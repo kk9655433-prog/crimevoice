@@ -630,6 +630,27 @@
     ]
   ];
 
+  const PLATE_SHAPES = {
+    "shape-a": [
+      [0.10, 0.10],
+      [0.92, 0.06],
+      [0.84, 0.92],
+      [0.08, 0.88]
+    ],
+    "shape-b": [
+      [0.08, 0.14],
+      [0.88, 0.06],
+      [0.94, 0.88],
+      [0.14, 0.94]
+    ],
+    "shape-c": [
+      [0.06, 0.18],
+      [0.82, 0.08],
+      [0.96, 0.82],
+      [0.18, 0.96]
+    ]
+  };
+
   let activeTrayColors = [];
   let trayFill = {};
   let buffer = [];
@@ -783,17 +804,21 @@
   function createPlateElement(layerIndex, plateIndex, colorPool) {
     const [x, y] = LAYER_LAYOUTS[layerIndex][plateIndex];
     const shapes = ["shape-a","shape-b","shape-c"];
+    const shapeClass = shapes[(plateIndex + layerIndex) % 3];
     const rotation = [-6,-2,0,2,6][(plateIndex + layerIndex) % 5];
     const layoutType = (plateIndex + layerIndex) % 3;
+    const zValue = 100 + layerIndex * 20 + plateIndex;
 
     const el = document.createElement("div");
-    el.className = `plate ${shapes[(plateIndex + layerIndex) % 3]}`;
+    el.className = `plate ${shapeClass}`;
     el.style.left = `${x}px`;
     el.style.top = `${y}px`;
     el.style.transform = `rotate(${rotation}deg)`;
     el.dataset.layer = String(layerIndex);
     el.dataset.plate = String(plateIndex);
-    el.style.zIndex = String(100 + layerIndex * 20 + plateIndex);
+    el.dataset.shape = shapeClass;
+    el.dataset.z = String(zValue);
+    el.style.zIndex = String(zValue);
 
     const layouts = [
       [[20,16],[82,16],[20,56],[82,56]],
@@ -914,39 +939,75 @@
     }
   }
 
-  function topMeaningfulElementAt(px, py) {
-    const list = document.elementsFromPoint(px, py);
-    for (const el of list) {
-      if (el.classList?.contains("modal")) continue;
-      if (el.classList?.contains("screw")) return el;
-      if (el.classList?.contains("plate")) return el;
-      if (el.classList?.contains("vent-screw")) return el;
-      if (el.classList?.contains("vent")) return el;
-    }
-    return null;
+  function getPlatePolygonPoints(plate) {
+    const shapeName = plate.dataset.shape;
+    const shape = PLATE_SHAPES[shapeName];
+    if (!shape) return [];
+
+    const rect = plate.getBoundingClientRect();
+    return shape.map(([px, py]) => ({
+      x: rect.left + rect.width * px,
+      y: rect.top + rect.height * py
+    }));
   }
 
-  function isScrewFullyExposed(screw) {
+  function pointInPolygon(x, y, points) {
+    let inside = false;
+    for (let i = 0, j = points.length - 1; i < points.length; j = i++) {
+      const xi = points[i].x, yi = points[i].y;
+      const xj = points[j].x, yj = points[j].y;
+
+      const intersect =
+        ((yi > y) !== (yj > y)) &&
+        (x < ((xj - xi) * (y - yi)) / ((yj - yi) || 0.0000001) + xi);
+
+      if (intersect) inside = !inside;
+    }
+    return inside;
+  }
+
+  function getScrewSamplePoints(screw) {
     const rect = screw.getBoundingClientRect();
     const cx = rect.left + rect.width / 2;
     const cy = rect.top + rect.height / 2;
-    const r = rect.width * 0.34;
+    const r = rect.width * 0.22;
 
-    const samples = [
+    return [
       [cx, cy],
       [cx + r, cy],
       [cx - r, cy],
       [cx, cy + r],
-      [cx, cy - r],
-      [cx + r * 0.7, cy + r * 0.7],
-      [cx - r * 0.7, cy + r * 0.7],
-      [cx + r * 0.7, cy - r * 0.7],
-      [cx - r * 0.7, cy - r * 0.7]
+      [cx, cy - r]
     ];
+  }
+
+  function isCoveredByHigherPlate(x, y, currentPlate) {
+    const currentZ = Number(currentPlate.dataset.z || 0);
+
+    const allPlates = [...boardStage.querySelectorAll(".plate")]
+      .filter(plate =>
+        plate !== currentPlate &&
+        !plate.classList.contains("dropped") &&
+        Number(plate.dataset.z || 0) > currentZ
+      )
+      .sort((a, b) => Number(b.dataset.z || 0) - Number(a.dataset.z || 0));
+
+    for (const plate of allPlates) {
+      const polygon = getPlatePolygonPoints(plate);
+      if (polygon.length && pointInPolygon(x, y, polygon)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  function isScrewStructurallyAccessible(screw, plateEl) {
+    const samples = getScrewSamplePoints(screw);
 
     for (const [x, y] of samples) {
-      const topEl = topMeaningfulElementAt(x, y);
-      if (topEl !== screw) return false;
+      if (isCoveredByHigherPlate(x, y, plateEl)) {
+        return false;
+      }
     }
     return true;
   }
@@ -956,7 +1017,7 @@
     if (!introModal.classList.contains("hidden")) return;
     if (screw.dataset.removed === "1") return;
 
-    if (!isScrewFullyExposed(screw)) return;
+    if (!isScrewStructurallyAccessible(screw, plateEl)) return;
 
     const color = screw.dataset.color;
 
