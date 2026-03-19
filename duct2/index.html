@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>電網斷路</title>
+<style>
+  *{
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
+  }
+
+  html,body{
+    margin:0;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    font-family:"Microsoft JhengHei","PingFang TC",sans-serif;
+    background:
+      radial-gradient(circle at center, #10253d 0%, #081423 58%, #040b14 100%);
+    color:#fff;
+  }
+
+  .wrap{
+    width:100%;
+    height:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:18px;
+  }
+
+  .game-shell{
+    position:relative;
+    width:min(94vw, 480px);
+    aspect-ratio:0.86;
+    border-radius:20px;
+    background:
+      linear-gradient(145deg,#bfc8cf 0%,#edf2f5 10%,#8a949c 26%,#dce3e8 42%,#757f88 58%,#d7dde2 76%,#97a1aa 100%);
+    padding:12px;
+    box-shadow:
+      0 0 0 2px rgba(255,255,255,.16) inset,
+      0 0 0 5px rgba(68,78,88,.28) inset,
+      0 14px 34px rgba(0,0,0,.42);
+  }
+
+  .game-inner{
+    position:relative;
+    width:100%;
+    height:100%;
+    border-radius:14px;
+    overflow:hidden;
+    background:
+      linear-gradient(180deg,#1a2631 0%, #101821 100%);
+    box-shadow:
+      inset 0 0 0 1px rgba(255,255,255,.05),
+      inset 0 10px 20px rgba(255,255,255,.03),
+      inset 0 -12px 20px rgba(0,0,0,.28);
+  }
+
+  .title{
+    position:absolute;
+    top:12px;
+    left:14px;
+    z-index:5;
+    font-size:18px;
+    font-weight:700;
+    letter-spacing:.03em;
+    color:#e7eff5;
+    text-shadow:0 2px 4px rgba(0,0,0,.35);
+    pointer-events:none;
+    user-select:none;
+  }
+
+  .sub{
+    position:absolute;
+    top:40px;
+    left:14px;
+    z-index:5;
+    font-size:13px;
+    color:#bdd0dc;
+    pointer-events:none;
+    user-select:none;
+  }
+
+  canvas{
+    display:block;
+    width:100%;
+    height:100%;
+    touch-action:none;
+  }
+
+  .modal{
+    position:absolute;
+    inset:0;
+    z-index:20;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:rgba(0,0,0,.52);
+    backdrop-filter:blur(3px);
+  }
+
+  .modal.hidden{
+    display:none;
+  }
+
+  .modal-card{
+    width:min(82%, 320px);
+    border-radius:18px;
+    padding:22px 20px 18px;
+    text-align:center;
+    background:
+      linear-gradient(180deg,#202f3a 0%, #16212a 100%);
+    border:1px solid rgba(255,255,255,.1);
+    box-shadow:
+      0 14px 32px rgba(0,0,0,.42),
+      inset 0 0 0 1px rgba(255,255,255,.03);
+  }
+
+  .modal-card h2{
+    margin:0 0 14px;
+    font-size:24px;
+    color:#eef6fb;
+  }
+
+  .modal-card p{
+    margin:0;
+    line-height:1.8;
+    font-size:16px;
+    color:#d8e4eb;
+    white-space:pre-line;
+  }
+
+  .modal-card button{
+    margin-top:20px;
+    min-width:120px;
+    border:none;
+    border-radius:12px;
+    padding:12px 24px;
+    font-size:16px;
+    font-weight:700;
+    color:#fff;
+    cursor:pointer;
+    background:linear-gradient(180deg,#617f92 0%, #375367 100%);
+    box-shadow:
+      0 8px 16px rgba(0,0,0,.28),
+      inset 0 1px 0 rgba(255,255,255,.16);
+  }
+
+  .modal-card button:active{
+    transform:translateY(1px);
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="game-shell">
+    <div class="game-inner">
+      <div class="title">電網斷路</div>
+      <div class="sub">拖曳相同顏色節點，讓所有電路彼此不纏繞</div>
+      <canvas id="game"></canvas>
+
+      <div class="modal" id="introModal">
+        <div class="modal-card">
+          <h2>電網斷路</h2>
+          <p>監獄的通風管內部被設計了高壓電網，
+如果直接爬進去後果不堪設想，
+你需要重新接通不同顏色的電線，
+讓電線彼此繞過，
+所有線路都不能重疊，
+完成後才能進去。</p>
+          <button id="confirmBtn">確定</button>
+        </div>
+      </div>
+
+      <div class="modal hidden" id="successModal">
+        <div class="modal-card">
+          <p>你成功讓通風管的電網失效了，
+你繼續往前爬……</p>
+          <button id="nextStepBtn">確定</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(() => {
+  const COLS = 8;
+  const ROWS = 7;
+  const REDIRECT_URL = "https://www.youtube.com/";
+
+  const COLORS = {
+    Y: "#efe84a",
+    R: "#ff1d1d",
+    P: "#a100ff",
+    O: "#ff7a1f",
+    G: "#7dff14",
+    K: "#8fd8ff",
+    M: "#f28ad3"
+  };
+
+  const PAIRS = [
+    { id:"Y", a:[0,0], b:[2,4] },
+    { id:"R", a:[3,0], b:[6,5] },
+    { id:"P", a:[6,0], b:[7,3] },
+    { id:"O", a:[7,0], b:[6,1] },
+    { id:"G", a:[0,1], b:[4,6] },
+    { id:"K", a:[5,3], b:[5,6] },
+    { id:"M", a:[0,3], b:[3,6] }
+  ];
+
+  const canvas = document.getElementById("game");
+  const ctx = canvas.getContext("2d");
+  const introModal = document.getElementById("introModal");
+  const successModal = document.getElementById("successModal");
+  const confirmBtn = document.getElementById("confirmBtn");
+  const nextStepBtn = document.getElementById("nextStepBtn");
+
+  let endpoints = new Map();
+  let cellToEndpoint = new Map();
+  let paths = {};
+  let draggingColor = null;
+  let dragPath = [];
+  let solved = false;
+  let redirecting = false;
+  let lastPointer = null;
+
+  function key(x, y) {
+    return `${x},${y}`;
+  }
+
+  function resizeCanvas() {
+    const rect = canvas.getBoundingClientRect();
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width = Math.floor(rect.width * dpr);
+    canvas.height = Math.floor(rect.height * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    draw();
+  }
+
+  function initBoard() {
+    endpoints = new Map();
+    cellToEndpoint = new Map();
+    paths = {};
+    solved = false;
+    redirecting = false;
+    draggingColor = null;
+    dragPath = [];
+    lastPointer = null;
+
+    for (const pair of PAIRS) {
+      const [ax, ay] = pair.a;
+      const [bx, by] = pair.b;
+      endpoints.set(pair.id, { a: pair.a, b: pair.b });
+      cellToEndpoint.set(key(ax, ay), pair.id);
+      cellToEndpoint.set(key(bx, by), pair.id);
+      paths[pair.id] = [];
+    }
+  }
+
+  function getCellSize(rectW, rectH) {
+    const topArea = 72;
+    const sidePad = 20;
+    const bottomPad = 18;
+    const size = Math.min(
+      (rectW - sidePad * 2) / COLS,
+      (rectH - topArea - bottomPad) / ROWS
+    );
+    const boardW = size * COLS;
+    const boardH = size * ROWS;
+    const boardX = (rectW - boardW) / 2;
+    const boardY = topArea;
+    return { size, boardX, boardY, boardW, boardH };
+  }
+
+  function inBounds(x, y) {
+    return x >= 0 && y >= 0 && x < COLS && y < ROWS;
+  }
+
+  function areAdjacent(a, b) {
+    return Math.abs(a.x - b.x) + Math.abs(a.y - b.y) === 1;
+  }
+
+  function sameCell(a, b) {
+    return a.x === b.x && a.y === b.y;
+  }
+
+  function findPathIndex(path, x, y) {
+    return path.findIndex(p => p.x === x && p.y === y);
+  }
+
+  function isEndpointCell(x, y) {
+    return cellToEndpoint.has(key(x, y));
+  }
+
+  function endpointColorAt(x, y) {
+    return cellToEndpoint.get(key(x, y)) || null;
+  }
+
+  function cellOccupiedByOtherColor(color, x, y) {
+    for (const id of Object.keys(paths)) {
+      if (id === color) continue;
+      if (findPathIndex(paths[id], x, y) !== -1) return true;
+    }
+    const epColor = endpointColorAt(x, y);
+    return epColor !== null && epColor !== color;
+  }
+
+  function clearPath(color) {
+    paths[color] = [];
+  }
+
+  function startDragFrom(color, startCell) {
+    draggingColor = color;
+    dragPath = [startCell];
+    lastPointer = null;
+    clearPath(color);
+  }
+
+  function tryStepTo(cell) {
+    if (!draggingColor) return;
+
+    const last = dragPath[dragPath.length - 1];
+    if (sameCell(last, cell)) return;
+    if (!inBounds(cell.x, cell.y)) return;
+
+    const dx = cell.x - last.x;
+    const dy = cell.y - last.y;
+    if (Math.abs(dx) + Math.abs(dy) !== 1) return;
+
+    if (cellOccupiedByOtherColor(draggingColor, cell.x, cell.y)) return;
+
+    const backIndex = findPathIndex(dragPath, cell.x, cell.y);
+    if (backIndex !== -1) {
+      dragPath = dragPath.slice(0, backIndex + 1);
+      return;
+    }
+
+    const epColor = endpointColorAt(cell.x, cell.y);
+    if (epColor !== null && epColor !== draggingColor) return;
+
+    dragPath.push(cell);
+  }
+
+  function updateDragByPointer(clientX, clientY) {
+    if (!draggingColor) return;
+
+    const rect = canvas.getBoundingClientRect();
+    const { size, boardX, boardY, boardW, boardH } = getCellSize(rect.width, rect.height);
+    const px = clientX - rect.left;
+    const py = clientY - rect.top;
+
+    if (px < boardX || px >= boardX + boardW || py < boardY || py >= boardY + boardH) {
+      lastPointer = { x: px, y: py };
+      return;
+    }
+
+    const currentCell = {
+      x: Math.floor((px - boardX) / size),
+      y: Math.floor((py - boardY) / size)
+    };
+
+    const lastCell = dragPath[dragPath.length - 1];
+    const lastCenter = {
+      x: boardX + lastCell.x * size + size / 2,
+      y: boardY + lastCell.y * size + size / 2
+    };
+
+    const dx = px - lastCenter.x;
+    const dy = py - lastCenter.y;
+
+
+    if (Math.abs(dx) > Math.abs(dy)) {
+      if (dx > 0) tryStepTo({ x: lastCell.x + 1, y: lastCell.y });
+      if (dx < 0) tryStepTo({ x: lastCell.x - 1, y: lastCell.y });
+    } else {
+      if (dy > 0) tryStepTo({ x: lastCell.x, y: lastCell.y + 1 });
+      if (dy < 0) tryStepTo({ x: lastCell.x, y: lastCell.y - 1 });
+    }
+
+
+    const newLast = dragPath[dragPath.length - 1];
+    if (!sameCell(newLast, currentCell) && areAdjacent(newLast, currentCell)) {
+      tryStepTo(currentCell);
+    }
+
+    lastPointer = { x: px, y: py };
+  }
+
+function finishDrag() {
+  if (!draggingColor || dragPath.length === 0) {
+    draggingColor = null;
+    dragPath = [];
+    return;
+  }
+
+  const color = draggingColor;
+  const start = dragPath[0];
+  const end = dragPath[dragPath.length - 1];
+  const endpointsPair = endpoints.get(color);
+
+  const a = { x: endpointsPair.a[0], y: endpointsPair.a[1] };
+  const b = { x: endpointsPair.b[0], y: endpointsPair.b[1] };
+
+  const startIsA = sameCell(start, a);
+  const startIsB = sameCell(start, b);
+  const endIsA = sameCell(end, a);
+  const endIsB = sameCell(end, b);
+
+  if ((startIsA && endIsB) || (startIsB && endIsA)) {
+    let middle = dragPath.slice(1, dragPath.length - 1);
+
+    if (startIsB && endIsA) {
+      middle.reverse();
+    }
+
+    paths[color] = middle;
+  } else {
+    paths[color] = [];
+  }
+
+  draggingColor = null;
+  dragPath = [];
+  lastPointer = null;
+
+  solved = isSolved();
+  draw();
+
+  if (solved && !redirecting) {
+    redirecting = true;
+    successModal.classList.remove("hidden");
+  }
+}
+  function isSolved() {
+    const occupied = new Set();
+
+    for (const pair of PAIRS) {
+      const color = pair.id;
+      const path = paths[color];
+
+      // 每一組都必須真的被連起來
+      if (path.length === 0) return false;
+
+      const full = [{ x: pair.a[0], y: pair.a[1] }, ...path, { x: pair.b[0], y: pair.b[1] }];
+
+      for (let i = 1; i < full.length; i++) {
+        if (!areAdjacent(full[i - 1], full[i])) return false;
+      }
+
+      for (let i = 1; i < full.length - 1; i++) {
+        const k = key(full[i].x, full[i].y);
+        if (occupied.has(k)) return false;
+        occupied.add(k);
+      }
+    }
+
+    return true;
+  }
+
+  function roundedRect(x, y, w, h, r) {
+    ctx.beginPath();
+    ctx.moveTo(x + r, y);
+    ctx.arcTo(x + w, y, x + w, y + h, r);
+    ctx.arcTo(x + w, y + h, x, y + h, r);
+    ctx.arcTo(x, y + h, x, y, r);
+    ctx.arcTo(x, y, x + w, y, r);
+    ctx.closePath();
+  }
+
+  function drawBoardFrame(boardX, boardY, boardW, boardH) {
+    const grad = ctx.createLinearGradient(boardX, boardY, boardX + boardW, boardY + boardH);
+    grad.addColorStop(0, "#58715f");
+    grad.addColorStop(0.18, "#87a087");
+    grad.addColorStop(0.34, "#4d6a55");
+    grad.addColorStop(0.52, "#8aa38c");
+    grad.addColorStop(0.7, "#47634f");
+    grad.addColorStop(1, "#2f4a37");
+
+    ctx.fillStyle = grad;
+    roundedRect(boardX - 8, boardY - 8, boardW + 16, boardH + 16, 10);
+    ctx.fill();
+
+    ctx.fillStyle = "#015617";
+    roundedRect(boardX - 2, boardY - 2, boardW + 4, boardH + 4, 6);
+    ctx.fill();
+  }
+
+  function drawGrid(boardX, boardY, boardW, boardH, size) {
+    ctx.fillStyle = "#015617";
+    ctx.fillRect(boardX, boardY, boardW, boardH);
+
+    ctx.strokeStyle = "rgba(255,255,255,.1)";
+    ctx.lineWidth = 1;
+
+    for (let x = 0; x <= COLS; x++) {
+      ctx.beginPath();
+      ctx.moveTo(boardX + x * size, boardY);
+      ctx.lineTo(boardX + x * size, boardY + boardH);
+      ctx.stroke();
+    }
+
+    for (let y = 0; y <= ROWS; y++) {
+      ctx.beginPath();
+      ctx.moveTo(boardX, boardY + y * size);
+      ctx.lineTo(boardX + boardW, boardY + y * size);
+      ctx.stroke();
+    }
+  }
+
+  function cellCenter(x, y, boardX, boardY, size) {
+    return {
+      x: boardX + x * size + size / 2,
+      y: boardY + y * size + size / 2
+    };
+  }
+
+  function drawPathLine(points, color, boardX, boardY, size, preview = false) {
+    if (points.length < 2) return;
+
+    ctx.save();
+    ctx.lineJoin = "round";
+    ctx.lineCap = "round";
+    ctx.strokeStyle = color;
+    ctx.lineWidth = size * 0.28;
+    ctx.shadowColor = preview ? "transparent" : color;
+    ctx.shadowBlur = preview ? 0 : 6;
+    ctx.globalAlpha = preview ? 0.82 : 1;
+
+    ctx.beginPath();
+    const p0 = cellCenter(points[0].x, points[0].y, boardX, boardY, size);
+    ctx.moveTo(p0.x, p0.y);
+
+    for (let i = 1; i < points.length; i++) {
+      const p = cellCenter(points[i].x, points[i].y, boardX, boardY, size);
+      ctx.lineTo(p.x, p.y);
+    }
+
+    ctx.stroke();
+    ctx.restore();
+  }
+
+  function drawEndpoint(x, y, color, boardX, boardY, size) {
+    const c = cellCenter(x, y, boardX, boardY, size);
+    const outerR = size * 0.24;
+    const innerR = size * 0.16;
+
+    ctx.save();
+
+    ctx.fillStyle = color;
+    ctx.beginPath();
+    ctx.arc(c.x, c.y, outerR, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.fillStyle = "#2e2e34";
+    ctx.beginPath();
+    ctx.arc(c.x, c.y, innerR, 0, Math.PI * 2);
+    ctx.fill();
+
+    const grad = ctx.createRadialGradient(
+      c.x - innerR * 0.3, c.y - innerR * 0.35, innerR * 0.2,
+      c.x, c.y, innerR
+    );
+    grad.addColorStop(0, "#666");
+    grad.addColorStop(0.55, "#303038");
+    grad.addColorStop(1, "#111");
+    ctx.fillStyle = grad;
+    ctx.beginPath();
+    ctx.arc(c.x, c.y, innerR * 0.92, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.restore();
+  }
+
+  function draw() {
+    const w = canvas.getBoundingClientRect().width;
+    const h = canvas.getBoundingClientRect().height;
+    ctx.clearRect(0, 0, w, h);
+
+    const { size, boardX, boardY, boardW, boardH } = getCellSize(w, h);
+
+    drawBoardFrame(boardX, boardY, boardW, boardH);
+    drawGrid(boardX, boardY, boardW, boardH, size);
+
+    for (const pair of PAIRS) {
+      const color = COLORS[pair.id];
+      const mid = paths[pair.id];
+
+      if (mid.length > 0) {
+        const points = [
+          { x: pair.a[0], y: pair.a[1] },
+          ...mid,
+          { x: pair.b[0], y: pair.b[1] }
+        ];
+        drawPathLine(points, color, boardX, boardY, size, false);
+      }
+    }
+
+    if (draggingColor && dragPath.length > 1) {
+      drawPathLine(dragPath, COLORS[draggingColor], boardX, boardY, size, true);
+    }
+
+    for (const pair of PAIRS) {
+      drawEndpoint(pair.a[0], pair.a[1], COLORS[pair.id], boardX, boardY, size);
+      drawEndpoint(pair.b[0], pair.b[1], COLORS[pair.id], boardX, boardY, size);
+    }
+  }
+
+  function eventToCell(clientX, clientY) {
+    const rect = canvas.getBoundingClientRect();
+    const { size, boardX, boardY, boardW, boardH } = getCellSize(rect.width, rect.height);
+    const px = clientX - rect.left;
+    const py = clientY - rect.top;
+
+    if (px < boardX || px >= boardX + boardW || py < boardY || py >= boardY + boardH) {
+      return null;
+    }
+
+    return {
+      x: Math.floor((px - boardX) / size),
+      y: Math.floor((py - boardY) / size)
+    };
+  }
+
+  function onPointerDown(clientX, clientY) {
+    if (!introModal.classList.contains("hidden")) return;
+    if (!successModal.classList.contains("hidden")) return;
+    if (redirecting && solved) return;
+
+    const cell = eventToCell(clientX, clientY);
+    if (!cell) return;
+
+    const color = endpointColorAt(cell.x, cell.y);
+    if (!color) return;
+
+    startDragFrom(color, cell);
+    draw();
+  }
+
+  function onPointerMove(clientX, clientY) {
+    if (!draggingColor) return;
+    updateDragByPointer(clientX, clientY);
+    draw();
+  }
+
+  function onPointerUp() {
+    if (!draggingColor) return;
+    finishDrag();
+  }
+
+  canvas.addEventListener("mousedown", (e) => onPointerDown(e.clientX, e.clientY));
+  canvas.addEventListener("mousemove", (e) => onPointerMove(e.clientX, e.clientY));
+  window.addEventListener("mouseup", onPointerUp);
+
+  canvas.addEventListener("touchstart", (e) => {
+    const t = e.touches[0];
+    if (!t) return;
+    onPointerDown(t.clientX, t.clientY);
+  }, { passive: true });
+
+  canvas.addEventListener("touchmove", (e) => {
+    const t = e.touches[0];
+    if (!t) return;
+    onPointerMove(t.clientX, t.clientY);
+  }, { passive: true });
+
+  window.addEventListener("touchend", onPointerUp, { passive: true });
+
+  confirmBtn.addEventListener("click", () => {
+    introModal.classList.add("hidden");
+  });
+
+  nextStepBtn.addEventListener("click", () => {
+    location.href = REDIRECT_URL;
+  });
+
+  window.addEventListener("resize", resizeCanvas);
+
+  initBoard();
+  resizeCanvas();
+})();
+</script>
+</body>
+</html>
