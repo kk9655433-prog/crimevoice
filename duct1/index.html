@@ -1,687 +1,269 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-<title>逃離通風管</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>螺絲拆解</title>
+
 <style>
-  *{
-    box-sizing:border-box;
-    -webkit-tap-highlight-color:transparent;
-  }
+*{box-sizing:border-box;margin:0;padding:0}
 
-  html,body{
-    margin:0;
-    width:100%;
-    height:100%;
-    overflow:hidden;
-    font-family:"Microsoft JhengHei","PingFang TC",sans-serif;
-    background:
-      radial-gradient(circle at center, #0d2640 0%, #061727 52%, #030d17 100%);
-    color:#fff;
-  }
+body{
+  background:#081423;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  font-family:sans-serif;
+}
 
-  .wrap{
-    width:100%;
-    height:100%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:18px;
-  }
+.game-shell{
+  width:min(94vw,560px);
+  aspect-ratio:.66;
+  background:linear-gradient(145deg,#dce3e8,#6e7b86);
+  border-radius:20px;
+  padding:12px;
+}
 
-  .game-shell{
-    position:relative;
-    width:min(92vw, 430px);
-    aspect-ratio:0.79;
-    border-radius:20px;
-    background:
-      linear-gradient(145deg,#bfc8cf 0%,#edf2f5 10%,#8a949c 26%,#dce3e8 42%,#757f88 58%,#d7dde2 76%,#97a1aa 100%);
-    padding:12px;
-    box-shadow:
-      0 0 0 2px rgba(255,255,255,.16) inset,
-      0 0 0 5px rgba(68,78,88,.28) inset,
-      0 14px 34px rgba(0,0,0,.42);
-  }
+.game-inner{
+  width:100%;
+  height:100%;
+  border-radius:16px;
+  background:#0f1b24;
+  position:relative;
+  overflow:hidden;
+}
 
-  .game-inner{
-    position:relative;
-    width:100%;
-    height:100%;
-    border-radius:14px;
-    overflow:hidden;
-    background:
-      linear-gradient(180deg,#1a2631 0%, #101821 100%);
-    box-shadow:
-      inset 0 0 0 1px rgba(255,255,255,.05),
-      inset 0 10px 20px rgba(255,255,255,.03),
-      inset 0 -12px 20px rgba(0,0,0,.28);
-  }
+.title{position:absolute;top:12px;left:12px;color:#fff;font-weight:bold}
+.sub{position:absolute;top:36px;left:12px;color:#9fb4c3;font-size:12px}
 
-  .title{
-    position:absolute;
-    top:12px;
-    left:14px;
-    z-index:5;
-    font-size:18px;
-    font-weight:700;
-    letter-spacing:.03em;
-    color:#e7eff5;
-    text-shadow:0 2px 4px rgba(0,0,0,.35);
-    pointer-events:none;
-    user-select:none;
-  }
+.top-ui{
+  position:absolute;
+  top:70px;
+  width:100%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:10px;
+}
 
-  canvas{
-    display:block;
-    width:100%;
-    height:100%;
-    touch-action: manipulation;
-  }
+.tray-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+  width:90%;
+}
 
-  .modal{
-    position:absolute;
-    inset:0;
-    z-index:20;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:rgba(0,0,0,.52);
-    backdrop-filter:blur(3px);
-  }
+.tray-card{
+  height:60px;
+  border-radius:16px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
 
-  .modal.hidden{
-    display:none;
-  }
+.slot{
+  width:20px;height:20px;border-radius:50%;
+  margin:3px;
+  background:rgba(255,255,255,.2);
+}
 
-  .modal-card{
-    width:min(82%, 320px);
-    border-radius:18px;
-    padding:22px 20px 18px;
-    text-align:center;
-    background:
-      linear-gradient(180deg,#202f3a 0%, #16212a 100%);
-    border:1px solid rgba(255,255,255,.1);
-    box-shadow:
-      0 14px 32px rgba(0,0,0,.42),
-      inset 0 0 0 1px rgba(255,255,255,.03);
-  }
+.buffer-row{
+  display:flex;
+  gap:8px;
+}
 
-  .modal-card h2{
-    margin:0 0 14px;
-    font-size:24px;
-    color:#eef6fb;
-  }
+.buffer-slot{
+  width:20px;height:20px;border-radius:50%;
+  background:rgba(255,255,255,.15);
+}
 
-  .modal-card p{
-    margin:0;
-    line-height:1.8;
-    font-size:16px;
-    color:#d8e4eb;
-    white-space:pre-line;
-  }
+.board{
+  position:absolute;
+  bottom:0;
+  width:100%;
+  height:70%;
+  --scale:1;
+}
 
-  .modal-card button{
-    margin-top:20px;
-    min-width:120px;
-    border:none;
-    border-radius:12px;
-    padding:12px 24px;
-    font-size:16px;
-    font-weight:700;
-    color:#fff;
-    cursor:pointer;
-    background:linear-gradient(180deg,#617f92 0%, #375367 100%);
-    box-shadow:
-      0 8px 16px rgba(0,0,0,.28),
-      inset 0 1px 0 rgba(255,255,255,.16);
-  }
+.layer{
+  position:absolute;
+  inset:0;
+  transform:scale(var(--scale));
+  transform-origin:top center;
+}
 
-  .modal-card button:active{
-    transform:translateY(1px);
-  }
+.plate{
+  position:absolute;
+  width:120px;height:100px;
+  background:rgba(255,120,120,.7);
+  border-radius:12px;
+  transition:.6s;
+}
+
+.plate.drop{
+  transform:translateY(200px);
+  opacity:0;
+}
+
+.screw{
+  width:28px;height:28px;border-radius:50%;
+  position:absolute;
+  cursor:pointer;
+}
+
+.vent{
+  position:absolute;
+  bottom:40px;
+  left:50%;
+  transform:translateX(-50%);
+  width:260px;height:120px;
+  background:#333;
+  border-radius:12px;
+}
+
+.escape-light{
+  position:absolute;
+  inset:0;
+  background:white;
+  opacity:0;
+  transform:scale(.1);
+  transition:3s;
+}
+
+.escape-light.show{
+  opacity:1;
+  transform:scale(10);
+}
+
+.modal{
+  position:absolute;
+  inset:0;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:rgba(0,0,0,.5);
+}
+
+.hidden{display:none}
+
+.modal-card{
+  background:#1c2a33;
+  padding:20px;
+  border-radius:12px;
+  text-align:center;
+}
+
+button{
+  margin-top:10px;
+  padding:8px 20px;
+}
 </style>
 </head>
+
 <body>
-<div class="wrap">
-  <div class="game-shell">
-    <div class="game-inner">
-      <div class="title">連通所有通風管</div>
-      <canvas id="game"></canvas>
 
-      <div class="modal" id="introModal">
-        <div class="modal-card">
-          <h2>逃離通風管</h2>
-          <p>你面前有一張通風管地圖
-但地圖被打亂了
-你需要找出正確的通風管連接方式
-才能離開這邊</p>
-          <button id="confirmBtn">確定</button>
-        </div>
-      </div>
+<div class="game-shell">
+<div class="game-inner">
 
-      <div class="modal hidden" id="successModal">
-        <div class="modal-card">
-          <p>你費盡千辛萬苦，
-終於找出通風管的路線，
-你現在要試圖爬進這個管道……</p>
-          <button id="nextStepBtn">確定</button>
-        </div>
-      </div>
-    </div>
-  </div>
+<div class="title">螺絲拆解</div>
+<div class="sub">拆掉板子上的螺絲，打開出口</div>
+
+<div class="top-ui">
+<div class="tray-grid" id="tray"></div>
+<div class="buffer-row" id="buffer"></div>
+</div>
+
+<div class="board" id="board">
+<div class="layer" id="layer"></div>
+<div class="vent" id="vent"></div>
+</div>
+
+<div class="escape-light" id="light"></div>
+
+<div class="modal" id="end">
+<div class="modal-card">
+<p>你終於見到了太陽……</p>
+<button onclick="location.reload()">確定</button>
+</div>
+</div>
+
+</div>
 </div>
 
 <script>
-(() => {
-  const COLS = 6;
-  const ROWS = 8;
-  const TARGET_INTERNAL_DEAD_ENDS = 10;
-  const REDIRECT_URL = "https://kk9655433-prog.github.io/crimevoice/duct2/";
-
-  const canvas = document.getElementById("game");
-  const ctx = canvas.getContext("2d");
-  const introModal = document.getElementById("introModal");
-  const successModal = document.getElementById("successModal");
-  const confirmBtn = document.getElementById("confirmBtn");
-  const nextStepBtn = document.getElementById("nextStepBtn");
-
-  const DIRS = [
-    { x: 0, y: -1, bit: 1 },
-    { x: 1, y: 0, bit: 2 },
-    { x: 0, y: 1, bit: 4 },
-    { x: -1, y: 0, bit: 8 }
-  ];
-
-  const START = { x: 0, y: 2, outsideBit: 8, side: "left" };
-  const END   = { x: COLS - 1, y: 5, outsideBit: 2, side: "right" };
-
-  const IMAGE_PATHS = {
-    straight: "/crimevoice/img/straight.png",
-    corner: "/crimevoice/img/corner.png",
-    tee: "/crimevoice/img/tee.png",
-    cross: "/crimevoice/img/cross.png",
-    end: "/crimevoice/img/end.png",
-    connector_left: "/crimevoice/img/connector_left.png",
-    connector_right: "/crimevoice/img/connector_right.png"
-  };
-
-  const IMAGES = {};
-  let solution = [];
-  let grid = [];
-  let solvedState = false;
-  let redirecting = false;
-  let imagesReady = false;
-
-  function resizeCanvas() {
-    const rect = canvas.getBoundingClientRect();
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    canvas.width = Math.floor(rect.width * dpr);
-    canvas.height = Math.floor(rect.height * dpr);
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    draw();
-  }
-
-  function loadImages() {
-    const entries = Object.entries(IMAGE_PATHS);
-    return Promise.all(entries.map(([key, src]) => {
-      return new Promise((resolve, reject) => {
-        const img = new Image();
-        img.onload = () => {
-          IMAGES[key] = img;
-          resolve();
-        };
-        img.onerror = () => {
-          reject(new Error(`圖片載入失敗: ${src}`));
-        };
-        img.src = src;
-      });
-    }));
-  }
-
-  function rand(n) {
-    return Math.floor(Math.random() * n);
-  }
-
-  function rotateMaskLeft(mask) {
-    return ((mask << 1) & 15) | ((mask >> 3) & 1);
-  }
-
-  function degree(mask) {
-    return ((mask & 1) ? 1 : 0)
-      + ((mask & 2) ? 1 : 0)
-      + ((mask & 4) ? 1 : 0)
-      + ((mask & 8) ? 1 : 0);
-  }
-
-  function inBounds(x, y) {
-    return x >= 0 && y >= 0 && x < COLS && y < ROWS;
-  }
-
-  function oppositeBit(bit) {
-    if (bit === 1) return 4;
-    if (bit === 2) return 8;
-    if (bit === 4) return 1;
-    return 2;
-  }
-
-  function isStart(x, y) {
-    return x === START.x && y === START.y;
-  }
-
-  function isEnd(x, y) {
-    return x === END.x && y === END.y;
-  }
-
-  function isTerminal(x, y) {
-    return isStart(x, y) || isEnd(x, y);
-  }
-
-  function generateTreeMasks() {
-    const masks = Array.from({ length: ROWS }, () => Array(COLS).fill(0));
-    const visited = Array.from({ length: ROWS }, () => Array(COLS).fill(false));
-    const frontier = [];
-
-    function addFrontier(x, y) {
-      for (const d of DIRS) {
-        const nx = x + d.x;
-        const ny = y + d.y;
-        if (!inBounds(nx, ny)) continue;
-        if (visited[ny][nx]) continue;
-        frontier.push({ x, y, nx, ny, bit: d.bit, opposite: oppositeBit(d.bit) });
-      }
-    }
-
-    visited[START.y][START.x] = true;
-    addFrontier(START.x, START.y);
-
-    while (frontier.length) {
-      const i = rand(frontier.length);
-      const edge = frontier.splice(i, 1)[0];
-
-      if (visited[edge.ny][edge.nx]) continue;
-
-      masks[edge.y][edge.x] |= edge.bit;
-      masks[edge.ny][edge.nx] |= edge.opposite;
-      visited[edge.ny][edge.nx] = true;
-      addFrontier(edge.nx, edge.ny);
-    }
-
-    return masks;
-  }
-
-  function countInternalDeadEnds(masks) {
-    let count = 0;
-    for (let y = 0; y < ROWS; y++) {
-      for (let x = 0; x < COLS; x++) {
-        if (isTerminal(x, y)) continue;
-        if (degree(masks[y][x]) === 1) count++;
-      }
-    }
-    return count;
-  }
-
-  function buildPuzzle() {
-    while (true) {
-      const baseMasks = generateTreeMasks();
-
-      if (degree(baseMasks[START.y][START.x]) !== 1) continue;
-      if (degree(baseMasks[END.y][END.x]) !== 1) continue;
-
-      const internalDeadEnds = countInternalDeadEnds(baseMasks);
-      if (internalDeadEnds !== TARGET_INTERNAL_DEAD_ENDS) continue;
-
-      const finalMasks = baseMasks.map(row => row.slice());
-      finalMasks[START.y][START.x] |= START.outsideBit;
-      finalMasks[END.y][END.x] |= END.outsideBit;
-
-      solution = finalMasks;
-
-      grid = Array.from({ length: ROWS }, (_, y) =>
-        Array.from({ length: COLS }, (_, x) => {
-          let m = solution[y][x];
-          const rotTimes = degree(m) === 4 ? 0 : rand(4);
-          for (let i = 0; i < rotTimes; i++) m = rotateMaskLeft(m);
-          return { mask: m };
-        })
-      );
-
-      if (isExactlySolved()) {
-        outer:
-        for (let y = 0; y < ROWS; y++) {
-          for (let x = 0; x < COLS; x++) {
-            if (degree(grid[y][x].mask) !== 4) {
-              grid[y][x].mask = rotateMaskLeft(grid[y][x].mask);
-              break outer;
-            }
-          }
-        }
-      }
-
-      return;
-    }
-  }
-
-  function isExactlySolved() {
-    for (let y = 0; y < ROWS; y++) {
-      for (let x = 0; x < COLS; x++) {
-        if (grid[y][x].mask !== solution[y][x]) return false;
-      }
-    }
-    return true;
-  }
-
-  function getOpenSides(mask, x, y) {
-    const opens = [];
-    if (mask & 1) opens.push({ nx: x, ny: y - 1, bit: 1, opposite: 4, outside: y === 0 });
-    if (mask & 2) opens.push({ nx: x + 1, ny: y, bit: 2, opposite: 8, outside: x === COLS - 1 });
-    if (mask & 4) opens.push({ nx: x, ny: y + 1, bit: 4, opposite: 1, outside: y === ROWS - 1 });
-    if (mask & 8) opens.push({ nx: x - 1, ny: y, bit: 8, opposite: 2, outside: x === 0 });
-    return opens;
-  }
-
-  function isSolved() {
-    for (let y = 0; y < ROWS; y++) {
-      for (let x = 0; x < COLS; x++) {
-        const mask = grid[y][x].mask;
-        const opens = getOpenSides(mask, x, y);
-
-        for (const o of opens) {
-          if (o.outside) {
-            const isStartOutside = (x === START.x && y === START.y && o.bit === START.outsideBit);
-            const isEndOutside = (x === END.x && y === END.y && o.bit === END.outsideBit);
-            if (!isStartOutside && !isEndOutside) return false;
-            continue;
-          }
-
-          if (!inBounds(o.nx, o.ny)) return false;
-
-          const neighborMask = grid[o.ny][o.nx].mask;
-          if ((neighborMask & o.opposite) === 0) return false;
-        }
-      }
-    }
-
-    const visited = Array.from({ length: ROWS }, () => Array(COLS).fill(false));
-    const queue = [{ x: START.x, y: START.y }];
-    visited[START.y][START.x] = true;
-
-    while (queue.length) {
-      const { x, y } = queue.shift();
-      const mask = grid[y][x].mask;
-      const opens = getOpenSides(mask, x, y);
-
-      for (const o of opens) {
-        if (o.outside) continue;
-        if (!inBounds(o.nx, o.ny)) continue;
-        if (visited[o.ny][o.nx]) continue;
-
-        const neighborMask = grid[o.ny][o.nx].mask;
-        if ((neighborMask & o.opposite) === 0) continue;
-
-        visited[o.ny][o.nx] = true;
-        queue.push({ x: o.nx, y: o.ny });
-      }
-    }
-
-    for (let y = 0; y < ROWS; y++) {
-      for (let x = 0; x < COLS; x++) {
-        if (!visited[y][x]) return false;
-      }
-    }
-
-    if ((grid[START.y][START.x].mask & START.outsideBit) === 0) return false;
-    if ((grid[END.y][END.x].mask & END.outsideBit) === 0) return false;
-
-    return true;
-  }
-
-  function roundedRect(x, y, w, h, r) {
-    ctx.beginPath();
-    ctx.moveTo(x + r, y);
-    ctx.arcTo(x + w, y, x + w, y + h, r);
-    ctx.arcTo(x + w, y + h, x, y + h, r);
-    ctx.arcTo(x, y + h, x, y, r);
-    ctx.arcTo(x, y, x + w, y, r);
-    ctx.closePath();
-  }
-
-  function drawBoardFrame(boardX, boardY, boardW, boardH) {
-    const grad = ctx.createLinearGradient(boardX, boardY, boardX + boardW, boardY + boardH);
-    grad.addColorStop(0, "#58636c");
-    grad.addColorStop(0.18, "#dfe6eb");
-    grad.addColorStop(0.34, "#8a949d");
-    grad.addColorStop(0.52, "#eef3f6");
-    grad.addColorStop(0.7, "#8e98a1");
-    grad.addColorStop(1, "#5a656f");
-
-    ctx.fillStyle = grad;
-    roundedRect(boardX - 8, boardY - 8, boardW + 16, boardH + 16, 12);
-    ctx.fill();
-
-    ctx.fillStyle = "#111922";
-    roundedRect(boardX - 3, boardY - 3, boardW + 6, boardH + 6, 9);
-    ctx.fill();
-
-    ctx.strokeStyle = "rgba(255,255,255,.08)";
-    ctx.lineWidth = 1;
-    roundedRect(boardX - 3, boardY - 3, boardW + 6, boardH + 6, 9);
-    ctx.stroke();
-  }
-
-  function getPieceType(mask) {
-    const d = degree(mask);
-    if (d === 4) return "cross";
-    if (d === 3) return "tee";
-    if (d === 2) {
-      if (mask === 5 || mask === 10) return "straight";
-      return "corner";
-    }
-    return "end";
-  }
-
-  function getPieceRotation(mask) {
-    switch(mask) {
-      case 1: return 0;
-      case 2: return 90;
-      case 4: return 180;
-      case 8: return 270;
-
-      case 3: return 0;
-      case 6: return 90;
-      case 12: return 180;
-      case 9: return 270;
-
-      case 5: return 0;
-      case 10: return 90;
-
-      case 11: return 0;
-      case 7: return 90;
-      case 14: return 180;
-      case 13: return 270;
-
-      case 15: return 0;
-
-      default: return 0;
-    }
-  }
-
-  function drawCellPiece(x, y, mask, cellSize, boardX, boardY, solved) {
-    const type = getPieceType(mask);
-    const img = IMAGES[type];
-    if (!img) return;
-
-    const cx = boardX + x * cellSize + cellSize / 2;
-    const cy = boardY + y * cellSize + cellSize / 2;
-    const rot = getPieceRotation(mask) * Math.PI / 180;
-
-    ctx.save();
-    ctx.translate(cx, cy);
-
-    if (solved) {
-      ctx.shadowColor = "rgba(145,230,248,.42)";
-      ctx.shadowBlur = 10;
-    }
-
-    ctx.rotate(rot);
-    ctx.drawImage(img, -cellSize / 2, -cellSize / 2, cellSize, cellSize);
-    ctx.restore();
-  }
-
-  function drawExternalConnector(side, rowIndex, cellSize, boardX, boardY, solved) {
-    const key = side === "left" ? "connector_left" : "connector_right";
-    const img = IMAGES[key];
-    if (!img) return;
-
-    const y = boardY + rowIndex * cellSize;
-
-    ctx.save();
-    if (solved) {
-      ctx.shadowColor = "rgba(145,230,248,.42)";
-      ctx.shadowBlur = 10;
-    }
-
-    if (side === "left") {
-      ctx.drawImage(img, boardX - cellSize, y, cellSize, cellSize);
-    } else {
-      ctx.drawImage(img, boardX + COLS * cellSize, y, cellSize, cellSize);
-    }
-    ctx.restore();
-  }
-
-  function draw() {
-    const w = canvas.getBoundingClientRect().width;
-    const h = canvas.getBoundingClientRect().height;
-    ctx.clearRect(0, 0, w, h);
-
-    const solved = solvedState;
-    const topArea = 54;
-    const sidePad = 44;
-    const bottomPad = 24;
-
-    const cellSize = Math.min(
-      (w - sidePad * 2) / COLS,
-      (h - topArea - bottomPad) / ROWS
-    );
-
-    const boardW = cellSize * COLS;
-    const boardH = cellSize * ROWS;
-    const boardX = (w - boardW) / 2;
-    const boardY = topArea;
-
-    drawBoardFrame(boardX, boardY, boardW, boardH);
-
-    ctx.fillStyle = "rgba(255,255,255,.018)";
-    roundedRect(boardX, boardY, boardW, boardH, 8);
-    ctx.fill();
-
-    ctx.strokeStyle = "rgba(255,255,255,.04)";
-    ctx.lineWidth = 1;
-    for (let y = 0; y <= ROWS; y++) {
-      ctx.beginPath();
-      ctx.moveTo(boardX, boardY + y * cellSize);
-      ctx.lineTo(boardX + boardW, boardY + y * cellSize);
-      ctx.stroke();
-    }
-    for (let x = 0; x <= COLS; x++) {
-      ctx.beginPath();
-      ctx.moveTo(boardX + x * cellSize, boardY);
-      ctx.lineTo(boardX + x * cellSize, boardY + boardH);
-      ctx.stroke();
-    }
-
-    if (!imagesReady) {
-      ctx.fillStyle = "#d8e4eb";
-      ctx.font = "16px Microsoft JhengHei";
-      ctx.textAlign = "center";
-      ctx.fillText("PNG 載入中…", w / 2, h / 2);
-      return;
-    }
-
-    drawExternalConnector("left", START.y, cellSize, boardX, boardY, solved);
-    drawExternalConnector("right", END.y, cellSize, boardX, boardY, solved);
-
-    for (let y = 0; y < ROWS; y++) {
-      for (let x = 0; x < COLS; x++) {
-        drawCellPiece(x, y, grid[y][x].mask, cellSize, boardX, boardY, solved);
-      }
-    }
-  }
-
-  function rotateCell(x, y) {
-    if (degree(grid[y][x].mask) === 4) return;
-    grid[y][x].mask = rotateMaskLeft(grid[y][x].mask);
-  }
-
-  function handlePointer(clientX, clientY) {
-    if (!introModal.classList.contains("hidden")) return;
-    if (redirecting) return;
-    if (!imagesReady) return;
-
-    const rect = canvas.getBoundingClientRect();
-    const w = rect.width;
-    const h = rect.height;
-
-    const topArea = 54;
-    const sidePad = 44;
-    const bottomPad = 24;
-
-    const cellSize = Math.min(
-      (w - sidePad * 2) / COLS,
-      (h - topArea - bottomPad) / ROWS
-    );
-
-    const boardW = cellSize * COLS;
-    const boardH = cellSize * ROWS;
-    const boardX = (w - boardW) / 2;
-    const boardY = topArea;
-
-    const px = clientX - rect.left;
-    const py = clientY - rect.top;
-
-    if (px < boardX || px >= boardX + boardW || py < boardY || py >= boardY + boardH) return;
-
-    const x = Math.floor((px - boardX) / cellSize);
-    const y = Math.floor((py - boardY) / cellSize);
-
-    rotateCell(x, y);
-    solvedState = isSolved();
-    draw();
-
-    if (solvedState) {
-      redirecting = true;
-      successModal.classList.remove("hidden");
-    }
-  }
-
-  canvas.addEventListener("pointerup", (e) => {
-    handlePointer(e.clientX, e.clientY);
-  });
-
-  confirmBtn.addEventListener("click", () => {
-    introModal.classList.add("hidden");
-  });
-
-  nextStepBtn.addEventListener("click", () => {
-    location.href = REDIRECT_URL;
-  });
-
-  window.addEventListener("resize", resizeCanvas);
-
-  buildPuzzle();
-  solvedState = false;
-  resizeCanvas();
-
-  loadImages()
-    .then(() => {
-      imagesReady = true;
-      draw();
-    })
-    .catch((err) => {
-      console.error(err);
-      alert("PNG 載入失敗，請檢查 img 資料夾與檔名是否正確。");
-    });
-})();
+const colors=["red","orange","blue","purple","pink","yellow","gray"]
+
+const COLOR_MAP={
+red:"#ff3e3e",
+orange:"#ff9a2b",
+blue:"#54a8ff",
+purple:"#9d4dff",
+pink:"#ef86d2",
+yellow:"#f1d441",
+gray:"#aaa"
+}
+
+const layer=document.getElementById("layer")
+const board=document.getElementById("board")
+const light=document.getElementById("light")
+const end=document.getElementById("end")
+
+function scale(){
+let w=window.innerWidth
+let s=1
+if(w<500)s=.7
+else if(w<700)s=.85
+board.style.setProperty("--scale",s)
+}
+window.onresize=scale
+scale()
+
+function randomColor(){return colors[Math.floor(Math.random()*colors.length)]}
+
+let plates=[]
+
+for(let i=0;i<12;i++){
+let p=document.createElement("div")
+p.className="plate"
+p.style.left=Math.random()*200+"px"
+p.style.top=Math.random()*200+"px"
+
+for(let j=0;j<4;j++){
+let s=document.createElement("div")
+s.className="screw"
+let c=randomColor()
+s.style.background=COLOR_MAP[c]
+s.style.left=(j%2?60:10)+"px"
+s.style.top=(j<2?10:50)+"px"
+
+s.onclick=()=>{
+s.remove()
+if(p.querySelectorAll(".screw").length===0){
+p.classList.add("drop")
+checkEnd()
+}
+}
+
+p.appendChild(s)
+}
+
+layer.appendChild(p)
+plates.push(p)
+}
+
+function checkEnd(){
+let left=plates.filter(p=>!p.classList.contains("drop")).length
+if(left===0){
+setTimeout(()=>{
+light.classList.add("show")
+setTimeout(()=>{
+end.classList.remove("hidden")
+},3000)
+},500)
+}
+}
 </script>
+
 </body>
 </html>
