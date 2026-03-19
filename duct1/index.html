@@ -76,6 +76,7 @@
     display:block;
     width:100%;
     height:100%;
+    touch-action: manipulation;
   }
 
   .modal{
@@ -242,14 +243,6 @@
     return Math.floor(Math.random() * n);
   }
 
-  function shuffle(arr) {
-    for (let i = arr.length - 1; i > 0; i--) {
-      const j = rand(i + 1);
-      [arr[i], arr[j]] = [arr[j], arr[i]];
-    }
-    return arr;
-  }
-
   function rotateMaskLeft(mask) {
     return ((mask << 1) & 15) | ((mask >> 3) & 1);
   }
@@ -329,10 +322,7 @@
   }
 
   function buildPuzzle() {
-    let attempt = 0;
-
     while (true) {
-      attempt++;
       const baseMasks = generateTreeMasks();
 
       if (degree(baseMasks[START.y][START.x]) !== 1) continue;
@@ -664,15 +654,9 @@
     }
   }
 
-  canvas.addEventListener("click", (e) => {
+  canvas.addEventListener("pointerup", (e) => {
     handlePointer(e.clientX, e.clientY);
   });
-
-  canvas.addEventListener("touchstart", (e) => {
-    const t = e.touches[0];
-    if (!t) return;
-    handlePointer(t.clientX, t.clientY);
-  }, { passive: true });
 
   confirmBtn.addEventListener("click", () => {
     introModal.classList.add("hidden");
