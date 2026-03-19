@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>螺絲拆解</title>
+<style>
+  *{
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
+    user-select:none;
+  }
+
+  html,body{
+    margin:0;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    font-family:"Microsoft JhengHei","PingFang TC",sans-serif;
+    background:
+      radial-gradient(circle at center, #10253d 0%, #081423 58%, #040b14 100%);
+    color:#fff;
+  }
+
+  .wrap{
+    width:100%;
+    height:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:18px;
+  }
+
+  .game-shell{
+    position:relative;
+    width:min(94vw, 560px);
+    aspect-ratio:0.86;
+    border-radius:20px;
+    background:
+      linear-gradient(145deg,#bfc8cf 0%,#edf2f5 10%,#8a949c 26%,#dce3e8 42%,#757f88 58%,#d7dde2 76%,#97a1aa 100%);
+    padding:12px;
+    box-shadow:
+      0 0 0 2px rgba(255,255,255,.16) inset,
+      0 0 0 5px rgba(68,78,88,.28) inset,
+      0 14px 34px rgba(0,0,0,.42);
+  }
+
+  .game-inner{
+    position:relative;
+    width:100%;
+    height:100%;
+    border-radius:14px;
+    overflow:hidden;
+    background:
+      linear-gradient(180deg,#1a2631 0%, #101821 100%);
+    box-shadow:
+      inset 0 0 0 1px rgba(255,255,255,.05),
+      inset 0 10px 20px rgba(255,255,255,.03),
+      inset 0 -12px 20px rgba(0,0,0,.28);
+  }
+
+  .title{
+    position:absolute;
+    top:12px;
+    left:14px;
+    z-index:120;
+    font-size:18px;
+    font-weight:700;
+    color:#e7eff5;
+    text-shadow:0 2px 4px rgba(0,0,0,.35);
+    pointer-events:none;
+  }
+
+  .sub{
+    position:absolute;
+    top:40px;
+    left:14px;
+    z-index:120;
+    font-size:13px;
+    color:#bdd0dc;
+    pointer-events:none;
+  }
+
+  .top-ui{
+    position:absolute;
+    top:76px;
+    left:50%;
+    transform:translateX(-50%);
+    width:min(92%, 460px);
+    z-index:125;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:12px;
+  }
+
+  .tray-grid{
+    width:100%;
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:12px;
+  }
+
+  .tray-card{
+    min-height:72px;
+    border-radius:18px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:10px 8px;
+    position:relative;
+    color:#fff;
+    box-shadow:
+      0 10px 24px rgba(0,0,0,.28),
+      inset 0 0 0 1px rgba(255,255,255,.08);
+  }
+
+  .tray-card.empty{
+    background:linear-gradient(180deg,#273744 0%, #19242c 100%);
+    opacity:.28;
+  }
+
+  .tray-card::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    border-radius:18px;
+    box-shadow:inset 0 0 0 2px rgba(255,255,255,.04);
+    pointer-events:none;
+  }
+
+  .tray-slots{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:8px;
+  }
+
+  .slot{
+    width:24px;
+    height:24px;
+    border-radius:50%;
+    background:rgba(255,255,255,.12);
+    box-shadow:
+      inset 0 0 0 2px rgba(255,255,255,.10),
+      inset 0 -5px 8px rgba(0,0,0,.20);
+  }
+
+  .buffer-row{
+    display:flex;
+    gap:10px;
+    align-items:center;
+    justify-content:center;
+    min-height:28px;
+  }
+
+  .buffer-slot{
+    width:24px;
+    height:24px;
+    border-radius:50%;
+    background:rgba(255,255,255,.08);
+    box-shadow:
+      inset 0 0 0 2px rgba(255,255,255,.08),
+      inset 0 -5px 8px rgba(0,0,0,.20);
+  }
+
+  .board{
+    position:absolute;
+    left:50%;
+    top:196px;
+    transform:translateX(-50%);
+    width:min(94%, 500px);
+    height:calc(100% - 210px);
+    z-index:5;
+  }
+
+  .shaft{
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    width:270px;
+    height:110px;
+    border-radius:999px;
+    background:
+      radial-gradient(circle at center, #05070a 0%, #000 46%, #111821 70%, rgba(255,255,255,.04) 100%);
+    box-shadow:
+      inset 0 0 30px rgba(0,0,0,.8),
+      0 0 40px rgba(0,0,0,.45);
+    z-index:0;
+  }
+
+  .vent{
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    width:340px;
+    height:170px;
+    border-radius:20px;
+    background:
+      linear-gradient(180deg,#454f58 0%, #202a31 100%);
+    box-shadow:
+      0 16px 30px rgba(0,0,0,.30),
+      inset 0 0 0 2px rgba(255,255,255,.08),
+      inset 0 12px 18px rgba(255,255,255,.05);
+    z-index:1;
+    transition:
+      transform .7s ease,
+      opacity .7s ease,
+      filter .7s ease;
+  }
+
+  .vent.falling{
+    transform:translate(-50%, 280px) rotate(7deg);
+    opacity:0;
+    filter:blur(1px);
+    pointer-events:none;
+  }
+
+  .vent-bars{
+    position:absolute;
+    left:26px;
+    right:26px;
+    top:28px;
+    bottom:28px;
+    border-radius:12px;
+    background:#161c21;
+    overflow:hidden;
+    box-shadow:inset 0 0 0 1px rgba(255,255,255,.06);
+  }
+
+  .vent-bars::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+      repeating-linear-gradient(
+        90deg,
+        rgba(230,235,240,.82) 0 6px,
+        transparent 6px 22px
+      );
+  }
+
+  .vent-screw{
+    position:absolute;
+    width:34px;
+    height:34px;
+    border-radius:50%;
+    border:none;
+    cursor:pointer;
+    background:#a6a9b3;
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.28),
+      0 4px 8px rgba(0,0,0,.30);
+    z-index:2;
+    pointer-events:none;
+    opacity:.95;
+    transform:scale(.72);
+    transition:
+      transform .20s ease,
+      opacity .20s ease;
+  }
+
+  .vent.active .vent-screw{
+    pointer-events:auto;
+  }
+
+  .vent-screw::before,
+  .vent-screw::after{
+    content:"";
+    position:absolute;
+    background:rgba(30,20,20,.55);
+    border-radius:2px;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+  }
+
+  .vent-screw::before{
+    width:16px;
+    height:4px;
+  }
+
+  .vent-screw::after{
+    width:4px;
+    height:16px;
+  }
+
+  .vent-screw.unscrewing{
+    transform:scale(1.22);
+  }
+
+  .vent-screw.removed{
+    opacity:0;
+    pointer-events:none;
+    transform:scale(1.45);
+  }
+
+  .layer{
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+  }
+
+  .layer .plate{
+    pointer-events:none;
+  }
+
+  .layer .screw{
+    pointer-events:auto;
+  }
+
+  .plate{
+    position:absolute;
+    width:132px;
+    height:108px;
+    overflow:visible;
+    background:rgba(255, 132, 132, 0.74);
+    border:3px solid rgba(20,20,25,0.55);
+    box-shadow:
+      0 10px 24px rgba(0,0,0,.22),
+      inset 0 0 0 1px rgba(255,255,255,.18);
+    transition:
+      transform .62s ease,
+      opacity .62s ease,
+      filter .62s ease;
+  }
+
+  .plate::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+      linear-gradient(140deg, rgba(255,255,255,.18), rgba(255,255,255,0) 42%, rgba(0,0,0,.08));
+    pointer-events:none;
+  }
+
+  .plate.shape-a{
+    clip-path:polygon(10% 10%, 92% 6%, 84% 92%, 8% 88%);
+  }
+
+  .plate.shape-b{
+    clip-path:polygon(8% 14%, 88% 6%, 94% 88%, 14% 94%);
+  }
+
+  .plate.shape-c{
+    clip-path:polygon(6% 18%, 82% 8%, 96% 82%, 18% 96%);
+  }
+
+  .plate.dropped{
+    transform:translateY(220px) rotate(10deg);
+    opacity:0;
+    pointer-events:none;
+    filter:blur(1px);
+  }
+
+  .screw{
+    position:absolute;
+    width:30px;
+    height:30px;
+    border-radius:50%;
+    border:none;
+    cursor:pointer;
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.35),
+      0 4px 8px rgba(0,0,0,.30);
+    padding:0;
+    transition:
+      transform .10s ease,
+      opacity .18s ease;
+  }
+
+  .screw:active{
+    transform:scale(.94);
+  }
+
+  .screw.removed{
+    opacity:0;
+    pointer-events:none;
+    transform:scale(.5);
+  }
+
+  .screw::before,
+  .screw::after{
+    content:"";
+    position:absolute;
+    background:rgba(30,20,20,.55);
+    border-radius:2px;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+  }
+
+  .screw::before{
+    width:14px;
+    height:4px;
+  }
+
+  .screw::after{
+    width:4px;
+    height:14px;
+  }
+
+  .escape-light{
+    position:absolute;
+    inset:0;
+    z-index:130;
+    pointer-events:none;
+    opacity:0;
+    background:
+      radial-gradient(circle at center,
+        rgba(255,255,255,1) 0%,
+        rgba(255,255,255,1) 10%,
+        rgba(255,255,255,.98) 22%,
+        rgba(255,255,255,.95) 38%,
+        rgba(255,255,255,.88) 56%,
+        rgba(255,255,255,.72) 72%,
+        rgba(255,255,255,.35) 86%,
+        rgba(255,255,255,0) 100%);
+    transform:scale(.08);
+    transition:
+      opacity 3s linear,
+      transform 3s cubic-bezier(.16,.72,.22,1),
+      filter 3s ease-out,
+      background-color 3s linear;
+    filter:blur(0px);
+    background-color:rgba(255,255,255,0);
+  }
+
+  .escape-light.expand{
+    opacity:1;
+    transform:scale(10);
+    filter:blur(18px);
+    background-color:rgba(255,255,255,1);
+  }
+
+  .modal{
+    position:absolute;
+    inset:0;
+    z-index:140;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:rgba(0,0,0,.52);
+    backdrop-filter:blur(3px);
+  }
+
+  .modal.hidden{
+    display:none;
+  }
+
+  .modal-card{
+    width:min(82%, 340px);
+    border-radius:18px;
+    padding:22px 20px 18px;
+    text-align:center;
+    background:
+      linear-gradient(180deg,#202f3a 0%, #16212a 100%);
+    border:1px solid rgba(255,255,255,.1);
+    box-shadow:
+      0 14px 32px rgba(0,0,0,.42),
+      inset 0 0 0 1px rgba(255,255,255,.03);
+  }
+
+  .modal-card p{
+    margin:0;
+    line-height:1.8;
+    font-size:16px;
+    color:#d8e4eb;
+    white-space:pre-line;
+  }
+
+  .modal-card button{
+    margin-top:20px;
+    min-width:120px;
+    border:none;
+    border-radius:12px;
+    padding:12px 24px;
+    font-size:16px;
+    font-weight:700;
+    color:#fff;
+    cursor:pointer;
+    background:linear-gradient(180deg,#617f92 0%, #375367 100%);
+    box-shadow:
+      0 8px 16px rgba(0,0,0,.28),
+      inset 0 1px 0 rgba(255,255,255,.16);
+  }
+
+  @media (max-width:560px){
+    .top-ui{
+      width:min(94%, 430px);
+      top:74px;
+      gap:10px;
+    }
+    .tray-grid{
+      gap:10px;
+    }
+    .tray-card{
+      min-height:68px;
+    }
+    .slot,.buffer-slot{
+      width:22px;
+      height:22px;
+    }
+    .board{
+      top:192px;
+      height:calc(100% - 206px);
+    }
+    .plate{
+      width:122px;
+      height:100px;
+    }
+    .vent{
+      width:300px;
+      height:152px;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="game-shell">
+    <div class="game-inner">
+      <div class="title">螺絲拆解</div>
+      <div class="sub">拆掉板子上的螺絲，打開最後的通風出口</div>
+
+      <div class="top-ui">
+        <div class="tray-grid" id="trayGrid"></div>
+        <div class="buffer-row" id="bufferRow"></div>
+      </div>
+
+      <div class="board" id="board">
+        <div class="shaft"></div>
+        <div class="vent" id="ventPanel">
+          <div class="vent-bars"></div>
+        </div>
+      </div>
+
+      <div class="escape-light" id="escapeLight"></div>
+
+      <div class="modal" id="introModal">
+        <div class="modal-card">
+          <p>距離出口只剩最後一步，
+你面前是被螺絲鎖住的通風出口，
+你需要把螺絲轉開……</p>
+          <button id="confirmBtn">確定</button>
+        </div>
+      </div>
+
+      <div class="modal hidden" id="successModal">
+        <div class="modal-card">
+          <p>隨著拿掉最後一顆螺絲，
+你終於見到了太陽……</p>
+          <button id="finishBtn">確定</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(() => {
+  const board = document.getElementById("board");
+  const trayGrid = document.getElementById("trayGrid");
+  const bufferRow = document.getElementById("bufferRow");
+  const introModal = document.getElementById("introModal");
+  const successModal = document.getElementById("successModal");
+  const confirmBtn = document.getElementById("confirmBtn");
+  const finishBtn = document.getElementById("finishBtn");
+  const ventPanel = document.getElementById("ventPanel");
+  const escapeLight = document.getElementById("escapeLight");
+
+  const COLOR_MAP = {
+    red: "#ff3e3e",
+    orange: "#ff9a2b",
+    blue: "#54a8ff",
+    purple: "#9d4dff",
+    pink: "#ef86d2",
+    yellow: "#f1d441",
+    gray: "#a6a9b3"
+  };
+
+  const COLOR_ORDER = ["red","orange","blue","purple","pink","yellow","gray"];
+
+  const MAIN_COLOR_COUNTS = {
+    red: 16,
+    orange: 16,
+    blue: 16,
+    purple: 16,
+    pink: 16,
+    yellow: 12,
+    gray: 16
+  };
+
+  const LAYER_LAYOUTS = [
+    [
+      [18, 18], [128, 8], [248, 18],
+      [48, 94], [158, 84], [278, 94],
+      [30, 172], [142, 164], [260, 176]
+    ],
+    [
+      [46, 34], [156, 24], [276, 34],
+      [22, 108], [136, 102], [254, 114],
+      [52, 186], [164, 178], [282, 188]
+    ],
+    [
+      [10, 48], [122, 42], [238, 50],
+      [40, 126], [152, 118], [268, 130],
+      [18, 204], [132, 196], [246, 210]
+    ]
+  ];
+
+  let activeTrayColors = [];
+  let trayFill = {};
+  let buffer = [];
+  let finished = false;
+  let restarting = false;
+
+  function shuffle(arr) {
+    const copy = arr.slice();
+    for (let i = copy.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [copy[i], copy[j]] = [copy[j], copy[i]];
+    }
+    return copy;
+  }
+
+  function pickRandomColors(count, exclude = []) {
+    const pool = COLOR_ORDER.filter(c => !exclude.includes(c));
+    return shuffle(pool).slice(0, count);
+  }
+
+  function makeColorPool() {
+    const pool = [];
+    for (const color of COLOR_ORDER) {
+      for (let i = 0; i < MAIN_COLOR_COUNTS[color]; i++) pool.push(color);
+    }
+    return shuffle(pool);
+  }
+
+  function resetState() {
+    activeTrayColors = pickRandomColors(4);
+    trayFill = {
+      red:0, orange:0, blue:0, purple:0, pink:0, yellow:0, gray:0
+    };
+    buffer = [];
+    finished = false;
+    restarting = false;
+    escapeLight.classList.remove("expand");
+    successModal.classList.add("hidden");
+  }
+
+  function nextAvailableColor() {
+    const candidates = COLOR_ORDER.filter(color => {
+      if (activeTrayColors.includes(color)) return false;
+
+      const onBoardCount = [...board.querySelectorAll(`.screw[data-color="${color}"]`)]
+        .filter(s => s.dataset.removed === "0").length;
+
+      const inBuffer = buffer.filter(c => c === color).length;
+      const inTray = trayFill[color] || 0;
+
+      return onBoardCount + inBuffer + inTray > 0;
+    });
+
+    if (candidates.length === 0) return null;
+    return candidates[Math.floor(Math.random() * candidates.length)];
+  }
+
+  function refillTrayFromBuffer(color) {
+    while ((trayFill[color] || 0) < 4) {
+      const idx = buffer.indexOf(color);
+      if (idx === -1) break;
+      buffer.splice(idx, 1);
+      trayFill[color] = (trayFill[color] || 0) + 1;
+    }
+  }
+
+  function checkCompletedTrays() {
+    let changed = true;
+    while (changed) {
+      changed = false;
+      for (let i = 0; i < activeTrayColors.length; i++) {
+        const color = activeTrayColors[i];
+        if ((trayFill[color] || 0) >= 4) {
+          trayFill[color] = 0;
+          const next = nextAvailableColor();
+          if (next) {
+            activeTrayColors[i] = next;
+            refillTrayFromBuffer(next);
+          } else {
+            activeTrayColors[i] = null;
+          }
+          changed = true;
+        }
+      }
+      activeTrayColors = activeTrayColors.filter(Boolean);
+    }
+  }
+
+  function renderTopUI() {
+    trayGrid.innerHTML = "";
+    for (let i = 0; i < 4; i++) {
+      const color = activeTrayColors[i] || null;
+      const card = document.createElement("div");
+      card.className = "tray-card";
+
+      if (!color) {
+        card.classList.add("empty");
+      } else {
+        card.style.background = `
+          linear-gradient(180deg,
+            ${COLOR_MAP[color]}88 0%,
+            ${COLOR_MAP[color]}44 100%)
+        `;
+        card.style.boxShadow =
+          `0 10px 24px rgba(0,0,0,.28),
+           inset 0 0 0 1px rgba(255,255,255,.10),
+           inset 0 0 20px ${COLOR_MAP[color]}33`;
+      }
+
+      const slots = document.createElement("div");
+      slots.className = "tray-slots";
+
+      for (let j = 0; j < 4; j++) {
+        const slot = document.createElement("div");
+        slot.className = "slot";
+
+        if (color && j < (trayFill[color] || 0)) {
+          slot.style.background = COLOR_MAP[color];
+          slot.style.boxShadow =
+            `inset 0 0 0 2px rgba(255,255,255,.18),
+             0 0 10px ${COLOR_MAP[color]}66`;
+        }
+
+        slots.appendChild(slot);
+      }
+
+      card.appendChild(slots);
+      trayGrid.appendChild(card);
+    }
+
+    bufferRow.innerHTML = "";
+    for (let i = 0; i < 7; i++) {
+      const slot = document.createElement("div");
+      slot.className = "buffer-slot";
+      if (buffer[i]) slot.style.background = COLOR_MAP[buffer[i]];
+      bufferRow.appendChild(slot);
+    }
+  }
+
+  function createPlateElement(layerIndex, plateIndex, colorPool) {
+    const [x, y] = LAYER_LAYOUTS[layerIndex][plateIndex];
+    const shapes = ["shape-a","shape-b","shape-c"];
+    const rotation = [-6,-2,0,2,6][(plateIndex + layerIndex) % 5];
+    const layoutType = (plateIndex + layerIndex) % 3;
+
+    const el = document.createElement("div");
+    el.className = `plate ${shapes[(plateIndex + layerIndex) % 3]}`;
+    el.style.left = `${x}px`;
+    el.style.top = `${y}px`;
+    el.style.transform = `rotate(${rotation}deg)`;
+    el.dataset.layer = String(layerIndex);
+    el.dataset.plate = String(plateIndex);
+    el.style.zIndex = String(100 + layerIndex * 20 + plateIndex);
+
+    const layouts = [
+      [[20,16],[82,16],[20,56],[82,56]],
+      [[18,18],[80,16],[18,58],[80,58]],
+      [[22,14],[82,18],[22,58],[82,58]]
+    ];
+
+    layouts[layoutType].forEach((pos) => {
+      const color = colorPool.shift();
+      const screw = document.createElement("button");
+      screw.className = "screw";
+      screw.dataset.color = color;
+      screw.dataset.removed = "0";
+      screw.style.background = COLOR_MAP[color];
+      screw.style.left = `${pos[0]}px`;
+      screw.style.top = `${pos[1]}px`;
+
+      screw.addEventListener("click", (e) => {
+        e.stopPropagation();
+        handleScrewClick(screw, el);
+      });
+
+      el.appendChild(screw);
+    });
+
+    return el;
+  }
+
+  function buildBoard() {
+    [...board.querySelectorAll(".layer")].forEach(v => v.remove());
+
+    const pool = makeColorPool();
+
+    for (let layer = 0; layer < 3; layer++) {
+      const layerEl = document.createElement("div");
+      layerEl.className = "layer";
+      layerEl.dataset.layer = String(layer);
+      layerEl.style.zIndex = String(20 + layer * 10);
+
+      for (let i = 0; i < 9; i++) {
+        const plate = createPlateElement(layer, i, pool);
+        layerEl.appendChild(plate);
+      }
+
+      board.appendChild(layerEl);
+    }
+
+    setupVent();
+    renderTopUI();
+  }
+
+  function setupVent() {
+    ventPanel.classList.remove("active", "falling");
+    [...ventPanel.querySelectorAll(".vent-screw")].forEach(v => v.remove());
+
+    const screws = [
+      [8, 8],
+      [298, 8],
+      [8, 128],
+      [298, 128]
+    ];
+
+    screws.forEach(([x, y]) => {
+      const btn = document.createElement("button");
+      btn.className = "vent-screw";
+      btn.style.left = `${x}px`;
+      btn.style.top = `${y}px`;
+      btn.dataset.removed = "0";
+
+      btn.addEventListener("click", () => {
+        if (!ventPanel.classList.contains("active")) return;
+        if (btn.dataset.removed === "1") return;
+
+        btn.classList.add("unscrewing");
+        setTimeout(() => {
+          btn.dataset.removed = "1";
+          btn.classList.remove("unscrewing");
+          btn.classList.add("removed");
+
+          const left = [...ventPanel.querySelectorAll(".vent-screw")]
+            .filter(s => s.dataset.removed === "0").length;
+
+          if (left === 0) {
+            setTimeout(() => {
+              ventPanel.classList.add("falling");
+
+              setTimeout(() => {
+                escapeLight.classList.add("expand");
+
+                setTimeout(() => {
+                  finished = true;
+                  successModal.classList.remove("hidden");
+                }, 3000);
+              }, 700);
+            }, 120);
+          }
+        }, 140);
+      });
+
+      ventPanel.appendChild(btn);
+    });
+  }
+
+  function restartGame() {
+    if (restarting) return;
+    restarting = true;
+    resetState();
+    buildBoard();
+  }
+
+  function maybeActivateVent() {
+    const left = [...board.querySelectorAll(".plate")]
+      .filter(p => !p.classList.contains("dropped")).length;
+
+    if (left === 0) {
+      ventPanel.classList.add("active");
+    }
+  }
+
+  function topMeaningfulElementAt(px, py) {
+    const list = document.elementsFromPoint(px, py);
+    for (const el of list) {
+      if (el.classList?.contains("modal")) continue;
+      if (el.classList?.contains("screw")) return el;
+      if (el.classList?.contains("plate")) return el;
+      if (el.classList?.contains("vent-screw")) return el;
+      if (el.classList?.contains("vent")) return el;
+    }
+    return null;
+  }
+
+  function isScrewFullyExposed(screw) {
+    const rect = screw.getBoundingClientRect();
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top + rect.height / 2;
+    const r = rect.width * 0.34;
+
+    const samples = [
+      [cx, cy],
+      [cx + r, cy],
+      [cx - r, cy],
+      [cx, cy + r],
+      [cx, cy - r],
+      [cx + r * 0.7, cy + r * 0.7],
+      [cx - r * 0.7, cy + r * 0.7],
+      [cx + r * 0.7, cy - r * 0.7],
+      [cx - r * 0.7, cy - r * 0.7]
+    ];
+
+    for (const [x, y] of samples) {
+      const topEl = topMeaningfulElementAt(x, y);
+      if (topEl !== screw) return false;
+    }
+    return true;
+  }
+
+  function handleScrewClick(screw, plateEl) {
+    if (finished) return;
+    if (!introModal.classList.contains("hidden")) return;
+    if (screw.dataset.removed === "1") return;
+
+    if (!isScrewFullyExposed(screw)) return;
+
+    const color = screw.dataset.color;
+
+    if (activeTrayColors.includes(color)) {
+      trayFill[color] = (trayFill[color] || 0) + 1;
+      refillTrayFromBuffer(color);
+    } else {
+      if (buffer.length >= 7) {
+        restartGame();
+        return;
+      }
+      buffer.push(color);
+    }
+
+    screw.dataset.removed = "1";
+    screw.classList.add("removed");
+
+    checkCompletedTrays();
+    renderTopUI();
+
+    const remaining = [...plateEl.querySelectorAll(".screw")]
+      .filter(s => s.dataset.removed === "0");
+
+    if (remaining.length === 0) {
+      plateEl.classList.add("dropped");
+      setTimeout(maybeActivateVent, 620);
+    }
+  }
+
+  confirmBtn.addEventListener("click", () => {
+    introModal.classList.add("hidden");
+  });
+
+  finishBtn.addEventListener("click", () => {
+    successModal.classList.add("hidden");
+  });
+
+  resetState();
+  buildBoard();
+})();
+</script>
+</body>
+</html>
