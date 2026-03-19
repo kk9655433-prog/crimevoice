@@ -27,17 +27,17 @@
     display:flex;
     align-items:center;
     justify-content:center;
-    padding:18px;
+    padding:10px;
   }
 
   .game-shell{
     position:relative;
-    width:min(92vw, 430px);
-    aspect-ratio:0.79;
+    width:min(96vw, 450px);
+    aspect-ratio:0.70;
     border-radius:20px;
     background:
       linear-gradient(145deg,#bfc8cf 0%,#edf2f5 10%,#8a949c 26%,#dce3e8 42%,#757f88 58%,#d7dde2 76%,#97a1aa 100%);
-    padding:12px;
+    padding:10px;
     box-shadow:
       0 0 0 2px rgba(255,255,255,.16) inset,
       0 0 0 5px rgba(68,78,88,.28) inset,
@@ -60,10 +60,10 @@
 
   .title{
     position:absolute;
-    top:12px;
-    left:14px;
+    top:10px;
+    left:12px;
     z-index:5;
-    font-size:18px;
+    font-size:17px;
     font-weight:700;
     letter-spacing:.03em;
     color:#e7eff5;
@@ -76,7 +76,7 @@
     display:block;
     width:100%;
     height:100%;
-    touch-action: manipulation;
+    touch-action:manipulation;
   }
 
   .modal{
@@ -139,6 +139,49 @@
 
   .modal-card button:active{
     transform:translateY(1px);
+  }
+
+  @media (max-width:560px){
+    .wrap{
+      padding:6px;
+    }
+
+    .game-shell{
+      width:98vw;
+      aspect-ratio:0.64;
+      padding:8px;
+      border-radius:18px;
+    }
+
+    .game-inner{
+      border-radius:12px;
+    }
+
+    .title{
+      top:8px;
+      left:10px;
+      font-size:16px;
+    }
+
+    .modal-card{
+      width:min(86%, 300px);
+      padding:20px 16px 16px;
+    }
+
+    .modal-card h2{
+      font-size:22px;
+    }
+
+    .modal-card p{
+      font-size:15px;
+      line-height:1.7;
+    }
+
+    .modal-card button{
+      min-width:110px;
+      padding:11px 20px;
+      font-size:15px;
+    }
   }
 </style>
 </head>
@@ -212,6 +255,29 @@
   let solvedState = false;
   let redirecting = false;
   let imagesReady = false;
+
+  function getBoardMetrics() {
+    const rect = canvas.getBoundingClientRect();
+    const w = rect.width;
+    const h = rect.height;
+    const isMobile = window.innerWidth <= 560;
+
+    const topArea = isMobile ? 42 : 46;
+    const sidePad = isMobile ? 12 : 18;
+    const bottomPad = isMobile ? 14 : 18;
+
+    const cellSize = Math.min(
+      (w - sidePad * 2) / COLS,
+      (h - topArea - bottomPad) / ROWS
+    );
+
+    const boardW = cellSize * COLS;
+    const boardH = cellSize * ROWS;
+    const boardX = (w - boardW) / 2;
+    const boardY = topArea;
+
+    return { w, h, topArea, sidePad, bottomPad, cellSize, boardW, boardH, boardX, boardY };
+  }
 
   function resizeCanvas() {
     const rect = canvas.getBoundingClientRect();
@@ -550,24 +616,10 @@
   }
 
   function draw() {
-    const w = canvas.getBoundingClientRect().width;
-    const h = canvas.getBoundingClientRect().height;
+    const { w, h, cellSize, boardW, boardH, boardX, boardY } = getBoardMetrics();
     ctx.clearRect(0, 0, w, h);
 
     const solved = solvedState;
-    const topArea = 54;
-    const sidePad = 44;
-    const bottomPad = 24;
-
-    const cellSize = Math.min(
-      (w - sidePad * 2) / COLS,
-      (h - topArea - bottomPad) / ROWS
-    );
-
-    const boardW = cellSize * COLS;
-    const boardH = cellSize * ROWS;
-    const boardX = (w - boardW) / 2;
-    const boardY = topArea;
 
     drawBoardFrame(boardX, boardY, boardW, boardH);
 
@@ -619,22 +671,7 @@
     if (!imagesReady) return;
 
     const rect = canvas.getBoundingClientRect();
-    const w = rect.width;
-    const h = rect.height;
-
-    const topArea = 54;
-    const sidePad = 44;
-    const bottomPad = 24;
-
-    const cellSize = Math.min(
-      (w - sidePad * 2) / COLS,
-      (h - topArea - bottomPad) / ROWS
-    );
-
-    const boardW = cellSize * COLS;
-    const boardH = cellSize * ROWS;
-    const boardX = (w - boardW) / 2;
-    const boardY = topArea;
+    const { boardX, boardY, boardW, boardH, cellSize } = getBoardMetrics();
 
     const px = clientX - rect.left;
     const py = clientY - rect.top;
