@@ -334,8 +334,8 @@
             setHint("請將手機靠近空白卡片");
             addLog("目標卡驗證通過", "ok");
           }else{
-            setStatus("這不是目標卡片");
-            setHint("請重新感應正確的目標卡片");
+            setStatus("感應失敗，無法感應本卡片");
+            setHint("請重新感應目標卡片");
             addLog("目標卡驗證失敗", "err");
           }
           return;
@@ -343,7 +343,7 @@
 
         if(phase === "waitBlank"){
           if(text !== BLANK_TEXT){
-            setStatus("這不是指定的空白卡");
+            setStatus("此卡片並非空白卡");
             setHint("請換一張正確的空白卡片");
             addLog("空白卡驗證失敗", "err");
             return;
