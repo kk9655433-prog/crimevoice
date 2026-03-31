@@ -179,7 +179,7 @@
 <div class="wrap">
   <div class="panel">
     <div class="title">卡片複製系統</div>
-    <div class="subtitle">請先感應目標卡片，再感應空白卡片，完成複製程序</div>
+    <div class="subtitle">先感應目標卡，再感應空白卡，最後再次感應驗證</div>
 
     <div class="stage">
       <div id="pillMaster" class="stage-pill">1. 讀取目標卡</div>
@@ -200,7 +200,7 @@
       <div id="log"></div>
     </div>
 
-    <div class="footer-note">需使用支援 Web NFC 的 Android Chrome 與 HTTPS</div>
+    <div class="footer-note">需使用 Android Chrome、HTTPS、已開啟 NFC</div>
   </div>
 </div>
 
@@ -221,9 +221,10 @@
   const pillVerify = document.getElementById("pillVerify");
 
   let reader = null;
-  let phase = "idle"; // idle | waitMaster | waitBlankRead | writingBlank | waitVerify | done
-  let scanAttached = false;
-  let lockUntil = 0;
+  let scanStarted = false;
+  let phase = "idle"; // idle | waitMaster | waitBlank | writing | waitVerify | done
+  let readLock = false;
+  let lastReadAt = 0;
 
   function setStatus(text){
     statusBox.textContent = text;
@@ -250,7 +251,6 @@
     pillMaster.classList.remove("active");
     pillBlank.classList.remove("active");
     pillVerify.classList.remove("active");
-
     if(step === 1) pillMaster.classList.add("active");
     if(step === 2) pillBlank.classList.add("active");
     if(step === 3) pillVerify.classList.add("active");
@@ -258,7 +258,8 @@
 
   function resetFlow(){
     phase = "idle";
-    lockUntil = 0;
+    readLock = false;
+    lastReadAt = 0;
     setStatus("待命中……");
     setHint("按下開始後，請將手機靠近目標卡片");
     setActivePill(0);
@@ -272,19 +273,11 @@
         const decoder = new TextDecoder(record.encoding || "utf-8");
         return decoder.decode(record.data);
       }
-
-      if(record.recordType === "url"){
+      if(record.recordType === "url" || record.recordType === "mime"){
         const decoder = new TextDecoder("utf-8");
         return decoder.decode(record.data);
       }
-
-      if(record.recordType === "mime"){
-        const decoder = new TextDecoder("utf-8");
-        return decoder.decode(record.data);
-      }
-    }catch(err){
-      return "";
-    }
+    }catch(e){}
     return "";
   }
 
@@ -297,48 +290,48 @@
     return "";
   }
 
-  function sameCooldown(){
+  function allowRead(){
     const now = Date.now();
-    if(now < lockUntil) return true;
-    lockUntil = now + 1400;
-    return false;
+    if(readLock) return false;
+    if(now - lastReadAt < 1200) return false;
+    lastReadAt = now;
+    return true;
   }
 
-  async function ensureReader(){
+  async function ensureScanStarted(){
     if(!("NDEFReader" in window)){
       throw new Error("此裝置或瀏覽器不支援 Web NFC");
     }
+
     if(!reader){
       reader = new NDEFReader();
     }
-    return reader;
-  }
 
-  async function beginScan(){
-    const r = await ensureReader();
-    await r.scan();
+    if(scanStarted){
+      return;
+    }
 
-    if(scanAttached) return;
+    await reader.scan();
+    scanStarted = true;
 
-    r.addEventListener("readingerror", () => {
+    reader.onreadingerror = () => {
       addLog("讀取失敗，請重新貼近卡片", "err");
-    });
+    };
 
-    r.addEventListener("reading", async (event) => {
-      if(sameCooldown()) return;
+    reader.onreading = async (event) => {
+      if(!allowRead()) return;
 
       const serial = event.serialNumber || "(無序號)";
       const text = getTagText(event.message);
-
       addLog(`偵測到卡片，serial=${serial}，text=${text || "(無文字)"}`);
 
       try{
         if(phase === "waitMaster"){
           if(text === MASTER_TEXT){
-            phase = "waitBlankRead";
+            phase = "waitBlank";
             setActivePill(2);
             setStatus("已複製卡片");
-            setHint("請將手機靠近空白卡片\n系統將寫入複製資料");
+            setHint("請將手機靠近空白卡片");
             addLog("目標卡驗證通過", "ok");
           }else{
             setStatus("這不是目標卡片");
@@ -348,7 +341,7 @@
           return;
         }
 
-        if(phase === "waitBlankRead"){
+        if(phase === "waitBlank"){
           if(text !== BLANK_TEXT){
             setStatus("這不是指定的空白卡");
             setHint("請換一張正確的空白卡片");
@@ -356,9 +349,10 @@
             return;
           }
 
-          phase = "writingBlank";
+          phase = "writing";
+          readLock = true;
           setStatus("複製中……");
-          setHint("請保持手機與卡片貼近，直到寫入完成");
+          setHint("請保持卡片貼近手機");
           addLog("空白卡驗證通過，開始寫入", "ok");
 
           try{
@@ -374,13 +368,17 @@
             phase = "waitVerify";
             setActivePill(3);
             setStatus("寫入完成");
-            setHint("請再次感應這張卡片\n進行最終驗證");
+            setHint("請移開卡片，再重新感應同一張卡片進行驗證");
             addLog("寫入成功，等待最終驗證", "ok");
           }catch(writeErr){
-            phase = "waitBlankRead";
+            phase = "waitBlank";
             setStatus("寫入失敗");
             setHint("請重新將空白卡片靠近手機");
             addLog(`寫入失敗：${writeErr.message}`, "err");
+          }finally{
+            setTimeout(() => {
+              readLock = false;
+            }, 1200);
           }
           return;
         }
@@ -403,18 +401,17 @@
           addLog("流程已完成，需重置後才能再次操作", "warn");
         }
       }catch(err){
-        addLog(`流程錯誤：${err.message}`, "err");
         setStatus("系統錯誤");
         setHint("請重置後重新操作");
+        addLog(`流程錯誤：${err.message}`, "err");
+        readLock = false;
       }
-    });
-
-    scanAttached = true;
+    };
   }
 
   async function startFlow(){
     try{
-      await beginScan();
+      await ensureScanStarted();
       phase = "waitMaster";
       setActivePill(1);
       setStatus("請感應目標卡片");
@@ -422,7 +419,7 @@
       addLog("掃描已啟動，等待目標卡");
     }catch(err){
       setStatus("無法啟動 NFC");
-      setHint("請確認使用 Android Chrome、已開啟 NFC，且網頁是 HTTPS");
+      setHint("請確認使用 Android Chrome、已開啟 NFC、並以 HTTPS 開啟頁面");
       addLog(`啟動失敗：${err.message}`, "err");
     }
   }
