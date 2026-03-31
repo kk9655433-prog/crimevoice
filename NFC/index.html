@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>卡片複製系統</title>
+<style>
+  *{
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
+  }
+
+  html,body{
+    margin:0;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    font-family:"Microsoft JhengHei","PingFang TC",sans-serif;
+    background:
+      radial-gradient(circle at top, #1e2a38 0%, #0e141b 48%, #05070a 100%);
+    color:#fff;
+  }
+
+  .wrap{
+    width:100%;
+    height:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:18px;
+  }
+
+  .panel{
+    width:min(92vw, 430px);
+    border-radius:24px;
+    padding:24px 18px 18px;
+    background:rgba(255,255,255,0.06);
+    border:1px solid rgba(255,255,255,0.12);
+    box-shadow:0 18px 50px rgba(0,0,0,0.45);
+    backdrop-filter:blur(10px);
+  }
+
+  .title{
+    text-align:center;
+    font-size:28px;
+    font-weight:800;
+    letter-spacing:2px;
+    margin-bottom:10px;
+    text-shadow:0 0 12px rgba(255,255,255,0.15);
+  }
+
+  .subtitle{
+    text-align:center;
+    font-size:14px;
+    line-height:1.7;
+    color:rgba(255,255,255,0.78);
+    margin-bottom:18px;
+  }
+
+  .stage{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:8px;
+    margin-bottom:14px;
+    flex-wrap:wrap;
+  }
+
+  .stage-pill{
+    padding:7px 12px;
+    border-radius:999px;
+    background:rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.08);
+    font-size:12px;
+    color:rgba(255,255,255,0.85);
+  }
+
+  .stage-pill.active{
+    background:linear-gradient(135deg, rgba(94,214,255,0.28), rgba(108,129,255,0.22));
+    border-color:rgba(130,220,255,0.36);
+    color:#fff;
+    box-shadow:0 0 16px rgba(94,214,255,0.16);
+  }
+
+  .status-box{
+    min-height:132px;
+    border-radius:18px;
+    padding:18px 16px;
+    background:rgba(0,0,0,0.28);
+    border:1px solid rgba(255,255,255,0.08);
+    box-shadow:inset 0 0 0 1px rgba(255,255,255,0.02);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    font-size:20px;
+    font-weight:700;
+    line-height:1.7;
+    white-space:pre-line;
+    margin-bottom:14px;
+  }
+
+  .hint{
+    font-size:13px;
+    line-height:1.7;
+    color:rgba(255,255,255,0.72);
+    text-align:center;
+    margin-bottom:16px;
+    min-height:44px;
+    white-space:pre-line;
+  }
+
+  .controls{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    margin-bottom:14px;
+  }
+
+  button{
+    appearance:none;
+    border:none;
+    outline:none;
+    border-radius:14px;
+    padding:14px 12px;
+    font-size:16px;
+    font-weight:800;
+    cursor:pointer;
+  }
+
+  .btn-main{
+    color:#07131d;
+    background:linear-gradient(135deg,#90e7ff,#63a7ff);
+    box-shadow:0 10px 24px rgba(80,170,255,0.22);
+  }
+
+  .btn-sub{
+    color:#fff;
+    background:rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.08);
+  }
+
+  .log-box{
+    border-radius:16px;
+    background:rgba(255,255,255,0.04);
+    border:1px solid rgba(255,255,255,0.08);
+    padding:12px;
+    max-height:180px;
+    overflow:auto;
+  }
+
+  .log-title{
+    font-size:12px;
+    color:rgba(255,255,255,0.6);
+    margin-bottom:8px;
+  }
+
+  .log-line{
+    font-size:12px;
+    line-height:1.6;
+    color:rgba(255,255,255,0.78);
+    word-break:break-word;
+    margin-bottom:4px;
+  }
+
+  .log-line.ok{ color:#93ffb4; }
+  .log-line.err{ color:#ff9f9f; }
+  .log-line.warn{ color:#ffd28d; }
+
+  .footer-note{
+    margin-top:10px;
+    text-align:center;
+    font-size:11px;
+    color:rgba(255,255,255,0.46);
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="panel">
+    <div class="title">卡片複製系統</div>
+    <div class="subtitle">請先感應目標卡片，再感應空白卡片，完成複製程序</div>
+
+    <div class="stage">
+      <div id="pillMaster" class="stage-pill">1. 讀取目標卡</div>
+      <div id="pillBlank" class="stage-pill">2. 寫入空白卡</div>
+      <div id="pillVerify" class="stage-pill">3. 驗證完成卡</div>
+    </div>
+
+    <div id="statusBox" class="status-box">待命中……</div>
+    <div id="hint" class="hint">按下開始後，請將手機靠近目標卡片</div>
+
+    <div class="controls">
+      <button id="startBtn" class="btn-main">開始</button>
+      <button id="resetBtn" class="btn-sub">重置</button>
+    </div>
+
+    <div class="log-box">
+      <div class="log-title">系統記錄</div>
+      <div id="log"></div>
+    </div>
+
+    <div class="footer-note">需使用支援 Web NFC 的 Android Chrome 與 HTTPS</div>
+  </div>
+</div>
+
+<script>
+(() => {
+  const MASTER_TEXT = "PRISON_MASTER_CARD_V1";
+  const BLANK_TEXT = "BLANK_COPY_CARD_V1";
+  const COPIED_TEXT = "COPIED_PRISON_PASS_V1";
+
+  const statusBox = document.getElementById("statusBox");
+  const hint = document.getElementById("hint");
+  const log = document.getElementById("log");
+  const startBtn = document.getElementById("startBtn");
+  const resetBtn = document.getElementById("resetBtn");
+
+  const pillMaster = document.getElementById("pillMaster");
+  const pillBlank = document.getElementById("pillBlank");
+  const pillVerify = document.getElementById("pillVerify");
+
+  let reader = null;
+  let phase = "idle"; // idle | waitMaster | waitBlankRead | writingBlank | waitVerify | done
+  let scanAttached = false;
+  let lockUntil = 0;
+
+  function setStatus(text){
+    statusBox.textContent = text;
+  }
+
+  function setHint(text){
+    hint.textContent = text;
+  }
+
+  function addLog(text, type=""){
+    const div = document.createElement("div");
+    div.className = "log-line" + (type ? " " + type : "");
+    const t = new Date().toLocaleTimeString("zh-TW", { hour12:false });
+    div.textContent = `[${t}] ${text}`;
+    log.appendChild(div);
+    log.scrollTop = log.scrollHeight;
+  }
+
+  function clearLog(){
+    log.innerHTML = "";
+  }
+
+  function setActivePill(step){
+    pillMaster.classList.remove("active");
+    pillBlank.classList.remove("active");
+    pillVerify.classList.remove("active");
+
+    if(step === 1) pillMaster.classList.add("active");
+    if(step === 2) pillBlank.classList.add("active");
+    if(step === 3) pillVerify.classList.add("active");
+  }
+
+  function resetFlow(){
+    phase = "idle";
+    lockUntil = 0;
+    setStatus("待命中……");
+    setHint("按下開始後，請將手機靠近目標卡片");
+    setActivePill(0);
+    clearLog();
+    addLog("流程已重置");
+  }
+
+  function decodeRecord(record){
+    try{
+      if(record.recordType === "text"){
+        const decoder = new TextDecoder(record.encoding || "utf-8");
+        return decoder.decode(record.data);
+      }
+
+      if(record.recordType === "url"){
+        const decoder = new TextDecoder("utf-8");
+        return decoder.decode(record.data);
+      }
+
+      if(record.recordType === "mime"){
+        const decoder = new TextDecoder("utf-8");
+        return decoder.decode(record.data);
+      }
+    }catch(err){
+      return "";
+    }
+    return "";
+  }
+
+  function getTagText(message){
+    if(!message || !message.records) return "";
+    for(const record of message.records){
+      const text = decodeRecord(record).trim();
+      if(text) return text;
+    }
+    return "";
+  }
+
+  function sameCooldown(){
+    const now = Date.now();
+    if(now < lockUntil) return true;
+    lockUntil = now + 1400;
+    return false;
+  }
+
+  async function ensureReader(){
+    if(!("NDEFReader" in window)){
+      throw new Error("此裝置或瀏覽器不支援 Web NFC");
+    }
+    if(!reader){
+      reader = new NDEFReader();
+    }
+    return reader;
+  }
+
+  async function beginScan(){
+    const r = await ensureReader();
+    await r.scan();
+
+    if(scanAttached) return;
+
+    r.addEventListener("readingerror", () => {
+      addLog("讀取失敗，請重新貼近卡片", "err");
+    });
+
+    r.addEventListener("reading", async (event) => {
+      if(sameCooldown()) return;
+
+      const serial = event.serialNumber || "(無序號)";
+      const text = getTagText(event.message);
+
+      addLog(`偵測到卡片，serial=${serial}，text=${text || "(無文字)"}`);
+
+      try{
+        if(phase === "waitMaster"){
+          if(text === MASTER_TEXT){
+            phase = "waitBlankRead";
+            setActivePill(2);
+            setStatus("已複製卡片");
+            setHint("請將手機靠近空白卡片\n系統將寫入複製資料");
+            addLog("目標卡驗證通過", "ok");
+          }else{
+            setStatus("這不是目標卡片");
+            setHint("請重新感應正確的目標卡片");
+            addLog("目標卡驗證失敗", "err");
+          }
+          return;
+        }
+
+        if(phase === "waitBlankRead"){
+          if(text !== BLANK_TEXT){
+            setStatus("這不是指定的空白卡");
+            setHint("請換一張正確的空白卡片");
+            addLog("空白卡驗證失敗", "err");
+            return;
+          }
+
+          phase = "writingBlank";
+          setStatus("複製中……");
+          setHint("請保持手機與卡片貼近，直到寫入完成");
+          addLog("空白卡驗證通過，開始寫入", "ok");
+
+          try{
+            await reader.write({
+              records: [
+                {
+                  recordType: "text",
+                  data: COPIED_TEXT
+                }
+              ]
+            });
+
+            phase = "waitVerify";
+            setActivePill(3);
+            setStatus("寫入完成");
+            setHint("請再次感應這張卡片\n進行最終驗證");
+            addLog("寫入成功，等待最終驗證", "ok");
+          }catch(writeErr){
+            phase = "waitBlankRead";
+            setStatus("寫入失敗");
+            setHint("請重新將空白卡片靠近手機");
+            addLog(`寫入失敗：${writeErr.message}`, "err");
+          }
+          return;
+        }
+
+        if(phase === "waitVerify"){
+          if(text === COPIED_TEXT){
+            phase = "done";
+            setStatus("複製卡片成功");
+            setHint("此卡片已完成複製程序");
+            addLog("最終驗證通過，流程完成", "ok");
+          }else{
+            setStatus("驗證失敗");
+            setHint("請重新感應剛才寫入的那張卡片");
+            addLog("最終驗證失敗，內容不是完成卡", "err");
+          }
+          return;
+        }
+
+        if(phase === "done"){
+          addLog("流程已完成，需重置後才能再次操作", "warn");
+        }
+      }catch(err){
+        addLog(`流程錯誤：${err.message}`, "err");
+        setStatus("系統錯誤");
+        setHint("請重置後重新操作");
+      }
+    });
+
+    scanAttached = true;
+  }
+
+  async function startFlow(){
+    try{
+      await beginScan();
+      phase = "waitMaster";
+      setActivePill(1);
+      setStatus("請感應目標卡片");
+      setHint("請將手機靠近目標卡片");
+      addLog("掃描已啟動，等待目標卡");
+    }catch(err){
+      setStatus("無法啟動 NFC");
+      setHint("請確認使用 Android Chrome、已開啟 NFC，且網頁是 HTTPS");
+      addLog(`啟動失敗：${err.message}`, "err");
+    }
+  }
+
+  startBtn.addEventListener("click", startFlow);
+  resetBtn.addEventListener("click", resetFlow);
+
+  resetFlow();
+})();
+</script>
+</body>
+</html>
