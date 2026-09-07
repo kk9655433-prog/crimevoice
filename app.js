@@ -644,13 +644,59 @@ function actions(p){const liked=localStorage.getItem('liked-'+p.id)==='1';return
 function postHTML(p){const own=!p.author;return `<article class="post" data-post="${p.id}">${avatar(own?PROFILE.name:p.author,own?PROFILE.avatar:p.avatar)}<div><div class="post-header"><strong>${esc(own?PROFILE.handle:p.handle)}</strong><span class="meta">${own?PROFILE.flag+' '+PROFILE.location+' · ':''}${p.time}</span><span class="dots">•••</span></div><p class="post-text">${esc(p.text)}</p>${p.image?`<img class="post-image" src="${p.image}" alt="串文圖片">`:''}${actions(p)}</div></article>`}
 function renderFeed(list=POSTS,target='#feed'){const el=$(target);el.innerHTML=list.length?list.map(postHTML).join(''):'<div class="empty">目前沒有內容</div>';bindActions()}
 function bindActions(){$$('[data-like]').forEach(b=>b.onclick=e=>{e.stopPropagation();const p=ALL_POSTS.find(x=>x.id===b.dataset.like),on=b.classList.toggle('liked');localStorage.setItem('liked-'+p.id,on?'1':'0');b.querySelector('span').textContent=p.likes+(on?1:0)});$$('[data-post]').forEach(x=>x.onclick=()=>openPost(x.dataset.post));$$('[data-open]').forEach(x=>x.onclick=e=>{e.stopPropagation();openPost(x.dataset.open)})}
-function showView(v,previous=state.view){state.previous=previous;state.view=v;$$('.view').forEach(x=>x.classList.remove('active'));$('#'+v+'View').classList.add('active');const root=v==='profile';$('#backBtn').classList.toggle('hidden',root||['messages','search','activity','viewer'].includes(v));$('#searchBtn').classList.toggle('hidden',v!=='profile');scrollTo(0,0)}
-function openPost(id){const p=ALL_POSTS.find(x=>x.id===id);unlock(id);showView('detail');$('#detailPost').innerHTML=postHTML(p);const ordered=p.replies.map((r,i)=>({...r,index:i})).sort((a,b)=>Number(b.ownerLiked)-Number(a.ownerLiked));$('#detailReplies').innerHTML=ordered.length?ordered.map(r=>{const key=id+'r'+r.index,on=localStorage.getItem('liked-'+key)==='1';return `<article class="reply">${avatar(r.name,r.avatar)}<div><div class="post-header">
+function showView(v,previous=state.view,addHistory=true){
+  if(!$('#'+v+'View'))return;
+
+  state.previous=previous;
+  state.view=v;
+
+  $$('.view').forEach(view=>{
+    view.classList.remove('active');
+  });
+
+  $('#'+v+'View').classList.add('active');
+
+  const root=v==='profile';
+
+  $('#backBtn').classList.toggle(
+    'hidden',
+    root||['messages','search','activity','viewer'].includes(v)
+  );
+
+  $('#searchBtn').classList.toggle(
+    'hidden',
+    v!=='profile'
+  );
+
+  if(
+    addHistory &&
+    history.state?.argView!==v
+  ){
+    history.pushState(
+      {
+        argView:v,
+        previousView:previous
+      },
+      ''
+    );
+  }
+
+  scrollTo(0,0);
+}
+function openPost(id){const p=ALL_POSTS.find(x=>x.id===id);unlock(id);showView('detail');$('#detailPost').innerHTML=postHTML(p);const ordered=p.replies.map((r,i)=>({...r,index:i})).sort((a,b)=>Number(b.ownerLiked)-Number(a.ownerLiked));$('#detailReplies').innerHTML=ordered.length?ordered.map(r=>{
+  const key=id+'r'+r.index;
+  const on=localStorage.getItem('liked-'+key)==='1';
+
+  const isAuthor=
+    r.isAuthor===true ||
+    r.handle===PROFILE.handle;
+
+  return `<article class="reply">${avatar(r.name,r.avatar)}<div><div class="post-header">
   <strong>${esc(r.handle)}</strong>
 
 <span class="meta">
   ${r.time?`${esc(r.time)} · `:''}
-  ${esc(r.flag||'🇺🇸')} ${esc(r.location||'美國・哥譚')}
+  ${esc(r.flag||'🇺🇸')} ${esc(r.location||'哥譚')}
   ${isAuthor?' · 作者':''}
 </span>
 
@@ -703,7 +749,13 @@ function initProfile(){$('#displayName').textContent=PROFILE.name;$('#handle').t
 function toast(t){const x=$('#toast');x.textContent=t;x.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>x.classList.remove('show'),1800)}
 $('#followBtn').onclick=()=>{const on=$('#followBtn').classList.toggle('following');$('#followBtn').textContent=on?'追蹤中':'追蹤'};
 $('#messageBtn').onclick=()=>$('#messageDialog').showModal();$('#closeDialog').onclick=()=>$('#messageDialog').close();
-$('#searchBtn').onclick=()=>showView('search');$('#backBtn').onclick=()=>showView(state.previous||'profile');
+$('#searchBtn').onclick=()=>showView('search');$('#backBtn').onclick=()=>{
+  if(history.state?.argView!=='profile'){
+    history.back();
+  }else{
+    showView('profile','profile',false);
+  }
+};
 $('#followersBtn').onclick=()=>{showView('people');renderPeople('followers')};$('#followingBtn').onclick=()=>{showView('people');renderPeople('following')};$('#followersTab').onclick=()=>renderPeople('followers');$('#followingTab').onclick=()=>renderPeople('following');
 $('#altFollowBtn').onclick=followAlt;$('#altMessageBtn').onclick=()=>state.altFollowed?openChat():$('#messageDialog').showModal();
 $('#codeForm').onsubmit=e=>{
@@ -746,4 +798,42 @@ $('#codeForm').onsubmit=e=>{
 $$('[data-nav]').forEach(b=>b.onclick=()=>{const v=b.dataset.nav;showView(v,v);if(v==='messages')renderMessages();if(v==='activity')renderFeed(ACTIVITY_POSTS,'#activityFeed');if(v==='search')renderProgress()});
 const TAB_CONTENT={posts:POSTS,replies:REPLY_POSTS,media:MEDIA_POSTS,reposts:REPOST_POSTS};$$('[data-profile-tab]').forEach(b=>b.onclick=()=>{$$('[data-profile-tab]').forEach(x=>x.classList.remove('active'));b.classList.add('active');renderFeed(TAB_CONTENT[b.dataset.profileTab])});
 $('#searchInput').oninput=e=>{const q=e.target.value.trim().toLowerCase();if(q==='0826')unlock('p3');const list=POSTS.filter(p=>(p.text+(p.clue||'')+(p.clueTitle||'')).toLowerCase().includes(q));$('#searchResults').innerHTML=q?`<div class="reply-heading">搜尋結果</div>${list.map(postHTML).join('')}`:'';bindActions()};
+history.replaceState(
+  {
+    argView:'profile',
+    previousView:'profile'
+  },
+  ''
+);
+
+window.addEventListener('popstate',event=>{
+  const view=event.state?.argView;
+
+  if(!view)return;
+
+  showView(
+    view,
+    event.state?.previousView||'profile',
+    false
+  );
+
+  if(view==='messages'){
+    renderMessages();
+  }
+
+  if(view==='activity'){
+    renderFeed(
+      ACTIVITY_POSTS,
+      '#activityFeed'
+    );
+  }
+
+  if(view==='search'){
+    renderProgress();
+  }
+
+  if(view==='alt'){
+    renderAlt();
+  }
+});
 initProfile();renderFeed();renderProgress();updateUnread();renderMessages();
