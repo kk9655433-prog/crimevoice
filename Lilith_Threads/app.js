@@ -251,9 +251,9 @@ const POSTS=[
     likes:1328,reposts:117,shares:42,
 	image:'assets/party.jpg',
     replies:[
-      {name:'73號',handle:'room_73',avatar:'assets/avatar-3.svg',text:'恭喜。這應該是妳們最忙的一晚了。',likes:51,reposts:5,shares:1},
-      {name:'GothamDaily',handle:'gotham_daily',avatar:'assets/avatar-2.svg',text:'現場氣氛很好。',likes:32,reposts:4,shares:1},
-      {name:'莉莉絲',handle:'PROFILE.handle',avatar: 'assets/avatar.jpg',text:'我比較記得的是結束之後終於可以坐下來。',likes:138,reposts:9,shares:3}
+      {name:'73號',handle:'room_73',avatar:'assets/avatar-3.svg',text:'沒有想到市長是這樣的人。',likes:51,reposts:5,shares:1},
+      {name:'GothamDaily',handle:'gotham_daily',avatar:'assets/avatar-2.svg',text:'你是否知情市長私底下做的這些事？',likes:32,reposts:4,shares:1},
+      {name:'莉莉絲',handle:'PROFILE.handle',avatar: 'assets/avatar.jpg',text:'我不想回答這些事。',likes:138,reposts:9,shares:3}
     ]
   },
 
