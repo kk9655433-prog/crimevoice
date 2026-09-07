@@ -20,3 +20,27 @@ dialog{background:#1b1b1b!important;color:#fff!important;border:1px solid #38383
 .message-row time{color:#777;font-size:12px;white-space:nowrap}.chat-person{display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 0 15px}.chat-person img{width:64px;height:64px;margin-bottom:5px}.chat-person span{color:#888;font-size:14px}
 .topbar{position:sticky}.topbar .brand{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);height:38px;display:grid;place-items:center;pointer-events:none}.app-logo{display:block;width:38px;height:38px;border-radius:9px;object-fit:cover}.topbar .back{z-index:2;color:#fff!important}.topbar .back svg{width:29px;height:29px;stroke-width:2.2}.topbar #searchBtn{margin-left:auto;z-index:2}
 .reply-link{display:block;margin:-6px 0 12px;color:#6ca8ff;overflow-wrap:anywhere;text-decoration:none}.reply-link:hover{text-decoration:underline}
+.dots{
+  margin-left:auto;
+  width:28px;
+  height:28px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#888;
+  font-size:0;
+  letter-spacing:0;
+  flex:none;
+}
+
+.dots::before{
+  content:"";
+  width:3px;
+  height:3px;
+  border-radius:50%;
+  background:currentColor;
+  box-shadow:
+    6px 0 0 currentColor,
+    12px 0 0 currentColor;
+  transform:translateX(-6px);
+}
