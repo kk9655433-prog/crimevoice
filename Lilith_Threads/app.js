@@ -1,5 +1,5 @@
 /* ===== 主要資料：文字與圖片路徑都可在這裡替換 ===== */
-const PROFILE={name:'莉莉絲・凱特',handle:'lilith.kate',flag:'🇺🇸',location:'美國・哥譚',bio:'美國民主黨幕僚｜哥譚\n這裡的言論僅代表我個人。',tags:['#Gotham','#Democrats','#公共政策'],followers:'1,284',following:'156',avatar:'assets/avatar.jpg'};
+const PROFILE={name:'莉莉絲・凱特',handle:'lilith.kate',flag:'🇺🇸',location:'哥譚',bio:'美國民主黨幕僚｜哥譚\n這裡的言論僅代表我個人。',tags:['#Gotham','#Democrats','#公共政策'],followers:'1,284',following:'156',avatar:'assets/avatar.jpg'};
 const ALT={name:'L.K.',handle:'LK555888111222',avatar:'assets/person-alt.jpg'};
 const FOLLOWERS=[
  {name:'林七',handle:'lin_seven',bio:'偶爾拍照。',avatar:'assets/person-lin.svg'},
@@ -86,7 +86,7 @@ const POSTS=[
     likes:418,reposts:29,shares:7,
     replies:[
       {name:'73號',handle:'room_73',avatar:'assets/avatar-3.svg',text:'這在現在會被說是社畜欸，哈哈。',likes:16,reposts:1,shares:0,ownerLiked:true},
-      {name:'莉莉絲',handle:'PROFILE.handle',avatar: 'assets/avatar.jpg',text:'唉。',likes:73,reposts:4,shares:1}
+      {name:'莉莉絲',handle:'lilith.kate',avatar: 'assets/avatar.jpg',text:'唉。',likes:73,reposts:4,shares:1}
     ]
   },
 
@@ -97,7 +97,7 @@ const POSTS=[
     likes:362,reposts:27,shares:6,
     replies:[
       {name:'路過的人',handle:'passing_by',avatar:'assets/avatar-2.svg',text:'真的需要準備這麼衣服嗎？',likes:21,reposts:2,shares:0},
-      {name:'莉莉絲',handle:'PROFILE.handle',avatar: 'assets/avatar.jpg',text:'看你負責什麼工作。但我以前是需要的。',likes:48,reposts:2,shares:1}
+      {name:'莉莉絲',handle:'lilith.kate',avatar: 'assets/avatar.jpg',text:'看你負責什麼工作。但我以前是需要的。',likes:48,reposts:2,shares:1}
     ]
   },
 
@@ -108,7 +108,7 @@ const POSTS=[
     likes:591,reposts:43,shares:12,
     replies:[
       {name:'GothamDaily',handle:'gotham_daily',avatar:'assets/avatar-2.svg',text:'這樣不是很好嗎？',likes:18,reposts:1,shares:0},
-      {name:'莉莉絲',handle:'PROFILE.handle',avatar: 'assets/avatar.jpg',text:'是。只是還在習慣。',likes:84,reposts:5,shares:2}
+      {name:'莉莉絲',handle:'lilith.kate',avatar: 'assets/avatar.jpg',text:'是。只是還在習慣。',likes:84,reposts:5,shares:2}
     ]
   },
 
@@ -119,7 +119,7 @@ const POSTS=[
     likes:487,reposts:35,shares:9,
     replies:[
       {name:'無名',handle:'anonymous_gotham',avatar:'assets/person-unknown.svg',text:'突然不知道該說恭喜還是節哀。',likes:27,reposts:2,shares:0},
-      {name:'莉莉絲',handle:'PROFILE.handle',avatar: 'assets/avatar.jpg',text:'我也還在判斷。',likes:61,reposts:3,shares:1}
+      {name:'莉莉絲',handle:'lilith.kate',avatar: 'assets/avatar.jpg',text:'我也還在判斷。',likes:61,reposts:3,shares:1}
     ]
   },
 
@@ -130,7 +130,7 @@ const POSTS=[
     likes:704,reposts:52,shares:14,
     replies:[
       {name:'73號',handle:'room_73',avatar:'assets/avatar-3.svg',text:'拿去睡覺。',likes:38,reposts:2,shares:0},
-      {name:'莉莉絲',handle:'PROFILE.handle',avatar: 'assets/avatar.jpg',text:'我正在學習。',likes:93,reposts:6,shares:2}
+      {name:'莉莉絲',handle:'lilith.kate',avatar: 'assets/avatar.jpg',text:'我正在學習。',likes:93,reposts:6,shares:2}
     ]
   },
 
@@ -141,7 +141,7 @@ const POSTS=[
     likes:831,reposts:47,shares:15,
     replies:[
       {name:'路過的人',handle:'passing_by',avatar:'assets/avatar-2.svg',text:'但妳以前真的很常發市政廳的事情。',likes:34,reposts:3,shares:1},
-      {name:'莉莉絲',handle:'PROFILE.handle',avatar: 'assets/avatar.jpg',text:'因為那時候我的生活也真的很常在市政廳。',likes:107,reposts:7,shares:2}
+      {name:'莉莉絲',handle:'lilith.kate',avatar: 'assets/avatar.jpg',text:'因為那時候我的生活也真的很常在市政廳。',likes:107,reposts:7,shares:2}
     ]
   },
 
@@ -152,7 +152,7 @@ const POSTS=[
     likes:613,reposts:31,shares:8,
     replies:[
       {name:'73號',handle:'room_73',avatar:'assets/avatar-3.svg',text:'這種東西通常最後都會變成紀念品。',likes:25,reposts:1,shares:0},
-      {name:'莉莉絲',handle:'PROFILE.handle',avatar: 'assets/avatar.jpg',text:'可能吧。',likes:46,reposts:2,shares:0}
+      {name:'莉莉絲',handle:'lilith.kate',avatar: 'assets/avatar.jpg',text:'可能吧。',likes:46,reposts:2,shares:0}
     ]
   },
 
@@ -163,7 +163,7 @@ const POSTS=[
     likes:389,reposts:22,shares:5,
     replies:[
       {name:'GothamDaily',handle:'gotham_daily',avatar:'assets/avatar-2.svg',text:'還有人不知道妳已經離開了嗎？',likes:19,reposts:1,shares:0},
-      {name:'莉莉絲',handle:'PROFILE.handle',avatar: 'assets/avatar.jpg',text:'可能還有一些自動寄送的東西沒有改。',likes:37,reposts:2,shares:0}
+      {name:'莉莉絲',handle:'lilith.kate',avatar: 'assets/avatar.jpg',text:'可能還有一些自動寄送的東西沒有改。',likes:37,reposts:2,shares:0}
     ]
   },
 
@@ -174,7 +174,7 @@ const POSTS=[
     likes:451,reposts:28,shares:6,
     replies:[
       {name:'無名',handle:'anonymous_gotham',avatar:'assets/person-unknown.svg',text:'流程表也算你的戰績。',likes:42,reposts:3,shares:1},
-      {name:'莉莉絲',handle:'PROFILE.handle',avatar: 'assets/avatar.jpg',text:'我甚至不記得它們是哪一天的。',likes:59,reposts:3,shares:1}
+      {name:'莉莉絲',handle:'lilith.kate',avatar: 'assets/avatar.jpg',text:'我甚至不記得它們是哪一天的。',likes:59,reposts:3,shares:1}
     ]
   },
 
@@ -185,7 +185,7 @@ const POSTS=[
     likes:537,reposts:34,shares:8,
     replies:[
       {name:'73號',handle:'room_73',avatar:'assets/avatar-3.svg',text:'妳以前到底幾點開始上班？',likes:18,reposts:1,shares:0},
-      {name:'莉莉絲',handle:'PROFILE.handle',avatar: 'assets/avatar.jpg',text:'不想回憶。',likes:77,reposts:5,shares:1}
+      {name:'莉莉絲',handle:'lilith.kate',avatar: 'assets/avatar.jpg',text:'不想回憶。',likes:77,reposts:5,shares:1}
     ]
   },
 
@@ -196,7 +196,7 @@ const POSTS=[
     likes:614,reposts:39,shares:11,
     replies:[
       {name:'路過的人',handle:'passing_by',avatar:'assets/avatar-2.svg',text:'所以真的完全離開了？',likes:26,reposts:2,shares:0},
-      {name:'莉莉絲',handle:'PROFILE.handle',avatar: 'assets/avatar.jpg',text:'對。',likes:71,reposts:3,shares:1}
+      {name:'莉莉絲',handle:'lilith.kate',avatar: 'assets/avatar.jpg',text:'對。',likes:71,reposts:3,shares:1}
     ]
   },
 
@@ -207,7 +207,7 @@ const POSTS=[
     likes:792,reposts:57,shares:17,
     replies:[
       {name:'73號',handle:'room_73',avatar:'assets/avatar-3.svg',text:'這才是正式離職的儀式。',likes:41,reposts:4,shares:1},
-      {name:'莉莉絲',handle:'PROFILE.handle',avatar: 'assets/avatar.jpg',text:'確實比交接文件有感。',likes:92,reposts:7,shares:2}
+      {name:'莉莉絲',handle:'lilith.kate',avatar: 'assets/avatar.jpg',text:'確實比交接文件有感。',likes:92,reposts:7,shares:2}
     ]
   },
 
@@ -218,7 +218,7 @@ const POSTS=[
     likes:466,reposts:28,shares:7,
     replies:[
       {name:'無名',handle:'anonymous_gotham',avatar:'assets/person-unknown.svg',text:'這篇居然有點難過。',likes:32,reposts:2,shares:0},
-      {name:'莉莉絲',handle:'PROFILE.handle',avatar: 'assets/avatar.jpg',text:'我只是第一次發現那個紅燈原來這麼久。',likes:81,reposts:4,shares:1}
+      {name:'莉莉絲',handle:'lilith.kate',avatar: 'assets/avatar.jpg',text:'我只是第一次發現那個紅燈原來這麼久。',likes:81,reposts:4,shares:1}
     ]
   },
 
@@ -229,7 +229,7 @@ const POSTS=[
     likes:718,reposts:54,shares:16,
     replies:[
       {name:'73號',handle:'room_73',avatar:'assets/avatar-3.svg',text:'那杯咖啡最後怎麼辦？',likes:27,reposts:1,shares:0},
-      {name:'莉莉絲',handle:'PROFILE.handle',avatar: 'assets/avatar.jpg',text:'不知道。',likes:119,reposts:8,shares:2}
+      {name:'莉莉絲',handle:'lilith.kate',avatar: 'assets/avatar.jpg',text:'不知道。',likes:119,reposts:8,shares:2}
     ]
   },
 
@@ -240,7 +240,7 @@ const POSTS=[
     likes:936,reposts:81,shares:25,
     replies:[
       {name:'GothamDaily',handle:'gotham_daily',avatar:'assets/avatar-2.svg',text:'昨晚辛苦了。',likes:44,reposts:5,shares:1},
-      {name:'莉莉絲',handle:'PROFILE.handle',avatar: 'assets/avatar.jpg',text:'謝謝。',likes:103,reposts:6,shares:2}
+      {name:'莉莉絲',handle:'lilith.kate',avatar: 'assets/avatar.jpg',text:'謝謝。',likes:103,reposts:6,shares:2}
     ]
   },
 
@@ -253,7 +253,7 @@ const POSTS=[
     replies:[
       {name:'73號',handle:'room_73',avatar:'assets/avatar-3.svg',text:'沒有想到市長是這樣的人。',likes:51,reposts:5,shares:1},
       {name:'GothamDaily',handle:'gotham_daily',avatar:'assets/avatar-2.svg',text:'你是否知情市長私底下做的這些事？',likes:32,reposts:4,shares:1},
-      {name:'莉莉絲',handle:'PROFILE.handle',avatar: 'assets/avatar.jpg',text:'我不想回答這些事。',likes:138,reposts:9,shares:3}
+      {name:'莉莉絲',handle:'lilith.kate',avatar: 'assets/avatar.jpg',text:'我不想回答這些事。',likes:138,reposts:9,shares:3}
     ]
   },
 
@@ -264,7 +264,7 @@ const POSTS=[
     likes:845,reposts:74,shares:20,
     replies:[
       {name:'路過的人',handle:'passing_by',avatar:'assets/avatar-2.svg',text:'座位到底有多難排？',likes:28,reposts:2,shares:0},
-      {name:'莉莉絲',handle:'PROFILE.handle',avatar: 'assets/avatar.jpg',text:'你不知道一張桌子可以牽涉多少人的自尊。',likes:113,reposts:8,shares:3}
+      {name:'莉莉絲',handle:'lilith.kate',avatar: 'assets/avatar.jpg',text:'你不知道一張桌子可以牽涉多少人的自尊。',likes:113,reposts:8,shares:3}
     ]
   },
 
@@ -276,7 +276,7 @@ const POSTS=[
     replies:[
       {name:'記者A',handle:'daily_reporter',avatar:'assets/avatar-2.svg',text:'收到，懂了。',likes:34,reposts:3,shares:1},
       {name:'73號',handle:'room_73',avatar:'assets/avatar-3.svg',text:'最後一句才是真正的理由。',likes:52,reposts:5,shares:1},
-      {name:'莉莉絲',handle:'PROFILE.handle',avatar: 'assets/avatar.jpg',text:'非常正確。',likes:96,reposts:6,shares:2}
+      {name:'莉莉絲',handle:'lilith.kate',avatar: 'assets/avatar.jpg',text:'非常正確。',likes:96,reposts:6,shares:2}
     ]
   },
 
@@ -287,7 +287,7 @@ const POSTS=[
     likes:583,reposts:41,shares:10,
     replies:[
       {name:'無名',handle:'anonymous_gotham',avatar:'assets/person-unknown.svg',text:'這個日期現在是不是已經變成某種心理陰影？',likes:31,reposts:2,shares:0},
-      {name:'莉莉絲',handle:'PROFILE.handle',avatar: 'assets/avatar.jpg',text:'還有十三天，不要提醒我。',likes:84,reposts:5,shares:1}
+      {name:'莉莉絲',handle:'lilith.kate',avatar: 'assets/avatar.jpg',text:'還有十三天，不要提醒我。',likes:84,reposts:5,shares:1}
     ]
   },
 
@@ -298,7 +298,7 @@ const POSTS=[
     likes:739,reposts:62,shares:17,
     replies:[
       {name:'73號',handle:'room_73',avatar:'assets/avatar-3.svg',text:'所以最後怎麼辦？',likes:21,reposts:1,shares:0},
-      {name:'莉莉絲',handle:'PROFILE.handle',avatar: 'assets/avatar.jpg',text:'大家開始確認下一場行程。',likes:63,reposts:3,shares:1}
+      {name:'莉莉絲',handle:'lilith.kate',avatar: 'assets/avatar.jpg',text:'大家開始確認下一場行程。',likes:63,reposts:3,shares:1}
     ]
   },
 
@@ -309,7 +309,7 @@ const POSTS=[
     likes:624,reposts:48,shares:12,
     replies:[
       {name:'GothamDaily',handle:'gotham_daily',avatar:'assets/avatar-2.svg',text:'第一版通常代表什麼？',likes:25,reposts:2,shares:0},
-      {name:'莉莉絲',handle:'PROFILE.handle',avatar: 'assets/avatar.jpg',text:'代表後面還有第二版。',likes:97,reposts:7,shares:2}
+      {name:'莉莉絲',handle:'lilith.kate',avatar: 'assets/avatar.jpg',text:'代表後面還有第二版。',likes:97,reposts:7,shares:2}
     ]
   },
 
@@ -320,7 +320,7 @@ const POSTS=[
     likes:471,reposts:36,shares:8,
     replies:[
       {name:'路過的人',handle:'passing_by',avatar:'assets/avatar-2.svg',text:'這就是幕僚生活嗎？',likes:19,reposts:1,shares:0},
-      {name:'莉莉絲',handle:'PROFILE.handle',avatar: 'assets/avatar.jpg',text:'這只是其中一部分。',likes:52,reposts:3,shares:1}
+      {name:'莉莉絲',handle:'lilith.kate',avatar: 'assets/avatar.jpg',text:'這只是其中一部分。',likes:52,reposts:3,shares:1}
     ]
   },
 
@@ -331,7 +331,7 @@ const POSTS=[
     likes:813,reposts:63,shares:18,
     replies:[
       {name:'73號',handle:'room_73',avatar:'assets/avatar-3.svg',text:'妳那個「我相信他」看起來很不像相信。',likes:46,reposts:3,shares:1},
-      {name:'莉莉絲',handle:'PROFILE.handle',avatar: 'assets/avatar.jpg',text:'我相信今年會很忙。',likes:103,reposts:7,shares:2}
+      {name:'莉莉絲',handle:'lilith.kate',avatar: 'assets/avatar.jpg',text:'我相信今年會很忙。',likes:103,reposts:7,shares:2}
     ]
   },
 
@@ -342,7 +342,7 @@ const POSTS=[
     likes:687,reposts:42,shares:10,
     replies:[
       {name:'無名',handle:'anonymous_gotham',avatar:'assets/person-unknown.svg',text:'這可能是整個辦公室最重要的文件。',likes:37,reposts:3,shares:1},
-      {name:'莉莉絲',handle:'PROFILE.handle',avatar: 'assets/avatar.jpg',text:'同意。',likes:72,reposts:4,shares:1}
+      {name:'莉莉絲',handle:'lilith.kate',avatar: 'assets/avatar.jpg',text:'同意。',likes:72,reposts:4,shares:1}
     ]
   },
 
@@ -353,7 +353,7 @@ const POSTS=[
     likes:902,reposts:79,shares:22,
     replies:[
       {name:'記者A',handle:'daily_reporter',avatar:'assets/avatar-2.svg',text:'新聞稿也是這樣。',likes:29,reposts:2,shares:0},
-      {name:'莉莉絲',handle:'PROFILE.handle',avatar: 'assets/avatar.jpg',text:'我們互相理解。',likes:81,reposts:6,shares:2}
+      {name:'莉莉絲',handle:'lilith.kate',avatar: 'assets/avatar.jpg',text:'我們互相理解。',likes:81,reposts:6,shares:2}
     ]
   },
 
@@ -364,7 +364,7 @@ const POSTS=[
     likes:776,reposts:54,shares:14,
     replies:[
       {name:'73號',handle:'room_73',avatar:'assets/avatar-3.svg',text:'那妳呢？',likes:15,reposts:1,shares:0},
-      {name:'莉莉絲',handle:'PROFILE.handle',avatar: 'assets/avatar.jpg',text:'我每天都在想今天要不要穿西裝。',likes:48,reposts:3,shares:1}
+      {name:'莉莉絲',handle:'lilith.kate',avatar: 'assets/avatar.jpg',text:'我每天都在想今天要不要穿西裝。',likes:48,reposts:3,shares:1}
     ]
   },
 
@@ -375,7 +375,7 @@ const POSTS=[
     likes:641,reposts:45,shares:11,
     replies:[
       {name:'GothamDaily',handle:'gotham_daily',avatar:'assets/avatar-2.svg',text:'市長本人應該也分不清。',likes:24,reposts:2,shares:0},
-      {name:'莉莉絲',handle:'PROFILE.handle',avatar: 'assets/avatar.jpg',text:'我有時候也分不清。',likes:63,reposts:4,shares:1}
+      {name:'莉莉絲',handle:'lilith.kate',avatar: 'assets/avatar.jpg',text:'我有時候也分不清。',likes:63,reposts:4,shares:1}
     ]
   },
 
@@ -399,7 +399,7 @@ const POSTS=[
     likes:513,reposts:31,shares:7,
     replies:[
       {name:'無名',handle:'anonymous_gotham',avatar:'assets/person-unknown.svg',text:'幕僚的生日提醒系統是不是很可怕。',likes:27,reposts:2,shares:0},
-      {name:'莉莉絲',handle:'PROFILE.handle',avatar: 'assets/avatar.jpg',text:'非常有效率。',likes:51,reposts:3,shares:1}
+      {name:'莉莉絲',handle:'lilith.kate',avatar: 'assets/avatar.jpg',text:'非常有效率。',likes:51,reposts:3,shares:1}
     ]
   },
 
@@ -411,7 +411,7 @@ const POSTS=[
     likes:882,reposts:71,shares:20,
     replies:[
       {name:'路過的人',handle:'passing_by',avatar:'assets/avatar-2.svg',text:'好可愛',likes:37,reposts:3,shares:1},
-      {name:'莉莉絲',handle:'PROFILE.handle',avatar: 'assets/avatar.jpg',text:'他剛剛又抓我了啦。',likes:116,reposts:8,shares:3}
+      {name:'莉莉絲',handle:'lilith.kate',avatar: 'assets/avatar.jpg',text:'他剛剛又抓我了啦。',likes:116,reposts:8,shares:3}
     ]
   },
 
@@ -422,7 +422,7 @@ const POSTS=[
     likes:947,reposts:84,shares:24,
     replies:[
       {name:'73號',handle:'room_73',avatar:'assets/avatar-3.svg',text:'我有看到直播',likes:26,reposts:1,shares:0},
-      {name:'莉莉絲',handle:'PROFILE.handle',avatar: 'assets/avatar.jpg',text:'唉。',likes:129,reposts:9,shares:3}
+      {name:'莉莉絲',handle:'lilith.kate',avatar: 'assets/avatar.jpg',text:'唉。',likes:129,reposts:9,shares:3}
     ]
   },
 
@@ -433,7 +433,7 @@ const POSTS=[
     likes:438,reposts:28,shares:6,
     replies:[
       {name:'無名',handle:'anonymous_gotham',avatar:'assets/person-unknown.svg',text:'你們到底都收到了些什麼...？',likes:17,reposts:1,shares:0},
-      {name:'莉莉絲',handle:'PROFILE.handle',avatar: 'assets/avatar.jpg',text:'我不方便回答這個問題。',likes:54,reposts:3,shares:1}
+      {name:'莉莉絲',handle:'lilith.kate',avatar: 'assets/avatar.jpg',text:'我不方便回答這個問題。',likes:54,reposts:3,shares:1}
     ]
   },
 
@@ -444,7 +444,7 @@ const POSTS=[
     likes:529,reposts:37,shares:9,
     replies:[
       {name:'GothamDaily',handle:'gotham_daily',avatar:'assets/avatar-2.svg',text:'市長好強喔。',likes:31,reposts:2,shares:0},
-      {name:'莉莉絲',handle:'PROFILE.handle',avatar: 'assets/avatar.jpg',text:'還有機場。忘了說。',likes:44,reposts:2,shares:1}
+      {name:'莉莉絲',handle:'lilith.kate',avatar: 'assets/avatar.jpg',text:'還有機場。忘了說。',likes:44,reposts:2,shares:1}
     ]
   },
 
@@ -455,7 +455,7 @@ const POSTS=[
     likes:614,reposts:48,shares:12,
     replies:[
       {name:'73號',handle:'room_73',avatar:'assets/avatar-3.svg',text:'市長有睡嗎？',likes:28,reposts:2,shares:0},
-      {name:'莉莉絲',handle:'PROFILE.handle',avatar: 'assets/avatar.jpg',text:'他很努力抓時間休息啦。',likes:66,reposts:4,shares:1}
+      {name:'莉莉絲',handle:'lilith.kate',avatar: 'assets/avatar.jpg',text:'他很努力抓時間休息啦。',likes:66,reposts:4,shares:1}
     ]
   },
 
@@ -466,7 +466,7 @@ const POSTS=[
     likes:483,reposts:39,shares:9,
     replies:[
       {name:'路過的人',handle:'passing_by',avatar:'assets/avatar-2.svg',text:'市政工作感覺好累。',likes:22,reposts:1,shares:0},
-      {name:'莉莉絲',handle:'PROFILE.handle',avatar: 'assets/avatar.jpg',text:'但蠻開心的。',likes:58,reposts:3,shares:1}
+      {name:'莉莉絲',handle:'lilith.kate',avatar: 'assets/avatar.jpg',text:'但蠻開心的。',likes:58,reposts:3,shares:1}
     ]
   },
 
@@ -477,7 +477,7 @@ const POSTS=[
     likes:367,reposts:24,shares:5,
     replies:[
       {name:'無名',handle:'anonymous_gotham',avatar:'assets/person-unknown.svg',text:'這樣有做意外備案嗎？',likes:12,reposts:1,shares:0},
-      {name:'莉莉絲',handle:'PROFILE.handle',avatar: 'assets/avatar.jpg',text:'後面三頁全是備案。',likes:39,reposts:2,shares:0}
+      {name:'莉莉絲',handle:'lilith.kate',avatar: 'assets/avatar.jpg',text:'後面三頁全是備案。',likes:39,reposts:2,shares:0}
     ]
   },
 
@@ -489,7 +489,7 @@ const POSTS=[
 	image:'assets/HILL01.jpg',
     replies:[
       {name:'73號',handle:'room_73',avatar:'assets/avatar-3.svg',text:'哇這個光線很棒欸。',likes:17,reposts:1,shares:0},
-      {name:'莉莉絲',handle:'PROFILE.handle',avatar: 'assets/avatar.jpg',text:'我也這麼認為。',likes:31,reposts:1,shares:0}
+      {name:'莉莉絲',handle:'lilith.kate',avatar: 'assets/avatar.jpg',text:'我也這麼認為。',likes:31,reposts:1,shares:0}
     ]
   },
 
@@ -500,7 +500,7 @@ const POSTS=[
     likes:341,reposts:26,shares:6,
     replies:[
       {name:'路過的人',handle:'passing_by',avatar:'assets/avatar-2.svg',text:'莉莉絲也辦脆啦。',likes:14,reposts:1,shares:0},
-      {name:'莉莉絲',handle:'PROFILE.handle',avatar: 'assets/avatar.jpg',text:'對啊，現在還在熟悉脆的操作。',likes:43,reposts:2,shares:0}
+      {name:'莉莉絲',handle:'lilith.kate',avatar: 'assets/avatar.jpg',text:'對啊，現在還在熟悉脆的操作。',likes:43,reposts:2,shares:0}
     ]
   }
 ];
@@ -528,7 +528,6 @@ const REPOST_POSTS=[
     id:'repost1',
 
     isRepost:true,
-    repostedBy:PROFILE.handle,
 
     author:'BTA250',
     handle:'BTA250',
