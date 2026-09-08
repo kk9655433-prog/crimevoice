@@ -1,5 +1,5 @@
 /* ===== 主要資料：文字與圖片路徑都可在這裡替換 ===== */
-const PROFILE={name:'莉莉絲・凱特',handle:'lilith.kate',flag:'🇺🇸',location:'高譚',bio:'高譚人\n這裡的言論僅代表我個人。',tags:['#Gotham','#Democrats','#公共政策'],followers:'1,284',following:'156',avatar:'assets/avatar.jpg'};
+const PROFILE={name:'莉莉絲・凱特',handle:'lilith.kate',flag:'🇺🇸',location:'高譚',bio:'高譚人\n這裡的言論僅代表我個人。',tags:['#Gotham','#Democrats','#公共政策'],followers:'1,284',following:'156',avatar:'assets/avatar.png'};
 const ALT={name:'L.K.',handle:'LK555888111222',avatar:'assets/person-alt.jpg'};
 const FOLLOWERS=[
  {name:'林七',handle:'lin_seven',bio:'偶爾拍照。',avatar:'assets/person-lin.svg'},
@@ -99,31 +99,31 @@ const NEWS_POST={
   ],
   likes:18943,reposts:2841,shares:1607,
   replies:[
-    {name:'瑪莎',handle:'martha_works',avatar:'assets/avatar-3.svg',text:'希爾市長無罪！！！！高譚日報是共和黨的狗吧？？',likes:227,reposts:18,shares:3},
-    {name:'湯姆森',handle:'thomson_g',avatar:'assets/person-chen.svg',text:'都被警方移送了還無罪，支持者到底要裝瞎到什麼時候？',likes:615,reposts:47,shares:12},
-    {name:'蘇菲',handle:'sophie_park',avatar:'assets/avatar-3.svg',text:'移送又不是判刑！講得像已經定罪一樣。',likes:438,reposts:31,shares:8},
-    {name:'艾倫',handle:'allen_watch',avatar:'assets/person-chen.svg',text:'現場那麼多人都看到希爾脅持韋恩了，還需要公開什麼？',likes:782,reposts:66,shares:19},
-    {name:'匿名市民',handle:'citizen_404',avatar:'assets/person-rain.svg',text:'到底是現場哪些人看到？我也說我在現場好不好？沒圖沒真相啦！',likes:391,reposts:22,shares:5},
-    {name:'喬治',handle:'george_news',avatar:'assets/person-lin.svg',text:'欸我真的在現場。夜翼、紅頭罩和羅賓他們衝進去之後，警方才把希爾帶走。\n附上一張現場圖！',image:'assets/NEWS01.jpg',likes:1264,reposts:153,shares:87},
-    {name:'露西',handle:'lucy_says',avatar:'assets/avatar-3.svg',text:'蒙面義警闖進市府晚會、控制民選市長，大家居然沒有反應？',likes:317,reposts:29,shares:7},
-    {name:'威廉',handle:'william_w',avatar:'assets/person-chen.svg',text:'他們救了一個被脅持的人，警方也在場。不要講得像義警政變。',likes:694,reposts:54,shares:16},
-	{name:'馬克',handle:'mark_truth',avatar:'assets/person-lin.svg',text:'照片右下那位被綁著的人是布魯斯韋恩嗎？',likes:121,reposts:18,shares:1},
-    {name:'小報讀者',handle:'tabloid_reader',avatar:'assets/person-rain.svg',text:'哇，人體器官販賣？？這比昨天報紙寫的還誇張。',likes:843,reposts:71,shares:24},
-    {name:'保羅',handle:'paul_cityhall',avatar:'assets/person-lin.svg',text:'報導只說疑似涉及啦。先等檢方調查好嗎。',likes:529,reposts:38,shares:9},
-    {name:'城南阿姨',handle:'southside_auntie',avatar:'assets/avatar-3.svg',text:'希爾上任以後南區明明改善很多，我不相信他會做這種事！',likes:284,reposts:16,shares:3},
-    {name:'馬克',handle:'mark_truth',avatar:'assets/person-lin.svg',text:'蝙蝠俠萬歲！',likes:911,reposts:79,shares:21},
-    {name:'凱特',handle:'kate_k',avatar:'assets/person-rain.svg',text:'蝙蝠俠這次根本沒出現好嗎？',likes:358,reposts:27,shares:4},
-    {name:'傑克',handle:'jack_in_city',avatar:'assets/person-chen.svg',text:'市長本人在公開場合脅持人，這就值得被關了吧？',likes:746,reposts:61,shares:13},
-    {name:'莉莎',handle:'lisa_coffee',avatar:'assets/person-rain.svg',text:'有沒有人知道市府代理程序會由誰接任？新聞怎麼完全沒寫。',likes:201,reposts:12,shares:2},
-    {name:'戴維',handle:'david_question',avatar:'assets/person-chen.svg',text:'我比較想知道其他涉案人士是誰。不可能只有希爾一個人吧？',likes:573,reposts:48,shares:11},
-    {name:'莉莉絲・凱特',handle:PROFILE.handle,avatar:PROFILE.avatar,profileLink:true,text:'目前一切還在偵查中，請不要做過多猜測。',likes:46,reposts:2,shares:0},
-    {name:'莎拉',handle:'sarah_here',avatar:'assets/avatar-3.svg',text:'所以現在是由副市長代理嗎。',likes:286,reposts:24,shares:6},
-    {name:'尼克',handle:'nick_no_filter',avatar:'assets/person-rain.svg',text:'完了，今年底里夫斯的當選大概已經確定了，我對未來感到絕望。',likes:402,reposts:37,shares:9},
-    {name:'海倫',handle:'helen_home',avatar:'assets/avatar-3.svg',text:'里夫斯很好吧？至少長的蠻帥的啊。',likes:377,reposts:25,shares:5},
-    {name:'報童',handle:'paperboy_7',avatar:'assets/person-chen.svg',text:'今天所有報紙都賣光了，下午的增刊也沒剩幾份！',likes:538,reposts:48,shares:11},
-    {name:'布朗先生',handle:'mr_brown_g',avatar:'assets/person-lin.svg',text:'留友看，帥又不能當飯吃。',likes:421,reposts:34,shares:8},
-    {name:'米亞',handle:'mia_afterfive',avatar:'assets/person-rain.svg',text:'有人有懶人包嗎？話說上面是不是有個人是市府幕僚？',likes:263,reposts:18,shares:4},
-    {name:'老城居民',handle:'oldtown_resident',avatar:'assets/person-lin.svg',text:'都奈橋蓋這麼多年沒蓋好原來都是因為官商勾結。',likes:514,reposts:53,shares:18}
+    {name:'martha_works',handle:'martha_works',avatar:'assets/avatar-3.svg',text:'希爾市長無罪！！！！高譚日報是共和黨的狗吧？？',likes:227,reposts:18,shares:3},
+    {name:'thomson_g',handle:'thomson_g',avatar:'assets/person-chen.svg',text:'都被警方移送了還無罪，支持者到底要裝瞎到什麼時候？',likes:615,reposts:47,shares:12},
+    {name:'sophie_park',handle:'sophie_park',avatar:'assets/avatar-3.svg',text:'移送又不是判刑！講得像已經定罪一樣。',likes:438,reposts:31,shares:8},
+    {name:'allen_watch',handle:'allen_watch',avatar:'assets/person-chen.svg',text:'現場那麼多人都看到希爾脅持韋恩了，還需要公開什麼？',likes:782,reposts:66,shares:19},
+    {name:'citizen_404',handle:'citizen_404',avatar:'assets/person-rain.svg',text:'到底是現場哪些人看到？我也說我在現場好不好？沒圖沒真相啦！',likes:391,reposts:22,shares:5},
+    {name:'george_news',handle:'george_news',avatar:'assets/person-lin.svg',text:'欸我真的在現場。夜翼、紅頭罩和羅賓他們衝進去之後，警方才把希爾帶走。\n附上一張現場圖！',image:'assets/NEWS01.jpg',likes:1264,reposts:153,shares:87},
+    {name:'lucy_says',handle:'lucy_says',avatar:'assets/avatar-3.svg',text:'蒙面義警闖進市府晚會、控制民選市長，大家居然沒有反應？',likes:317,reposts:29,shares:7},
+    {name:'william_w',handle:'william_w',avatar:'assets/person-chen.svg',text:'他們救了一個被脅持的人，警方也在場。不要講得像義警政變。',likes:694,reposts:54,shares:16},
+	{name:'mark_truth',handle:'mark_truth',avatar:'assets/person-lin.svg',text:'照片右下那位被綁著的人是布魯斯韋恩嗎？',likes:121,reposts:18,shares:1},
+    {name:'tabloid_reader',handle:'tabloid_reader',avatar:'assets/person-rain.svg',text:'哇，人體器官販賣？？這比昨天報紙寫的還誇張。',likes:843,reposts:71,shares:24},
+    {name:'paul_cityhall',handle:'paul_cityhall',avatar:'assets/person-lin.svg',text:'報導只說疑似涉及啦。先等檢方調查好嗎。',likes:529,reposts:38,shares:9},
+    {name:'southside_auntie',handle:'southside_auntie',avatar:'assets/avatar-3.svg',text:'希爾上任以後南區明明改善很多，我不相信他會做這種事！',likes:284,reposts:16,shares:3},
+    {name:'mark_truth',handle:'mark_truth',avatar:'assets/person-lin.svg',text:'蝙蝠俠萬歲！',likes:911,reposts:79,shares:21},
+    {name:'kate_k',handle:'kate_k',avatar:'assets/person-rain.svg',text:'蝙蝠俠這次根本沒出現好嗎？',likes:358,reposts:27,shares:4},
+    {name:'jack_in_city',handle:'jack_in_city',avatar:'assets/person-chen.svg',text:'市長本人在公開場合脅持人，這就值得被關了吧？',likes:746,reposts:61,shares:13},
+    {name:'lisa_coffee',handle:'lisa_coffee',avatar:'assets/person-rain.svg',text:'有沒有人知道市府代理程序會由誰接任？新聞怎麼完全沒寫。',likes:201,reposts:12,shares:2},
+    {name:'david_question',handle:'david_question',avatar:'assets/person-chen.svg',text:'我比較想知道其他涉案人士是誰。不可能只有希爾一個人吧？',likes:573,reposts:48,shares:11},
+    {name:'lilith.kate',handle:PROFILE.handle,avatar:PROFILE.avatar,profileLink:true,text:'目前一切還在偵查中，請不要做過多猜測。',likes:46,reposts:2,shares:0},
+    {name:'sarah_here',handle:'sarah_here',avatar:'assets/avatar-3.svg',text:'所以現在是由副市長代理嗎。',likes:286,reposts:24,shares:6},
+    {name:'nick_no_filter',handle:'nick_no_filter',avatar:'assets/person-rain.svg',text:'完了，今年底里夫斯的當選大概已經確定了，我對未來感到絕望。',likes:402,reposts:37,shares:9},
+    {name:'helen_home',handle:'helen_home',avatar:'assets/avatar-3.svg',text:'里夫斯很好吧？至少長的蠻帥的啊。',likes:377,reposts:25,shares:5},
+    {name:'paperboy_7',handle:'paperboy_7',avatar:'assets/person-chen.svg',text:'今天所有報紙都賣光了，下午的增刊也沒剩幾份！',likes:538,reposts:48,shares:11},
+    {name:'mr_brown_g',handle:'mr_brown_g',avatar:'assets/person-lin.svg',text:'留友看，帥又不能當飯吃。',likes:421,reposts:34,shares:8},
+    {name:'mia_afterfive',handle:'mia_afterfive',avatar:'assets/person-rain.svg',text:'有人有懶人包嗎？話說上面是不是有個人是市府幕僚？',likes:263,reposts:18,shares:4},
+    {name:'oldtown_resident',handle:'oldtown_resident',avatar:'assets/person-lin.svg',text:'都奈橋蓋這麼多年沒蓋好原來都是因為官商勾結。',likes:514,reposts:53,shares:18}
   ]
 };
 
@@ -903,7 +903,7 @@ function repliesHTML(p){const ordered=p.replies.map((r,i)=>({...r,index:i})).sor
 function bindReplyActions(){$$('[data-reply-like]').forEach(b=>b.onclick=e=>{e.stopPropagation();const on=b.classList.toggle('liked');localStorage.setItem('liked-'+b.dataset.replyLike,on?'1':'0')});$$('[data-profile-entry-target]').forEach(x=>{const open=e=>{if(e.type==='keydown'&&!['Enter',' '].includes(e.key))return;e.preventDefault();e.stopPropagation();unlock(NEWS_POST.id);showView('profile','news')};x.onclick=open;x.onkeydown=open})}
 function renderNews(){$('#newsPost').innerHTML=postHTML(NEWS_POST,true);$('#newsReplies').innerHTML=repliesHTML(NEWS_POST);bindActions();bindReplyActions()}
 function renderNewsProfile(){$('#newsProfileAvatar').src=NEWS_PROFILE.avatar;$('#newsProfileName').textContent=NEWS_PROFILE.name;$('#newsProfileHandle').textContent=NEWS_PROFILE.handle;renderFeed([...NEWS_RECENT_POSTS,NEWS_POST,...NEWS_PROFILE_POSTS],'#newsProfileFeed')}
-function openPost(id){const p=ALL_POSTS.find(x=>x.id===id);if(id!==NEWS_POST.id)unlock(id);showView('detail');$('#detailPost').innerHTML=postHTML(p,false);$('#detailReplies').innerHTML=repliesHTML(p);bindActions();bindReplyActions()}
+function openPost(id){const p=ALL_POSTS.find(x=>x.id===id);unlock(id);showView('detail');$('#detailPost').innerHTML=postHTML(p,false);$('#detailReplies').innerHTML=repliesHTML(p);bindActions();bindReplyActions()}
 function unlock(id){
   const clues=CLUES.filter(c=>c.postId===id);
   const newClues=clues.filter(c=>!state.unlocked.has(c.id));
@@ -1048,4 +1048,12 @@ window.addEventListener('popstate',event=>{
     renderNewsProfile();
   }
 });
-initProfile();renderNews();renderNewsProfile();renderFeed();renderProgress();updateUnread();renderMessages();
+initProfile();
+renderNews();
+unlock(NEWS_POST.id);
+renderNewsProfile();
+renderFeed();
+renderProgress();
+updateUnread();
+renderMessages();
+checkCompletion();
