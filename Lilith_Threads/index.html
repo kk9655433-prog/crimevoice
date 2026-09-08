@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<!-- saved from url=(0048)https://aemu-arg-threads.aemu08623.chatgpt.site/ -->
 <html lang="zh-Hant"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#101010">
-  <meta name="description" content="莉莉絲.凱特的串文與解謎進度">
-  <title>莉莉絲・凱特(@lilith.kate)・脆脆的，暢所欲言</title>
+  <meta name="description" content="高譚日報：布魯斯．韋恩獲救，希爾市長移送法辦">
+  <title>高譚日報(@gotham_daily)・脆脆的，暢所欲言</title>
   <link rel="icon" type="image/jpeg" href="./assets/app-logo.jpg">
   <link rel="stylesheet" href="./styles.css?v=aaa2">
   <link rel="stylesheet" href="./styles-dark.css?v=aaa2">
-  <link rel="stylesheet" href="./styles-v3.css?v=aaa4">
+  <link rel="stylesheet" href="./styles-v3.css?v=aaa5">
 </head>
 <body>
   <svg class="svg-defs" aria-hidden="true"><symbol id="i-heart" viewBox="0 0 24 24"><path d="M20.8 4.7a5.5 5.5 0 0 0-7.8 0L12 5.8l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.7-7.4 1.1-1.1a5.5 5.5 0 0 0 0-7.8Z"></path></symbol><symbol id="i-comment" viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.5 10 10 0 0 1-4.1-.9L3 21l1.5-4.2A8.6 8.6 0 1 1 21 11.5Z"></path></symbol><symbol id="i-repost" viewBox="0 0 24 24"><path d="m17 2 4 4-4 4"></path><path d="M3 11V9a3 3 0 0 1 3-3h15"></path><path d="m7 22-4-4 4-4"></path><path d="M21 13v2a3 3 0 0 1-3 3H3"></path></symbol><symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></symbol><symbol id="i-home" viewBox="0 0 24 24"><path d="m3 11 9-8 9 8v9H6v-7h12"></path></symbol><symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"></circle><path d="M4 21a8 8 0 0 1 16 0"></path></symbol><symbol id="i-send" viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4Z"></path><path d="m22 2-11 11"></path></symbol><symbol id="i-back" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"></path></symbol></svg>
@@ -21,16 +20,42 @@
   </header>
 
   <main class="shell">
-    <section id="profileView" class="view active">
+    <section id="newsView" class="view active news-view">
+      <article id="newsPost"></article>
+      <div class="reply-heading">回覆</div>
+      <div id="newsReplies"></div>
+    </section>
+
+    <section id="newsProfileView" class="view">
+      <section class="profile">
+        <div class="profile-head">
+          <div>
+            <h1 id="newsProfileName">高譚日報</h1>
+            <p class="handle">@<span id="newsProfileHandle">gotham_daily</span>　🇺🇸 高譚</p>
+          </div>
+          <img class="avatar profile-avatar" id="newsProfileAvatar" src="./assets/Krona01.jpg" alt="高譚日報的頭像">
+        </div>
+        <p class="bio">高譚市即時新聞、公共議題與城市生活。</p>
+        <p class="stats"><strong>82.6萬</strong> 位粉絲 · <strong>118</strong> 人追蹤中</p>
+        <div class="profile-actions">
+          <button id="newsFollowBtn" class="pill primary">追蹤</button>
+          <button id="newsMessageBtn" class="pill">發送訊息</button>
+        </div>
+      </section>
+      <div class="tabs"><button class="active">串文</button><button>回覆</button><button>影音內容</button><button>轉發</button></div>
+      <div id="newsProfileFeed"></div>
+    </section>
+
+    <section id="profileView" class="view">
       <section class="profile">
         <div class="profile-head">
           <div>
             <h1 id="displayName">莉莉絲・凱特</h1>
-            <p class="handle"><span id="handle">lilith.kate</span><span class="flag">🇺🇸</span><span id="location">哥譚</span></p>
+            <p class="handle"><span id="handle">lilith.kate</span><span class="flag">🇺🇸</span><span id="location">高譚</span></p>
           </div>
           <img class="avatar profile-avatar" id="profileAvatar" src="./avatar.svg" alt="莉莉絲.凱特的頭像">
         </div>
-        <p class="bio" id="bio">美國民主黨幕僚｜哥譚<br>這裡的言論僅代表我個人。</p>
+        <p class="bio" id="bio">美國民主黨幕僚｜高譚<br>這裡的言論僅代表我個人。</p>
         <div class="tags" id="tags"><span>#Gotham</span><span>#Democrats</span><span>#公共政策</span></div>
         <p class="stats"><button id="followersBtn"><strong id="followers">1,284</strong> 位粉絲</button><span>·</span><button id="followingBtn"><strong id="following">156</strong> 人追蹤中</button></p>
         <div class="profile-actions">
@@ -51,7 +76,7 @@
 
     <section id="altView" class="view alt-view">
       <section class="profile alt-profile">
-        <div class="profile-head"><div><div class="name-row"><h1>L.K.</h1><span id="followsYou" class="follows-you hidden">追蹤你</span></div><p class="handle">LK555888111222 🇺🇸 哥譚</p></div><img id="altProfileAvatar" class="avatar profile-avatar" src="./assets/person-alt.jpg" alt="L.K. 的頭像"></div>
+        <div class="profile-head"><div><div class="name-row"><h1>L.K.</h1><span id="followsYou" class="follows-you hidden">追蹤你</span></div><p class="handle">LK555888111222 🇺🇸 高譚</p></div><img id="altProfileAvatar" class="avatar profile-avatar" src="./assets/person-alt.jpg" alt="L.K. 的頭像"></div>
         <p class="bio">好喜歡你。<br>別在白天找我。</p>
         <p class="stats">31 位粉絲 · 9 人追蹤中</p>
         <div class="profile-actions"><button id="altFollowBtn" class="pill primary">追蹤</button><button class="pill" id="altMessageBtn">發送訊息</button></div>
@@ -76,7 +101,7 @@
   </main>
 
   <nav class="bottom-nav" aria-label="主要導覽">
-    <button data-nav="profile" aria-label="莉莉絲的個人頁面"><svg><use href="#i-home"></use></svg></button>
+    <button data-nav="news" aria-label="返回高譚日報貼文"><svg><use href="#i-home"></use></svg></button>
     <button data-nav="messages" class="nav-message" aria-label="訊息"><svg><use href="#i-send"></use></svg><i id="navUnread" class="nav-badge hidden">1</i></button>
     <button data-nav="search" class="nav-search" aria-label="搜尋與解謎進度"><svg><use href="#i-search"></use></svg></button>
     <button data-nav="activity" aria-label="動態"><svg><use href="#i-heart"></use></svg></button>
@@ -85,7 +110,7 @@
 
   <dialog id="messageDialog"><div class="modal-icon">!</div><h2>無法發送訊息</h2><p>這個帳號目前不接受陌生訊息。</p><button id="closeDialog">確定</button></dialog>
   <div id="toast" role="status" aria-live="polite"></div>
-  <script src="./app.js?v=aaa5"></script>
+  <script src="./app.js?v=aaa8"></script>
 
 
 </body></html>

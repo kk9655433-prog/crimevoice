@@ -1,5 +1,5 @@
 /* ===== 主要資料：文字與圖片路徑都可在這裡替換 ===== */
-const PROFILE={name:'莉莉絲・凱特',handle:'lilith.kate',flag:'🇺🇸',location:'哥譚',bio:'哥譚人\n這裡的言論僅代表我個人。',tags:['#Gotham','#Democrats','#公共政策'],followers:'1,284',following:'156',avatar:'assets/avatar.jpg'};
+const PROFILE={name:'莉莉絲・凱特',handle:'lilith.kate',flag:'🇺🇸',location:'高譚',bio:'高譚人\n這裡的言論僅代表我個人。',tags:['#Gotham','#Democrats','#公共政策'],followers:'1,284',following:'156',avatar:'assets/avatar.jpg'};
 const ALT={name:'L.K.',handle:'LK555888111222',avatar:'assets/person-alt.jpg'};
 const FOLLOWERS=[
  {name:'林七',handle:'lin_seven',bio:'偶爾拍照。',avatar:'assets/person-lin.svg'},
@@ -11,7 +11,7 @@ const FOLLOWERS=[
  {name:'路過的人',handle:'passing_by',bio:'只是剛好看到。',avatar:'assets/avatar-2.svg'},
  {name:'艾琳',handle:'erin_writes',bio:'城市裡的一個普通人。',avatar:'assets/avatar-2.svg'},
  {name:'M.',handle:'monday_morning',bio:'咖啡比政治可靠。',avatar:'assets/avatar-3.svg'},
- {name:'北邊的人',handle:'north_side_04',bio:'住在哥譚北邊。',avatar:'assets/person-lin.svg'},
+ {name:'北邊的人',handle:'north_side_04',bio:'住在高譚北邊。',avatar:'assets/person-lin.svg'},
  {name:'喬治',handle:'george_w',bio:'偶爾評論市政。',avatar:'assets/person-chen.svg'},
  {name:'夜班記者',handle:'night_shift',bio:'還沒下班。',avatar:'assets/avatar-2.svg'},
  {name:'紙杯咖啡',handle:'paper_cup_01',bio:'每天都需要咖啡。',avatar:'assets/avatar-3.svg'},
@@ -27,7 +27,7 @@ const FOLLOWERS=[
  {name:'南邊來的',handle:'from_the_south',bio:'偶爾來市中心。',avatar:'assets/person-chen.svg'},
  {name:'咖啡第二杯',handle:'coffee_second',bio:'第一杯已經喝完了。',avatar:'assets/avatar-2.svg'},
  {name:'伊森',handle:'ethan_works',bio:'城市、工作、睡眠。',avatar:'assets/avatar-3.svg'},
- {name:'晚安哥譚',handle:'goodnight_gotham',bio:'晚上比較清醒。',avatar:'assets/person-lin.svg'},
+ {name:'晚安高譚',handle:'goodnight_gotham',bio:'晚上比較清醒。',avatar:'assets/person-lin.svg'},
  {name:'小報讀者',handle:'tabloid_reader',bio:'我只是看看新聞。',avatar:'assets/person-rain.svg'},
  {name:'沒有暱稱',handle:'no_nickname_here',bio:'',avatar:'assets/person-unknown.svg'},
  {name:'星期三',handle:'wednesday_person',bio:'不是每個星期三都一樣。',avatar:'assets/avatar-2.svg'},
@@ -48,7 +48,7 @@ const FOLLOWERS=[
  {name:'布朗先生',handle:'mr_brown_g',bio:'退休之後比較有時間。',avatar:'assets/person-lin.svg'},
  {name:'不想上班',handle:'dont_wanna_work',bio:'每天都在努力。',avatar:'assets/person-rain.svg'},
  {name:'報紙角落',handle:'corner_of_paper',bio:'每天看一點新聞。',avatar:'assets/person-unknown.svg'},
- {name:'傑克',handle:'jack_around_g',bio:'哥譚本地人。',avatar:'assets/avatar-2.svg'},
+ {name:'傑克',handle:'jack_around_g',bio:'高譚本地人。',avatar:'assets/avatar-2.svg'},
  {name:'艾蜜莉',handle:'emily_gotham',bio:'偶爾發牢騷。',avatar:'assets/avatar-3.svg'},
  {name:'半夜三點',handle:'three_am_again',bio:'又睡不著。',avatar:'assets/person-chen.svg'},
  {name:'城市居民A',handle:'gotham_citizen_a',bio:'普通市民。',avatar:'assets/person-lin.svg'},
@@ -66,7 +66,7 @@ const FOLLOWING=[
  {name:'夜班記者',handle:'night_shift',bio:'還沒下班。',avatar:'assets/avatar-2.svg'},
  {name:'安娜',handle:'anna_in_gotham',bio:'在這座城市生活。',avatar:'assets/person-rain.svg'},
  {name:'R.',handle:'r_after_work',bio:'下班之後才是人生。',avatar:'assets/avatar-3.svg'},
- {name:'晚安哥譚',handle:'goodnight_gotham',bio:'晚上比較清醒。',avatar:'assets/person-lin.svg'},
+ {name:'晚安高譚',handle:'goodnight_gotham',bio:'晚上比較清醒。',avatar:'assets/person-lin.svg'},
  {name:'米亞',handle:'mia_afterfive',bio:'五點以後才是我的時間。',avatar:'assets/person-rain.svg'},
  {name:'湯姆森',handle:'thomson_g',bio:'住在河邊。',avatar:'assets/person-chen.svg'},
  {name:'艾倫',handle:'alan_corner',bio:'城市觀察。',avatar:'assets/person-lin.svg'},
@@ -78,6 +78,161 @@ const FOLLOWING=[
  {name:'老朋友',handle:'old_friend_g',bio:'認識一些人，也認識一些事。',avatar:'assets/person-chen.svg'},
  {name:'沒有新聞',handle:'no_news_today',bio:'希望今天沒有新聞。',avatar:'assets/avatar-2.svg'}
 ];
+
+const NEWS_POST={
+  id:'news-lilith-entry',
+  author:'高譚日報',
+  handle:'gotham_daily',
+  avatar:'assets/GOTHAM.jpg',
+  time:'2026-3-15',
+  headline:'布魯斯．韋恩獲救　希爾市長移送法辦',
+  text:'韋恩企業董事長布魯斯．韋恩，昨夜於都奈橋建成周年紀念晚會遭到高譚市市長漢密爾頓．希爾脅持，好在最終高譚市義警們即時現身，事件才有驚無險的落幕。警方證實韋恩目前狀況穩定，已接受醫療檢查。\n\n同日晚間，高譚市長漢密爾頓．希爾遭警方拘捕，經偵訊後正式移送法辦，市政府已宣布啟動代理程序。據悉，在救援行動中取得多項關鍵證據，內容疑似涉及貪污和人體器官販賣等其他非法行動，目前已交由警方與檢方調查。\n\n檢方表示相關證據仍待進一步釐清，案件後續如何發展、希爾是否遭正式起訴，以及市府內部是否存在更多涉案人士，仍有待司法程序逐一確認。',
+  clueTitle:'莉莉絲凱特',
+  clue:'在留言區內留言，似乎了解很多內幕',
+  likes:18943,reposts:2841,shares:1607,
+  replies:[
+    {name:'瑪莎',handle:'martha_works',avatar:'assets/avatar-3.svg',text:'希爾市長無罪！！！！高譚日報什麼時候也開始幫義警定罪了？',likes:227,reposts:18,shares:3},
+    {name:'湯姆森',handle:'thomson_g',avatar:'assets/person-chen.svg',text:'都被警方移送了還無罪，支持者到底要裝瞎到什麼時候？',likes:615,reposts:47,shares:12},
+    {name:'蘇菲',handle:'sophie_park',avatar:'assets/avatar-3.svg',text:'移送又不是判刑！證據都還沒公開，現在講得像已經定罪一樣。',likes:438,reposts:31,shares:8},
+    {name:'艾倫',handle:'allen_watch',avatar:'assets/person-chen.svg',text:'現場那麼多人都看到希爾脅持韋恩了，還需要公開什麼？',likes:782,reposts:66,shares:19},
+    {name:'匿名市民',handle:'citizen_404',avatar:'assets/person-rain.svg',text:'「那麼多人都看到」是哪些人？留言區每個都自稱在現場。',likes:391,reposts:22,shares:5},
+    {name:'喬治',handle:'george_news',avatar:'assets/person-lin.svg',text:'我真的在現場。夜翼、紅頭罩和羅賓他們衝進去之後，警方才把希爾帶走。',likes:1264,reposts:153,shares:87},
+    {name:'露西',handle:'lucy_says',avatar:'assets/avatar-3.svg',text:'蒙面義警闖進市府晚會、控制民選市長，大家居然還在叫好？',likes:317,reposts:29,shares:7},
+    {name:'威廉',handle:'william_w',avatar:'assets/person-chen.svg',text:'他們救了一個被脅持的人，警方也在場。不要講得像義警政變。',likes:694,reposts:54,shares:16},
+    {name:'小報讀者',handle:'tabloid_reader',avatar:'assets/person-rain.svg',text:'等一下，人體器官販賣？？這比昨天報紙寫的還誇張。',likes:843,reposts:71,shares:24},
+    {name:'保羅',handle:'paul_cityhall',avatar:'assets/person-lin.svg',text:'報導只說「疑似涉及」，留言已經直接當成器官販賣集團了。先等檢方調查吧。',likes:529,reposts:38,shares:9},
+    {name:'城南阿姨',handle:'southside_auntie',avatar:'assets/avatar-3.svg',text:'希爾上任以後南區明明改善很多，我不相信他會做這種事！',likes:284,reposts:16,shares:3},
+    {name:'馬克',handle:'mark_truth',avatar:'assets/person-lin.svg',text:'有做過好事就不能犯罪？這是什麼邏輯？',likes:911,reposts:79,shares:21},
+    {name:'凱特',handle:'kate_k',avatar:'assets/person-rain.svg',text:'你們只是看到自己想看的。現在連關鍵證據是什麼都沒人知道。',likes:358,reposts:27,shares:4},
+    {name:'傑克',handle:'jack_in_city',avatar:'assets/person-chen.svg',text:'市長本人在公開場合脅持人，這還不叫關鍵證據？',likes:746,reposts:61,shares:13},
+    {name:'莉莎',handle:'lisa_coffee',avatar:'assets/person-rain.svg',text:'有沒有人知道市府代理程序會由誰接任？新聞怎麼完全沒寫。',likes:201,reposts:12,shares:2},
+    {name:'戴維',handle:'david_question',avatar:'assets/person-chen.svg',text:'我比較想知道其他涉案人士是誰。都說到市府內部了，不可能只有希爾一個人吧？',likes:573,reposts:48,shares:11},
+    {name:'莉莉絲・凱特',handle:PROFILE.handle,avatar:PROFILE.avatar,profileLink:true,text:'目前一切還在偵查中，請不要做過多猜測。',likes:46,reposts:2,shares:0},
+    {name:'莎拉',handle:'sarah_here',avatar:'assets/avatar-3.svg',text:'所以代理市長的人選什麼時候公布？市府不能一直沒有說法吧。',likes:286,reposts:24,shares:6},
+    {name:'尼克',handle:'nick_no_filter',avatar:'assets/person-rain.svg',text:'昨天說只是晚會意外，今天變成器官販賣，明天是不是要說外星人？',likes:402,reposts:37,shares:9},
+    {name:'海倫',handle:'helen_home',avatar:'assets/avatar-3.svg',text:'至少先讓警方把證據查完吧，現在消息真的太亂了。',likes:377,reposts:25,shares:5},
+    {name:'報童',handle:'paperboy_7',avatar:'assets/person-chen.svg',text:'今天所有報紙都賣光了，下午的增刊也沒剩幾份。',likes:538,reposts:48,shares:11},
+    {name:'布朗先生',handle:'mr_brown_g',avatar:'assets/person-lin.svg',text:'留言區又吵起來了，留友看。',likes:421,reposts:34,shares:8},
+    {name:'米亞',handle:'mia_afterfive',avatar:'assets/person-rain.svg',text:'市政府啟動代理程序的公告在哪裡？有人有連結嗎？',likes:263,reposts:18,shares:4},
+    {name:'老城居民',handle:'oldtown_resident',avatar:'assets/person-lin.svg',text:'都奈橋之前傳出的安全疑慮也應該趁這次一起重查。',likes:514,reposts:53,shares:18}
+  ]
+};
+
+const NEWS_PROFILE={name:'高譚日報',handle:'gotham_daily',avatar:'assets/GOTHAM.jpg'};
+const NEWS_RECENT_POSTS=[
+  {
+    id:'news-0908-transit',
+    author:NEWS_PROFILE.name,
+    handle:NEWS_PROFILE.handle,
+    avatar:NEWS_PROFILE.avatar,
+    time:'2026-9-8',
+    headline:'中央線號誌異常　部分班次延誤',
+    text:'高譚捷運中央線今日傍晚發生號誌異常，部分班次延誤約十五分鐘。交通局表示系統已陸續恢復，仍請旅客預留候車時間。',
+    likes:1268,reposts:184,shares:63,
+    replies:[]
+  },
+  {
+    id:'news-0908-water',
+    author:NEWS_PROFILE.name,
+    handle:NEWS_PROFILE.handle,
+    avatar:NEWS_PROFILE.avatar,
+    time:'2026-9-8',
+    headline:'舊城區自來水管破裂　兩處道路臨時封閉',
+    text:'舊城區今日上午發生自來水管破裂事故，造成部分路面積水。市府已封閉兩處道路進行搶修，預計晚間恢復通行。',
+    likes:943,reposts:137,shares:42,
+    replies:[]
+  },
+  {
+    id:'news-0907-fraud',
+    author:NEWS_PROFILE.name,
+    handle:NEWS_PROFILE.handle,
+    avatar:NEWS_PROFILE.avatar,
+    time:'2026-9-7',
+    headline:'冒用慈善機構名義募款　警方籲市民提高警覺',
+    text:'高譚市近日出現多起假冒慈善機構進行街頭募款的案件。警方呼籲市民捐款前確認機構名稱與登記資料，若發現可疑人士應立即通報。',
+    likes:2156,reposts:672,shares:318,
+    replies:[]
+  },
+  {
+    id:'news-0906-museum',
+    author:NEWS_PROFILE.name,
+    handle:NEWS_PROFILE.handle,
+    avatar:NEWS_PROFILE.avatar,
+    time:'2026-9-6',
+    headline:'高譚市立博物館秋季特展　本週末開幕',
+    text:'高譚市立博物館秋季特展將於本週末開幕，展出多件城市早期建設圖紙、照片與私人收藏，開幕首日將延長開放至晚間九時。',
+    likes:1874,reposts:293,shares:126,
+    replies:[]
+  },
+  {
+    id:'news-0905-wayne',
+    author:NEWS_PROFILE.name,
+    handle:NEWS_PROFILE.handle,
+    avatar:NEWS_PROFILE.avatar,
+    time:'2026-9-5',
+    headline:'韋恩基金會擴大獎學金計畫　新增技職學生名額',
+    text:'韋恩基金會宣布擴大年度獎學金計畫，除原有大學與研究所名額外，今年將新增技職學生與在職進修申請類別。',
+    likes:3642,reposts:521,shares:204,
+    replies:[]
+  },
+  {
+    id:'news-0904-market',
+    author:NEWS_PROFILE.name,
+    handle:NEWS_PROFILE.handle,
+    avatar:NEWS_PROFILE.avatar,
+    time:'2026-9-4',
+    headline:'港區週末市集回歸　周邊道路實施交通管制',
+    text:'港區週末市集將於本週六重新開放，活動期間周邊部分道路禁止車輛進入。主辦單位建議民眾搭乘大眾運輸工具前往。',
+    likes:1537,reposts:248,shares:97,
+    replies:[]
+  },
+  {
+    id:'news-0903-budget',
+    author:NEWS_PROFILE.name,
+    handle:NEWS_PROFILE.handle,
+    avatar:NEWS_PROFILE.avatar,
+    time:'2026-9-3',
+    headline:'市議會審查明年度預算　治安與交通支出成焦點',
+    text:'高譚市議會今日開始審查明年度總預算，治安、公共交通及舊城區基礎建設支出成為本次會期主要討論焦點。',
+    likes:2318,reposts:486,shares:173,
+    replies:[]
+  },
+  {
+    id:'news-0902-power',
+    author:NEWS_PROFILE.name,
+    handle:NEWS_PROFILE.handle,
+    avatar:NEWS_PROFILE.avatar,
+    time:'2026-9-2',
+    headline:'東區晚間短暫停電　電力公司稱設備故障',
+    text:'東區部分街區昨晚發生短暫停電，影響時間約四十分鐘。電力公司表示事故由區域設備故障引起，目前供電已全面恢復。',
+    likes:1749,reposts:302,shares:111,
+    replies:[]
+  },
+  {
+    id:'news-0901-weather',
+    author:NEWS_PROFILE.name,
+    handle:NEWS_PROFILE.handle,
+    avatar:NEWS_PROFILE.avatar,
+    time:'2026-9-1',
+    headline:'高譚本週持續降雨　沿海地區留意強風',
+    text:'氣象中心預估高譚本週受鋒面影響，降雨機率持續偏高，沿海及港區可能出現較強陣風，提醒市民外出攜帶雨具。',
+    likes:1083,reposts:167,shares:58,
+    replies:[]
+  }
+];
+const NEWS_PROFILE_POSTS=[
+  {id:'news-0314-night',author:NEWS_PROFILE.name,handle:NEWS_PROFILE.handle,avatar:NEWS_PROFILE.avatar,time:'2026-3-14',headline:'都奈橋周年晚會突發騷亂　警方封鎖現場',text:'都奈橋建成周年紀念晚會晚間發生騷亂，警方已封鎖會場周邊道路，並呼籲市民暫時避開該區。現場情況仍待進一步確認。',likes:7632,reposts:1128,shares:604,replies:[]},
+  {id:'news-0314-bridge',author:NEWS_PROFILE.name,handle:NEWS_PROFILE.handle,avatar:NEWS_PROFILE.avatar,time:'2026-3-14',headline:'都奈橋建成周年　市府晚間舉行紀念晚會',text:'都奈橋今日迎來建成周年，市政府晚間將舉行紀念晚會。市長漢密爾頓．希爾、前議員里夫斯及韋恩企業董事長布魯斯．韋恩預計出席。',likes:1843,reposts:221,shares:96,replies:[]},
+  {id:'news-0313-transit',author:NEWS_PROFILE.name,handle:NEWS_PROFILE.handle,avatar:NEWS_PROFILE.avatar,time:'2026-3-13',headline:'中央線號誌異常　尖峰時段延誤近半小時',text:'高譚捷運中央線今晨因號誌異常一度停駛，尖峰時段多座車站出現候車人潮，交通局表示系統已於上午九時恢復正常。',likes:921,reposts:138,shares:44,replies:[]},
+  {id:'news-0312-hospital',author:NEWS_PROFILE.name,handle:NEWS_PROFILE.handle,avatar:NEWS_PROFILE.avatar,time:'2026-3-12',headline:'高譚綜合醫院擴建案通過　預計明年動工',text:'市議會昨日通過高譚綜合醫院擴建預算，院方表示新增院區將以急重症與兒童醫療為主，預計明年第一季動工。',likes:1377,reposts:186,shares:71,replies:[]},
+  {id:'news-0311-port',author:NEWS_PROFILE.name,handle:NEWS_PROFILE.handle,avatar:NEWS_PROFILE.avatar,time:'2026-3-11',headline:'港區倉庫深夜失火　無人傷亡',text:'高譚港第七码頭一處廢棄倉庫昨夜發生火警，消防局於兩小時內控制火勢，現場無人傷亡，起火原因仍在調查。',likes:2204,reposts:417,shares:183,replies:[]},
+  {id:'news-0310-missing',author:NEWS_PROFILE.name,handle:NEWS_PROFILE.handle,avatar:NEWS_PROFILE.avatar,time:'2026-3-10',headline:'東區再傳失蹤案件　警方籲勿散播未證實消息',text:'東區近日接連傳出人口失蹤通報，警方表示目前尚無證據顯示案件彼此相關，已成立專案小組調查。',likes:4862,reposts:973,shares:515,replies:[]},
+  {id:'news-0309-election',author:NEWS_PROFILE.name,handle:NEWS_PROFILE.handle,avatar:NEWS_PROFILE.avatar,time:'2026-3-9',headline:'市議會選區重劃案進入二讀　朝野仍無共識',text:'高譚市議會今日審議選區重劃草案，兩黨議員針對人口基準與行政區邊界持續交鋒，表決日期尚未確定。',likes:1108,reposts:264,shares:73,replies:[]},
+  {id:'news-0308-wayne',author:NEWS_PROFILE.name,handle:NEWS_PROFILE.handle,avatar:NEWS_PROFILE.avatar,time:'2026-3-8',headline:'韋恩基金會宣布增設三處社區醫療站',text:'韋恩基金會宣布將於南區與舊城區增設三處社區醫療站，提供基礎診療、心理諮詢與夜間急診轉介服務。',likes:3561,reposts:521,shares:202,replies:[]},
+  {id:'news-0307-arkham',author:NEWS_PROFILE.name,handle:NEWS_PROFILE.handle,avatar:NEWS_PROFILE.avatar,time:'2026-3-7',headline:'阿卡漢周邊道路修繕　部分路段夜間封閉',text:'市府工務局表示，阿卡漢區周邊三條主要道路將自本周起進行夜間修繕，預計工期為十四日。',likes:638,reposts:102,shares:31,replies:[]},
+  {id:'news-0306-weather',author:NEWS_PROFILE.name,handle:NEWS_PROFILE.handle,avatar:NEWS_PROFILE.avatar,time:'2026-3-6',headline:'冷鋒晚間抵達　高譚未來三日持續降雨',text:'氣象中心預估冷鋒將於今日晚間抵達，高譚未來三日降雨機率偏高，沿海地區並可能出現強風。',likes:847,reposts:119,shares:52,replies:[]}
+];
+
 const POSTS=[
   {
     id:'p1',
@@ -230,7 +385,7 @@ const POSTS=[
     {name:'瑪莎',handle:'martha_works',avatar:'assets/avatar-3.svg',text:'那支槍也可能不是希爾市長的！現場這麼亂，誰都能塞給他！',likes:116,reposts:7,shares:1},
     {name:'傑克',handle:'jack_in_city',avatar:'assets/person-chen.svg',text:'都已經親眼看到他拿著了，支持者還能說是別人塞的，民主黨支持者腦子有洞吧。',likes:311,reposts:26,shares:8},
     {name:'凱特',handle:'kate_k',avatar:'assets/person-rain.svg',text:'新聞上爆的那些料不是真的吧？',likes:163,reposts:10,shares:3},
-    {name:'匿名市民',handle:'citizen_404',avatar:'assets/person-rain.svg',text:'你們哥譚真亂。',likes:295,reposts:34,shares:9},
+    {name:'匿名市民',handle:'citizen_404',avatar:'assets/person-rain.svg',text:'你們高譚真亂。',likes:295,reposts:34,shares:9},
     {name:'星球日報',handle:'daily_Planet',avatar:'assets/Planet01.jpg',text:'我們報社記者就在現場，希爾確實被警方帶走了，今晚就會有現場完整報導。',likes:248,reposts:22,shares:7},
     {name:'尼克',handle:'nick_no_filter',avatar:'assets/person-rain.svg',text:'被帶走調查不等於有罪好嗎。\n拜託大家先分清楚逮捕和定罪。',likes:271,reposts:19,shares:6},
     {name:'湯姆森',handle:'thomson_g',avatar:'assets/person-chen.svg',text:'都奈橋偷工減料如果出事會害多少人？？現在證據都被報導出來了還想裝無辜？',likes:387,reposts:37,shares:14},
@@ -249,7 +404,7 @@ const POSTS=[
     {name:'布朗先生',handle:'mr_brown_g',avatar:'assets/person-lin.svg',text:'原本只是周年晚會，最後變成市長被英雄包圍，我今晚真的沒白來。',likes:481,reposts:49,shares:21},
     {name:'喬治',handle:'george_news',avatar:'assets/person-lin.svg',text:'更新：布魯斯・韋恩已經被救護人員帶離現場，看起來沒有受傷。',likes:734,reposts:103,shares:89},
     {name:'小報讀者',handle:'tabloid_reader',avatar:'assets/person-rain.svg',text:'韋恩先生又被綁架了嗎？他到底為什麼每次參加活動都會出事？？',likes:516,reposts:61,shares:34},
-    {name:'匿名市民',handle:'citizen_404',avatar:'assets/person-rain.svg',text:'哥譚首富的日常行程：慈善晚會、發表演說、被綁架。',likes:917,reposts:126,shares:52}
+    {name:'匿名市民',handle:'citizen_404',avatar:'assets/person-rain.svg',text:'高譚首富的日常行程：慈善晚會、發表演說、被綁架。',likes:917,reposts:126,shares:52}
   ]
 },
 
@@ -293,8 +448,8 @@ const POSTS=[
     text:'今天終於收到所有人的周年晚宴邀請答覆了！布魯斯韋恩堂堂登場！',
     likes:624,reposts:48,shares:12,
     replies:[
-      {name:'GothamDaily',handle:'gotham_daily',avatar:'assets/avatar-2.svg',text:'天啊，哥譚甜心欸，他去晚宴幹什麼？',likes:25,reposts:2,shares:0},
-      {name:'莉莉絲・凱特',handle:PROFILE.handle,avatar:PROFILE.avatar,isAuthor:true,text:'哥譚甜心、晚宴，多麼搭配的兩個詞。',likes:97,reposts:7,shares:2}
+      {name:'GothamDaily',handle:'gotham_daily',avatar:'assets/avatar-2.svg',text:'天啊，高譚甜心欸，他去晚宴幹什麼？',likes:25,reposts:2,shares:0},
+      {name:'莉莉絲・凱特',handle:PROFILE.handle,avatar:PROFILE.avatar,isAuthor:true,text:'高譚甜心、晚宴，多麼搭配的兩個詞。',likes:97,reposts:7,shares:2}
     ]
   },
 
@@ -506,19 +661,26 @@ const POSTS=[
   }
 ];
 const REPLY_POSTS=[
- {
+{
 	id:'reply1',
+	time:'2025-03-15',
+	text:'目前一切還在偵查中，請不要做過多猜測。',
+	likes:46,reposts:0,shares:2,
+	replies:[{}]
+ },
+ 
+ {
+	id:'reply2',
 	time:'2025-08-11',
 	text:'天神降臨。',
 	likes:57,reposts:8,shares:2,
 	replies:[
 	 {
-		name:'哥譚觀察',
+		name:'高譚觀察',
 		handle:'gotham_watch',
 		avatar:'assets/person-chen.svg',
 		text:'民主黨現在都自認是神了？',
 		likes:21,reposts:5,shares:1,
-		ownerLiked:true
 	 }
 	]
  }
@@ -531,7 +693,17 @@ const REPOST_POSTS=[
     text:'現代人常陷入一種迷思：認為在愛情中做到絕對的真實與毫无保留，才是通往深層連結的唯一路徑。\n然而從心理學與實務經驗來看，缺乏界線的「過度自我暴露」往往事與願違。當真誠失去了分寸，它不再是建立信任的橋樑，反而可能轉化為對關係的隱形施壓，進而加速親密關係的崩解。究竟這份「毫無保留」背後隱藏著怎樣的心理機制，又是如何一步步侵蝕了彼此的感情？',
     likes:302,reposts:74,shares:22,
     replies:[{name:'林七',handle:'lin_seven',avatar:'assets/person-lin.svg',
-		text:'這篇分析寫得滿準的。',likes:18,reposts:4,shares:2}]}
+		text:'這篇分析寫得滿準的。',likes:18,reposts:4,shares:2}]},
+		{
+    id:'repost2',isRepost:true,
+    author:'sophie_park',handle:'sophie_park',avatar:'assets/avatar-3.svg',time:'1天前',
+    text:'剛搬來高譚三個月，房租便宜是真的\n現在知道為什麼了',
+    likes:5524,reposts:1248,shares:4492,
+    replies:[{name:'看熱鬧的',handle:'just_here_for_this',avatar:'assets/person-lin.svg',
+		text:'剛在鑽石區買個熱狗，後面巷子突然傳來幾聲槍響跟警報器爆音，\n老闆手都沒抖，繼續夾酸菜，還順便問我：要不要加辣？加辣加五塊喔😎',likes:18,reposts:4,shares:2},
+		{name:'湯姆森',handle:'thomson_g',avatar:'assets/person-chen.svg',
+		text:'我受夠了你們高譚人。',likes:23,reposts:0,shares:0}
+		]}
 ];
 const ALT_POSTS=[
   {
@@ -577,17 +749,17 @@ const ALT_POSTS=[
 ];
 const ACTIVITY_POSTS=[
  {id:'a1',author:'Gotham Transit',handle:'gotham_transit',avatar:'assets/person-chen.svg',time:'18分鐘',text:'中央線因號誌異常延誤約 12 分鐘。',likes:42,reposts:8,shares:3,replies:[]},
- {id:'a2',author:'雨停以前',handle:'before_rainstops',avatar:'assets/person-rain.svg',time:'1小時',text:'今晚的哥譚下雨了。',likes:17,reposts:1,shares:0,replies:[]},
- {id:'a3',author:'Gotham Ledger',handle:'gotham_ledger',avatar:'assets/person-lin.svg',time:'2小時',text:'市政廳拒絕回應 8 月 26 日會議紀錄缺頁一事。',likes:318,reposts:91,shares:36,replies:[{name:'哥譚觀察',handle:'gotham_watch',avatar:'assets/person-chen.svg',text:'缺的剛好是附件第三頁。',likes:55,reposts:12,shares:4,ownerLiked:true}]},
+ {id:'a2',author:'雨停以前',handle:'before_rainstops',avatar:'assets/person-rain.svg',time:'1小時',text:'今晚的高譚下雨了。',likes:17,reposts:1,shares:0,replies:[]},
+ {id:'a3',author:'Gotham Ledger',handle:'gotham_ledger',avatar:'assets/person-lin.svg',time:'2小時',text:'市政廳拒絕回應 8 月 26 日會議紀錄缺頁一事。',likes:318,reposts:91,shares:36,replies:[{name:'高譚觀察',handle:'gotham_watch',avatar:'assets/person-chen.svg',text:'缺的剛好是附件第三頁。',likes:55,reposts:12,shares:4,ownerLiked:true}]},
  {id:'a4',author:'Coffee in Gotham',handle:'coffee_gotham',avatar:'assets/avatar-2.svg',time:'4小時',text:'秋季限定肉桂拿鐵今天開始供應。',likes:73,reposts:6,shares:2,replies:[]},
- {id:'a5',author:'哥譚舊聞考察',handle:'gotham_oldnews',avatar:'assets/person-unknown.svg',time:'5小時',text:'大家還有人記得大概十年前的爆炸案嗎？',likes:86,reposts:13,shares:4,replies:[
+ {id:'a5',author:'高譚舊聞考察',handle:'gotham_oldnews',avatar:'assets/person-unknown.svg',time:'5小時',text:'大家還有人記得大概十年前的爆炸案嗎？',likes:86,reposts:13,shares:4,replies:[
    {name:'路過的人',handle:'passing_by',avatar:'assets/avatar-2.svg',text:'哪次？誰做的？',likes:12,reposts:0,shares:0},
    {name:'南區居民',handle:'southside_local',avatar:'assets/person-rain.svg',text:'小丑炸的。',likes:19,reposts:1,shares:0},
    {name:'夜班記者',handle:'night_shift',avatar:'assets/avatar-2.svg',text:'哪次，靠北，小丑炸了好幾次。',likes:44,reposts:3,shares:1},
    {name:'舊報紙',handle:'old_newspaper',avatar:'assets/avatar-2.svg',text:'炸阿卡漢監獄的那次啦！',likes:28,reposts:2,shares:0},
    {name:'小雨',handle:'rainy_window',avatar:'assets/avatar-2.svg',text:'有炸過阿卡漢監獄喔！？',likes:8,reposts:0,shares:0},
    {name:'沒有新聞',handle:'no_news_today',avatar:'assets/avatar-3.svg',text:'阿卡漢監獄現在還在嗎？',likes:11,reposts:0,shares:0},
-   {name:'哥譚觀察',handle:'gotham_watch',avatar:'assets/person-chen.svg',text:'欸大家！我找到當時的報導！',link:'https://www.facebook.com/profile.php?id=61579296969600',likes:53,reposts:7,shares:4}
+   {name:'高譚觀察',handle:'gotham_watch',avatar:'assets/person-chen.svg',text:'欸大家！我找到當時的報導！',link:'https://www.facebook.com/profile.php?id=61579296969600',likes:53,reposts:7,shares:4}
  ]}
 ];
 const CHATS=[
@@ -598,6 +770,9 @@ const CHATS=[
 const ALL_POSTS=[
   ...new Map(
     [
+      NEWS_POST,
+	  ...NEWS_RECENT_POSTS,
+      ...NEWS_PROFILE_POSTS,
       ...POSTS,
       ...REPLY_POSTS,
       ...MEDIA_POSTS,
@@ -611,15 +786,15 @@ const CLUES=ALL_POSTS.filter(p=>String(p.clueTitle||'').trim()&&String(p.clue||'
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const STORAGE_KEY='lilith-arg-state-v2';
 const saved=JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}');
-const state={unlocked:new Set(saved.unlocked||[]),altFollowed:!!saved.altFollowed,mutual:!!saved.mutual,unread:!!saved.unread,view:'profile',previous:'profile'};
+const state={unlocked:new Set(saved.unlocked||[]),altFollowed:!!saved.altFollowed,mutual:!!saved.mutual,unread:!!saved.unread,view:'news',previous:'news'};
 function save(){localStorage.setItem(STORAGE_KEY,JSON.stringify({unlocked:[...state.unlocked],altFollowed:state.altFollowed,mutual:state.mutual,unread:state.unread}))}
 function esc(v=''){return String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function icon(id){return `<svg><use href="#${id}"/></svg>`}
-function avatar(name,src){return `<img class="avatar post-avatar" src="${src}" alt="${esc(name)} 的頭像">`}
-function actions(p){const liked=localStorage.getItem('liked-'+p.id)==='1';return `<div class="actions"><button class="action heart ${liked?'liked':''}" data-like="${p.id}">${icon('i-heart')}<span>${p.likes+(liked?1:0)}</span></button><button class="action" data-open="${p.id}">${icon('i-comment')}<span>${p.replies.length}</span></button><button class="action">${icon('i-repost')}<span>${p.reposts||0}</span></button><button class="action">${icon('i-send')}<span>${p.shares||0}</span></button></div>`}
-function postHTML(p){const own=!p.author;return `<article class="post" data-post="${p.id}">${avatar(own?PROFILE.name:p.author,own?PROFILE.avatar:p.avatar)}<div><div class="post-header"><strong>${esc(own?PROFILE.handle:p.handle)}</strong><span class="meta">${own?PROFILE.flag+' '+PROFILE.location+' · ':''}${p.time}</span><span class="dots">•••</span></div><p class="post-text">${esc(p.text)}</p>${p.image?`<img class="post-image" src="${p.image}" alt="串文圖片">`:''}${actions(p)}</div></article>`}
-function renderFeed(list=POSTS,target='#feed'){const el=$(target);el.innerHTML=list.length?list.map(postHTML).join(''):'<div class="empty">目前沒有內容</div>';bindActions()}
-function bindActions(){$$('[data-like]').forEach(b=>b.onclick=e=>{e.stopPropagation();const p=ALL_POSTS.find(x=>x.id===b.dataset.like),on=b.classList.toggle('liked');localStorage.setItem('liked-'+p.id,on?'1':'0');b.querySelector('span').textContent=p.likes+(on?1:0)});$$('[data-post]').forEach(x=>x.onclick=()=>openPost(x.dataset.post));$$('[data-open]').forEach(x=>x.onclick=e=>{e.stopPropagation();openPost(x.dataset.open)})}
+function avatar(name,src,attrs=''){return `<img class="avatar post-avatar" src="${src}" alt="${esc(name)} 的頭像" ${attrs}>`}
+function actions(p,openable=true){const liked=localStorage.getItem('liked-'+p.id)==='1';return `<div class="actions"><button class="action heart ${liked?'liked':''}" data-like="${p.id}">${icon('i-heart')}<span>${p.likes+(liked?1:0)}</span></button><button class="action" ${openable?`data-open="${p.id}"`:''}>${icon('i-comment')}<span>${p.replies.length}</span></button><button class="action">${icon('i-repost')}<span>${p.reposts||0}</span></button><button class="action">${icon('i-send')}<span>${p.shares||0}</span></button></div>`}
+function postHTML(p,clickable=true){const own=!p.author;const newsAccount=p.handle===NEWS_PROFILE.handle;const newsLink=newsAccount?'data-news-profile-link="1" tabindex="0" role="link" aria-label="前往高譚日報的個人頁面"':'';return `<article class="post ${p.headline?'news-post':''}" ${clickable?`data-post="${p.id}"`:''}>${avatar(own?PROFILE.name:p.author,own?PROFILE.avatar:p.avatar,newsLink)}<div><div class="post-header"><strong ${newsLink}>${esc(own?PROFILE.handle:p.author)}</strong><span class="meta">${own?PROFILE.flag+' '+PROFILE.location+' · ':'@'+p.handle+' · '}${p.time}</span><span class="dots">•••</span></div>${p.headline?`<h1 class="news-headline">${esc(p.headline)}</h1>`:''}<p class="post-text">${esc(p.text)}</p>${p.image?`<img class="post-image" src="${p.image}" alt="串文圖片">`:''}${actions(p,clickable)}</div></article>`}
+function renderFeed(list=POSTS,target='#feed'){const el=$(target);el.innerHTML=list.length?list.map(p=>postHTML(p)).join(''):'<div class="empty">目前沒有內容</div>';bindActions()}
+function bindActions(){$$('[data-like]').forEach(b=>b.onclick=e=>{e.stopPropagation();const p=ALL_POSTS.find(x=>x.id===b.dataset.like),on=b.classList.toggle('liked');localStorage.setItem('liked-'+p.id,on?'1':'0');b.querySelector('span').textContent=p.likes+(on?1:0)});$$('[data-post]').forEach(x=>x.onclick=()=>openPost(x.dataset.post));$$('[data-open]').forEach(x=>x.onclick=e=>{e.stopPropagation();openPost(x.dataset.open)});$$('[data-news-profile-link]').forEach(x=>{const open=e=>{if(e.type==='keydown'&&!['Enter',' '].includes(e.key))return;e.preventDefault();e.stopPropagation();showView('newsProfile',state.view);renderNewsProfile()};x.onclick=open;x.onkeydown=open})}
 function showView(v,previous=state.view,addHistory=true){
   if(!$('#'+v+'View'))return;
 
@@ -632,7 +807,7 @@ function showView(v,previous=state.view,addHistory=true){
 
   $('#'+v+'View').classList.add('active');
 
-  const root=v==='profile';
+  const root=v==='news';
 
   $('#backBtn').classList.toggle(
     'hidden',
@@ -659,20 +834,19 @@ function showView(v,previous=state.view,addHistory=true){
 
   scrollTo(0,0);
 }
-function openPost(id){const p=ALL_POSTS.find(x=>x.id===id);unlock(id);showView('detail');$('#detailPost').innerHTML=postHTML(p);const ordered=p.replies.map((r,i)=>({...r,index:i})).sort((a,b)=>Number(b.ownerLiked)-Number(a.ownerLiked));$('#detailReplies').innerHTML=ordered.length?ordered.map(r=>{
-  const key=id+'r'+r.index;
+function repliesHTML(p){const ordered=p.replies.map((r,i)=>({...r,index:i})).sort((a,b)=>Number(b.ownerLiked)-Number(a.ownerLiked));return ordered.length?ordered.map(r=>{
+  const key=p.id+'r'+r.index;
   const on=localStorage.getItem('liked-'+key)==='1';
 
-  const isAuthor=
-    r.isAuthor===true ||
-    r.handle===PROFILE.handle;
+  const isAuthor=r.isAuthor===true;
 
-  return `<article class="reply">${avatar(r.name,r.avatar)}<div><div class="post-header">
-  <strong>${esc(r.handle)}</strong>
+  return `<article class="reply" ${r.profileLink?'data-profile-entry="1"':''}>${avatar(r.name,r.avatar,r.profileLink?'data-profile-entry-target="1" tabindex="0" role="link" aria-label="前往莉莉絲・凱特的個人頁面"':'')}<div><div class="post-header">
+  <strong ${r.profileLink?'data-profile-entry-target="1" tabindex="0" role="link" aria-label="前往莉莉絲・凱特的個人頁面"':''}>${esc(r.name)}</strong>
 
 <span class="meta">
+  @${esc(r.handle)} ·
   ${r.time?`${esc(r.time)} · `:''}
-  ${esc(r.flag||'🇺🇸')} ${esc(r.location||'哥譚')}
+  ${esc(r.flag||'🇺🇸')} ${esc(r.location||'高譚')}
   ${isAuthor?' · 作者':''}
 </span>
 
@@ -686,7 +860,11 @@ function openPost(id){const p=ALL_POSTS.find(x=>x.id===id);unlock(id);showView('
       `
       : ''
   }
-</div><p class="post-text">${esc(r.text)}</p>${r.link?`<a class="reply-link" href="${esc(r.link)}" target="_blank" rel="noopener noreferrer">${esc(r.link)}</a>`:''}<div class="actions"><button class="action heart ${on?'liked':''}" data-reply-like="${key}">${icon('i-heart')}<span>${r.likes+(on?1:0)}</span></button><button class="action">${icon('i-comment')}<span>0</span></button><button class="action">${icon('i-repost')}<span>${r.reposts||0}</span></button><button class="action">${icon('i-send')}<span>${r.shares||0}</span></button></div></div></article>`}).join(''):'<div class="empty">尚無回覆</div>';bindActions();$$('[data-reply-like]').forEach(b=>b.onclick=()=>{const on=b.classList.toggle('liked');localStorage.setItem('liked-'+b.dataset.replyLike,on?'1':'0')})}
+  </div><p class="post-text">${esc(r.text)}</p>${r.link?`<a class="reply-link" href="${esc(r.link)}" target="_blank" rel="noopener noreferrer">${esc(r.link)}</a>`:''}<div class="actions"><button class="action heart ${on?'liked':''}" data-reply-like="${key}">${icon('i-heart')}<span>${r.likes+(on?1:0)}</span></button><button class="action">${icon('i-comment')}<span>0</span></button><button class="action">${icon('i-repost')}<span>${r.reposts||0}</span></button><button class="action">${icon('i-send')}<span>${r.shares||0}</span></button></div></div></article>`}).join(''):'<div class="empty">尚無回覆</div>'}
+function bindReplyActions(){$$('[data-reply-like]').forEach(b=>b.onclick=e=>{e.stopPropagation();const on=b.classList.toggle('liked');localStorage.setItem('liked-'+b.dataset.replyLike,on?'1':'0')});$$('[data-profile-entry-target]').forEach(x=>{const open=e=>{if(e.type==='keydown'&&!['Enter',' '].includes(e.key))return;e.preventDefault();e.stopPropagation();unlock(NEWS_POST.id);showView('profile','news')};x.onclick=open;x.onkeydown=open})}
+function renderNews(){$('#newsPost').innerHTML=postHTML(NEWS_POST,true);$('#newsReplies').innerHTML=repliesHTML(NEWS_POST);bindActions();bindReplyActions()}
+function renderNewsProfile(){$('#newsProfileAvatar').src=NEWS_PROFILE.avatar;$('#newsProfileName').textContent=NEWS_PROFILE.name;$('#newsProfileHandle').textContent=NEWS_PROFILE.handle;renderFeed([...NEWS_RECENT_POSTS,NEWS_POST,...NEWS_PROFILE_POSTS],'#newsProfileFeed')}
+function openPost(id){const p=ALL_POSTS.find(x=>x.id===id);if(id!==NEWS_POST.id)unlock(id);showView('detail');$('#detailPost').innerHTML=postHTML(p,false);$('#detailReplies').innerHTML=repliesHTML(p);bindActions();bindReplyActions()}
 function unlock(id){if(!CLUES.some(c=>c.id===id)||state.unlocked.has(id))return;state.unlocked.add(id);save();toast('已更新搜尋歷史紀錄');renderProgress()}
 function renderProgress(){const found=CLUES.filter(c=>state.unlocked.has(c.id));$('#clueList').innerHTML=found.map((p,i)=>`<div class="clue"><span class="clue-num">${i+1}</span><div><h3>${esc(p.clueTitle)}</h3><p>${esc(p.clue)}</p></div></div>`).join('')}
 function renderPeople(type='followers'){const list=type==='followers'?FOLLOWERS:FOLLOWING;$('#followersTab').classList.toggle('active',type==='followers');$('#followingTab').classList.toggle('active',type==='following');$('#peopleList').innerHTML=list.map((p,i)=>`<article class="person ${p.isAlt?'clickable-person':''}" ${p.isAlt?'data-alt-profile="1"':''}><img class="avatar person-avatar" src="${p.avatar}" alt="${esc(p.name)}"><div class="person-copy"><strong>${esc(p.name)}</strong><span>@${esc(p.handle)}</span>${p.bio?`<p>${esc(p.bio)}</p>`:''}</div><button class="mini-follow" data-person-follow="${type}-${i}">追蹤</button></article>`).join('');$$('[data-alt-profile]').forEach(x=>x.onclick=e=>{if(!e.target.closest('[data-person-follow]'))openAlt()});$$('[data-person-follow]').forEach(b=>b.onclick=()=>{const on=b.classList.toggle('following');b.textContent=on?'追蹤中':'追蹤'})}
@@ -725,11 +903,13 @@ function initProfile(){$('#displayName').textContent=PROFILE.name;$('#handle').t
 function toast(t){const x=$('#toast');x.textContent=t;x.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>x.classList.remove('show'),1800)}
 $('#followBtn').onclick=()=>{const on=$('#followBtn').classList.toggle('following');$('#followBtn').textContent=on?'追蹤中':'追蹤'};
 $('#messageBtn').onclick=()=>$('#messageDialog').showModal();$('#closeDialog').onclick=()=>$('#messageDialog').close();
+$('#newsFollowBtn').onclick=()=>{const on=$('#newsFollowBtn').classList.toggle('following');$('#newsFollowBtn').textContent=on?'追蹤中':'追蹤'};
+$('#newsMessageBtn').onclick=()=>$('#messageDialog').showModal();
 $('#searchBtn').onclick=()=>showView('search');$('#backBtn').onclick=()=>{
-  if(history.state?.argView!=='profile'){
+  if(history.state?.argView!=='news'){
     history.back();
   }else{
-    showView('profile','profile',false);
+    showView('news','news',false);
   }
 };
 $('#followersBtn').onclick=()=>{showView('people');renderPeople('followers')};$('#followingBtn').onclick=()=>{showView('people');renderPeople('following')};$('#followersTab').onclick=()=>renderPeople('followers');$('#followingTab').onclick=()=>renderPeople('following');
@@ -773,11 +953,11 @@ $('#codeForm').onsubmit=e=>{
 };
 $$('[data-nav]').forEach(b=>b.onclick=()=>{const v=b.dataset.nav;showView(v,v);if(v==='messages')renderMessages();if(v==='activity')renderFeed(ACTIVITY_POSTS,'#activityFeed');if(v==='search')renderProgress()});
 const TAB_CONTENT={posts:POSTS,replies:REPLY_POSTS,media:MEDIA_POSTS,reposts:REPOST_POSTS};$$('[data-profile-tab]').forEach(b=>b.onclick=()=>{$$('[data-profile-tab]').forEach(x=>x.classList.remove('active'));b.classList.add('active');renderFeed(TAB_CONTENT[b.dataset.profileTab])});
-$('#searchInput').oninput=e=>{const q=e.target.value.trim().toLowerCase();if(q==='0826')unlock('p3');const list=POSTS.filter(p=>(p.text+(p.clue||'')+(p.clueTitle||'')).toLowerCase().includes(q));$('#searchResults').innerHTML=q?`<div class="reply-heading">搜尋結果</div>${list.map(postHTML).join('')}`:'';bindActions()};
+$('#searchInput').oninput=e=>{const q=e.target.value.trim().toLowerCase();if(q==='0826')unlock('p3');const list=POSTS.filter(p=>(p.text+(p.clue||'')+(p.clueTitle||'')).toLowerCase().includes(q));$('#searchResults').innerHTML=q?`<div class="reply-heading">搜尋結果</div>${list.map(p=>postHTML(p)).join('')}`:'';bindActions()};
 history.replaceState(
   {
-    argView:'profile',
-    previousView:'profile'
+    argView:'news',
+    previousView:'news'
   },
   ''
 );
@@ -811,5 +991,9 @@ window.addEventListener('popstate',event=>{
   if(view==='alt'){
     renderAlt();
   }
+
+  if(view==='newsProfile'){
+    renderNewsProfile();
+  }
 });
-initProfile();renderFeed();renderProgress();updateUnread();renderMessages();
+initProfile();renderNews();renderNewsProfile();renderFeed();renderProgress();updateUnread();renderMessages();
