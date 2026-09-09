@@ -7,8 +7,8 @@ const FOLLOWERS=[
  {name:'無名',handle:'deleted_0826',bio:'',avatar:'assets/person-unknown.svg'},
  {name:'LH',handle:'LH5588812',bio:'好喜歡你。',avatar:'assets/person-alt.jpg',isAlt:true},
  {name:'陳暮',handle:'muchen_26',bio:'Gotham',avatar:'assets/person-chen.svg'},
- {name:'73號',handle:'room_73',bio:'請勿敲門。',avatar:'assets/avatar-3.svg'},
- {name:'路過的人',handle:'passing_by',bio:'只是剛好看到。',avatar:'assets/avatar-2.svg'},
+ {name:'73號',handle:'room_73',bio:'請勿敲門。',avatar:'assets/room_73.jpg'},
+ {name:'路過的人',handle:'passing_by',bio:'只是剛好看到。',avatar:'assets/passing.jpg'},
  {name:'艾琳',handle:'erin_writes',bio:'城市裡的一個普通人。',avatar:'assets/avatar-2.svg'},
  {name:'M.',handle:'monday_morning',bio:'咖啡比政治可靠。',avatar:'assets/avatar-3.svg'},
  {name:'北邊的人',handle:'north_side_04',bio:'住在高譚北邊。',avatar:'assets/person-lin.svg'},
@@ -22,30 +22,30 @@ const FOLLOWERS=[
  {name:'不知道叫什麼',handle:'probably_nobody',bio:'如題。',avatar:'assets/person-unknown.svg'},
  {name:'觀察者',handle:'just_observing',bio:'看看而已。',avatar:'assets/person-lin.svg'},
  {name:'小湯姆',handle:'tom_from_gotham',bio:'本地居民。',avatar:'assets/avatar-2.svg'},
- {name:'瑪莎',handle:'martha_works',bio:'工作中，勿擾。',avatar:'assets/avatar-3.svg'},
+ {name:'瑪莎',handle:'martha_works',bio:'工作中，勿擾。',avatar:'assets/works.jpg'},
  {name:'紙上談兵',handle:'on_paper_only',bio:'我只負責提出問題。',avatar:'assets/person-rain.svg'},
  {name:'南邊來的',handle:'from_the_south',bio:'偶爾來市中心。',avatar:'assets/person-chen.svg'},
  {name:'咖啡第二杯',handle:'coffee_second',bio:'第一杯已經喝完了。',avatar:'assets/avatar-2.svg'},
  {name:'伊森',handle:'ethan_works',bio:'城市、工作、睡眠。',avatar:'assets/avatar-3.svg'},
  {name:'晚安高譚',handle:'goodnight_gotham',bio:'晚上比較清醒。',avatar:'assets/person-lin.svg'},
- {name:'小報讀者',handle:'tabloid_reader',bio:'我只是看看新聞。',avatar:'assets/person-rain.svg'},
+ {name:'小報讀者',handle:'tabloid_reader',bio:'我只是看看新聞。',avatar:'assets/tabloid_reader.jpg'},
  {name:'沒有暱稱',handle:'no_nickname_here',bio:'',avatar:'assets/person-unknown.svg'},
  {name:'星期三',handle:'wednesday_person',bio:'不是每個星期三都一樣。',avatar:'assets/avatar-2.svg'},
  {name:'城市邊緣',handle:'edge_of_city',bio:'離市中心很遠。',avatar:'assets/avatar-3.svg'},
  {name:'阿德',handle:'ade_gotham',bio:'今天也在上班。',avatar:'assets/person-chen.svg'},
  {name:'看熱鬧的',handle:'just_here_for_this',bio:'沒有立場。',avatar:'assets/person-lin.svg'},
- {name:'舊報紙',handle:'old_newspaper',bio:'昨天的新聞也是新聞。',avatar:'assets/avatar-2.svg'},
+ {name:'舊報紙',handle:'old_newspaper',bio:'昨天的新聞也是新聞。',avatar:'assets/old_newspaper.jpg'},
  {name:'白噪音',handle:'white_noise_g',bio:'保持安靜。',avatar:'assets/avatar-3.svg'},
- {name:'米亞',handle:'mia_afterfive',bio:'五點以後才是我的時間。',avatar:'assets/person-rain.svg'},
- {name:'湯姆森',handle:'thomson_g',bio:'住在河邊。',avatar:'assets/person-chen.svg'},
- {name:'小雨',handle:'rainy_window',bio:'今天也在下雨。',avatar:'assets/avatar-2.svg'},
+ {name:'米亞',handle:'mia_afterfive',bio:'五點以後才是我的時間。',avatar:'assets/mia.jpg'},
+ {name:'湯姆森',handle:'thomson_g',bio:'住在河邊。',avatar:'assets/thomson_g.jpg'},
+ {name:'小雨',handle:'rainy_window',bio:'今天也在下雨。',avatar:'assets/rainy_window.jpg'},
  {name:'沒有新聞',handle:'no_news_today',bio:'希望今天沒有新聞。',avatar:'assets/avatar-3.svg'},
  {name:'艾倫',handle:'alan_corner',bio:'城市觀察。',avatar:'assets/person-lin.svg'},
- {name:'南區居民',handle:'southside_local',bio:'南區生活紀錄。',avatar:'assets/person-rain.svg'},
- {name:'老麥',handle:'old_mack_g',bio:'這城市比我年輕。',avatar:'assets/person-chen.svg'},
+ {name:'南區居民',handle:'southside_local',bio:'南區生活紀錄。',avatar:'assets/southside_local.jpg'},
+ {name:'老麥',handle:'old_mack_g',bio:'這城市比我年輕。',avatar:'assets/old_mack_g.jpg'},
  {name:'卡洛',handle:'carlo_notes',bio:'一些城市雜記。',avatar:'assets/avatar-2.svg'},
- {name:'蘇菲',handle:'sophie_park',bio:'拍照、散步、咖啡。',avatar:'assets/avatar-3.svg'},
- {name:'布朗先生',handle:'mr_brown_g',bio:'退休之後比較有時間。',avatar:'assets/person-lin.svg'},
+ {name:'蘇菲',handle:'sophie_park',bio:'拍照、散步、咖啡。',avatar:'assets/sophie_park.jpg'},
+ {name:'布朗先生',handle:'mr_brown_g',bio:'退休之後比較有時間。',avatar:'assets/mr_brown_g.jpg'},
  {name:'不想上班',handle:'dont_wanna_work',bio:'每天都在努力。',avatar:'assets/person-rain.svg'},
  {name:'報紙角落',handle:'corner_of_paper',bio:'每天看一點新聞。',avatar:'assets/person-unknown.svg'},
  {name:'傑克',handle:'jack_around_g',bio:'高譚本地人。',avatar:'assets/avatar-2.svg'},
@@ -57,8 +57,8 @@ const FOLLOWERS=[
 ];
 
 const FOLLOWING=[
- {name:'73號',handle:'room_73',bio:'請勿敲門。',avatar:'assets/avatar-3.svg'},
- {name:'路過的人',handle:'passing_by',bio:'只是剛好看到。',avatar:'assets/avatar-2.svg'},
+ {name:'73號',handle:'room_73',bio:'請勿敲門。',avatar:'assets/room_73.jpg'},
+ {name:'路過的人',handle:'passing_by',bio:'只是剛好看到。',avatar:'assets/passing.jpg'},
  {name:'林七',handle:'lin_seven',bio:'偶爾拍照。',avatar:'assets/person-lin.svg'},
  {name:'雨停以前',handle:'before_rainstops',bio:'你說的不過是如果。',avatar:'assets/person-rain.svg'},
  {name:'陳暮',handle:'muchen_26',bio:'Gotham',avatar:'assets/person-chen.svg'},
@@ -67,12 +67,12 @@ const FOLLOWING=[
  {name:'安娜',handle:'anna_in_gotham',bio:'在這座城市生活。',avatar:'assets/person-rain.svg'},
  {name:'R.',handle:'r_after_work',bio:'下班之後才是人生。',avatar:'assets/avatar-3.svg'},
  {name:'晚安高譚',handle:'goodnight_gotham',bio:'晚上比較清醒。',avatar:'assets/person-lin.svg'},
- {name:'米亞',handle:'mia_afterfive',bio:'五點以後才是我的時間。',avatar:'assets/person-rain.svg'},
- {name:'湯姆森',handle:'thomson_g',bio:'住在河邊。',avatar:'assets/person-chen.svg'},
+ {name:'米亞',handle:'mia_afterfive',bio:'五點以後才是我的時間。',avatar:'assets/mia.jpg'},
+ {name:'湯姆森',handle:'thomson_g',bio:'住在河邊。',avatar:'assets/thomson_g.jpg'},
  {name:'艾倫',handle:'alan_corner',bio:'城市觀察。',avatar:'assets/person-lin.svg'},
- {name:'蘇菲',handle:'sophie_park',bio:'拍照、散步、咖啡。',avatar:'assets/avatar-3.svg'},
+ {name:'蘇菲',handle:'sophie_park',bio:'拍照、散步、咖啡。',avatar:'assets/sophie_park.jpg'},
  {name:'卡洛',handle:'carlo_notes',bio:'一些城市雜記。',avatar:'assets/avatar-2.svg'},
- {name:'舊報紙',handle:'old_newspaper',bio:'昨天的新聞也是新聞。',avatar:'assets/avatar-2.svg'},
+ {name:'舊報紙',handle:'old_newspaper',bio:'昨天的新聞也是新聞。',avatar:'assets/old_newspaper.jpg'},
  {name:'老城區居民',handle:'old_gotham_resident',bio:'搬來很多年了。',avatar:'assets/person-chen.svg'},
  {name:'看熱鬧的',handle:'just_here_for_this',bio:'沒有立場。',avatar:'assets/avatar-3.svg'},
  {name:'老朋友',handle:'old_friend_g',bio:'認識一些人，也認識一些事。',avatar:'assets/person-chen.svg'},
@@ -98,31 +98,31 @@ const NEWS_POST={
   ],
   likes:18943,reposts:2841,shares:1607,
   replies:[
-    {handle:'martha_works',avatar:'assets/avatar-3.svg',text:'希爾市長無罪！！！！高譚日報是共和黨的狗吧？？',likes:227,reposts:18,shares:3},
-    {handle:'thomson_g',avatar:'assets/person-chen.svg',text:'都被警方移送了還無罪，支持者到底要裝瞎到什麼時候？',likes:615,reposts:47,shares:12},
-    {handle:'sophie_park',avatar:'assets/avatar-3.svg',text:'移送又不是判刑！講得像已經定罪一樣。',likes:438,reposts:31,shares:8},
-    {handle:'allen_watch',avatar:'assets/person-chen.svg',text:'現場那麼多人都看到希爾脅持韋恩了，還需要公開什麼？',likes:782,reposts:66,shares:19},
-    {handle:'citizen_404',avatar:'assets/person-rain.svg',text:'到底是現場哪些人看到？我也說我在現場好不好？沒圖沒真相啦！',likes:391,reposts:22,shares:5},
-    {handle:'george_news',avatar:'assets/person-lin.svg',text:'欸我真的在現場。夜翼、紅頭罩和羅賓他們衝進去之後，警方才把希爾帶走。\n附上一張現場圖！',image:'assets/NEWS01.jpg',likes:1264,reposts:153,shares:87},
-    {handle:'lucy_says',avatar:'assets/avatar-3.svg',text:'蒙面義警闖進市府晚會、控制民選市長，大家居然沒有反應？',likes:317,reposts:29,shares:7},
-    {handle:'william_w',avatar:'assets/person-chen.svg',text:'他們救了一個被脅持的人，現場也有警方在場。不要講得像義警政變好嗎?',likes:694,reposts:54,shares:16},
-	{handle:'mark_truth',avatar:'assets/person-lin.svg',text:'照片右下那位被綁著的人是布魯斯韋恩嗎？',likes:121,reposts:18,shares:1},
-    {handle:'tabloid_reader',avatar:'assets/person-rain.svg',text:'哇，人體器官販賣？？這比昨天報紙寫的還誇張。',likes:843,reposts:71,shares:24},
-    {handle:'paul_cityhall',avatar:'assets/person-lin.svg',text:'報導只說疑似涉及啦。先等檢方調查好嗎。',likes:529,reposts:38,shares:9},
-    {handle:'southside_auntie',avatar:'assets/avatar-3.svg',text:'希爾上任以後南區明明改善很多，我不相信他會做這種事！',likes:284,reposts:16,shares:3},
-    {handle:'mark_truth',avatar:'assets/person-lin.svg',text:'蝙蝠俠萬歲！',likes:911,reposts:79,shares:21},
-    {handle:'kate_k',avatar:'assets/person-rain.svg',text:'蝙蝠俠這次根本沒出現好嗎？',likes:358,reposts:27,shares:4},
-    {handle:'jack_in_city',avatar:'assets/person-chen.svg',text:'市長本人在公開場合脅持人，這就值得被關了吧？',likes:746,reposts:61,shares:13},
-    {handle:'lisa_coffee',avatar:'assets/person-rain.svg',text:'有沒有人知道市府代理程序會由誰接任？新聞怎麼完全沒寫。',likes:201,reposts:12,shares:2},
-    {handle:'david_question',avatar:'assets/person-chen.svg',text:'我比較想知道其他涉案人士是誰。不可能只有希爾一個人吧？',likes:573,reposts:48,shares:11},
+    {handle:'martha_works',avatar:'assets/works.jpg',text:'希爾市長無罪！！！！高譚日報是共和黨的狗吧？？',likes:227,reposts:18,shares:3},
+    {handle:'thomson_g',avatar:'assets/thomson_g.jpg',text:'都被警方移送了還無罪，支持者到底要裝瞎到什麼時候？',likes:615,reposts:47,shares:12},
+    {handle:'sophie_park',avatar:'assets/sophie_park.jpg',text:'移送又不是判刑！講得像已經定罪一樣。',likes:438,reposts:31,shares:8},
+    {handle:'allen_watch',avatar:'assets/allen_watch.jpg',text:'現場那麼多人都看到希爾脅持韋恩了，還需要公開什麼？',likes:782,reposts:66,shares:19},
+    {handle:'citizen_404',avatar:'assets/citizen_404.jpg',text:'到底是現場哪些人看到？我也說我在現場好不好？沒圖沒真相啦！',likes:391,reposts:22,shares:5},
+    {handle:'george_news',avatar:'assets/george_news.jpg',text:'欸我真的在現場。夜翼、紅頭罩和羅賓他們衝進去之後，警方才把希爾帶走。\n附上一張現場圖！',image:'assets/NEWS01.jpg',likes:1264,reposts:153,shares:87},
+    {handle:'lucy_says',avatar:'assets/lucy_says.jpg',text:'蒙面義警闖進市府晚會、控制民選市長，大家居然沒有反應？',likes:317,reposts:29,shares:7},
+    {handle:'william_w',avatar:'assets/william_w.jpg',text:'他們救了一個被脅持的人，現場也有警方在場。不要講得像義警政變好嗎?',likes:694,reposts:54,shares:16},
+	{handle:'mark_truth',avatar:'assets/mark_truth.jpg',text:'照片右下那位被綁著的人是布魯斯韋恩嗎？',likes:121,reposts:18,shares:1},
+    {handle:'tabloid_reader',avatar:'assets/tabloid_reader.jpg',text:'哇，人體器官販賣？？這比昨天報紙寫的還誇張。',likes:843,reposts:71,shares:24},
+    {handle:'paul_cityhall',avatar:'assets/paul_cityhall.jpg',text:'報導只說疑似涉及啦。先等檢方調查好嗎。',likes:529,reposts:38,shares:9},
+    {handle:'southside_auntie',avatar:'assets/southside_auntie.jpg',text:'希爾上任以後南區明明改善很多，我不相信他會做這種事！',likes:284,reposts:16,shares:3},
+    {handle:'mark_truth',avatar:'assets/mark_truth.jpg',text:'蝙蝠俠萬歲！',likes:911,reposts:79,shares:21},
+    {handle:'kate_k',avatar:'assets/kate_k.jpg',text:'蝙蝠俠這次根本沒出現好嗎？',likes:358,reposts:27,shares:4},
+    {handle:'jack_in_city',avatar:'assets/jack_in_city.jpg',text:'市長本人在公開場合脅持人，這就值得被關了吧？',likes:746,reposts:61,shares:13},
+    {handle:'lisa_coffee',avatar:'assets/lisa_coffee.jpg',text:'有沒有人知道市府代理程序會由誰接任？新聞怎麼完全沒寫。',likes:201,reposts:12,shares:2},
+    {handle:'david_question',avatar:'assets/david_question.jpg',text:'我比較想知道其他涉案人士是誰。不可能只有希爾一個人吧？',likes:573,reposts:48,shares:11},
     {handle:PROFILE.handle,avatar:PROFILE.avatar,profileLink:true,text:'目前一切還在偵查中，請不要做過多猜測。',likes:46,reposts:2,shares:0},
-    {handle:'sarah_here',avatar:'assets/avatar-3.svg',text:'所以現在是由副市長代理嗎。',likes:286,reposts:24,shares:6},
-    {handle:'nick_no_filter',avatar:'assets/person-rain.svg',text:'完了，今年底里夫斯的當選大概已經確定了，我對未來感到絕望。',likes:402,reposts:37,shares:9},
-    {handle:'helen_home',avatar:'assets/avatar-3.svg',text:'里夫斯很好吧？至少長的蠻帥的啊。',likes:377,reposts:25,shares:5},
-    {handle:'paperboy_7',avatar:'assets/person-chen.svg',text:'今天所有報紙都賣光了，下午的增刊也沒剩幾份！',likes:538,reposts:48,shares:11},
-    {handle:'mr_brown_g',avatar:'assets/person-lin.svg',text:'留友看，帥又不能當飯吃。',likes:421,reposts:34,shares:8},
-    {handle:'mia_afterfive',avatar:'assets/person-rain.svg',text:'有人有懶人包嗎？話說上面是不是有個人是市府幕僚？',likes:263,reposts:18,shares:4},
-    {handle:'oldtown_resident',avatar:'assets/person-lin.svg',text:'都奈橋蓋這麼多年沒蓋好原來都是因為官商勾結。',likes:514,reposts:53,shares:18}
+    {handle:'sarah_here',avatar:'assets/sarah_here.jpg',text:'所以現在是由副市長代理嗎。',likes:286,reposts:24,shares:6},
+    {handle:'nick_no_filter',avatar:'assets/nick_no_filter.jpg',text:'完了，今年底里夫斯的當選大概已經確定了，我對未來感到絕望。',likes:402,reposts:37,shares:9},
+    {handle:'helen_home',avatar:'assets/helen_home.jpg',text:'里夫斯很好吧？至少長的蠻帥的啊。',likes:377,reposts:25,shares:5},
+    {handle:'paperboy_7',avatar:'assets/paperboy_7.jpg',text:'今天所有報紙都賣光了，下午的增刊也沒剩幾份！',likes:538,reposts:48,shares:11},
+    {handle:'mr_brown_g',avatar:'assets/mr_brown_g.jpg',text:'留友看，帥又不能當飯吃。',likes:421,reposts:34,shares:8},
+    {handle:'mia_afterfive',avatar:'assets/mia.jpg',text:'有人有懶人包嗎？話說上面是不是有個人是市府幕僚？',likes:263,reposts:18,shares:4},
+    {handle:'oldtown_resident',avatar:'assets/oldtown_resident.jpg',text:'都奈橋蓋這麼多年沒蓋好原來都是因為官商勾結。',likes:514,reposts:53,shares:18}
   ]
 };
 
@@ -244,7 +244,7 @@ const POSTS=[
     text:'今天下午突然很認真地思考了一件事：\n工作究竟代表什麼，是為了錢，還是生活的意義。',
     likes:418,reposts:29,shares:7,
     replies:[
-      {handle:'room_73',avatar:'assets/avatar-3.svg',text:'你上班上瘋了吧，哈哈。',likes:16,reposts:1,shares:0,ownerLiked:true},
+      {handle:'room_73',avatar:'assets/room_73.jpg',text:'你上班上瘋了吧，哈哈。',likes:16,reposts:1,shares:0,ownerLiked:true},
       {handle:PROFILE.handle,avatar:PROFILE.avatar,isAuthor:true,text:'唉。',likes:73,reposts:4,shares:1}
     ]
   },
@@ -256,7 +256,7 @@ const POSTS=[
     text:'整理衣櫃。\n怎麼這麼多衣服。',
     likes:362,reposts:27,shares:6,
     replies:[
-      {handle:'passing_by',avatar:'assets/avatar-2.svg',text:'真的需要準備這麼衣服嗎？',likes:21,reposts:2,shares:0},
+      {handle:'passing_by',avatar:'assets/passing.jpg',text:'真的需要準備這麼衣服嗎？',likes:21,reposts:2,shares:0},
       {handle:PROFILE.handle,avatar:PROFILE.avatar,isAuthor:true,text:'看你負責什麼工作。但我以前是需要的。',likes:48,reposts:2,shares:1}
     ]
   },
@@ -268,7 +268,7 @@ const POSTS=[
     text:'晚上經過都奈橋。\n現在都要拆了嗎。',
     likes:591,reposts:43,shares:12,
     replies:[
-      {handle:'gotham_daily',avatar:'assets/avatar-2.svg',text:'畢竟有可能有安全疑慮？',likes:18,reposts:1,shares:0},
+      {handle:'summer058',avatar:'assets/summer058.jpg',text:'畢竟有可能有安全疑慮？',likes:18,reposts:1,shares:0},
       {handle:PROFILE.handle,avatar:PROFILE.avatar,isAuthor:true,text:'是啊，只是很感嘆。',likes:84,reposts:5,shares:2}
     ]
   },
@@ -281,7 +281,7 @@ const POSTS=[
     text:'有人問我為什麼最近幾乎不談現在的工作。\n因為現在這份工作不太算是鎂光燈下的工作。\n沒什麼好一直說的。',
     likes:831,reposts:47,shares:15,
     replies:[
-      {handle:'passing_by',avatar:'assets/avatar-2.svg',text:'但妳以前真的很常發工作的事情耶。',likes:34,reposts:3,shares:1},
+      {handle:'passing_by',avatar:'assets/passing.jpg',text:'但妳以前真的很常發工作的事情耶。',likes:34,reposts:3,shares:1},
       {handle:PROFILE.handle,avatar:PROFILE.avatar,isAuthor:true,text:'因為那時候的工作也確實蠻有意思的。',likes:107,reposts:7,shares:2}
     ]
   },
@@ -294,7 +294,7 @@ const POSTS=[
     text:'最近開始正常吃早餐。\n以前早上不是趕會議就是趕車，早餐通常在路上解決。\n今天坐下來慢慢吃完，突然覺得這件事以前好像很奢侈。',
     likes:537,reposts:34,shares:8,
     replies:[
-      {handle:'room_73',avatar:'assets/avatar-3.svg',text:'妳以前到底幾點開始上班？',likes:18,reposts:1,shares:0},
+      {handle:'room_73',avatar:'assets/room_73.jpg',text:'妳以前到底幾點開始上班？',likes:18,reposts:1,shares:0},
       {handle:PROFILE.handle,avatar:PROFILE.avatar,isAuthor:true,text:'不想回憶。',likes:77,reposts:5,shares:1}
     ]
   },
@@ -309,31 +309,31 @@ const POSTS=[
     clue:'市長在晚宴上似乎爆出醜聞，被夜翼等人當眾逮捕。',
     likes:5718,reposts:54,shares:816,
     replies:[
-      {handle:'martha_works',avatar:'assets/avatar-3.svg',text:'希爾市長無罪！！！！',likes:27,reposts:1,shares:0},
-      {handle:'sophie_park',avatar:'assets/avatar-3.svg',text:'希爾市長不可能犯罪！。',likes:119,reposts:8,shares:2},
-	  {handle:'thomson_g',avatar:'assets/person-chen.svg',text:'希爾王八蛋背信棄義！',likes:85,reposts:2,shares:0},
-      {handle:'tabloid_reader',avatar:'assets/person-rain.svg',text:'報紙上說的都是真的嗎？？天啊。',likes:128,reposts:6,shares:0},
-	  {handle:'mia_afterfive',avatar:'assets/person-rain.svg',text:'希爾市長沒有錯！！',likes:150,reposts:1,shares:2},
-      {handle:'mr_brown_g',avatar:'assets/person-lin.svg',text:'哇這邊太精采了吧，留友看。',likes:58,reposts:7,shares:3},
-	  {handle:'anna_daily',avatar:'assets/avatar-3.svg',text:'希爾市長無罪！那些報導根本沒有證據！',likes:96,reposts:4,shares:1},
-	  {handle:'jack_in_city',avatar:'assets/person-chen.svg',text:'都爆出這麼多事情了，還有人相信他？',likes:143,reposts:11,shares:3},
-	  {handle:'kate_k',avatar:'assets/person-rain.svg',text:'一張報紙寫什麼你們就信什麼，也太好操弄了吧。',likes:87,reposts:5,shares:0},
-	  {handle:'oldtown_resident',avatar:'assets/person-lin.svg',text:'我住這裡二十年了，希爾上任後城市明明變得更好。',likes:171,reposts:13,shares:5},
-	  {handle:'allen_watch',avatar:'assets/person-chen.svg',text:'蝙蝠俠都把他抓走了，相信蝙蝠俠。',likes:204,reposts:18,shares:4},
-	  {handle:'lucy_says',avatar:'assets/avatar-3.svg',text:'蝙蝠俠才是社會亂源！',likes:118,reposts:7,shares:2},
-	  {handle:'george_news',avatar:'assets/person-lin.svg',text:'嚴格來說，逮捕他的是夜翼和紅頭罩跟羅賓們，\n英雄大集結！我在現場！',likes:775,reposts:13,shares:152},
-	  {handle:'citizen_404',avatar:'assets/person-rain.svg',text:'笑死，報紙寫了就一定是真的？記者從來不會說謊是不是？',likes:189,reposts:16,shares:3},
-	  {handle:'helen_home',avatar:'assets/avatar-3.svg',text:'你要不要自己出來選?',likes:131,reposts:6,shares:1},
-	  {handle:'william_w',avatar:'assets/person-chen.svg',text:'希望蝙蝠俠趕快把希爾送進監獄。',likes:156,reposts:12,shares:4},
-	  {handle:'lisa_coffee',avatar:'assets/person-rain.svg',text:'蝙蝠俠只負責抓人\n送進監獄是檢察官的事啦，你是法盲喔？',likes:102,reposts:5,shares:2},
-	  {handle:'mark_truth',avatar:'assets/person-lin.svg',text:'做過好事就能偷工減料？他還脅持布魯斯韋恩耶，這是什麼邏輯？',likes:220,reposts:21,shares:7},
-	  {handle:'southside_auntie',avatar:'assets/avatar-3.svg',text:'我不管你們怎麼說，反正我相信希爾市長！',likes:64,reposts:2,shares:0},
-	  {handle:'david_question',avatar:'assets/person-chen.svg',text:'所以這樣希爾會和柯波特成為獄友嗎？',likes:147,reposts:9,shares:2},
-	  {handle:'jenny_j',avatar:'assets/person-rain.svg',text:'哈哈你們自己選的，留友看民主黨支持者崩潰。',likes:198,reposts:14,shares:5},
-	  {handle:'paul_cityhall',avatar:'assets/person-lin.svg',text:'都是經濟罪犯，還真的有可能關在一起。',likes:91,reposts:5,shares:1},
-	  {handle:'paperboy_7',avatar:'assets/person-chen.svg',text:'這周的報紙銷量都很好，整條街都在討論這件事。',likes:112,reposts:8,shares:3},
-	  {handle:'sarah_here',avatar:'assets/avatar-3.svg',text:'連幕僚都落跑了，還能有什麼假的。',likes:176,reposts:15,shares:6},
-	  {handle:'nick_no_filter',avatar:'assets/person-rain.svg',text:'說不定只是正常換工作啊\n怎樣，幕僚就不能換工作喔?',likes:163,reposts:10,shares:2}
+      {handle:'martha_works',avatar:'assets/works.jpg',text:'希爾市長無罪！！！！',likes:27,reposts:1,shares:0},
+      {handle:'sophie_park',avatar:'assets/sophie_park.jpg',text:'希爾市長不可能犯罪！。',likes:119,reposts:8,shares:2},
+	  {handle:'thomson_g',avatar:'assets/thomson_g.jpg',text:'希爾王八蛋背信棄義！',likes:85,reposts:2,shares:0},
+      {handle:'tabloid_reader',avatar:'assets/tabloid_reader.jpg',text:'報紙上說的都是真的嗎？？天啊。',likes:128,reposts:6,shares:0},
+	  {handle:'mia_afterfive',avatar:'assets/mia.jpg',text:'希爾市長沒有錯！！',likes:150,reposts:1,shares:2},
+      {handle:'mr_brown_g',avatar:'assets/mr_brown_g.jpg',text:'哇這邊太精采了吧，留友看。',likes:58,reposts:7,shares:3},
+	  {handle:'anna_552',avatar:'assets/anna_552.jpg',text:'希爾市長無罪！那些報導根本沒有證據！',likes:96,reposts:4,shares:1},
+	  {handle:'jack_in_city',avatar:'assets/jack_in_city.jpg',text:'都爆出這麼多事情了，還有人相信他？',likes:143,reposts:11,shares:3},
+	  {handle:'kate_k',avatar:'assets/kate_k.jpg',text:'一張報紙寫什麼你們就信什麼，也太好操弄了吧。',likes:87,reposts:5,shares:0},
+	  {handle:'oldtown_resident',avatar:'assets/oldtown_resident.jpg',text:'我住這裡二十年了，希爾上任後城市明明變得更好。',likes:171,reposts:13,shares:5},
+	  {handle:'allen_watch',avatar:'assets/allen_watch.jpg',text:'蝙蝠俠都把他抓走了，相信蝙蝠俠。',likes:204,reposts:18,shares:4},
+	  {handle:'lucy_says',avatar:'assets/lucy_says.jpg',text:'蝙蝠俠才是社會亂源！',likes:118,reposts:7,shares:2},
+	  {handle:'george_news',avatar:'assets/george_news.jpg',text:'嚴格來說，逮捕他的是夜翼和紅頭罩跟羅賓們，\n英雄大集結！我在現場！',likes:775,reposts:13,shares:152},
+	  {handle:'citizen_404',avatar:'assets/citizen_404.jpg',text:'笑死，報紙寫了就一定是真的？記者從來不會說謊是不是？',likes:189,reposts:16,shares:3},
+	  {handle:'helen_home',avatar:'assets/helen_home.jpg',text:'你要不要自己出來選?',likes:131,reposts:6,shares:1},
+	  {handle:'william_w',avatar:'assets/william_w.jpg',text:'希望蝙蝠俠趕快把希爾送進監獄。',likes:156,reposts:12,shares:4},
+	  {handle:'lisa_coffee',avatar:'assets/lisa_coffee.jpg',text:'蝙蝠俠只負責抓人\n送進監獄是檢察官的事啦，你是法盲喔？',likes:102,reposts:5,shares:2},
+	  {handle:'mark_truth',avatar:'assets/mark_truth.jpg',text:'做過好事就能偷工減料？他還脅持布魯斯韋恩耶，這是什麼邏輯？',likes:220,reposts:21,shares:7},
+	  {handle:'southside_auntie',avatar:'assets/southside_auntie.jpg',text:'我不管你們怎麼說，反正我相信希爾市長！',likes:64,reposts:2,shares:0},
+	  {handle:'david_question',avatar:'assets/david_question.jpg',text:'所以這樣希爾會和柯波特成為獄友嗎？',likes:147,reposts:9,shares:2},
+	  {handle:'jenny_j',avatar:'assets/jenny_j.jpg',text:'哈哈你們自己選的，留友看民主黨支持者崩潰。',likes:198,reposts:14,shares:5},
+	  {handle:'paul_cityhall',avatar:'assets/paul_cityhall.jpg',text:'都是經濟罪犯，還真的有可能關在一起。',likes:91,reposts:5,shares:1},
+	  {handle:'paperboy_7',avatar:'assets/paperboy_7.jpg',text:'這周的報紙銷量都很好，整條街都在討論這件事。',likes:112,reposts:8,shares:3},
+	  {handle:'sarah_here',avatar:'assets/sarah_here.jpg',text:'連幕僚都落跑了，還能有什麼假的。',likes:176,reposts:15,shares:6},
+	  {handle:'nick_no_filter',avatar:'assets/nick_no_filter.jpg',text:'說不定只是正常換工作啊\n怎樣，幕僚就不能換工作喔?',likes:163,reposts:10,shares:2}
 	  
     ]
   },
@@ -345,31 +345,31 @@ const POSTS=[
   text:'昨晚結束之後，接了一整晚的電話。\n',
   likes:936,reposts:81,shares:25,
   replies:[
-    {handle:'gotham_daily',avatar:'assets/avatar-2.svg',text:'昨晚辛苦了。',likes:44,reposts:5,shares:1,ownerLiked:true},
+    {handle:'summer058',avatar:'assets/summer058.jpg',text:'昨晚辛苦了。',likes:44,reposts:5,shares:1,ownerLiked:true},
     {handle:PROFILE.handle,avatar:PROFILE.avatar,isAuthor:true,text:'謝謝。',likes:103,reposts:6,shares:2},
-    {handle:'sarah_here',avatar:'assets/avatar-3.svg',text:'所以市政府到底知不知道希爾做了什麼？',likes:186,reposts:17,shares:5},
-    {handle:'anna_daily',avatar:'assets/avatar-3.svg',text:'她只是一個幕僚，你們為什麼要把市長做的事情算在她頭上？',likes:121,reposts:6,shares:2},
-    {handle:'jack_in_city',avatar:'assets/person-chen.svg',text:'市長在晚宴上被當眾抓走，市府幕僚一句話都不用交代？',likes:215,reposts:19,shares:7},
-    {handle:'kate_k',avatar:'assets/person-rain.svg',text:'要交代也是警方和市長本人交代，騷擾基層工作人員幹嘛。',likes:98,reposts:5,shares:1},
-    {handle:'nick_no_filter',avatar:'assets/person-rain.svg',text:'打電話去騷擾人的是有什麼毛病？\n她看起來也根本不知道發生什麼事。',likes:177,reposts:13,shares:4},
-    {handle:'mark_truth',avatar:'assets/person-lin.svg',text:'不知道？晚會是市府辦的，希爾還在現場挾持布魯斯・韋恩，她怎麼可能完全不知情？',likes:249,reposts:24,shares:9},
-    {handle:'lucy_says',avatar:'assets/avatar-3.svg',text:'現在連挾持都是你們自己說的，現場那麼亂，誰看清楚了？',likes:114,reposts:8,shares:2},
-    {handle:'george_news',avatar:'assets/person-lin.svg',text:'我在現場，韋恩確實被希爾控制住了。\n夜翼他們衝進來之後才把人救下來。',likes:681,reposts:72,shares:118},
-    {handle:'citizen_404',avatar:'assets/person-rain.svg',text:'又一個自稱在現場的，現在網路上每個人都坐第一排是不是？',likes:203,reposts:15,shares:4},
-    {handle:'paperboy_7',avatar:'assets/person-chen.svg',text:'昨天星球日報已經刊出現場照片了，不用在場才能看到喔！',likes:156,reposts:12,shares:3},
-    {handle:'tabloid_reader',avatar:'assets/person-rain.svg',text:'每一家報紙寫的版本都不一樣，我已經不知道該信誰了。',likes:139,reposts:7,shares:1},
-    {handle:'allen_watch',avatar:'assets/person-chen.svg',text:'相信英雄就好，他們不會無緣無故在公開場合抓走市長吧。',likes:281,reposts:23,shares:8},
-    {handle:'southside_auntie',avatar:'assets/avatar-3.svg',text:'蒙面義警想抓誰就抓誰，這樣還有人覺得很正常？',likes:91,reposts:4,shares:1},
-    {handle:'william_w',avatar:'assets/person-chen.svg',text:'現場還有警察，最後是警察把希爾帶走的，不是義警私刑。',likes:194,reposts:14,shares:4},
-    {handle:'david_question',avatar:'assets/person-chen.svg',text:'那些電話是記者打的，還是市民打的？\n市府什麼時候開記者會？',likes:133,reposts:6,shares:2},
+    {handle:'sarah_here',avatar:'assets/sarah_here.jpg',text:'所以市政府到底知不知道希爾做了什麼？',likes:186,reposts:17,shares:5},
+    {handle:'anna_552',avatar:'assets/anna_552.jpg',text:'她只是一個幕僚，你們為什麼要把市長做的事情算在她頭上？',likes:121,reposts:6,shares:2},
+    {handle:'jack_in_city',avatar:'assets/jack_in_city.jpg',text:'市長在晚宴上被當眾抓走，市府幕僚一句話都不用交代？',likes:215,reposts:19,shares:7},
+    {handle:'kate_k',avatar:'assets/kate_k.jpg',text:'要交代也是警方和市長本人交代，騷擾基層工作人員幹嘛。',likes:98,reposts:5,shares:1},
+    {handle:'nick_no_filter',avatar:'assets/nick_no_filter.jpg',text:'打電話去騷擾人的是有什麼毛病？\n她看起來也根本不知道發生什麼事。',likes:177,reposts:13,shares:4},
+    {handle:'mark_truth',avatar:'assets/mark_truth.jpg',text:'不知道？晚會是市府辦的，希爾還在現場挾持布魯斯・韋恩，她怎麼可能完全不知情？',likes:249,reposts:24,shares:9},
+    {handle:'lucy_says',avatar:'assets/lucy_says.jpg',text:'現在連挾持都是你們自己說的，現場那麼亂，誰看清楚了？',likes:114,reposts:8,shares:2},
+    {handle:'george_news',avatar:'assets/george_news.jpg',text:'我在現場，韋恩確實被希爾控制住了。\n夜翼他們衝進來之後才把人救下來。',likes:681,reposts:72,shares:118},
+    {handle:'citizen_404',avatar:'assets/citizen_404.jpg',text:'又一個自稱在現場的，現在網路上每個人都坐第一排是不是？',likes:203,reposts:15,shares:4},
+    {handle:'paperboy_7',avatar:'assets/paperboy_7.jpg',text:'昨天星球日報已經刊出現場照片了，不用在場才能看到喔！',likes:156,reposts:12,shares:3},
+    {handle:'tabloid_reader',avatar:'assets/tabloid_reader.jpg',text:'每一家報紙寫的版本都不一樣，我已經不知道該信誰了。',likes:139,reposts:7,shares:1},
+    {handle:'allen_watch',avatar:'assets/allen_watch.jpg',text:'相信英雄就好，他們不會無緣無故在公開場合抓走市長吧。',likes:281,reposts:23,shares:8},
+    {handle:'southside_auntie',avatar:'assets/southside_auntie.jpg',text:'蒙面義警想抓誰就抓誰，這樣還有人覺得很正常？',likes:91,reposts:4,shares:1},
+    {handle:'william_w',avatar:'assets/william_w.jpg',text:'現場還有警察，最後是警察把希爾帶走的，不是義警私刑。',likes:194,reposts:14,shares:4},
+    {handle:'david_question',avatar:'assets/david_question.jpg',text:'那些電話是記者打的，還是市民打的？\n市府什麼時候開記者會？',likes:133,reposts:6,shares:2},
     {handle:PROFILE.handle,avatar:PROFILE.avatar,isAuthor:true,text:'我目前沒有能夠公開說明的內容。',likes:347,reposts:28,shares:11},
-    {handle:'helen_home',avatar:'assets/avatar-3.svg',text:'辛苦了。',likes:224,reposts:18,shares:6},
-    {handle:'mia_afterfive',avatar:'assets/person-rain.svg',text:'也可能是市府要求所有人封口啊，她說了才會害到自己吧。',likes:148,reposts:9,shares:2},
-    {handle:'paul_cityhall',avatar:'assets/person-lin.svg',text:'如果事情涉及正在調查的案件，本來就不能隨便對外透露。',likes:172,reposts:11,shares:3},
-    {handle:'oldtown_resident',avatar:'assets/person-lin.svg',text:'先等調查結果吧，現在網路上連希爾已經認罪的謠言都有了。',likes:127,reposts:8,shares:2},
-    {handle:'thomson_g',avatar:'assets/person-chen.svg',text:'他好像的確已經在現場認罪了耶報導有寫。',likes:269,reposts:25,shares:9},
-    {handle:'martha_works',avatar:'assets/avatar-3.svg',text:'我不管，希爾無罪！',likes:101,reposts:6,shares:1},
-    {handle:'mr_brown_g',avatar:'assets/person-lin.svg',text:'留言區怎麼又打起來了，留友看。',likes:76,reposts:9,shares:2}
+    {handle:'helen_home',avatar:'assets/helen_home.jpg',text:'辛苦了。',likes:224,reposts:18,shares:6},
+    {handle:'mia_afterfive',avatar:'assets/mia.jpg',text:'也可能是市府要求所有人封口啊，她說了才會害到自己吧。',likes:148,reposts:9,shares:2},
+    {handle:'paul_cityhall',avatar:'assets/paul_cityhall.jpg',text:'如果事情涉及正在調查的案件，本來就不能隨便對外透露。',likes:172,reposts:11,shares:3},
+    {handle:'oldtown_resident',avatar:'assets/oldtown_resident.jpg',text:'先等調查結果吧，現在網路上連希爾已經認罪的謠言都有了。',likes:127,reposts:8,shares:2},
+    {handle:'thomson_g',avatar:'assets/thomson_g.jpg',text:'他好像的確已經在現場認罪了耶報導有寫。',likes:269,reposts:25,shares:9},
+    {handle:'martha_works',avatar:'assets/works.jpg',text:'我不管，希爾無罪！',likes:101,reposts:6,shares:1},
+    {handle:'mr_brown_g',avatar:'assets/mr_brown_g.jpg',text:'留言區怎麼又打起來了，留友看。',likes:76,reposts:9,shares:2}
   ]
 },
 
@@ -383,39 +383,39 @@ const POSTS=[
   likes:1328,reposts:117,shares:42,
   image:'assets/party.jpg',
   replies:[
-    {handle:'room_73',avatar:'assets/avatar-3.svg',text:'沒有想到市長是這樣的人。',likes:51,reposts:5,shares:1},
-    {handle:'gotham_daily',avatar:'assets/avatar-2.svg',text:'你是否知情市長私底下做的這些事？',likes:32,reposts:4,shares:1},
+    {handle:'room_73',avatar:'assets/room_73.jpg',text:'沒有想到市長是這樣的人。',likes:51,reposts:5,shares:1},
+    {handle:'gotham_daily',avatar:'assets/assets/GOTHAM.jpg',text:'你是否知情市長私底下做的這些事？',likes:32,reposts:4,shares:1},
     {handle:PROFILE.handle,avatar:PROFILE.avatar,isAuthor:true,text:'我不想回答這些事。',likes:138,reposts:9,shares:3},
-    {handle:'george_news',avatar:'assets/person-lin.svg',text:'現場現在一團亂，希爾市長剛剛被夜翼和紅頭罩攔下來了！',likes:892,reposts:146,shares:203},
-    {handle:'tabloid_reader',avatar:'assets/person-rain.svg',text:'真的假的？？我朋友說現場連羅賓都出現了。',likes:327,reposts:31,shares:12},
-    {handle:'allen_watch',avatar:'assets/person-chen.svg',text:'是真的，至少有三個人從宴會廳上方跳下來。\n好多英雄喔！',likes:614,reposts:88,shares:76},
-    {handle:'lucy_says',avatar:'assets/avatar-3.svg',text:'一群蒙面人闖進市府活動抓走民選市長，你們還在那邊歡呼？',likes:194,reposts:16,shares:5},
-    {handle:'william_w',avatar:'assets/person-chen.svg',text:'希爾當時手上有人質，不攔他難道站著看？',likes:353,reposts:29,shares:11},
-    {handle:'anna_daily',avatar:'assets/avatar-3.svg',text:'誰說是人質？影片根本看不清楚，只看到韋恩先生站在他旁邊。',likes:142,reposts:9,shares:2},
-    {handle:'mark_truth',avatar:'assets/person-lin.svg',text:'他拿槍抵著布魯斯・韋恩，這還不叫人質嗎？',likes:428,reposts:42,shares:16},
-    {handle:'martha_works',avatar:'assets/avatar-3.svg',text:'那支槍也可能不是希爾市長的！現場這麼亂，誰都能塞給他！',likes:116,reposts:7,shares:1},
-    {handle:'jack_in_city',avatar:'assets/person-chen.svg',text:'都已經親眼看到他拿著了，支持者還能說是別人塞的，民主黨支持者腦子有洞吧。',likes:311,reposts:26,shares:8},
-    {handle:'kate_k',avatar:'assets/person-rain.svg',text:'新聞上爆的那些料不是真的吧？',likes:163,reposts:10,shares:3},
-    {handle:'citizen_404',avatar:'assets/person-rain.svg',text:'你們高譚真亂。',likes:295,reposts:34,shares:9},
+    {handle:'george_news',avatar:'assets/george_news.jpg',text:'現場現在一團亂，希爾市長剛剛被夜翼和紅頭罩攔下來了！',likes:892,reposts:146,shares:203},
+    {handle:'tabloid_reader',avatar:'assets/tabloid_reader.jpg',text:'真的假的？？我朋友說現場連羅賓都出現了。',likes:327,reposts:31,shares:12},
+    {handle:'allen_watch',avatar:'assets/allen_watch.jpg',text:'是真的，至少有三個人從宴會廳上方跳下來。\n好多英雄喔！',likes:614,reposts:88,shares:76},
+    {handle:'lucy_says',avatar:'assets/lucy_says.jpg',text:'一群蒙面人闖進市府活動抓走民選市長，你們還在那邊歡呼？',likes:194,reposts:16,shares:5},
+    {handle:'william_w',avatar:'assets/william_w.jpg',text:'希爾當時手上有人質，不攔他難道站著看？',likes:353,reposts:29,shares:11},
+    {handle:'anna_552',avatar:'assets/anna_552.jpg',text:'誰說是人質？影片根本看不清楚，只看到韋恩先生站在他旁邊。',likes:142,reposts:9,shares:2},
+    {handle:'mark_truth',avatar:'assets/mark_truth.jpg',text:'他拿槍抵著布魯斯・韋恩，這還不叫人質嗎？',likes:428,reposts:42,shares:16},
+    {handle:'martha_works',avatar:'assets/works.jpg',text:'那支槍也可能不是希爾市長的！現場這麼亂，誰都能塞給他！',likes:116,reposts:7,shares:1},
+    {handle:'jack_in_city',avatar:'assets/jack_in_city.jpg',text:'都已經親眼看到他拿著了，支持者還能說是別人塞的，民主黨支持者腦子有洞吧。',likes:311,reposts:26,shares:8},
+    {handle:'kate_k',avatar:'assets/kate_k.jpg',text:'新聞上爆的那些料不是真的吧？',likes:163,reposts:10,shares:3},
+    {handle:'citizen_404',avatar:'assets/citizen_404.jpg',text:'你們高譚真亂。',likes:295,reposts:34,shares:9},
     {handle:'daily_Planet',avatar:'assets/Planet01.jpg',text:'我們報社記者就在現場，希爾確實被警方帶走了，今晚就會有現場完整報導。',likes:248,reposts:22,shares:7},
-    {handle:'nick_no_filter',avatar:'assets/person-rain.svg',text:'被帶走調查不等於有罪好嗎。\n拜託大家先分清楚逮捕和定罪。',likes:271,reposts:19,shares:6},
-    {handle:'thomson_g',avatar:'assets/person-chen.svg',text:'都奈橋偷工減料如果出事會害多少人？？現在證據都被報導出來了還想裝無辜？',likes:387,reposts:37,shares:14},
-    {handle:'oldtown_resident',avatar:'assets/person-lin.svg',text:'橋一蓋完就說有偷工減料，這些證據誰知道是真是假？？？',likes:155,reposts:12,shares:3},
-    {handle:'paul_cityhall',avatar:'assets/person-lin.svg',text:'工程款挪用被爆料跟橋蓋好多久是兩件事吧？',likes:306,reposts:25,shares:8},
-    {handle:'mia_afterfive',avatar:'assets/person-rain.svg',text:'希爾上任後明明做了那麼多建設，現在所有人都當他是過街老鼠。',likes:173,reposts:11,shares:2},
-    {handle:'jenny_j',avatar:'assets/person-rain.svg',text:'做建設花的是納稅人的錢，不是希爾自己掏腰包耶，別把他說得像慈善家一樣。',likes:344,reposts:32,shares:10},
-    {handle:'southside_auntie',avatar:'assets/avatar-3.svg',text:'我只知道希爾上任後治安真的有變好。',likes:124,reposts:6,shares:1},
-    {handle:'david_question',avatar:'assets/person-chen.svg',text:'可是抓他的不就是每天晚上在處理治安問題的那些人嗎？',likes:283,reposts:21,shares:6},
-    {handle:'sarah_here',avatar:'assets/avatar-3.svg',text:'莉莉絲你是晚會的工作人員吧？市長被抓之前有沒有什麼異常？',likes:237,reposts:17,shares:5},
+    {handle:'nick_no_filter',avatar:'assets/nick_no_filter.jpg',text:'被帶走調查不等於有罪好嗎。\n拜託大家先分清楚逮捕和定罪。',likes:271,reposts:19,shares:6},
+    {handle:'thomson_g',avatar:'assets/thomson_g.jpg',text:'都奈橋偷工減料如果出事會害多少人？？現在證據都被報導出來了還想裝無辜？',likes:387,reposts:37,shares:14},
+    {handle:'oldtown_resident',avatar:'assets/oldtown_resident.jpg',text:'橋一蓋完就說有偷工減料，這些證據誰知道是真是假？？？',likes:155,reposts:12,shares:3},
+    {handle:'paul_cityhall',avatar:'assets/paul_cityhall.jpg',text:'工程款挪用被爆料跟橋蓋好多久是兩件事吧？',likes:306,reposts:25,shares:8},
+    {handle:'mia_afterfive',avatar:'assets/mia.jpg',text:'希爾上任後明明做了那麼多建設，現在所有人都當他是過街老鼠。',likes:173,reposts:11,shares:2},
+    {handle:'jenny_j',avatar:'assets/jenny_j.jpg',text:'做建設花的是納稅人的錢，不是希爾自己掏腰包耶，別把他說得像慈善家一樣。',likes:344,reposts:32,shares:10},
+    {handle:'southside_auntie',avatar:'assets/southside_auntie.jpg',text:'我只知道希爾上任後治安真的有變好。',likes:124,reposts:6,shares:1},
+    {handle:'david_question',avatar:'assets/david_question.jpg',text:'可是抓他的不就是每天晚上在處理治安問題的那些人嗎？',likes:283,reposts:21,shares:6},
+    {handle:'sarah_here',avatar:'assets/sarah_here.jpg',text:'莉莉絲你是晚會的工作人員吧？市長被抓之前有沒有什麼異常？',likes:237,reposts:17,shares:5},
     {handle:PROFILE.handle,avatar:PROFILE.avatar,isAuthor:true,text:'請恕我無法回答。',likes:292,reposts:23,shares:9},
-    {handle:'helen_home',avatar:'assets/avatar-3.svg',text:'「無法回答」跟「不知情」不一樣喔。',likes:319,reposts:28,shares:8},
-    {handle:'anna_daily',avatar:'assets/avatar-3.svg',text:'你們不要一直逼問她，她又不是警察。',likes:168,reposts:10,shares:2},
-    {handle:'jack_in_city',avatar:'assets/person-chen.svg',text:'她是市府幕僚，也是晚會工作人員，記者問她很正常吧。',likes:226,reposts:15,shares:4},
-    {handle:'lucy_says',avatar:'assets/avatar-3.svg',text:'正常採訪跟跑到私人帳號圍攻是兩回事啊。',likes:192,reposts:13,shares:3},
-    {handle:'mr_brown_g',avatar:'assets/person-lin.svg',text:'原本只是周年晚會，最後變成這樣，我今晚真的沒白來。',likes:481,reposts:49,shares:21},
-    {handle:'george_news',avatar:'assets/person-lin.svg',text:'更新：布魯斯・韋恩已經被救護人員帶離現場，看起來沒有受傷。',likes:734,reposts:103,shares:89},
-    {handle:'tabloid_reader',avatar:'assets/person-rain.svg',text:'韋恩先生又被綁架了嗎？他到底為什麼每次參加活動都會出事？？',likes:516,reposts:61,shares:34},
-    {handle:'citizen_404',avatar:'assets/person-rain.svg',text:'高譚首富的日常行程：慈善晚會、發表演說、被綁架。',likes:917,reposts:126,shares:52}
+    {handle:'helen_home',avatar:'assets/helen_home.jpg',text:'「無法回答」跟「不知情」不一樣喔。',likes:319,reposts:28,shares:8},
+    {handle:'anna_552',avatar:'assets/anna_552.jpg',text:'你們不要一直逼問她，她又不是警察。',likes:168,reposts:10,shares:2},
+    {handle:'jack_in_city',avatar:'assets/jack_in_city.jpg',text:'她是市府幕僚，也是晚會工作人員，記者問她很正常吧。',likes:226,reposts:15,shares:4},
+    {handle:'lucy_says',avatar:'assets/lucy_says.jpg',text:'正常採訪跟跑到私人帳號圍攻是兩回事啊。',likes:192,reposts:13,shares:3},
+    {handle:'mr_brown_g',avatar:'assets/mr_brown_g.jpg',text:'原本只是周年晚會，最後變成這樣，我今晚真的沒白來。',likes:481,reposts:49,shares:21},
+    {handle:'george_news',avatar:'assets/george_news.jpg',text:'更新：布魯斯・韋恩已經被救護人員帶離現場，看起來沒有受傷。',likes:734,reposts:103,shares:89},
+    {handle:'tabloid_reader',avatar:'assets/tabloid_reader.jpg',text:'韋恩先生又被綁架了嗎？他到底為什麼每次參加活動都會出事？？',likes:516,reposts:61,shares:34},
+    {handle:'citizen_404',avatar:'assets/citizen_404.jpg',text:'高譚首富的日常行程：慈善晚會、發表演說、被綁架。',likes:917,reposts:126,shares:52}
   ]
 },
 
@@ -426,7 +426,7 @@ const POSTS=[
     text:'距離晚宴還有兩天。\n座位表今天又改了一次。',
     likes:845,reposts:74,shares:20,
     replies:[
-      {handle:'passing_by',avatar:'assets/avatar-2.svg',text:'座位到底有多難排？',likes:28,reposts:2,shares:0},
+      {handle:'passing_by',avatar:'assets/passing.jpg',text:'座位到底有多難排？',likes:28,reposts:2,shares:0},
       {handle:PROFILE.handle,avatar:PROFILE.avatar,isAuthor:true,text:'你不知道一張桌子可以牽涉多少人的自尊。',likes:113,reposts:8,shares:3}
     ]
   },
@@ -451,7 +451,7 @@ const POSTS=[
     text:'今天市長的公開行程結束得比預定早半小時！圓滿達成提早回家！\n',
     likes:739,reposts:62,shares:17,
     replies:[
-      {handle:'room_73',avatar:'assets/avatar-3.svg',text:'恭喜！',likes:21,reposts:1,shares:0,ownerLiked:true},
+      {handle:'room_73',avatar:'assets/room_73.jpg',text:'恭喜！',likes:21,reposts:1,shares:0,ownerLiked:true},
       {handle:PROFILE.handle,avatar:PROFILE.avatar,isAuthor:true,text:'好累！',likes:63,reposts:3,shares:1}
     ]
   },
@@ -463,7 +463,7 @@ const POSTS=[
     text:'今天終於收到所有人的周年晚宴邀請答覆了！布魯斯韋恩堂堂登場！',
     likes:624,reposts:48,shares:12,
     replies:[
-      {handle:'gotham_daily',avatar:'assets/avatar-2.svg',text:'天啊，高譚甜心欸，他去晚宴幹什麼？',likes:25,reposts:2,shares:0},
+      {handle:'summer058',avatar:'assets/summer058.jpg',text:'天啊，高譚甜心欸，他去晚宴幹什麼？',likes:25,reposts:2,shares:0},
       {handle:PROFILE.handle,avatar:PROFILE.avatar,isAuthor:true,text:'高譚甜心、晚宴，多麼搭配的兩個詞。',likes:97,reposts:7,shares:2}
     ]
   },
@@ -475,7 +475,7 @@ const POSTS=[
     text:'今年第一場大型活動開始準備！',
     likes:471,reposts:36,shares:8,
     replies:[
-      {handle:'passing_by',avatar:'assets/avatar-2.svg',text:'加油！',likes:19,reposts:1,shares:0,ownerLiked:true},
+      {handle:'passing_by',avatar:'assets/passing.jpg',text:'加油！',likes:19,reposts:1,shares:0,ownerLiked:true},
       {handle:PROFILE.handle,avatar:PROFILE.avatar,isAuthor:true,text:'謝謝你～',likes:52,reposts:3,shares:1}
     ]
   },
@@ -487,7 +487,7 @@ const POSTS=[
     text:'新年第一個工作日。\n市長說今年會是非常重要的一年。\n我看過第一季的行程表了，滿滿當當的。\n。',
     likes:813,reposts:63,shares:18,
     replies:[
-      {handle:'room_73',avatar:'assets/avatar-3.svg',text:'天啊，感覺就很累。',likes:46,reposts:3,shares:1},
+      {handle:'room_73',avatar:'assets/room_73.jpg',text:'天啊，感覺就很累。',likes:46,reposts:3,shares:1},
       {handle:PROFILE.handle,avatar:PROFILE.avatar,isAuthor:true,text:'我相信今年會很忙。',likes:103,reposts:7,shares:2}
     ]
   },
@@ -512,7 +512,7 @@ const POSTS=[
     text:'分享一下市長的趣事，他今天進辦公室的時候才發現他鞋子左右穿反了。',
     likes:902,reposts:79,shares:22,
     replies:[
-      {handle:'rainy_window',avatar:'assets/avatar-2.svg',text:'這樣穿不會不舒服嗎？',likes:29,reposts:2,shares:0},
+      {handle:'rainy_window',avatar:'assets/rainy_window.jpg',text:'這樣穿不會不舒服嗎？',likes:29,reposts:2,shares:0},
       {handle:PROFILE.handle,avatar:PROFILE.avatar,isAuthor:true,text:'顯然他累到沒辦法意識到不舒服這件事。',likes:81,reposts:6,shares:2}
     ]
   },
@@ -524,7 +524,7 @@ const POSTS=[
     text:'今天和市長去社區活動。\n小朋友問他是不是每天都穿西裝。\n那確實',
     likes:776,reposts:54,shares:14,
     replies:[
-      {handle:'room_73',avatar:'assets/avatar-3.svg',text:'那妳呢？',likes:15,reposts:1,shares:0},
+      {handle:'room_73',avatar:'assets/room_73.jpg',text:'那妳呢？',likes:15,reposts:1,shares:0},
       {handle:PROFILE.handle,avatar:PROFILE.avatar,isAuthor:true,text:'我每天都在想今天要不要穿西裝。',likes:48,reposts:3,shares:1}
     ]
   },
@@ -536,7 +536,7 @@ const POSTS=[
     text:'又被貓咬了。',
     likes:641,reposts:45,shares:11,
     replies:[
-      {handle:'gotham_daily',avatar:'assets/avatar-2.svg',text:'你家貓蠻兇的。',likes:24,reposts:2,shares:0},
+      {handle:'summer058',avatar:'assets/summer058.jpg',text:'你家貓蠻兇的。',likes:24,reposts:2,shares:0},
       {handle:PROFILE.handle,avatar:PROFILE.avatar,isAuthor:true,text:'又凶又胖。',likes:63,reposts:4,shares:1}
     ]
   },
@@ -550,7 +550,7 @@ const POSTS=[
     clueTitle:'希爾市長的生日',
     clue:'希爾的生日是8月31日。',
     replies:[
-      {handle:'room_73',avatar:'assets/avatar-3.svg',text:'希爾市長生日快樂！',likes:18,reposts:24,shares:1,ownerLiked:true},
+      {handle:'room_73',avatar:'assets/room_73.jpg',text:'希爾市長生日快樂！',likes:18,reposts:24,shares:1,ownerLiked:true},
       {handle:'muchen_26',avatar:'assets/person-chen.svg',text:'希爾生日快樂！你也辛苦了。',likes:16,reposts:17,shares:1,ownerLiked:true}
     ]
   },
@@ -575,7 +575,7 @@ const POSTS=[
 	image:'assets/cat01.jpg',
     likes:882,reposts:71,shares:20,
     replies:[
-      {handle:'passing_by',avatar:'assets/avatar-2.svg',text:'好可愛',likes:37,reposts:3,shares:1},
+      {handle:'passing_by',avatar:'assets/passing.jpg',text:'好可愛',likes:37,reposts:3,shares:1},
       {handle:PROFILE.handle,avatar:PROFILE.avatar,isAuthor:true,text:'他剛剛又抓我了啦。',likes:116,reposts:8,shares:3}
     ]
   },
@@ -587,7 +587,7 @@ const POSTS=[
     text:'今天是都奈橋公共建設說明會。',
     likes:947,reposts:84,shares:24,
     replies:[
-      {handle:'room_73',avatar:'assets/avatar-3.svg',text:'我有看到直播',likes:26,reposts:1,shares:0},
+      {handle:'room_73',avatar:'assets/room_73.jpg',text:'我有看到直播',likes:26,reposts:1,shares:0},
       {handle:PROFILE.handle,avatar:PROFILE.avatar,isAuthor:true,text:'唉。',likes:129,reposts:9,shares:3},
 	  {handle:'corner_of_paper',avatar:'assets/person-unknown.svg',text:'所以都奈橋到底要蓋多久？已經蓋五年了！',likes:26,reposts:1,shares:0},
     ]
@@ -612,7 +612,7 @@ const POSTS=[
     text:'年底整理市長今年的公開活動。\n會議、視察、剪綵、演講，共四百二十七場，這還不含質詢和市政事務，不愧是希爾市長。',
     likes:529,reposts:37,shares:9,
     replies:[
-      {handle:'gotham_daily',avatar:'assets/avatar-2.svg',text:'市長好強喔。',likes:31,reposts:2,shares:0},
+      {handle:'summer058',avatar:'assets/summer058.jpg',text:'市長好強喔。',likes:31,reposts:2,shares:0},
       {handle:PROFILE.handle,avatar:PROFILE.avatar,isAuthor:true,text:'還有機場。忘了說。',likes:44,reposts:2,shares:1}
     ]
   },
@@ -639,7 +639,7 @@ const POSTS=[
     text:'市長今天從早上八點一路跑到晚上九點。\n大家都在車上睡著了。',
     likes:614,reposts:48,shares:12,
     replies:[
-      {handle:'room_73',avatar:'assets/avatar-3.svg',text:'市長有睡嗎？',likes:28,reposts:2,shares:0},
+      {handle:'room_73',avatar:'assets/room_73.jpg',text:'市長有睡嗎？',likes:28,reposts:2,shares:0},
       {handle:PROFILE.handle,avatar:PROFILE.avatar,isAuthor:true,text:'他很努力抓時間休息啦。',likes:66,reposts:4,shares:1}
     ]
   },
@@ -651,7 +651,7 @@ const POSTS=[
     text:'收到現場傳過來的一些文件，看來這不是只是簡單修改一下法案能解決的事情。',
     likes:483,reposts:39,shares:9,
     replies:[
-      {handle:'passing_by',avatar:'assets/avatar-2.svg',text:'市政工作感覺好累。',likes:22,reposts:1,shares:0},
+      {handle:'passing_by',avatar:'assets/passing.jpg',text:'市政工作感覺好累。',likes:22,reposts:1,shares:0},
       {handle:PROFILE.handle,avatar:PROFILE.avatar,isAuthor:true,text:'但蠻開心的。',likes:58,reposts:3,shares:1}
     ]
   },
@@ -676,7 +676,7 @@ const POSTS=[
     likes:298,reposts:19,shares:4,
 	image:'assets/HILL01.jpg',
     replies:[
-      {handle:'room_73',avatar:'assets/avatar-3.svg',text:'哇這個光線很棒欸。',likes:17,reposts:1,shares:0,ownerLiked:true},
+      {handle:'room_73',avatar:'assets/room_73.jpg',text:'哇這個光線很棒欸。',likes:17,reposts:1,shares:0,ownerLiked:true},
       {handle:PROFILE.handle,avatar:PROFILE.avatar,isAuthor:true,text:'我也這麼認為。',likes:31,reposts:1,shares:0}
     ]
   },
@@ -690,7 +690,7 @@ const POSTS=[
     clue:'脆脆的剛上線，莉莉絲就辦了一個帳號，原來她是希爾的幕僚。',
     likes:341,reposts:26,shares:6,
     replies:[
-      {handle:'passing_by',avatar:'assets/avatar-2.svg',text:'莉莉絲也辦脆啦。',likes:14,reposts:1,shares:0},
+      {handle:'passing_by',avatar:'assets/passing.jpg',text:'莉莉絲也辦脆啦。',likes:14,reposts:1,shares:0},
       {handle:PROFILE.handle,avatar:PROFILE.avatar,isAuthor:true,text:'對啊，現在還在熟悉脆的操作。',likes:43,reposts:2,shares:0}
     ]
   }
@@ -714,7 +714,7 @@ const REPLY_POSTS=[
 	replies:[
 	 {
 		handle:'gotham_watch',
-		avatar:'assets/person-chen.svg',
+		avatar:'assets/gotham_watc.jpg',
 		text:'民主黨現在都自認是神了？',
 		likes:21,reposts:5,shares:1,
 	 }
@@ -732,12 +732,12 @@ const REPOST_POSTS=[
 		text:'這篇分析寫得滿準的。',likes:18,reposts:4,shares:2}]},
 	{
     id:'repost2',isRepost:true,
-    handle:'sophie_park',avatar:'assets/avatar-3.svg',time:'1天前',
+    handle:'sophie_park',avatar:'assets/sophie_park.jpg',time:'1天前',
     text:'剛搬來高譚三個月，房租便宜是真的\n現在知道為什麼了',
     likes:5524,reposts:1248,shares:4492,
     replies:[{handle:'just_here_for_this',avatar:'assets/person-lin.svg',
 		text:'剛在鑽石區買個熱狗，後面巷子突然傳來幾聲槍響跟警報器爆音，\n老闆手都沒抖，繼續夾酸菜，還順便問我：要不要加辣？加辣加五塊喔😎',likes:18,reposts:4,shares:2},
-		{handle:'thomson_g',avatar:'assets/person-chen.svg',
+		{handle:'thomson_g',avatar:'assets/thomson_g.jpg',
 		text:'我受夠了你們高譚人。',likes:23,reposts:0,shares:0}]},
 	{id:'repost3',handle:'edge_of_city',avatar:'assets/avatar-2.svg',time:'3天前',text:'【阿卡漢內部消息整理】\n根據市警局洩漏的預算報告，阿卡漢精神病院上個月光是重置安保感應系統與高壓隔離鐵門就耗費了近百萬美元\n諷刺的是，報告最後一頁特別註記：由於建築結構過於古老且多次遭受結構性破壞，目前絕大多數高風險病房的防護力降到了歷史最低點\n阿卡漢到底是在關人，還是給那些神經病一個度假勝地？',likes:73,reposts:6,shares:2,replies:[]},
 	{id:'repost4',handle:'gotham_job_hunter',avatar:'assets/person-unknown.svg',time:'5天前',text:'高譚打工人求解 🙋‍♂️\n最近打算換工作，想問一下各大反派幫派的薪水跟福利到底哪家比較好？',likes:86,reposts:13,shares:4,replies:[
@@ -877,25 +877,25 @@ const ALT_POSTS=[
   }
 ];
 const ACTIVITY_POSTS=[
- {id:'a1',handle:'gotham_transit',avatar:'assets/person-chen.svg',time:'18分鐘',text:'中央線因號誌異常延誤約40分鐘。',likes:42,reposts:8,shares:3,replies:[]},
- {id:'a2',handle:'before_rainstops',avatar:'assets/person-rain.svg',time:'1小時',text:'今晚的高譚下雨了。',likes:17,reposts:1,shares:0,replies:[]},
- {id:'a3',handle:'gotham_ledger',avatar:'assets/person-lin.svg',time:'2小時',text:'一天一張阿卡漢門鎖照片，直到高譚市政府把防盜系統換掉\nDay 47\n到底是誰給小丑湯匙的？',image:'assets/content.png',likes:318,reposts:91,shares:36,replies:[{handle:'gotham_watch',avatar:'assets/person-chen.svg',text:'等一下，這篇貼文的意思是\n\n小丑又又又又逃出來了？',likes:55,reposts:12,shares:4}]},
- {id:'a4',handle:'coffee_in_gotham',avatar:'assets/avatar-2.svg',time:'4小時',text:'新品冬季限定草莓奶凍泡泡紅茶預計下周開始供應喔！',likes:73,reposts:6,shares:2,replies:[]},
- {id:'a5',handle:'gotham_history_archive',avatar:'assets/person-unknown.svg',time:'5小時',text:'大家還有人記得大概十年前的爆炸案嗎？',clueTitle:'恭喜你發現了一則廣告',clue:'到底誰會在ARG裡打廣告啊？\n但希望你來參加茶會喔！',likes:86,reposts:13,shares:4,replies:[
-   {handle:'passing_by',avatar:'assets/avatar-2.svg',text:'哪次？誰做的？',likes:12,reposts:0,shares:0},
-   {handle:'southside_local',avatar:'assets/person-rain.svg',text:'小丑炸的。',likes:19,reposts:1,shares:0},
+ {id:'a1',handle:'gotham_transit',avatar:'assets/gotham_transit.jpg',time:'18分鐘',text:'中央線因號誌異常延誤約40分鐘。',likes:42,reposts:8,shares:3,replies:[]},
+ {id:'a2',handle:'before_rainstops',avatar:'assets/before_rainstops.jpg',time:'1小時',text:'今晚的高譚下雨了。',likes:17,reposts:1,shares:0,replies:[]},
+ {id:'a3',handle:'gotham_ledger',avatar:'assets/gotham_ledger.jpg',time:'2小時',text:'一天一張阿卡漢門鎖照片，直到高譚市政府把防盜系統換掉\nDay 47\n到底是誰給小丑湯匙的？',image:'assets/content.png',likes:318,reposts:91,shares:36,replies:[{handle:'gotham_watch',avatar:'assets/gotham_watc.jpg',text:'等一下，這篇貼文的意思是\n\n小丑又又又又逃出來了？',likes:55,reposts:12,shares:4}]},
+ {id:'a4',handle:'coffee_in_gotham',avatar:'assets/coffee_in_gotham.jpg',time:'4小時',text:'新品冬季限定草莓奶凍泡泡紅茶預計下周開始供應喔！',likes:73,reposts:6,shares:2,replies:[]},
+ {id:'a5',handle:'gotham_history_archive',avatar:'assets/history.jpg',time:'5小時',text:'大家還有人記得大概十年前的爆炸案嗎？',clueTitle:'恭喜你發現了一則廣告',clue:'到底誰會在ARG裡打廣告啊？\n但希望你來參加茶會喔！',likes:86,reposts:13,shares:4,replies:[
+   {handle:'passing_by',avatar:'assets/passing.jpg',text:'哪次？誰做的？',likes:12,reposts:0,shares:0},
+   {handle:'southside_local',avatar:'assets/southside_local.jpg',text:'小丑炸的。',likes:19,reposts:1,shares:0},
    {handle:'night_shift',avatar:'assets/avatar-2.svg',text:'哪次，靠北，小丑炸了好幾次。',likes:44,reposts:3,shares:1},
-   {handle:'old_newspaper',avatar:'assets/person-rain.svg',text:'炸阿卡漢監獄的那次啦！',likes:28,reposts:2,shares:0},
-   {handle:'rainy_window',avatar:'assets/person-rain.svg',text:'有炸過阿卡漢監獄喔！？',likes:8,reposts:0,shares:0},
+   {handle:'old_newspaper',avatar:'assets/old_newspaper.jpg',text:'炸阿卡漢監獄的那次啦！',likes:28,reposts:2,shares:0},
+   {handle:'rainy_window',avatar:'assets/rainy_window.jpg',text:'有炸過阿卡漢監獄喔！？',likes:8,reposts:0,shares:0},
    {handle:'no_news_today',avatar:'assets/avatar-3.svg',text:'阿卡漢監獄現在還在嗎？',likes:11,reposts:0,shares:0},
-   {handle:'gotham_watch',avatar:'assets/person-chen.svg',text:'欸大家！我找到當時的報導！',link:'https://www.facebook.com/profile.php?id=61579296969600',likes:53,reposts:7,shares:4}
+   {handle:'gotham_watch',avatar:'assets/gotham_watc.jpg',text:'欸大家！我找到當時的報導！',link:'https://www.facebook.com/profile.php?id=61579296969600',likes:53,reposts:7,shares:4}
  ]},
- {id:'a7',handle:'old_mack_g',avatar:'assets/person-chen.svg',time:'1天前',text:'冰山老闆超誇張 剛剛布魯斯韋恩來跳舞被他趕出去欸XDD!',likes:42,reposts:8,shares:3,replies:[]}
+ {id:'a7',handle:'old_mack_g',avatar:'assets/old_mack_g.jpg',time:'1天前',text:'冰山老闆超誇張 剛剛布魯斯韋恩來跳舞被他趕出去欸XDD!',likes:42,reposts:8,shares:3,replies:[]}
 ];
 const CHATS=[
- {id:'friend1',name:'小安',handle:'an_an',avatar:'assets/person-rain.svg',time:'下午 6:42',preview:'週末還要去看展嗎？',messages:[['in','週末還要去看展嗎？'],['out','要啊，時間不變。'],['in','好，那我到捷運站再找你。']]},
- {id:'friend2',name:'艾利',handle:'ALY_1204',avatar:'assets/person-lin.svg',time:'昨天',preview:'你有看到那個貼文嗎？',messages:[['in','你有看到那個貼文嗎？有狗遺失，飼主懸賞十萬的那個'],['out','剛看到。怎麼了？'],['in','在我家附近，我有點想去找看看，哈。']]},
- {id:'group',name:'週五桌遊團',handle:'friday_games',avatar:'assets/person-chen.svg',time:'星期一',preview:'Mika：這週缺一個人',messages:[['in','Mika：這週缺一個人，有誰能帶朋友？'],['out','我再問問看。'],['in','Joe：記得不要再遲到了。']]}
+ {id:'friend1',name:'小安',handle:'an_an',avatar:'assets/an_an.jpg',time:'下午 6:42',preview:'週末還要去看展嗎？',messages:[['in','週末還要去看展嗎？'],['out','要啊，時間不變。'],['in','好，那我到捷運站再找你。']]},
+ {id:'friend2',name:'艾利',handle:'ALY_1204',avatar:'assets/ALY_1204.jpg',time:'昨天',preview:'你有看到那個貼文嗎？',messages:[['in','你有看到那個貼文嗎？有狗遺失，飼主懸賞十萬的那個'],['out','剛看到。怎麼了？'],['in','在我家附近，我有點想去找看看，哈。']]},
+ {id:'group',name:'週五桌遊團',handle:' ',avatar:'assets/GAMEgroup.jpg',time:'星期一',preview:'Mika：這週缺一個人',messages:[['in','Mika：這週缺一個人，有誰能帶朋友？'],['out','我再問問看。'],['in','Joe：記得不要再遲到了。']]}
 ];
 const ALL_POSTS=[
   ...new Map(
