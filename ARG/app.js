@@ -134,7 +134,7 @@ const NEWS_RECENT_POSTS=[
     avatar:NEWS_PROFILE.avatar,
     time:'2026-9-8',
     headline:'中央線號誌異常　部分班次延誤',
-    text:'高譚捷運中央線今日傍晚發生號誌異常，部分班次延誤約十五分鐘。交通局表示系統已陸續恢復，仍請旅客預留候車時間。',
+    text:'高譚捷運中央線今日傍晚發生號誌異常，部分班次延誤約四十分鐘。交通局表示系統已陸續恢復，仍請旅客預留候車時間。',
     likes:1268,reposts:184,shares:63,
     replies:[]
   },
@@ -194,7 +194,7 @@ const NEWS_RECENT_POSTS=[
     avatar:NEWS_PROFILE.avatar,
     time:'2026-9-3',
     headline:'市議會審查明年度預算　治安與交通支出成焦點',
-    text:'高譚市議會今日開始審查明年度總預算，治安、公共交通及舊城區基礎建設支出成為本次會期主要討論焦點。',
+    text:'高譚市議會預計於今日開始審查今年度總預算，治安、公共交通及舊城區基礎建設支出成為本次會期主要討論話題。在野黨欲凍結項目將成矚目焦點。',
     likes:2318,reposts:486,shares:173,
     replies:[]
   },
@@ -877,11 +877,24 @@ const ALT_POSTS=[
   }
 ];
 const ACTIVITY_POSTS=[
- {id:'a1',handle:'gotham_transit',avatar:'assets/gotham_transit.jpg',time:'18分鐘',text:'中央線因號誌異常延誤約40分鐘。',likes:42,reposts:8,shares:3,replies:[]},
+ {id:'a1',handle:'gotham_transit',avatar:'assets/gotham_transit.jpg',time:'18分鐘',text:'中央線因號誌異常延誤約40分鐘。',likes:42,reposts:8,shares:3,replies:[
+  {handle:'dont_wanna_work',avatar:'assets/person-rain.svg',text:'很好，我今天又要因為高譚捷運遲到了。',likes:37,reposts:3,shares:1},
+  {handle:'seven_thirty',avatar:'assets/avatar-3.svg',text:'又來！？？？？',likes:82,reposts:9,shares:2},
+  {handle:'martha_works',avatar:'assets/works.jpg',text:'尖峰時間出這種問題到底要不要讓人回家？？？',likes:61,reposts:5,shares:1},
+  {handle:'r_after_work',avatar:'assets/avatar-2.svg',text:'我要死在月台上了',likes:46,reposts:4,shares:0},
+  {handle:'paper_cup_01',avatar:'assets/avatar-3.svg',text:'我手上的咖啡都喝完了，車還沒來。',likes:73,reposts:6,shares:2},
+  {handle:'anna_in_gotham',avatar:'assets/person-rain.svg',text:'可以說一下目前卡在哪一站嗎？車廂裡完全沒有廣播。',likes:29,reposts:2,shares:0},
+  {handle:'old_gotham_resident',avatar:'assets/person-chen.svg',text:'每次都是號誌異常，到底什麼時候才要把設備換掉？',likes:94,reposts:13,shares:4},
+  {handle:'mia_afterfive',avatar:'assets/mia.jpg',text:'我只想準時回家吃飯，這個要求在高譚很過分嗎？',likes:108,reposts:11,shares:3},
+  {handle:'night_shift',avatar:'assets/avatar-2.svg',text:'夜班還沒開始，我已經想請假了。',likes:41,reposts:3,shares:1},
+  {handle:'gotham_citizen_a',avatar:'assets/person-lin.svg',text:'高譚市民每天通勤都像在抽隨機事件卡，交通癱瘓，暫停移動一回合是吧。',likes:135,reposts:19,shares:6},
+  {handle:'emily_gotham',avatar:'assets/avatar-3.svg',text:'我真的要瘋了',likes:88,reposts:10,shares:3},
+  {handle:'mr_brown_g',avatar:'assets/mr_brown_g.jpg',text:'朋友們出門注意一下',likes:53,reposts:6,shares:1}
+]},
  {id:'a2',handle:'before_rainstops',avatar:'assets/before_rainstops.jpg',time:'1小時',text:'今晚的高譚下雨了。',likes:17,reposts:1,shares:0,replies:[]},
  {id:'a3',handle:'gotham_ledger',avatar:'assets/gotham_ledger.jpg',time:'2小時',text:'一天一張阿卡漢門鎖照片，直到高譚市政府把防盜系統換掉\nDay 47\n到底是誰給小丑湯匙的？',image:'assets/content.png',likes:318,reposts:91,shares:36,replies:[{handle:'gotham_watch',avatar:'assets/gotham_watc.jpg',text:'等一下，這篇貼文的意思是\n\n小丑又又又又逃出來了？',likes:55,reposts:12,shares:4}]},
  {id:'a4',handle:'coffee_in_gotham',avatar:'assets/coffee_in_gotham.jpg',time:'4小時',text:'新品冬季限定草莓奶凍泡泡紅茶預計下周開始供應喔！',likes:73,reposts:6,shares:2,replies:[]},
- {id:'a5',handle:'gotham_history_archive',avatar:'assets/history.jpg',time:'5小時',text:'大家還有人記得大概十年前的爆炸案嗎？',clueTitle:'恭喜你發現了一則廣告',clue:'到底誰會在ARG裡打廣告啊？\n但希望你來參加茶會喔！',likes:86,reposts:13,shares:4,replies:[
+ {id:'a5',handle:'gotham_history_archive',avatar:'assets/history.jpg',time:'5小時',text:'大家還有人記得大概八年前的爆炸案嗎？',clueTitle:'恭喜你發現了一則廣告',clue:'到底誰會在ARG裡打廣告啊？\n但希望你來參加茶會喔！',likes:86,reposts:13,shares:4,replies:[
    {handle:'passing_by',avatar:'assets/passing.jpg',text:'哪次？誰做的？',likes:12,reposts:0,shares:0},
    {handle:'southside_local',avatar:'assets/southside_local.jpg',text:'小丑炸的。',likes:19,reposts:1,shares:0},
    {handle:'night_shift',avatar:'assets/avatar-2.svg',text:'哪次，靠北，小丑炸了好幾次。',likes:44,reposts:3,shares:1},
@@ -912,29 +925,38 @@ const ALL_POSTS=[
     ].map(post=>[post.id,post])
   ).values()
 ];
-const CLUES=ALL_POSTS.flatMap(p=>{
-  if(Array.isArray(p.clues)){
-    return p.clues
-      .filter(c=>String(c.title||'').trim()&&String(c.text||'').trim())
-      .map((c,i)=>({
-        id:`${p.id}-clue-${i}`,
+const CLUES=[
+  ...ALL_POSTS.flatMap(p=>{
+    if(Array.isArray(p.clues)){
+      return p.clues
+        .filter(c=>String(c.title||'').trim()&&String(c.text||'').trim())
+        .map((c,i)=>({
+          id:`${p.id}-clue-${i}`,
+          postId:p.id,
+          clueTitle:c.title,
+          clue:c.text
+        }));
+    }
+
+    if(String(p.clueTitle||'').trim()&&String(p.clue||'').trim()){
+      return [{
+        id:p.id,
         postId:p.id,
-        clueTitle:c.title,
-        clue:c.text
-      }));
-  }
+        clueTitle:p.clueTitle,
+        clue:p.clue
+      }];
+    }
 
-  if(String(p.clueTitle||'').trim()&&String(p.clue||'').trim()){
-    return [{
-      id:p.id,
-      postId:p.id,
-      clueTitle:p.clueTitle,
-      clue:p.clue
-    }];
-  }
+    return [];
+  }),
 
-  return [];
-});
+  {
+    id:'lilith-profile-entry-clue',
+    postId:'lilith-profile-entry',
+    clueTitle:'莉莉絲凱特',
+    clue:'在留言區內留言，似乎了解很多內幕'
+  }
+];
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 
 /* ===== 隱藏可點擊提示＋基本頁面保護 ===== */
@@ -1028,6 +1050,9 @@ const STORAGE_KEY='lilith-arg-state-v2';
 const saved=JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}');
 const state={
   unlocked:new Set(saved.unlocked||[]),
+
+  followedProfiles:new Set(saved.followedProfiles||[]),
+
   altFollowed:!!saved.altFollowed,
   mutual:!!saved.mutual,
   unread:!!saved.unread,
@@ -1040,12 +1065,41 @@ function save(){
     STORAGE_KEY,
     JSON.stringify({
       unlocked:[...state.unlocked],
+
+      followedProfiles:[...state.followedProfiles],
+
       altFollowed:state.altFollowed,
       mutual:state.mutual,
       unread:state.unread,
       completionSignature:state.completionSignature
     })
   );
+}
+function updateFollowButton(selector,profileId){
+  const button=$(selector);
+
+  if(!button)return;
+
+  const followed=state.followedProfiles.has(profileId);
+
+  button.classList.toggle('following',followed);
+  button.textContent=followed?'追蹤中':'追蹤';
+}
+
+function toggleProfileFollow(selector,profileId){
+  if(state.followedProfiles.has(profileId)){
+    state.followedProfiles.delete(profileId);
+  }else{
+    state.followedProfiles.add(profileId);
+  }
+
+  save();
+  updateFollowButton(selector,profileId);
+}
+
+function renderFollowStates(){
+  updateFollowButton('#followBtn',PROFILE.handle);
+  updateFollowButton('#newsFollowBtn',NEWS_PROFILE.handle);
 }
 function esc(v=''){return String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function icon(id){return `<svg><use href="#${id}"/></svg>`}
@@ -1119,7 +1173,35 @@ function repliesHTML(p){const ordered=p.replies.map((r,i)=>({...r,index:i})).sor
       : ''
   }
   </div>${r.text?`<p class="post-text">${esc(r.text)}</p>`:''}${r.image?`<img class="reply-image" src="${esc(r.image)}" alt="留言圖片">`:''}${r.link?`<a class="reply-link" href="${esc(r.link)}" target="_blank" rel="noopener noreferrer">${esc(r.link)}</a>`:''}<div class="actions"><button class="action heart ${on?'liked':''}" data-reply-like="${key}">${icon('i-heart')}<span>${r.likes+(on?1:0)}</span></button><button class="action">${icon('i-comment')}<span>0</span></button><button class="action">${icon('i-repost')}<span>${r.reposts||0}</span></button><button class="action">${icon('i-send')}<span>${r.shares||0}</span></button></div></div></article>`}).join(''):'<div class="empty">尚無回覆</div>'}
-function bindReplyActions(){$$('[data-reply-like]').forEach(b=>b.onclick=e=>{e.stopPropagation();const on=b.classList.toggle('liked');localStorage.setItem('liked-'+b.dataset.replyLike,on?'1':'0')});$$('[data-profile-entry-target]').forEach(x=>{const open=e=>{if(e.type==='keydown'&&!['Enter',' '].includes(e.key))return;e.preventDefault();e.stopPropagation();unlock(NEWS_POST.id);showView('profile','news')};x.onclick=open;x.onkeydown=open})}
+function bindReplyActions(){
+  $$('[data-reply-like]').forEach(b=>{
+    b.onclick=e=>{
+      e.stopPropagation();
+
+      const on=b.classList.toggle('liked');
+
+      localStorage.setItem(
+        'liked-'+b.dataset.replyLike,
+        on?'1':'0'
+      );
+    };
+  });
+
+  $$('[data-profile-entry-target]').forEach(x=>{
+    const open=e=>{
+      if(e.type==='keydown'&&!['Enter',' '].includes(e.key))return;
+
+      e.preventDefault();
+      e.stopPropagation();
+
+      unlock('lilith-profile-entry');
+      showView('profile','news');
+    };
+
+    x.onclick=open;
+    x.onkeydown=open;
+  });
+}
 function renderNews(){$('#newsPost').innerHTML=postHTML(NEWS_POST,true);$('#newsReplies').innerHTML=repliesHTML(NEWS_POST);bindActions();bindReplyActions()}
 function renderNewsProfile(){$('#newsProfileAvatar').src=NEWS_PROFILE.avatar;$('#newsProfileName').textContent=NEWS_PROFILE.name;$('#newsProfileHandle').textContent=NEWS_PROFILE.handle;renderFeed([...NEWS_RECENT_POSTS,NEWS_POST,...NEWS_PROFILE_POSTS],'#newsProfileFeed')}
 function openPost(id){const p=ALL_POSTS.find(x=>x.id===id);unlock(id);showView('detail');$('#detailPost').innerHTML=postHTML(p,false);$('#detailReplies').innerHTML=repliesHTML(p);bindActions();bindReplyActions()}
@@ -1141,7 +1223,23 @@ function unlock(id){
   renderProgress();
   checkCompletion();
 }
-function renderProgress(){const found=CLUES.filter(c=>state.unlocked.has(c.id));$('#clueList').innerHTML=found.map((p,i)=>`<div class="clue"><span class="clue-num">${i+1}</span><div><h3>${esc(p.clueTitle)}</h3><p>${esc(p.clue)}</p></div></div>`).join('')}
+function renderProgress(){
+  const found=[...state.unlocked]
+    .map(id=>CLUES.find(c=>c.id===id))
+    .filter(Boolean);
+
+  $('#clueList').innerHTML=found
+    .map((p,i)=>`
+      <div class="clue">
+        <span class="clue-num">${i+1}</span>
+        <div>
+          <h3>${esc(p.clueTitle)}</h3>
+          <p>${esc(p.clue)}</p>
+        </div>
+      </div>
+    `)
+    .join('');
+}
 let completionTimer=null;
 
 function getCompletionSignature(){
@@ -1225,11 +1323,11 @@ function openChat(){
 function openRegularChat(id){const c=CHATS.find(x=>x.id===id);showView('chat','messages');$('#codeForm').classList.add('hidden');$('#chatBody').innerHTML=`<div class="chat-person"><img class="avatar" src="${c.avatar}" alt="${esc(c.name)}"><strong>${esc(c.name)}</strong><span>@${esc(c.handle)}</span></div><div class="date-divider">較早</div>${c.messages.map(m=>`<div class="bubble ${m[0]==='in'?'incoming':'outgoing'}">${esc(m[1])}</div>`).join('')}`}
 function initProfile(){$('#displayName').textContent=PROFILE.name;$('#handle').textContent=PROFILE.handle;$('#location').textContent=PROFILE.location;$('.flag').textContent=PROFILE.flag;$('#bio').innerHTML=esc(PROFILE.bio).replace(/\n/g,'<br>');$('#tags').innerHTML=PROFILE.tags.map(t=>`<span>${esc(t)}</span>`).join('');$('#followers').textContent=PROFILE.followers;$('#following').textContent=PROFILE.following;$('#profileAvatar').src=PROFILE.avatar}
 function toast(t){const x=$('#toast');x.textContent=t;x.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>x.classList.remove('show'),1800)}
-$('#followBtn').onclick=()=>{const on=$('#followBtn').classList.toggle('following');$('#followBtn').textContent=on?'追蹤中':'追蹤'};
+$('#followBtn').onclick=()=>{  toggleProfileFollow('#followBtn',PROFILE.handle);};
 $('#messageBtn').onclick=()=>$('#messageDialog').showModal();
 $('#closeDialog').onclick=()=>$('#messageDialog').close();
 $('#closeCompletionDialog').onclick=()=>$('#completionDialog').close();
-$('#newsFollowBtn').onclick=()=>{const on=$('#newsFollowBtn').classList.toggle('following');$('#newsFollowBtn').textContent=on?'追蹤中':'追蹤'};
+$('#newsFollowBtn').onclick=()=>{  toggleProfileFollow('#newsFollowBtn',NEWS_PROFILE.handle);};
 $('#newsMessageBtn').onclick=()=>$('#messageDialog').showModal();
 $('#searchBtn').onclick=()=>showView('search');$('#backBtn').onclick=()=>{
   if(history.state?.argView!=='news'){
@@ -1323,6 +1421,7 @@ window.addEventListener('popstate',event=>{
   }
 });
 initProfile();
+renderFollowStates();
 renderNews();
 unlock(NEWS_POST.id);
 renderNewsProfile();
