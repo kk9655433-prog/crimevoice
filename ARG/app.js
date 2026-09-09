@@ -105,7 +105,7 @@ const NEWS_POST={
     {handle:'citizen_404',avatar:'assets/person-rain.svg',text:'到底是現場哪些人看到？我也說我在現場好不好？沒圖沒真相啦！',likes:391,reposts:22,shares:5},
     {handle:'george_news',avatar:'assets/person-lin.svg',text:'欸我真的在現場。夜翼、紅頭罩和羅賓他們衝進去之後，警方才把希爾帶走。\n附上一張現場圖！',image:'assets/NEWS01.jpg',likes:1264,reposts:153,shares:87},
     {handle:'lucy_says',avatar:'assets/avatar-3.svg',text:'蒙面義警闖進市府晚會、控制民選市長，大家居然沒有反應？',likes:317,reposts:29,shares:7},
-    {handle:'william_w',avatar:'assets/person-chen.svg',text:'他們救了一個被脅持的人，警方也在場。不要講得像義警政變。',likes:694,reposts:54,shares:16},
+    {handle:'william_w',avatar:'assets/person-chen.svg',text:'他們救了一個被脅持的人，現場也有警方在場。不要講得像義警政變好嗎?',likes:694,reposts:54,shares:16},
 	{handle:'mark_truth',avatar:'assets/person-lin.svg',text:'照片右下那位被綁著的人是布魯斯韋恩嗎？',likes:121,reposts:18,shares:1},
     {handle:'tabloid_reader',avatar:'assets/person-rain.svg',text:'哇，人體器官販賣？？這比昨天報紙寫的還誇張。',likes:843,reposts:71,shares:24},
     {handle:'paul_cityhall',avatar:'assets/person-lin.svg',text:'報導只說疑似涉及啦。先等檢方調查好嗎。',likes:529,reposts:38,shares:9},
@@ -306,7 +306,7 @@ const POSTS=[
     time:'2026-3-16',
     text:'最近收到大家很多的訊息，謝謝大家。\n我已經正式從民主黨市府幕僚這份工作離職。\n感謝各界的關心。',
 	clueTitle:'市長犯罪',
-    clue:'市長在晚宴上似乎爆出醜聞，被蝙蝠俠(的羅賓們)當眾逮捕。',
+    clue:'市長在晚宴上似乎爆出醜聞，被夜翼等人當眾逮捕。',
     likes:5718,reposts:54,shares:816,
     replies:[
       {handle:'martha_works',avatar:'assets/avatar-3.svg',text:'希爾市長無罪！！！！',likes:27,reposts:1,shares:0},
@@ -351,14 +351,14 @@ const POSTS=[
     {handle:'anna_daily',avatar:'assets/avatar-3.svg',text:'她只是一個幕僚，你們為什麼要把市長做的事情算在她頭上？',likes:121,reposts:6,shares:2},
     {handle:'jack_in_city',avatar:'assets/person-chen.svg',text:'市長在晚宴上被當眾抓走，市府幕僚一句話都不用交代？',likes:215,reposts:19,shares:7},
     {handle:'kate_k',avatar:'assets/person-rain.svg',text:'要交代也是警方和市長本人交代，騷擾基層工作人員幹嘛。',likes:98,reposts:5,shares:1},
-    {handle:'nick_no_filter',avatar:'assets/person-rain.svg',text:'整晚打電話去騷擾人的是有什麼毛病？\n她看起來也根本不知道發生什麼事。',likes:177,reposts:13,shares:4},
+    {handle:'nick_no_filter',avatar:'assets/person-rain.svg',text:'打電話去騷擾人的是有什麼毛病？\n她看起來也根本不知道發生什麼事。',likes:177,reposts:13,shares:4},
     {handle:'mark_truth',avatar:'assets/person-lin.svg',text:'不知道？晚會是市府辦的，希爾還在現場挾持布魯斯・韋恩，她怎麼可能完全不知情？',likes:249,reposts:24,shares:9},
-    {handle:'lucy_says',avatar:'assets/avatar-3.svg',text:'現在連「挾持」都是你們自己說的，現場那麼亂，誰看清楚了？',likes:114,reposts:8,shares:2},
+    {handle:'lucy_says',avatar:'assets/avatar-3.svg',text:'現在連挾持都是你們自己說的，現場那麼亂，誰看清楚了？',likes:114,reposts:8,shares:2},
     {handle:'george_news',avatar:'assets/person-lin.svg',text:'我在現場，韋恩確實被希爾控制住了。\n夜翼他們衝進來之後才把人救下來。',likes:681,reposts:72,shares:118},
     {handle:'citizen_404',avatar:'assets/person-rain.svg',text:'又一個自稱在現場的，現在網路上每個人都坐第一排是不是？',likes:203,reposts:15,shares:4},
     {handle:'paperboy_7',avatar:'assets/person-chen.svg',text:'昨天星球日報已經刊出現場照片了，不用在場才能看到喔！',likes:156,reposts:12,shares:3},
     {handle:'tabloid_reader',avatar:'assets/person-rain.svg',text:'每一家報紙寫的版本都不一樣，我已經不知道該信誰了。',likes:139,reposts:7,shares:1},
-    {handle:'allen_watch',avatar:'assets/person-chen.svg',text:'相信蝙蝠俠就好，他們不會無緣無故在公開場合抓走市長吧。',likes:281,reposts:23,shares:8},
+    {handle:'allen_watch',avatar:'assets/person-chen.svg',text:'相信英雄就好，他們不會無緣無故在公開場合抓走市長吧。',likes:281,reposts:23,shares:8},
     {handle:'southside_auntie',avatar:'assets/avatar-3.svg',text:'蒙面義警想抓誰就抓誰，這樣還有人覺得很正常？',likes:91,reposts:4,shares:1},
     {handle:'william_w',avatar:'assets/person-chen.svg',text:'現場還有警察，最後是警察把希爾帶走的，不是義警私刑。',likes:194,reposts:14,shares:4},
     {handle:'david_question',avatar:'assets/person-chen.svg',text:'那些電話是記者打的，還是市民打的？\n市府什麼時候開記者會？',likes:133,reposts:6,shares:2},
@@ -400,19 +400,19 @@ const POSTS=[
     {handle:'daily_Planet',avatar:'assets/Planet01.jpg',text:'我們報社記者就在現場，希爾確實被警方帶走了，今晚就會有現場完整報導。',likes:248,reposts:22,shares:7},
     {handle:'nick_no_filter',avatar:'assets/person-rain.svg',text:'被帶走調查不等於有罪好嗎。\n拜託大家先分清楚逮捕和定罪。',likes:271,reposts:19,shares:6},
     {handle:'thomson_g',avatar:'assets/person-chen.svg',text:'都奈橋偷工減料如果出事會害多少人？？現在證據都被報導出來了還想裝無辜？',likes:387,reposts:37,shares:14},
-    {handle:'oldtown_resident',avatar:'assets/person-lin.svg',text:'橋剛蓋完就發現偷工減料，這些證據誰知道是真是假？？？',likes:155,reposts:12,shares:3},
+    {handle:'oldtown_resident',avatar:'assets/person-lin.svg',text:'橋一蓋完就說有偷工減料，這些證據誰知道是真是假？？？',likes:155,reposts:12,shares:3},
     {handle:'paul_cityhall',avatar:'assets/person-lin.svg',text:'工程款挪用被爆料跟橋蓋好多久是兩件事吧？',likes:306,reposts:25,shares:8},
-    {handle:'mia_afterfive',avatar:'assets/person-rain.svg',text:'希爾上任後明明做了那麼多建設，現在所有人都當他是定罪的罪犯。',likes:173,reposts:11,shares:2},
-    {handle:'jenny_j',avatar:'assets/person-rain.svg',text:'做建設花的是納稅人的錢，不是希爾自己掏腰包，少把他說得像慈善家。',likes:344,reposts:32,shares:10},
+    {handle:'mia_afterfive',avatar:'assets/person-rain.svg',text:'希爾上任後明明做了那麼多建設，現在所有人都當他是過街老鼠。',likes:173,reposts:11,shares:2},
+    {handle:'jenny_j',avatar:'assets/person-rain.svg',text:'做建設花的是納稅人的錢，不是希爾自己掏腰包耶，別把他說得像慈善家一樣。',likes:344,reposts:32,shares:10},
     {handle:'southside_auntie',avatar:'assets/avatar-3.svg',text:'我只知道希爾上任後治安真的有變好。',likes:124,reposts:6,shares:1},
     {handle:'david_question',avatar:'assets/person-chen.svg',text:'可是抓他的不就是每天晚上在處理治安問題的那些人嗎？',likes:283,reposts:21,shares:6},
     {handle:'sarah_here',avatar:'assets/avatar-3.svg',text:'莉莉絲你是晚會的工作人員吧？市長被抓之前有沒有什麼異常？',likes:237,reposts:17,shares:5},
     {handle:PROFILE.handle,avatar:PROFILE.avatar,isAuthor:true,text:'請恕我無法回答。',likes:292,reposts:23,shares:9},
     {handle:'helen_home',avatar:'assets/avatar-3.svg',text:'「無法回答」跟「不知情」不一樣喔。',likes:319,reposts:28,shares:8},
-    {handle:'anna_daily',avatar:'assets/avatar-3.svg',text:'你們不要一直逼問她，她又不是警察，也不是希爾的律師。',likes:168,reposts:10,shares:2},
+    {handle:'anna_daily',avatar:'assets/avatar-3.svg',text:'你們不要一直逼問她，她又不是警察。',likes:168,reposts:10,shares:2},
     {handle:'jack_in_city',avatar:'assets/person-chen.svg',text:'她是市府幕僚，也是晚會工作人員，記者問她很正常吧。',likes:226,reposts:15,shares:4},
-    {handle:'lucy_says',avatar:'assets/avatar-3.svg',text:'正常採訪跟跑到私人帳號圍攻是兩回事。',likes:192,reposts:13,shares:3},
-    {handle:'mr_brown_g',avatar:'assets/person-lin.svg',text:'原本只是周年晚會，最後變成市長被英雄包圍，我今晚真的沒白來。',likes:481,reposts:49,shares:21},
+    {handle:'lucy_says',avatar:'assets/avatar-3.svg',text:'正常採訪跟跑到私人帳號圍攻是兩回事啊。',likes:192,reposts:13,shares:3},
+    {handle:'mr_brown_g',avatar:'assets/person-lin.svg',text:'原本只是周年晚會，最後變成這樣，我今晚真的沒白來。',likes:481,reposts:49,shares:21},
     {handle:'george_news',avatar:'assets/person-lin.svg',text:'更新：布魯斯・韋恩已經被救護人員帶離現場，看起來沒有受傷。',likes:734,reposts:103,shares:89},
     {handle:'tabloid_reader',avatar:'assets/person-rain.svg',text:'韋恩先生又被綁架了嗎？他到底為什麼每次參加活動都會出事？？',likes:516,reposts:61,shares:34},
     {handle:'citizen_404',avatar:'assets/person-rain.svg',text:'高譚首富的日常行程：慈善晚會、發表演說、被綁架。',likes:917,reposts:126,shares:52}
@@ -880,7 +880,7 @@ const ACTIVITY_POSTS=[
  {id:'a1',handle:'gotham_transit',avatar:'assets/person-chen.svg',time:'18分鐘',text:'中央線因號誌異常延誤約40分鐘。',likes:42,reposts:8,shares:3,replies:[]},
  {id:'a2',handle:'before_rainstops',avatar:'assets/person-rain.svg',time:'1小時',text:'今晚的高譚下雨了。',likes:17,reposts:1,shares:0,replies:[]},
  {id:'a3',handle:'gotham_ledger',avatar:'assets/person-lin.svg',time:'2小時',text:'一天一張阿卡漢門鎖照片，直到高譚市政府把防盜系統換掉\nDay 47\n到底是誰給小丑湯匙的？',image:'assets/content.png',likes:318,reposts:91,shares:36,replies:[{handle:'gotham_watch',avatar:'assets/person-chen.svg',text:'等一下，這篇貼文的意思是\n\n小丑又又又又逃出來了？',likes:55,reposts:12,shares:4}]},
- {id:'a4',handle:'coffee_in_gotham',avatar:'assets/avatar-2.svg',time:'4小時',text:'秋季限定肉桂拿鐵今天開始供應。',likes:73,reposts:6,shares:2,replies:[]},
+ {id:'a4',handle:'coffee_in_gotham',avatar:'assets/avatar-2.svg',time:'4小時',text:'新品冬季限定草莓奶凍泡泡紅茶預計下周開始供應喔！',likes:73,reposts:6,shares:2,replies:[]},
  {id:'a5',handle:'gotham_history_archive',avatar:'assets/person-unknown.svg',time:'5小時',text:'大家還有人記得大概十年前的爆炸案嗎？',clueTitle:'恭喜你發現了一則廣告',clue:'到底誰會在ARG裡打廣告啊？\n但希望你來參加茶會喔！',likes:86,reposts:13,shares:4,replies:[
    {handle:'passing_by',avatar:'assets/avatar-2.svg',text:'哪次？誰做的？',likes:12,reposts:0,shares:0},
    {handle:'southside_local',avatar:'assets/person-rain.svg',text:'小丑炸的。',likes:19,reposts:1,shares:0},
@@ -1248,7 +1248,7 @@ $('#codeForm').onsubmit=e=>{
 
   if(!answer)return;
 
-  const accepted=['0831','8/31','08/31','8月31日','八月三十一日','8月31號','08-31'];
+  const accepted=['八三一','831','0831','8/31','０８／３１','8月31日','八月三十一日','8月31號','8月31','８／３１'];
 
   $('#chatBody').insertAdjacentHTML(
     'beforeend',
@@ -1262,7 +1262,7 @@ $('#codeForm').onsubmit=e=>{
     $('#chatBody').insertAdjacentHTML(
       'beforeend',
       `<div class="bubble incoming">答對了，我追蹤你了。</div>
-       <button class="view-alt-btn" id="viewAltFromChat">查看小帳</button>`
+       <button class="view-alt-btn" id="viewAltFromChat">查看帳號</button>`
     );
 
     input.value='';
