@@ -709,19 +709,18 @@ const REPLY_POSTS=[
  
  {
 	id:'reply2',
-    /* 之後要更換原始串文，直接修改這個 parentPost。 */
     parentPost:{
       id:'reply2-parent',
-      handle:'gotham_watch',
-      avatar:'assets/gotham_watc.jpg',
-      time:'2025-8-11',
+      handle:'martha_works',
+      avatar:'assets/works.jpg',
+      time:'2023-9-03',
       text:'今天在市政廳外拍到希爾市長。\n這個光線到底是怎麼回事？',
       image:'assets/Light.webp',
       likes:214,reposts:19,shares:6,
       replies:[]
     },
     handle:PROFILE.handle,
-	time:'2025-08-11',
+	time:'2023-09-03',
 	text:'天神降臨。',
 	likes:57,reposts:8,shares:2,
 	replies:[
