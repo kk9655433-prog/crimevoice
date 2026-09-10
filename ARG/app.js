@@ -1,5 +1,5 @@
 /* ===== 主要資料：文字與圖片路徑都可在這裡替換 ===== */
-const PROFILE={name:'莉莉絲・凱特',handle:'lilith.kate',flag:'🇺🇸',location:'高譚',bio:'高譚人\n這裡的言論僅代表我個人。',tags:['#Gotham','#Democrats','#公共政策'],followers:'1,284',following:'156',avatar:'assets/avatar.png'};
+const PROFILE={name:'莉莉絲・凱特',handle:'lilith.kate',flag:'🇺🇸',location:'高譚',bio:'高譚人\n這裡的言論僅代表我個人。\n1994/08/21',tags:['#Gotham','#Democrats','#公共政策'],followers:'1,284',following:'156',avatar:'assets/avatar.png'};
 const ALT={name:'LH',handle:'LH5588812',avatar:'assets/person-alt.jpg'};
 const FOLLOWERS=[
  {name:'林七',handle:'lin_seven',bio:'偶爾拍照。',avatar:'assets/person-lin.svg'},
@@ -306,7 +306,7 @@ const POSTS=[
     time:'2026-3-16',
     text:'最近收到大家很多的訊息，謝謝大家。\n我已經正式從民主黨市府幕僚這份工作離職。\n感謝各界的關心。',
 	clueTitle:'市長犯罪',
-    clue:'市長在晚宴上似乎爆出醜聞，被夜翼等人當眾逮捕。',
+    clue:'市長在晚宴上爆出醜聞，被夜翼等人當眾逮捕。',
     likes:5718,reposts:54,shares:816,
     replies:[
       {handle:'martha_works',avatar:'assets/works.jpg',text:'希爾市長無罪！！！！',likes:27,reposts:1,shares:0},
@@ -542,16 +542,29 @@ const POSTS=[
   },
 
   {
+    id:'p19',
+    handle:PROFILE.handle,
+    time:'2025-9-07',
+    text:'準備工作',
+	image:'assets/WORKWORK.webp',
+    clueTitle:'便條紙',
+    clue:'莉莉絲桌上有個便條紙寫著ZGMXXX。',
+    likes:1115,reposts:26,shares:25,
+    replies:[    ]
+  },
+
+  {
     id:'p28',
     handle:PROFILE.handle,
     time:'2025-8-31',
-    text:'恭喜希爾市長\n生日快樂！',
+    text:'恭喜希爾市長\n43歲生日快樂！',
     likes:1384,reposts:26,shares:48,
     clueTitle:'希爾市長的生日',
-    clue:'希爾的生日是8月31日。',
+    clue:'莉莉絲在8月31日祝希爾43歲生日快樂。',
     replies:[
       {handle:'room_73',avatar:'assets/room_73.jpg',text:'希爾市長生日快樂！',likes:18,reposts:24,shares:1,ownerLiked:true},
-      {handle:'muchen_26',avatar:'assets/person-chen.svg',text:'希爾生日快樂！你也辛苦了。',likes:16,reposts:17,shares:1,ownerLiked:true}
+      {handle:'muchen_26',avatar:'assets/person-chen.svg',text:'希爾生日快樂！你也辛苦了。',likes:16,reposts:17,shares:1,ownerLiked:true},
+	  {handle:PROFILE.handle,avatar:PROFILE.avatar,isAuthor:true,text:'也請大家持續關注下周上路的提案。',likes:122,reposts:5,shares:13}
     ]
   },
 
@@ -800,6 +813,16 @@ const ALT_POSTS=[
   },
 
     {
+    id:'alt14',
+    handle:ALT.handle,
+    avatar:ALT.avatar,
+    time:'2026-9-03',
+    text:'又快到他的生日了，我還記得他去年收到禮物的表情',
+    likes:4,reposts:2,shares:0,
+    replies:[]
+  },
+
+    {
     id:'alt3',
     handle:ALT.handle,
     avatar:ALT.avatar,
@@ -990,7 +1013,8 @@ const CLUES=[
     id:'lilith-profile-entry-clue',
     postId:'lilith-profile-entry',
     clueTitle:'莉莉絲凱特',
-    clue:'在留言區內留言，似乎了解很多內幕'
+    clue:'在高譚日報留言區內留言，似乎了解很多內幕，今年32歲。'
+	
   }
 ];
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
