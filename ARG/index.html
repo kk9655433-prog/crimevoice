@@ -5,7 +5,7 @@
   <meta name="theme-color" content="#101010">
   <meta name="description" content="高譚日報：布魯斯．韋恩獲救，希爾市長移送法辦">
   <title>高譚日報(@gotham_daily)・脆脆的，暢所欲言</title>
-  <link rel="icon" type="image/jpeg" href="./assets/app-logo.jpg">
+  <link rel="icon" type="image/jpeg" href="./assets/app-logo.png">
   <link rel="stylesheet" href="./styles.css?v=aaa2">
   <link rel="stylesheet" href="./styles-dark.css?v=aaa2">
   <link rel="stylesheet" href="./styles-v3.css?v=aaa5">
@@ -15,7 +15,20 @@
 
   <header class="topbar">
     <button class="icon-btn back hidden" id="backBtn" aria-label="返回"><svg><use href="#i-back"></use></svg></button>
-    <div class="brand" id="pageTitle"><img id="appLogo" class="app-logo" src="assets/app-logo.jpg" alt="網站標誌"></div>
+    <div
+  class="brand"
+  id="pageTitle"
+  role="button"
+  tabindex="0"
+  aria-label="查看網站製作者"
+>
+  <img
+    id="appLogo"
+    class="app-logo"
+    src="assets/app-logo.png"
+    alt="網站標誌"
+  >
+</div>
     <button class="icon-btn" id="searchBtn" aria-label="搜尋與解謎進度"><svg><use href="#i-search"></use></svg></button>
   </header>
 
@@ -109,12 +122,39 @@
   </nav>
 
   <dialog id="messageDialog"><div class="modal-icon">!</div><h2>無法發送訊息</h2><p>這個帳號目前不接受陌生訊息。</p><button id="closeDialog">確定</button></dialog>
+  <dialog id="creatorDialog">
+  <p>2027罪城迷聲ARG</p>
+	<p>
+    文案編輯：
+    <a
+      href="https://www.threads.com/@yutong2005_royce"
+      target="_blank"
+      rel="noopener noreferrer"
+    >阿羅</a>
+    </p>
+    <p>繪圖：
+    <a
+      href="https://www.threads.com/@merlin_gummybear"
+      target="_blank"
+      rel="noopener noreferrer"
+    >梅林</a>  </p>
+	<p>網站製作者：
+    <a
+      href="https://www.threads.com/@aemu0826"
+      target="_blank"
+      rel="noopener noreferrer"
+    >蕭杞</a></p>
+
+  <button id="closeCreatorDialog">關閉</button>
+</dialog>
+  
   <dialog id="completionDialog" class="completion-dialog">
   <div class="modal-icon">✓</div>
   <h2>恭喜你已經發現了目前為止的所有線索</h2>
   <p>但……明天大家又會發什麼串文呢？</p>
   <button id="closeCompletionDialog">繼續</button>
 </dialog>
+
   <div id="toast" role="status" aria-live="polite"></div>
   <script src="./app.js?v=aaa8"></script>
 

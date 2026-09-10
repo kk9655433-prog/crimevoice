@@ -241,7 +241,7 @@ const POSTS=[
     id:'p1',
     handle:PROFILE.handle,
     time:'2小時',
-    text:'今天下午突然很認真地思考了一件事：\n工作究竟代表什麼，是為了錢，還是生活的意義。',
+    text:'今天下午突然很認真地思考了一件事\n工作究竟代表什麼，是為了錢，還是生活的意義。',
     likes:418,reposts:29,shares:7,
     replies:[
       {handle:'room_73',avatar:'assets/room_73.jpg',text:'你上班上瘋了吧，哈哈。',likes:16,reposts:1,shares:0,ownerLiked:true},
@@ -384,7 +384,7 @@ const POSTS=[
   image:'assets/party.jpg',
   replies:[
     {handle:'room_73',avatar:'assets/room_73.jpg',text:'沒有想到市長是這樣的人。',likes:51,reposts:5,shares:1},
-    {handle:'gotham_daily',avatar:'assets/assets/GOTHAM.jpg',text:'你是否知情市長私底下做的這些事？',likes:32,reposts:4,shares:1},
+    {handle:'gotham_daily',avatar:'assets/GOTHAM.jpg',text:'你是否知情市長私底下做的這些事？',likes:32,reposts:4,shares:1},
     {handle:PROFILE.handle,avatar:PROFILE.avatar,isAuthor:true,text:'我不想回答這些事。',likes:138,reposts:9,shares:3},
     {handle:'george_news',avatar:'assets/george_news.jpg',text:'現場現在一團亂，希爾市長剛剛被夜翼和紅頭罩攔下來了！',likes:892,reposts:146,shares:203},
     {handle:'tabloid_reader',avatar:'assets/tabloid_reader.jpg',text:'真的假的？？我朋友說現場連羅賓都出現了。',likes:327,reposts:31,shares:12},
@@ -674,8 +674,9 @@ const POSTS=[
     time:'2023-9-03',
     text:'今天市政活動好忙。\n但希爾市長閃閃發光的耶，你們看。',
     likes:298,reposts:19,shares:4,
-	image:'assets/HILL01.jpg',
+	image:'assets/Light.webp',
     replies:[
+	
       {handle:'room_73',avatar:'assets/room_73.jpg',text:'哇這個光線很棒欸。',likes:17,reposts:1,shares:0,ownerLiked:true},
       {handle:PROFILE.handle,avatar:PROFILE.avatar,isAuthor:true,text:'我也這麼認為。',likes:31,reposts:1,shares:0}
     ]
@@ -685,7 +686,7 @@ const POSTS=[
     id:'p38',
     handle:PROFILE.handle,
     time:'2023-7-09',
-    text:'辦了脆的帳號。\n大家好，我是莉莉絲 凱特 目前擔任希爾的幕僚。\n請多指教！',
+    text:'辦了脆的帳號。\n大家好，我是莉莉絲 凱特，目前擔任希爾的幕僚。\n請多指教！',
 	clueTitle:'希爾的幕僚',
     clue:'脆脆的剛上線，莉莉絲就辦了一個帳號，原來她是希爾的幕僚。',
     likes:341,reposts:26,shares:6,
@@ -1327,6 +1328,23 @@ $('#followBtn').onclick=()=>{  toggleProfileFollow('#followBtn',PROFILE.handle);
 $('#messageBtn').onclick=()=>$('#messageDialog').showModal();
 $('#closeDialog').onclick=()=>$('#messageDialog').close();
 $('#closeCompletionDialog').onclick=()=>$('#completionDialog').close();
+
+function openCreatorDialog(){
+  $('#creatorDialog').showModal();
+}
+
+$('#pageTitle').onclick=openCreatorDialog;
+
+$('#pageTitle').onkeydown=e=>{
+  if(e.key!=='Enter'&&e.key!==' ')return;
+
+  e.preventDefault();
+  openCreatorDialog();
+};
+
+$('#closeCreatorDialog').onclick=()=>{
+  $('#creatorDialog').close();
+};
 $('#newsFollowBtn').onclick=()=>{  toggleProfileFollow('#newsFollowBtn',NEWS_PROFILE.handle);};
 $('#newsMessageBtn').onclick=()=>$('#messageDialog').showModal();
 $('#searchBtn').onclick=()=>showView('search');$('#backBtn').onclick=()=>{
