@@ -115,7 +115,7 @@ const NEWS_POST={
     {handle:'jack_in_city',avatar:'assets/jack_in_city.jpg',text:'市長本人在公開場合脅持人，這就值得被關了吧？',likes:746,reposts:61,shares:13},
     {handle:'lisa_coffee',avatar:'assets/lisa_coffee.jpg',text:'有沒有人知道市府代理程序會由誰接任？新聞怎麼完全沒寫。',likes:201,reposts:12,shares:2},
     {handle:'david_question',avatar:'assets/david_question.jpg',text:'我比較想知道其他涉案人士是誰。不可能只有希爾一個人吧？',likes:573,reposts:48,shares:11},
-    {handle:PROFILE.handle,avatar:PROFILE.avatar,profileLink:true,text:'目前一切還在偵查中，請不要做過多猜測。',likes:46,reposts:2,shares:0},
+    {handle:PROFILE.handle,avatar:PROFILE.avatar,profileLink:true,likeId:'reply1',text:'目前一切還在偵查中，請不要做過多猜測。',likes:46,reposts:2,shares:0},
     {handle:'sarah_here',avatar:'assets/sarah_here.jpg',text:'所以現在是由副市長代理嗎。',likes:286,reposts:24,shares:6},
     {handle:'nick_no_filter',avatar:'assets/nick_no_filter.jpg',text:'完了，今年底里夫斯的當選大概已經確定了，我對未來感到絕望。',likes:402,reposts:37,shares:9},
     {handle:'helen_home',avatar:'assets/helen_home.jpg',text:'里夫斯很好吧？至少長的蠻帥的啊。',likes:377,reposts:25,shares:5},
@@ -129,90 +129,90 @@ const NEWS_POST={
 const NEWS_PROFILE={name:'高譚日報',handle:'gotham_daily',avatar:'assets/GOTHAM.jpg'};
 const NEWS_RECENT_POSTS=[
   {
-    id:'news-0908-transit',
+    id:'news-1111-transit',
     handle:NEWS_PROFILE.handle,
     avatar:NEWS_PROFILE.avatar,
-    time:'2026-9-8',
+    time:'15分鐘',
     headline:'中央線號誌異常　部分班次延誤',
     text:'高譚捷運中央線今日傍晚發生號誌異常，部分班次延誤約四十分鐘。交通局表示系統已陸續恢復，仍請旅客預留候車時間。',
     likes:1268,reposts:184,shares:63,
     replies:[]
   },
+	{
+	  id:'news-1110-veterans',
+	  handle:NEWS_PROFILE.handle,
+	  avatar:NEWS_PROFILE.avatar,
+	  time:'1天',
+	  headline:'退伍軍人節紀念活動明日舉行　市政廣場周邊實施管制',
+	  text:'高譚市政府宣布，退伍軍人節紀念活動將於明日上午在市政廣場舉行。活動期間周邊部分道路將分階段封閉，市府呼籲民眾提前改道或搭乘大眾運輸工具。',
+	  likes:1943,reposts:337,shares:142,
+	  replies:[]
+	},
+	{
+	  id:'news-1109-thanksgiving',
+	  handle:NEWS_PROFILE.handle,
+	  avatar:NEWS_PROFILE.avatar,
+	  time:'2天',
+	  headline:'感恩節送餐計畫開放登記　十二處社區中心募集物資',
+	  text:'高譚市十二處社區中心即日起開放感恩節餐點登記，並募集罐頭、保暖衣物與日常用品。市府表示，今年將優先協助獨居長者、低收入家庭及臨時安置居民。',
+	  likes:2156,reposts:672,shares:318,
+	  replies:[]
+	},
   {
-    id:'news-0908-water',
+    id:'news-1108-museum',
     handle:NEWS_PROFILE.handle,
     avatar:NEWS_PROFILE.avatar,
-    time:'2026-9-8',
-    headline:'舊城區自來水管破裂　兩處道路臨時封閉',
-    text:'舊城區今日上午發生自來水管破裂事故，造成部分路面積水。市府已封閉兩處道路進行搶修，預計晚間恢復通行。',
-    likes:943,reposts:137,shares:42,
-    replies:[]
-  },
-  {
-    id:'news-0907-fraud',
-    handle:NEWS_PROFILE.handle,
-    avatar:NEWS_PROFILE.avatar,
-    time:'2026-9-7',
-    headline:'冒用慈善機構名義募款　警方籲市民提高警覺',
-    text:'高譚市近日出現多起假冒慈善機構進行街頭募款的案件。警方呼籲市民捐款前確認機構名稱與登記資料，若發現可疑人士應立即通報。',
-    likes:2156,reposts:672,shares:318,
-    replies:[]
-  },
-  {
-    id:'news-0906-museum',
-    handle:NEWS_PROFILE.handle,
-    avatar:NEWS_PROFILE.avatar,
-    time:'2026-9-6',
-    headline:'高譚市立博物館秋季特展　本週末開幕',
-    text:'高譚市立博物館秋季特展將於本週末開幕，展出多件城市早期建設圖紙、照片與私人收藏，開幕首日將延長開放至晚間九時。',
+    time:'3天',
+	headline:'高譚市立博物館深秋特展　本週末開幕',
+	text:'高譚市立博物館深秋特展將於本週末開幕，展出多件城市早期建設圖紙、歷史照片與私人收藏。開幕首日將延長開放至晚間九時，館外廣場另設熱飲與舊書攤位。',
     likes:1874,reposts:293,shares:126,
     replies:[]
   },
   {
-    id:'news-0905-wayne',
+    id:'news-1107-wayne',
     handle:NEWS_PROFILE.handle,
     avatar:NEWS_PROFILE.avatar,
-    time:'2026-9-5',
+    time:'4天',
     headline:'韋恩基金會擴大獎學金計畫　新增技職學生名額',
     text:'韋恩基金會宣布擴大年度獎學金計畫，除原有大學與研究所名額外，今年將新增技職學生與在職進修申請類別。',
     likes:3642,reposts:521,shares:204,
     replies:[]
   },
   {
-    id:'news-0904-market',
+    id:'news-1106-market',
     handle:NEWS_PROFILE.handle,
     avatar:NEWS_PROFILE.avatar,
-    time:'2026-9-4',
+    time:'5天',
     headline:'港區週末市集回歸　周邊道路實施交通管制',
     text:'港區週末市集將於本週六重新開放，活動期間周邊部分道路禁止車輛進入。主辦單位建議民眾搭乘大眾運輸工具前往。',
     likes:1537,reposts:248,shares:97,
     replies:[]
   },
   {
-    id:'news-0903-budget',
+    id:'news-1105-budget',
     handle:NEWS_PROFILE.handle,
     avatar:NEWS_PROFILE.avatar,
-    time:'2026-9-3',
-    headline:'市議會審查明年度預算　治安與交通支出成焦點',
-    text:'高譚市議會預計於今日開始審查今年度總預算，治安、公共交通及舊城區基礎建設支出成為本次會期主要討論話題。在野黨欲凍結項目將成矚目焦點。',
+    time:'6天',
+    headline:'市議會審查今年度預算　治安與交通支出成焦點',
+    text:'高譚市議會預計於今日審查完畢今年度總預算，自九月開始審查以來，已經歷三個月，治安、公共交通及舊城區基礎建設支出成為本次會期主要討論話題。另在野黨凍結項目已成矚目焦點。',
     likes:2318,reposts:486,shares:173,
     replies:[]
   },
   {
-    id:'news-0902-power',
+    id:'news-1104-power',
     handle:NEWS_PROFILE.handle,
     avatar:NEWS_PROFILE.avatar,
-    time:'2026-9-2',
+    time:'7天',
     headline:'東區晚間短暫停電　電力公司稱設備故障',
     text:'東區部分街區昨晚發生短暫停電，影響時間約四十分鐘。電力公司表示事故由區域設備故障引起，目前供電已全面恢復。',
     likes:1749,reposts:302,shares:111,
     replies:[]
   },
   {
-    id:'news-0901-weather',
+    id:'news-1103-weather',
     handle:NEWS_PROFILE.handle,
     avatar:NEWS_PROFILE.avatar,
-    time:'2026-9-1',
+    time:'2026-11-03',
     headline:'高譚本週持續降雨　沿海地區留意強風',
     text:'氣象中心預估高譚本週受鋒面影響，降雨機率持續偏高，沿海及港區可能出現較強陣風，提醒市民外出攜帶雨具。',
     likes:1083,reposts:167,shares:58,
@@ -253,11 +253,11 @@ const POSTS=[
     id:'p2',
     handle:PROFILE.handle,
     time:'1天',
-    text:'整理衣櫃。\n怎麼這麼多衣服。',
+    text:'整理衣櫃，把大衣都拿出來了。\n怎麼這麼多衣服。',
     likes:362,reposts:27,shares:6,
     replies:[
-      {handle:'passing_by',avatar:'assets/passing.jpg',text:'真的需要準備這麼衣服嗎？',likes:21,reposts:2,shares:0},
-      {handle:PROFILE.handle,avatar:PROFILE.avatar,isAuthor:true,text:'看你負責什麼工作。但我以前是需要的。',likes:48,reposts:2,shares:1}
+      {handle:'passing_by',avatar:'assets/passing.jpg',text:'高譚最近晚上真的變冷了。',likes:21,reposts:2,shares:0},
+      {handle:PROFILE.handle,avatar:PROFILE.avatar,isAuthor:true,text:'是啊。',likes:48,reposts:2,shares:1}
     ]
   },
 
@@ -699,8 +699,9 @@ const POSTS=[
 const REPLY_POSTS=[
 {
 	id:'reply1',
+    parentId:'news-lilith-entry',
     handle:PROFILE.handle,
-	time:'2025-03-15',
+	time:'2026-3-15',
 	text:'目前一切還在偵查中，請不要做過多猜測。',
 	likes:46,reposts:0,shares:2,
 	replies:[]
@@ -708,6 +709,17 @@ const REPLY_POSTS=[
  
  {
 	id:'reply2',
+    /* 之後要更換原始串文，直接修改這個 parentPost。 */
+    parentPost:{
+      id:'reply2-parent',
+      handle:'gotham_watch',
+      avatar:'assets/gotham_watc.jpg',
+      time:'2025-8-11',
+      text:'今天在市政廳外拍到希爾市長。\n這個光線到底是怎麼回事？',
+      image:'assets/Light.webp',
+      likes:214,reposts:19,shares:6,
+      replies:[]
+    },
     handle:PROFILE.handle,
 	time:'2025-08-11',
 	text:'天神降臨。',
@@ -722,6 +734,25 @@ const REPLY_POSTS=[
 	]
  }
 ];
+const INLINE_REPLY_PARENT_POSTS=REPLY_POSTS
+  .filter(reply=>reply.parentPost)
+  .map(reply=>({
+    ...reply.parentPost,
+    replies:[
+      {
+        handle:reply.handle,
+        avatar:reply.avatar||PROFILE.avatar,
+        likeId:reply.id,
+        time:reply.time,
+        text:reply.text,
+        image:reply.image,
+        likes:reply.likes,
+        reposts:reply.reposts,
+        shares:reply.shares
+      },
+      ...(reply.replies||[])
+    ]
+  }));
 const MEDIA_POSTS=POSTS.filter(post=>post.image);
 const REPOST_POSTS=[
   {
@@ -878,6 +909,10 @@ const ALT_POSTS=[
   }
 ];
 const ACTIVITY_POSTS=[
+ {id:'a8',handle:'old_mack_g',avatar:'assets/old_mack_g.jpg',time:'5分鐘',text:'今天是單身節，我今年還是單身，哭了。',likes:42,reposts:8,shares:3,replies:[
+	{handle:'paper_cup_01',avatar:'assets/avatar-3.svg',text:'今天不是軍人節嗎?',likes:73,reposts:6,shares:2},
+	{handle:'old_mack_g',avatar:'assets/old_mack_g.jpg',text:'不是，大哥，你不上網嗎？',likes:108,reposts:11,shares:3},
+ ]},
  {id:'a1',handle:'gotham_transit',avatar:'assets/gotham_transit.jpg',time:'18分鐘',text:'中央線因號誌異常延誤約40分鐘。',likes:42,reposts:8,shares:3,replies:[
   {handle:'dont_wanna_work',avatar:'assets/person-rain.svg',text:'很好，我今天又要因為高譚捷運遲到了。',likes:37,reposts:3,shares:1},
   {handle:'seven_thirty',avatar:'assets/avatar-3.svg',text:'又來！？？？？',likes:82,reposts:9,shares:2},
@@ -918,6 +953,7 @@ const ALL_POSTS=[
 	  ...NEWS_RECENT_POSTS,
       ...NEWS_PROFILE_POSTS,
       ...POSTS,
+      ...INLINE_REPLY_PARENT_POSTS,
       ...REPLY_POSTS,
       ...MEDIA_POSTS,
       ...REPOST_POSTS,
@@ -990,6 +1026,7 @@ function installPageProtection(){
     '[onclick]',
     '[data-post]',
     '[data-open]',
+    '[data-reply-thread]',
     '[data-news-profile-link]',
     '[data-profile-entry-target]',
     '[data-alt-profile]',
@@ -1105,10 +1142,73 @@ function renderFollowStates(){
 function esc(v=''){return String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function icon(id){return `<svg><use href="#${id}"/></svg>`}
 function avatar(name,src,attrs=''){return `<img class="avatar post-avatar" src="${src}" alt="${esc(name)} 的頭像" ${attrs}>`}
-function actions(p,openable=true){const liked=localStorage.getItem('liked-'+p.id)==='1';return `<div class="actions"><button class="action heart ${liked?'liked':''}" data-like="${p.id}">${icon('i-heart')}<span>${p.likes+(liked?1:0)}</span></button><button class="action" ${openable?`data-open="${p.id}"`:''}>${icon('i-comment')}<span>${p.comments ?? p.replies.length}</span></button><button class="action">${icon('i-repost')}<span>${p.reposts||0}</span></button><button class="action">${icon('i-send')}<span>${p.shares||0}</span></button></div>`}
-function postHTML(p,clickable=true){const own=p.handle===PROFILE.handle;const account=p.handle;const newsAccount=account===NEWS_PROFILE.handle;const newsLink=newsAccount?'data-news-profile-link="1" tabindex="0" role="link" aria-label="前往高譚日報的個人頁面"':'';return `<article class="post ${p.headline?'news-post':''}" ${clickable?`data-post="${p.id}"`:''}>${avatar(account,own?PROFILE.avatar:p.avatar,newsLink)}<div><div class="post-header"><strong ${newsLink}>${esc(account)}</strong><span class="meta">${own?PROFILE.flag+' '+PROFILE.location+' · ':''}${esc(p.time)}</span><span class="dots">•••</span></div>${p.headline?`<h1 class="news-headline">${esc(p.headline)}</h1>`:''}<p class="post-text">${esc(p.text)}</p>${p.image?`<img class="post-image" src="${p.image}" alt="串文圖片">`:''}${actions(p,clickable)}</div></article>`}
-function renderFeed(list=POSTS,target='#feed'){const el=$(target);el.innerHTML=list.length?list.map(p=>postHTML(p)).join(''):'<div class="empty">目前沒有內容</div>';bindActions()}
-function bindActions(){$$('[data-like]').forEach(b=>b.onclick=e=>{e.stopPropagation();const p=ALL_POSTS.find(x=>x.id===b.dataset.like),on=b.classList.toggle('liked');localStorage.setItem('liked-'+p.id,on?'1':'0');b.querySelector('span').textContent=p.likes+(on?1:0)});$$('[data-post]').forEach(x=>x.onclick=()=>openPost(x.dataset.post));$$('[data-open]').forEach(x=>x.onclick=e=>{e.stopPropagation();openPost(x.dataset.open)});$$('[data-news-profile-link]').forEach(x=>{const open=e=>{if(e.type==='keydown'&&!['Enter',' '].includes(e.key))return;e.preventDefault();e.stopPropagation();showView('newsProfile',state.view);renderNewsProfile()};x.onclick=open;x.onkeydown=open})}
+function postAvatar(p){
+  if(p.avatar)return p.avatar;
+  if(p.handle===PROFILE.handle)return PROFILE.avatar;
+  if(p.handle===NEWS_PROFILE.handle)return NEWS_PROFILE.avatar;
+  if(p.handle===ALT.handle)return ALT.avatar;
+  return 'assets/avatar-3.svg';
+}
+function actions(p,openable=true){
+  const liked=localStorage.getItem('liked-'+p.id)==='1';
+  const baseLikes=Number(p.likes)||0;
+  const replyCount=p.comments??(p.replies?.length||0);
+  return `<div class="actions"><button class="action heart ${liked?'liked':''}" data-like="${p.id}" data-base-likes="${baseLikes}">${icon('i-heart')}<span>${baseLikes+(liked?1:0)}</span></button><button class="action" ${openable?`data-open="${p.id}"`:''}>${icon('i-comment')}<span>${replyCount}</span></button><button class="action">${icon('i-repost')}<span>${p.reposts||0}</span></button><button class="action">${icon('i-send')}<span>${p.shares||0}</span></button></div>`;
+}
+function postHTML(p,clickable=true){const own=p.handle===PROFILE.handle;const account=p.handle;const newsAccount=account===NEWS_PROFILE.handle;const newsLink=newsAccount?'data-news-profile-link="1" tabindex="0" role="link" aria-label="前往高譚日報的個人頁面"':'';return `<article class="post ${p.headline?'news-post':''}" ${clickable?`data-post="${p.id}"`:''}>${avatar(account,postAvatar(p),newsLink)}<div><div class="post-header"><strong ${newsLink}>${esc(account)}</strong><span class="meta">${own?PROFILE.flag+' '+PROFILE.location+' · ':''}${esc(p.time)}</span><span class="dots">•••</span></div>${p.headline?`<h1 class="news-headline">${esc(p.headline)}</h1>`:''}<p class="post-text">${esc(p.text)}</p>${p.image?`<img class="post-image" src="${p.image}" alt="串文圖片">`:''}${actions(p,clickable)}</div></article>`}
+function getReplyParent(reply){
+  if(reply.parentId)return ALL_POSTS.find(post=>post.id===reply.parentId);
+  if(reply.parentPost)return ALL_POSTS.find(post=>post.id===reply.parentPost.id)||reply.parentPost;
+  return null;
+}
+function replyThreadHTML(reply){
+  const parent=getReplyParent(reply);
+  if(!parent)return postHTML(reply);
+  const liked=localStorage.getItem('liked-'+reply.id)==='1';
+  const baseLikes=Number(reply.likes)||0;
+  return `<div class="reply-thread" data-reply-thread="${parent.id}" tabindex="0" role="link" aria-label="開啟 ${esc(parent.handle)} 的原始串文">
+    <div class="reply-thread-parent">${postHTML(parent,false)}</div>
+    <article class="reply-thread-response">
+      ${avatar(reply.handle,postAvatar(reply))}
+      <div>
+        <div class="post-header"><strong>${esc(reply.handle)}</strong><span class="meta">${esc(reply.time)} · ${PROFILE.flag} ${esc(PROFILE.location)}</span><span class="dots">•••</span></div>
+        <p class="post-text">${esc(reply.text)}</p>
+        ${reply.image?`<img class="post-image" src="${esc(reply.image)}" alt="回覆圖片">`:''}
+        <div class="actions"><button class="action heart ${liked?'liked':''}" data-like="${reply.id}" data-base-likes="${baseLikes}">${icon('i-heart')}<span>${baseLikes+(liked?1:0)}</span></button><button class="action">${icon('i-comment')}<span>${reply.replies?.length||0}</span></button><button class="action">${icon('i-repost')}<span>${reply.reposts||0}</span></button><button class="action">${icon('i-send')}<span>${reply.shares||0}</span></button></div>
+      </div>
+    </article>
+  </div>`;
+}
+function renderFeed(list=POSTS,target='#feed'){
+  const el=$(target);
+  el.innerHTML=list.length?list.map(p=>(p.parentId||p.parentPost)?replyThreadHTML(p):postHTML(p)).join(''):'<div class="empty">目前沒有內容</div>';
+  bindActions();
+}
+function updateLikeButton(button,storageKey){
+  const on=button.classList.toggle('liked');
+  const baseLikes=Number(button.dataset.baseLikes)||0;
+  localStorage.setItem('liked-'+storageKey,on?'1':'0');
+  button.querySelector('span').textContent=baseLikes+(on?1:0);
+}
+function bindActions(){
+  $$('[data-like]').forEach(b=>b.onclick=e=>{
+    e.stopPropagation();
+    updateLikeButton(b,b.dataset.like);
+  });
+  $$('[data-post]').forEach(x=>x.onclick=()=>openPost(x.dataset.post));
+  $$('[data-open]').forEach(x=>x.onclick=e=>{e.stopPropagation();openPost(x.dataset.open)});
+  $$('[data-reply-thread]').forEach(x=>{
+    const open=e=>{
+      if(e.type==='keydown'&&!['Enter',' '].includes(e.key))return;
+      if(e.target.closest('button,a,[data-news-profile-link]'))return;
+      e.preventDefault();
+      openPost(x.dataset.replyThread);
+    };
+    x.onclick=open;
+    x.onkeydown=open;
+  });
+  $$('[data-news-profile-link]').forEach(x=>{const open=e=>{if(e.type==='keydown'&&!['Enter',' '].includes(e.key))return;e.preventDefault();e.stopPropagation();showView('newsProfile',state.view);renderNewsProfile()};x.onclick=open;x.onkeydown=open});
+}
 function showView(v,previous=state.view,addHistory=true){
   if(!$('#'+v+'View'))return;
 
@@ -1149,8 +1249,9 @@ function showView(v,previous=state.view,addHistory=true){
   scrollTo(0,0);
 }
 function repliesHTML(p){const ordered=p.replies.map((r,i)=>({...r,index:i})).sort((a,b)=>Number(b.ownerLiked)-Number(a.ownerLiked));return ordered.length?ordered.map(r=>{
-  const key=p.id+'r'+r.index;
+  const key=r.likeId||(p.id+'r'+r.index);
   const on=localStorage.getItem('liked-'+key)==='1';
+  const baseLikes=Number(r.likes)||0;
 
   const isAuthor=r.isAuthor===true;
 
@@ -1168,23 +1269,18 @@ function repliesHTML(p){const ordered=p.replies.map((r,i)=>({...r,index:i})).sor
       ? `
         <span class="owner-liked">
           ♥
-          <img src="${PROFILE.avatar}" alt="${esc(PROFILE.name)}">
+          <img src="${postAvatar(p)}" alt="由 ${esc(p.handle)} 按讚" title="${esc(p.handle)} 按讚">
         </span>
       `
       : ''
   }
-  </div>${r.text?`<p class="post-text">${esc(r.text)}</p>`:''}${r.image?`<img class="reply-image" src="${esc(r.image)}" alt="留言圖片">`:''}${r.link?`<a class="reply-link" href="${esc(r.link)}" target="_blank" rel="noopener noreferrer">${esc(r.link)}</a>`:''}<div class="actions"><button class="action heart ${on?'liked':''}" data-reply-like="${key}">${icon('i-heart')}<span>${r.likes+(on?1:0)}</span></button><button class="action">${icon('i-comment')}<span>0</span></button><button class="action">${icon('i-repost')}<span>${r.reposts||0}</span></button><button class="action">${icon('i-send')}<span>${r.shares||0}</span></button></div></div></article>`}).join(''):'<div class="empty">尚無回覆</div>'}
+  </div>${r.text?`<p class="post-text">${esc(r.text)}</p>`:''}${r.image?`<img class="reply-image" src="${esc(r.image)}" alt="留言圖片">`:''}${r.link?`<a class="reply-link" href="${esc(r.link)}" target="_blank" rel="noopener noreferrer">${esc(r.link)}</a>`:''}<div class="actions"><button class="action heart ${on?'liked':''}" data-reply-like="${key}" data-base-likes="${baseLikes}">${icon('i-heart')}<span>${baseLikes+(on?1:0)}</span></button><button class="action">${icon('i-comment')}<span>0</span></button><button class="action">${icon('i-repost')}<span>${r.reposts||0}</span></button><button class="action">${icon('i-send')}<span>${r.shares||0}</span></button></div></div></article>`}).join(''):'<div class="empty">尚無回覆</div>'}
 function bindReplyActions(){
   $$('[data-reply-like]').forEach(b=>{
     b.onclick=e=>{
       e.stopPropagation();
 
-      const on=b.classList.toggle('liked');
-
-      localStorage.setItem(
-        'liked-'+b.dataset.replyLike,
-        on?'1':'0'
-      );
+      updateLikeButton(b,b.dataset.replyLike);
     };
   });
 

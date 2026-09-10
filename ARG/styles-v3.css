@@ -69,3 +69,54 @@ dialog{background:#1b1b1b!important;color:#fff!important;border:1px solid #38383
 #creatorDialog a:active{
   color:#e6e2d5;
 }
+
+/* 個人頁「回覆」分頁：原始串文與莉莉絲回覆的串線結構 */
+.reply-thread{
+  position:relative;
+  border-bottom:1px solid #303030;
+  background:#101010;
+  outline:none;
+}
+
+.reply-thread-parent .post{
+  position:relative;
+  border-bottom:0!important;
+  padding-bottom:8px;
+}
+
+.reply-thread-parent .post::after{
+  content:"";
+  position:absolute;
+  left:43px;
+  top:68px;
+  bottom:-8px;
+  width:2px;
+  background:#343434;
+}
+
+.reply-thread-response{
+  display:grid;
+  grid-template-columns:48px 1fr;
+  gap:11px;
+  padding:8px 22px 20px;
+  background:#101010;
+}
+
+.reply-thread-response .post-avatar{
+  width:44px;
+  height:44px;
+}
+
+.reply-thread:focus-visible{
+  box-shadow:inset 0 0 0 2px #777;
+}
+
+@media(max-width:430px){
+  .reply-thread-parent .post::after{
+    left:37px;
+  }
+
+  .reply-thread-response{
+    padding-inline:16px;
+  }
+}
