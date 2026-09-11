@@ -7,6 +7,10 @@ const RELEASE={
   portrait:'2026-11-12T12:00:00+08:00',
   altPost:'2026-11-13T12:00:00+08:00',
   xiaAppointment:'2026-11-13T10:05:00+08:00',
+  groupFilled:'2026-11-12T20:16:00+08:00',
+  groupArrivedOne:'2026-11-13T13:55:00+08:00',
+  groupArrivedTwo:'2026-11-13T13:58:00+08:00',
+  groupPing:'2026-11-13T14:03:00+08:00',
   xiaReplyDeadline:'2026-11-13T23:00:00+08:00',
   lilithMessages:'2026-11-14T09:00:00+08:00',
   xiaEarly:'2026-11-14T10:48:00+08:00',
@@ -159,7 +163,7 @@ const NEWS_POST={
     {handle:'nick_no_filter',avatar:'assets/nick_no_filter.webp',text:'完了，今年底里夫斯的當選大概已經確定了，我對未來感到絕望。',likes:402,reposts:37,shares:9},
     {handle:'helen_home',avatar:'assets/helen_home.webp',text:'里夫斯很好吧？至少長的蠻帥的啊。',likes:377,reposts:25,shares:5},
     {handle:'paperboy_7',avatar:'assets/paperboy_7.webp',text:'今天所有報紙都賣光了，下午的增刊也沒剩幾份！',likes:538,reposts:48,shares:11},
-    {handle:'mr_brown_g',avatar:'assets/mr_brown_g.webp',text:'留友看，帥又不能當飯吃。',likes:421,reposts:34,shares:8},
+    {handle:'mr_brown_g',avatar:'assets/mr_brown_g.webp',text:'留友看，帥真的可以當飯吃。',likes:421,reposts:34,shares:8},
     {handle:'mia_afterfive',avatar:'assets/mia.webp',text:'有人有懶人包嗎？話說上面是不是有個人是市府幕僚？',likes:263,reposts:18,shares:4},
     {handle:'oldtown_resident',avatar:'assets/oldtown_resident.webp',text:'都奈橋蓋這麼多年沒蓋好原來都是因為官商勾結。',likes:514,reposts:53,shares:18}
   ]
@@ -1051,6 +1055,40 @@ const ALT_POSTS=[
     replies:[]
   }
 ];
+const ALT_REPLY_POSTS=[
+  {
+    id:'alt-reply-1',
+    parentPost:{id:'alt-reply-parent-1',handle:'gotham_court_watch',avatar:'assets/avatar-2.svg',time:'2026-10-18',text:'希爾案到底什麼時候才會開庭？拖得也太久。',likes:116,reposts:14,shares:3,replies:[]},
+    handle:ALT.handle,avatar:ALT.avatar,time:'2026-10-18',text:'他不該被你們隔著螢幕審判。',likes:9,reposts:0,shares:0,replies:[]
+  },
+  {
+    id:'alt-reply-2',
+    parentPost:{id:'alt-reply-parent-2',handle:'blackgate_letters',avatar:'assets/person-rain.svg',time:'2026-09-27',text:'聽說最近一直有人往黑門監獄寄花，獄方到底會不會代收？',likes:73,reposts:5,shares:1,replies:[]},
+    handle:ALT.handle,avatar:ALT.avatar,time:'2026-09-27',text:'他不喜歡太甜的花香，鬱金香比較適合。',likes:7,reposts:0,shares:0,replies:[]
+  },
+  {
+    id:'alt-reply-3',
+    parentPost:{id:'alt-reply-parent-3',handle:'cityhall_archive',avatar:'assets/old_newspaper.webp',time:'2026-08-31',text:'整理舊檔案時找到希爾市長就任時的官方肖像。',likes:204,reposts:32,shares:8,replies:[]},
+    handle:ALT.handle,avatar:ALT.avatar,time:'2026-08-31',text:'你們只看得見被掛起來、又被撤下來的那一面。',likes:13,reposts:1,shares:0,replies:[]
+  },
+  {
+    id:'alt-reply-4',
+    parentPost:{id:'alt-reply-parent-4',handle:'gotham_old_video',avatar:'assets/history.webp',time:'2026-07-19',text:'翻到希爾市長十年前第一次競選時的演說影片。',likes:331,reposts:61,shares:18,replies:[]},
+    handle:ALT.handle,avatar:ALT.avatar,time:'2026-07-19',text:'他說這段話以前，整晚都沒有睡。',likes:11,reposts:0,shares:0,replies:[]
+  },
+  {
+    id:'alt-reply-5',
+    parentPost:{id:'alt-reply-parent-5',handle:'late_night_question',avatar:'assets/avatar-3.svg',time:'2026-05-04',text:'認識一個人多久，才有資格說自己真正了解他？',likes:88,reposts:9,shares:2,replies:[]},
+    handle:ALT.handle,avatar:ALT.avatar,time:'2026-05-04',text:'十年也不一定夠。',likes:6,reposts:0,shares:0,replies:[]
+  }
+];
+const ALT_INLINE_REPLY_PARENT_POSTS=ALT_REPLY_POSTS.map(reply=>({
+  ...reply.parentPost,
+  replies:[{
+    handle:reply.handle,avatar:reply.avatar,likeId:reply.id,time:reply.time,
+    text:reply.text,likes:reply.likes,reposts:reply.reposts,shares:reply.shares
+  }]
+}));
 const ACTIVITY_POSTS=[
  {id:'a8',handle:'old_mack_g',avatar:'assets/old_mack_g.webp',time:'5分鐘',text:'今天是單身節，我今年還是單身，哭了。',likes:42,reposts:8,shares:3,replies:[
 	{handle:'paper_cup_01',avatar:'assets/avatar-3.svg',text:'今天不是軍人節嗎?',likes:73,reposts:6,shares:2},
@@ -1096,7 +1134,7 @@ const ACTIVITY_POSTS=[
 const CHATS=[
  {id:'friend1',name:'小安',handle:'an_an',avatar:'assets/an_an.webp',time:'下午 6:42',preview:'週末還要去看展嗎？',messages:[['in','週末還要去看展嗎？'],['out','要啊，時間不變。'],['in','好，那我到了再叫你。']]},
  {id:'friend2',name:'艾利',handle:'ALY_1204',avatar:'assets/ALY_1204.webp',time:'昨天',preview:'你有看到那個貼文嗎？',messages:[['in','你有看到那個貼文嗎？有狗遺失，飼主懸賞十萬的那個'],['out','剛看到。怎麼了？'],['in','在我家附近，我有點想去找看看，哈。']]},
- {id:'group',name:'週五桌遊團',handle:' ',avatar:'assets/GAMEgroup.webp',time:'星期一',preview:'Mika：這週缺一個人',messages:[['in','Mika：這週缺一個人，有誰能帶朋友？'],['out','我再問問看。'],['in','Joe：記得不要再遲到了。']]}
+ {id:'group',name:'週五桌遊團',isGroup:true,subtitle:'你追蹤的其中4人在此聊天室中',avatar:'assets/GAMEgroup.webp',time:'星期一',preview:'Mika：這週缺一個人',messages:[['date','2026年11月9日 下午8:12'],['in','Mika：這週缺一個人，有誰能帶朋友？'],['out','我再問問看。'],['in','Joe：記得不要再遲到了。']]}
 ];
 const ALL_POSTS=[
   ...new Map(
@@ -1112,6 +1150,8 @@ const ALL_POSTS=[
       ...REPLY_POSTS,
       ...MEDIA_POSTS,
       ...REPOST_POSTS,
+      ...ALT_INLINE_REPLY_PARENT_POSTS,
+      ...ALT_REPLY_POSTS,
       ...ALT_POSTS,
       ...ACTIVITY_POSTS
     ].map(post=>[post.id,post])
@@ -1261,9 +1301,16 @@ const state={
   xiaAnEmergencyMessagesShown:Number(saved.xiaAnEmergencyMessagesShown)||0,
   lilithChatStarted:!!saved.lilithChatStarted,
   endingUnlocked:!!saved.endingUnlocked,
+  endingViewed:!!saved.endingViewed,
+  altChatHistory:Array.isArray(saved.altChatHistory)?saved.altChatHistory:[],
+  lilithChatHistory:Array.isArray(saved.lilithChatHistory)?saved.lilithChatHistory:[],
+  dailyNoClueNotices:new Set(saved.dailyNoClueNotices||[]),
+  gameEndNoticeDismissed:!!saved.gameEndNoticeDismissed,
   completionSignature:saved.completionSignature||'',
   view:'news',
-  previous:'news'
+  previous:'news',
+  lastHomeView:'news',
+  homeScrolls:{}
 };
 function save(){
   localStorage.setItem(
@@ -1287,6 +1334,11 @@ function save(){
       xiaAnEmergencyMessagesShown:state.xiaAnEmergencyMessagesShown,
       lilithChatStarted:state.lilithChatStarted,
       endingUnlocked:state.endingUnlocked,
+      endingViewed:state.endingViewed,
+      altChatHistory:state.altChatHistory,
+      lilithChatHistory:state.lilithChatHistory,
+      dailyNoClueNotices:[...state.dailyNoClueNotices],
+      gameEndNoticeDismissed:state.gameEndNoticeDismissed,
       completionSignature:state.completionSignature
     })
   );
@@ -1362,9 +1414,18 @@ function replyThreadHTML(reply){
     </article>
   </div>`;
 }
-function renderFeed(list=profilePosts(),target='#feed'){
+const EMPTY_TAB_TEXT={
+  posts:'尚未發布任何串文',
+  replies:'尚未發布任何回覆',
+  media:'尚未發布任何影音內容',
+  reposts:'尚未轉發任何串文'
+};
+let newsProfileTab='posts';
+let altProfileTab='posts';
+let viewerProfileTab='posts';
+function renderFeed(list=profilePosts(),target='#feed',emptyText='目前沒有內容'){
   const el=$(target);
-  el.innerHTML=list.length?list.map(p=>(p.parentId||p.parentPost)?replyThreadHTML(p):postHTML(p)).join(''):'<div class="empty">目前沒有內容</div>';
+  el.innerHTML=list.length?list.map(p=>(p.parentId||p.parentPost)?replyThreadHTML(p):postHTML(p)).join(''):`<div class="empty">${esc(emptyText)}</div>`;
   bindActions();
 }
 function updateLikeButton(button,storageKey){
@@ -1393,11 +1454,19 @@ function bindActions(){
   $$('[data-news-profile-link]').forEach(x=>{const open=e=>{if(e.type==='keydown'&&!['Enter',' '].includes(e.key))return;e.preventDefault();e.stopPropagation();showView('newsProfile',state.view);renderNewsProfile()};x.onclick=open;x.onkeydown=open});
   $$('[data-alt-profile-link]').forEach(x=>{const open=e=>{if(e.type==='keydown'&&!['Enter',' '].includes(e.key))return;e.preventDefault();e.stopPropagation();openAlt()};x.onclick=open;x.onkeydown=open});
 }
+const HOME_VIEWS=new Set(['news','newsProfile','profile','alt']);
+
 function showView(v,previous=state.view,addHistory=true){
   if(!$('#'+v+'View'))return;
 
+  if(HOME_VIEWS.has(state.view)&&!HOME_VIEWS.has(v)){
+    state.lastHomeView=state.view;
+    state.homeScrolls[state.view]=window.scrollY;
+  }
+
   state.previous=previous;
   state.view=v;
+  if(HOME_VIEWS.has(v))state.lastHomeView=v;
 
   $$('.view').forEach(view=>{
     view.classList.remove('active');
@@ -1431,6 +1500,19 @@ function showView(v,previous=state.view,addHistory=true){
   }
 
   scrollTo(0,0);
+}
+
+function openRememberedHome(){
+  if(HOME_VIEWS.has(state.view)){
+    showView('news',state.view);
+    renderNews();
+    return;
+  }
+
+  const target=state.lastHomeView||'news';
+  const savedScroll=state.homeScrolls[target]||0;
+  showView(target,state.view);
+  requestAnimationFrame(()=>scrollTo(0,savedScroll));
 }
 function repliesHTML(p){const ordered=(p.replies||[]).map((r,i)=>({...r,index:i})).sort((a,b)=>Number(b.ownerLiked)-Number(a.ownerLiked));return ordered.length?ordered.map(r=>{
   const key=r.likeId||(p.id+'r'+r.index);
@@ -1494,10 +1576,17 @@ function bindReplyActions(){
 function renderNews(){$('#newsPost').innerHTML=postHTML(NEWS_POST,true);$('#newsReplies').innerHTML=repliesHTML(NEWS_POST);bindActions();bindReplyActions()}
 function releasedScheduledNews(){return SCHEDULED_NEWS_POSTS.filter(post=>hasArrived(post.publishedAt))}
 function releasedProfileOnlyNews(){return PROFILE_ONLY_SCHEDULED_NEWS.filter(post=>hasArrived(post.publishedAt))}
-function renderNewsProfile(){
-  $('#newsProfileAvatar').src=NEWS_PROFILE.avatar;$('#newsProfileName').textContent=NEWS_PROFILE.name;$('#newsProfileHandle').textContent=NEWS_PROFILE.handle;
+function newsProfilePosts(){
   const scheduled=[...releasedScheduledNews(),...releasedProfileOnlyNews()].sort((a,b)=>timeMs(b.publishedAt)-timeMs(a.publishedAt));
-  renderFeed([...scheduled,...NEWS_RECENT_POSTS,NEWS_POST,...NEWS_PROFILE_POSTS],'#newsProfileFeed');
+  return [...scheduled,...NEWS_RECENT_POSTS,NEWS_POST,...NEWS_PROFILE_POSTS];
+}
+function renderNewsProfile(tab=newsProfileTab){
+  newsProfileTab=tab;
+  $('#newsProfileAvatar').src=NEWS_PROFILE.avatar;$('#newsProfileName').textContent=NEWS_PROFILE.name;$('#newsProfileHandle').textContent=NEWS_PROFILE.handle;
+  $$('[data-news-tab]').forEach(button=>button.classList.toggle('active',button.dataset.newsTab===tab));
+  const posts=newsProfilePosts();
+  const content={posts,replies:[],media:posts.filter(post=>post.image),reposts:[]}[tab]||[];
+  renderFeed(content,'#newsProfileFeed',EMPTY_TAB_TEXT[tab]);
 }
 function openPost(id){
   const p=ALL_POSTS.find(x=>x.id===id);
@@ -1543,17 +1632,44 @@ function renderProgress(){
 }
 let completionTimer=null;
 
+const GAME_START_DAY='2026-11-11';
+const GAME_LAST_DAY='2026-11-14';
+const GAME_ENDED_DAY='2026-11-15';
+
+function currentTaipeiDay(){return dateInTaipei(Date.now())}
+
+function clueReleaseDay(clue){
+  const post=ALL_POSTS.find(item=>item.id===clue.postId);
+  if(!post||!post.publishedAt)return GAME_START_DAY;
+  const day=dateInTaipei(post.publishedAt);
+  return day<GAME_START_DAY?GAME_START_DAY:day;
+}
+
+function getAvailableClues(){
+  const today=currentTaipeiDay();
+  return CLUES.filter(clue=>clueReleaseDay(clue)<=today);
+}
+
+function getTodayClues(){
+  const today=currentTaipeiDay();
+  return CLUES.filter(clue=>clueReleaseDay(clue)===today);
+}
+
 function getCompletionSignature(){
-  return CLUES
+  return getAvailableClues()
     .map(c=>c.id)
     .sort()
     .join('|');
 }
 
 function checkCompletion(){
-  if(!CLUES.length)return;
+  const today=currentTaipeiDay();
+  if(today>GAME_LAST_DAY||(today===GAME_LAST_DAY&&state.endingViewed))return;
 
-  const collectedAll=CLUES.every(c=>{
+  const availableClues=getAvailableClues();
+  if(!availableClues.length)return;
+
+  const collectedAll=availableClues.every(c=>{
     return state.unlocked.has(c.id);
   });
 
@@ -1574,11 +1690,15 @@ function checkCompletion(){
   completionTimer=setTimeout(()=>{
     completionTimer=null;
 
-    const stillCollectedAll=CLUES.every(c=>{
+    const currentAvailableClues=getAvailableClues();
+    const stillCollectedAll=currentAvailableClues.every(c=>{
       return state.unlocked.has(c.id);
     });
 
     if(!stillCollectedAll)return;
+
+    const currentSignature=getCompletionSignature();
+    if(currentSignature!==signature)return;
 
     state.completionSignature=signature;
     save();
@@ -1589,6 +1709,28 @@ function checkCompletion(){
       dialog.showModal();
     }
   },5000);
+}
+
+function checkDailyAndGameNotices(isStartup=false){
+  const today=currentTaipeiDay();
+  const shouldShowGameEnd=today>=GAME_ENDED_DAY||(isStartup&&today===GAME_LAST_DAY&&state.endingViewed);
+
+  if(shouldShowGameEnd){
+    if(!state.gameEndNoticeDismissed){
+      const dialog=$('#gameEndDialog');
+      if(dialog&&!dialog.open)dialog.showModal();
+    }
+    return;
+  }
+
+  if(today<GAME_START_DAY||today>GAME_LAST_DAY)return;
+  if(getTodayClues().length)return;
+  if(state.dailyNoClueNotices.has(today))return;
+
+  state.dailyNoClueNotices.add(today);
+  save();
+  const dialog=$('#dailyNoClueDialog');
+  if(dialog&&!dialog.open)dialog.showModal();
 }
 function renderPeople(type='followers'){
   const list=type==='followers'?FOLLOWERS:FOLLOWING;
@@ -1601,20 +1743,28 @@ function renderPeople(type='followers'){
   $$('[data-person-follow]').forEach(b=>b.onclick=()=>{const on=b.classList.toggle('following');b.textContent=on?'追蹤中':'追蹤'});
 }
 function openAlt(){if(!hasArrived(RELEASE.portrait))return;showView('alt');renderAlt()}
-function renderAlt(){
+function renderAlt(tab=altProfileTab){
+  altProfileTab=tab;
   $('#altProfileAvatar').src=ALT.avatar;
   const follow=$('#altFollowBtn');follow.textContent=state.altFollowed?'追蹤中':'追蹤';follow.classList.toggle('following',state.altFollowed);
-  const canViewFeed=state.mutual||hasArrived(RELEASE.altPost);
+  const canViewFeed=state.mutual;
   $('#followsYou').classList.toggle('hidden',!state.mutual);
   $('#altGate').classList.toggle('hidden',canViewFeed);
   $('#altFeed').classList.toggle('hidden',!canViewFeed);
-  if(canViewFeed)renderFeed(ALT_POSTS.filter(post=>post.id!=='alt-1113-fraction'||hasArrived(post.publishedAt)),'#altFeed');
+  $$('[data-alt-tab]').forEach(button=>button.classList.toggle('active',button.dataset.altTab===tab));
+  if(canViewFeed){
+    const posts=ALT_POSTS.filter(post=>post.id!=='alt-1113-fraction'||hasArrived(post.publishedAt));
+    const content={posts,replies:ALT_REPLY_POSTS,media:posts.filter(post=>post.image),reposts:[]}[tab]||[];
+    renderFeed(content,'#altFeed',EMPTY_TAB_TEXT[tab]);
+  }
 }
 function followAlt(){if(state.altFollowed)return;state.altFollowed=true;state.unreadChats.add('alt');save();renderAlt();updateUnread();updateActivityBadge();toast('追蹤邀請已送出')}
 function syncTimedChatUnread(){
   if(hasArrived(RELEASE.xiaAppointment)&&!state.seenChatEvents.has('xia-appointment'))state.unreadChats.add('friend1');
   if(hasArrived(RELEASE.xiaReplyDeadline)&&!state.xiaAnAppointmentReplied&&!state.seenChatEvents.has('xia-reminder'))state.unreadChats.add('friend1');
   if(hasArrived(RELEASE.xiaEarly)&&!state.seenChatEvents.has('xia-early'))state.unreadChats.add('friend1');
+  if(hasArrived(RELEASE.groupFilled)&&!state.seenChatEvents.has('group-filled'))state.unreadChats.add('group');
+  if(hasArrived(RELEASE.groupArrivedOne)&&!state.seenChatEvents.has('group-meet'))state.unreadChats.add('group');
 }
 function xiaMessages(){
   const messages=[['date','2026年11月11日 上午11:23'],...CHATS.find(chat=>chat.id==='friend1').messages];
@@ -1651,7 +1801,19 @@ if(hasArrived(RELEASE.xiaEarly)){
   }
   return messages;
 }
-function chatMessages(chat){return chat.id==='friend1'?xiaMessages():chat.messages}
+function groupMessages(){
+  const messages=[...CHATS.find(chat=>chat.id==='group').messages];
+  if(hasArrived(RELEASE.groupFilled))messages.push(['date','2026年11月12日 下午8:16'],['in','JOY：我約到人了囉~']);
+  if(hasArrived(RELEASE.groupArrivedOne))messages.push(['date','2026年11月13日 下午1:55'],['in','Mika：我到了']);
+  if(hasArrived(RELEASE.groupArrivedTwo))messages.push(['in','JOY：我也到了']);
+  if(hasArrived(RELEASE.groupPing))messages.push(['in','Joe：@irrelevant.me 你到了嗎?']);
+  return messages;
+}
+function chatMessages(chat){
+  if(chat.id==='friend1')return xiaMessages();
+  if(chat.id==='group')return groupMessages();
+  return chat.messages;
+}
 function renderMessages(){
   syncTimedChatUnread();
   const mystery=state.altFollowed?`<button class="message-row" data-chat="alt"><img class="avatar" src="${ALT.avatar}" alt="${ALT.name}"><span><strong>${ALT.handle}</strong><small>你也喜歡他？那你也記得他的生日嗎？</small></span>${state.unreadChats.has('alt')?'<i class="unread-dot">1</i>':''}</button>`:'';
@@ -1664,7 +1826,7 @@ function renderMessages(){
 			<small>
 			  ${state.endingUnlocked
 				? '你怎麼知道這些事情？'
-				: '尚無訊息'
+				: state.lilithChatHistory.at(-1)?.text||'尚無訊息'
 			  }
 			</small>
 		  </span>
@@ -1703,7 +1865,7 @@ function refreshRelativeTimeLabels(){
 let lastTimelineSignature='';
 function refreshTimeline(){
   syncTimedChatUnread();
-  const signature=[...eligibleActivityEvents(),...releasedProfileOnlyNews().map(post=>post.id),hasArrived(RELEASE.xiaAppointment),hasArrived(RELEASE.xiaReplyDeadline),hasArrived(RELEASE.lilithMessages),hasArrived(RELEASE.xiaEarly)].join('|');
+  const signature=[...eligibleActivityEvents(),...releasedProfileOnlyNews().map(post=>post.id),hasArrived(RELEASE.xiaAppointment),hasArrived(RELEASE.xiaReplyDeadline),hasArrived(RELEASE.lilithMessages),hasArrived(RELEASE.xiaEarly),hasArrived(RELEASE.groupFilled),hasArrived(RELEASE.groupArrivedOne),hasArrived(RELEASE.groupArrivedTwo),hasArrived(RELEASE.groupPing)].join('|');
   if(signature!==lastTimelineSignature){
     lastTimelineSignature=signature;
     if(state.view==='newsProfile')renderNewsProfile();
@@ -1717,9 +1879,17 @@ function refreshTimeline(){
       }
       renderRegularChat(CHATS.find(chat=>chat.id==='friend1'));
     }
+    if(state.view==='chat'&&activeChatId==='group'){
+      if(hasArrived(RELEASE.groupFilled))state.seenChatEvents.add('group-filled');
+      if(hasArrived(RELEASE.groupArrivedOne))state.seenChatEvents.add('group-meet');
+      state.unreadChats.delete('group');
+      renderRegularChat(CHATS.find(chat=>chat.id==='group'));
+    }
     updateUnread();updateActivityBadge();save();
   }
   refreshRelativeTimeLabels();
+  checkCompletion();
+  checkDailyAndGameNotices(false);
 }
 function openChat(){
   showView('chat','messages');
@@ -1728,17 +1898,18 @@ function openChat(){
   save();
   updateUnread();
 
+  const history=state.altChatHistory.length
+    ? state.altChatHistory
+    : state.mutual?[{text:'0831',correct:true}]:[];
+
   $('#chatBody').innerHTML=`
     <div class="date-divider">今天</div>
     <div class="bubble incoming">你也喜歡他？那你也記得他的生日嗎？</div>
-    ${state.mutual
-      ? `
-        <div class="bubble outgoing">0831</div>
-        <div class="bubble incoming">答對了，我追蹤你了。</div>
-        <button class="view-alt-btn" id="viewAltFromChat">查看帳號</button>
-      `
-      : ''
-    }
+    ${history.map(item=>`
+      <div class="bubble outgoing">${esc(item.text)}</div>
+      <div class="bubble incoming">${item.correct?'答對了，我追蹤你了。':'答錯了。'}</div>
+    `).join('')}
+    ${state.mutual?'<button class="view-alt-btn" id="viewAltFromChat">查看帳號</button>':''}
   `;
 
   const input=$('#codeInput');input.inputMode='numeric';input.maxLength=4;input.placeholder='輸入答案';
@@ -1753,8 +1924,22 @@ const ENDING_CONTENT={
   text:'我最親愛的，漢密爾頓：\n「明天，和明天，和明天，一天接著一天，以蹣跚的步伐向前挪去。」\n相信不必多說，你便知道我引用的是哪一齣悲劇。現在外頭的人都這麼說。他們說你是馬克白，受野心與理想驅使，最終自取滅亡。但我始終相信，我們所做的是正確的事——即使世人不明白，即使你我至親之人也不明白。\n我知道你的理想，甚至可以說，我大概是這世上最盼望它成真的人，請你務必記得這一點：我始終站在你這一邊。\n另外，務必謹言慎行。無論文字或話語，一個不合時宜的停頓，都可能造成不必要的誤會；一兩週前我收到你的來信。你在上頭寫著：「我最親愛的，莉莉絲。」\n我希望那個逗號是你故意放的，但我猜不是。\n我知道你向來不樂意講究那些標點符號。放在以前，我自然會替你一一審查講稿和條文；但如今我不在你身邊，請萬事小心。\n\n莉莉絲。\n\n\n\n\n／\n\n\n\n\n「我說過我討厭菸味。」\n莉莉絲．凱特拉開車門，迎面而來的煙霧濃得幾乎令人窒息。她皺了皺眉，向後退開兩步，等車裡的煙散得差不多了，才抱著那束鬱金香坐進副駕駛座。\n「打扮得真隆重。」索恩偏過頭，打量了一眼她身上的白色風衣，輕聲嗤笑，「一個手下敗將，值得嗎？」\n「他是我的導師。」莉莉絲神色冷淡地望向窗外，顯然沒有繼續交談的興致。\n索恩倒不介意。他一手搭著方向盤，對著身旁這個身形幾乎只有自己一半大的女人喋喋不休，「不只如此吧？你跑來投靠我，親手把他弄到這副境地，現在倒擺起學生的架子了。真搞不懂你到底在想什麼……」\n「不管我在想什麼，都和你無關。」莉莉絲望著窗外飛速掠過的街景。\n導師嗎？確實不只如此。\n漢密爾頓．希爾是她的伯樂，是她的恩人，是她的導師和戰友，希爾可以用一個眼神告訴她該往哪走，也可以通過筆尖的輕輕一撇使她心煩意亂。\n她跟在這個人身邊十年，整整十年。她替他修改講稿，替他斟酌那些他從來懶得在意的字句和標點，替他記得每一場會議、每一個承諾，也比任何人都更清楚，他究竟想把高譚變成什麼模樣。\n她知道他的理想，甚至比希爾本人更清楚那些理想，所以她當然也比任何人更早看見結局——莉莉絲從一開始就知道漢密爾頓．希爾會走向滅亡。\n她提醒過他，一次，兩次，無數次，可希爾不以為意。他沉醉在那個近在咫尺的未來裡，一步一步向前走，從未回過頭來看她一眼。\n於是最後，莉莉絲替他停了下來，她將漢密爾頓．希爾出賣給索恩，親手驗證了自己早已說過無數次的預言。\n看吧，我早就告訴過你。莉莉絲垂下眼，指尖輕輕撫過懷裡鬱金香的花瓣，車窗上映出她模糊的倒影。她看著那張臉，忽然很輕地彎起嘴角。\n十分鐘。\n再十分鐘。\n她幾乎已經等不及了。\n至少現在他終於只能看著我了，我最親愛的，漢密爾頓。',
   image:'' // 需要結局圖片時填入，例如：assets/ending.webp
 };
+let endingTypingTimer=null;
 function renderEnding(){
-  $('#endingText').textContent=ENDING_CONTENT.text;
+  clearTimeout(endingTypingTimer);
+  const text=$('#endingText');
+  const characters=Array.from(ENDING_CONTENT.text);
+  let index=0;
+  text.textContent='';
+
+  const typeNextCharacter=()=>{
+    if(state.view!=='ending')return;
+    text.textContent+=characters[index]||'';
+    index++;
+    if(index<characters.length)endingTypingTimer=setTimeout(typeNextCharacter,28);
+  };
+
+  typeNextCharacter();
   const image=$('#endingImage');
   image.classList.toggle('hidden',!ENDING_CONTENT.image);
   if(ENDING_CONTENT.image)image.src=ENDING_CONTENT.image;
@@ -1772,6 +1957,9 @@ function openLilithChat(){
 
   activeChatId='lilith';
   showView('chat','messages');
+  const history=state.lilithChatHistory.length
+    ? state.lilithChatHistory
+    : state.endingUnlocked?[{text:'你今天要去見他嗎？',correct:true}]:[];
 
   $('#chatBody').innerHTML=`
     <div class="chat-person">
@@ -1786,30 +1974,12 @@ function openLilithChat(){
       </span>
     </div>
 
-    ${
-      state.endingUnlocked
-        ? `
-          <div class="bubble outgoing">
-            你今天要去見他嗎？
-          </div>
-
-          <div class="bubble incoming">
-            你是誰？
-          </div>
-
-          <div class="bubble incoming">
-            你怎麼知道這些事情？
-          </div>
-
-          <button
-            class="view-alt-btn"
-            id="showEndingBtn"
-          >
-            顯示結局
-          </button>
-        `
-        : ''
-    }
+    ${history.map(item=>`<div class="bubble outgoing">${esc(item.text)}</div>`).join('')}
+    ${state.endingUnlocked?`
+      <div class="bubble incoming">你是誰？</div>
+      <div class="bubble incoming">你怎麼知道這些事情？</div>
+      <button class="view-alt-btn" id="showEndingBtn">顯示結局</button>
+    `:''}
   `;
 
   const input=$('#codeInput');
@@ -1825,6 +1995,8 @@ function openLilithChat(){
 
   if(state.endingUnlocked){
     $('#showEndingBtn').onclick=()=>{
+      state.endingViewed=true;save();
+      if(completionTimer){clearTimeout(completionTimer);completionTimer=null}
       showView('ending','chat');
       renderEnding();
     };
@@ -1836,7 +2008,8 @@ function chatMessageHTML(message){
   return `<div class="bubble ${message[0]==='in'?'incoming':'outgoing'}">${esc(message[1])}</div>`;
 }
 function renderRegularChat(c){
-  $('#chatBody').innerHTML=`<div class="chat-person"><img class="avatar" src="${c.avatar}" alt="${esc(c.name)}"><strong>${esc(c.name)}</strong><span>@${esc(c.handle)}</span></div>${chatMessages(c).map(chatMessageHTML).join('')}`;
+  const subtitle=c.isGroup?c.subtitle:`@${c.handle}`;
+  $('#chatBody').innerHTML=`<div class="chat-person"><img class="avatar" src="${c.avatar}" alt="${esc(c.name)}"><strong>${esc(c.name)}</strong><span>${esc(subtitle)}</span></div>${chatMessages(c).map(chatMessageHTML).join('')}`;
   bindActions();
   const input=$('#codeInput');
   const canReply=c.id==='friend1'&&hasArrived(RELEASE.xiaAppointment)&&!hasArrived(RELEASE.xiaReplyDeadline)&&!state.xiaAnAppointmentReplied;
@@ -1870,6 +2043,11 @@ function openRegularChat(id){
       state.xiaAnEmergencyTriggered=true;state.xiaAnEmergencyMessagesShown=0;
     }
   }
+  if(id==='group'){
+    if(hasArrived(RELEASE.groupFilled))state.seenChatEvents.add('group-filled');
+    if(hasArrived(RELEASE.groupArrivedOne))state.seenChatEvents.add('group-meet');
+    state.unreadChats.delete('group');
+  }
   save();updateUnread();renderRegularChat(c);
   if(id==='friend1')continueXiaEmergency();
 }
@@ -1879,6 +2057,16 @@ $('#followBtn').onclick=()=>{  toggleProfileFollow('#followBtn',PROFILE.handle);
 $('#messageBtn').onclick=()=>(state.lilithChatStarted||hasArrived(RELEASE.lilithMessages))?openLilithChat():$('#messageDialog').showModal();
 $('#closeDialog').onclick=()=>$('#messageDialog').close();
 $('#closeCompletionDialog').onclick=()=>$('#completionDialog').close();
+$('#closeDailyNoClueDialog').onclick=()=>$('#dailyNoClueDialog').close();
+$('#closeGameEndDialog').onclick=()=>{
+  state.gameEndNoticeDismissed=true;
+  save();
+  $('#gameEndDialog').close();
+};
+$('#gameEndDialog').addEventListener('close',()=>{
+  state.gameEndNoticeDismissed=true;
+  save();
+});
 
 function openCreatorDialog(){
   $('#creatorDialog').showModal();
@@ -1917,6 +2105,10 @@ $('#codeForm').onsubmit=e=>{
 
 if(activeChatId==='lilith'){
   const message=input.value.trim();
+  const correct=message==='你今天要去見他嗎？';
+
+  state.lilithChatHistory.push({text:message,correct});
+  save();
 
   input.value='';
 
@@ -1925,7 +2117,7 @@ if(activeChatId==='lilith'){
     `<div class="bubble outgoing">${esc(message)}</div>`
   );
 
-  if(message==='你喜歡希爾對嗎?'){
+  if(correct){
     state.endingUnlocked=true;
     save();
 
@@ -1977,6 +2169,8 @@ setTimeout(()=>{
   );
 
   $('#showEndingBtn').onclick=()=>{
+    state.endingViewed=true;save();
+    if(completionTimer){clearTimeout(completionTimer);completionTimer=null}
     showView('ending','chat');
     renderEnding();
   };
@@ -2014,13 +2208,18 @@ state.xiaAnDeclined=declineKeywords.some(keyword=>{
   }
 
   const accepted=['八三一','831','0831','8/31','０８／３１','8月31日','八月三十一日','8月31號','8月31','８／３１'];
+  const altMessage=input.value.trim();
+  const altCorrect=accepted.includes(answer);
+
+  state.altChatHistory.push({text:altMessage,correct:altCorrect});
+  save();
 
   $('#chatBody').insertAdjacentHTML(
     'beforeend',
     `<div class="bubble outgoing">${esc(input.value.trim())}</div>`
   );
 
-  if(accepted.includes(answer)){
+  if(altCorrect){
     state.mutual=true;
     save();
 
@@ -2042,8 +2241,24 @@ state.xiaAnDeclined=declineKeywords.some(keyword=>{
     input.value='';
   }
 };
-$$('[data-nav]').forEach(b=>b.onclick=()=>{const v=b.dataset.nav;showView(v,v);if(v==='messages')renderMessages();if(v==='activity')renderActivity(true);if(v==='search')renderProgress()});
+$$('[data-nav]').forEach(b=>b.onclick=()=>{
+  const v=b.dataset.nav;
+  if(v==='news'){openRememberedHome();return}
+  showView(v,v);
+  if(v==='messages')renderMessages();
+  if(v==='activity')renderActivity(true);
+  if(v==='search')renderProgress();
+  if(v==='viewer')renderViewerTab();
+});
 const TAB_CONTENT={replies:REPLY_POSTS,media:MEDIA_POSTS,reposts:REPOST_POSTS};$$('[data-profile-tab]').forEach(b=>b.onclick=()=>{$$('[data-profile-tab]').forEach(x=>x.classList.remove('active'));b.classList.add('active');renderFeed(b.dataset.profileTab==='posts'?profilePosts():TAB_CONTENT[b.dataset.profileTab])});
+$$('[data-news-tab]').forEach(button=>button.onclick=()=>renderNewsProfile(button.dataset.newsTab));
+$$('[data-alt-tab]').forEach(button=>button.onclick=()=>renderAlt(button.dataset.altTab));
+function renderViewerTab(tab=viewerProfileTab){
+  viewerProfileTab=tab;
+  $$('[data-viewer-tab]').forEach(button=>button.classList.toggle('active',button.dataset.viewerTab===tab));
+  renderFeed([],'#viewerFeed',EMPTY_TAB_TEXT[tab]);
+}
+$$('[data-viewer-tab]').forEach(button=>button.onclick=()=>renderViewerTab(button.dataset.viewerTab));
 $('#searchInput').oninput=e=>{const q=e.target.value.trim().toLowerCase();if(q==='0826')unlock('p3');const list=POSTS.filter(p=>(p.text+(p.clue||'')+(p.clueTitle||'')).toLowerCase().includes(q));$('#searchResults').innerHTML=q?`<div class="reply-heading">搜尋結果</div>${list.map(p=>postHTML(p)).join('')}`:'';bindActions()};
 history.replaceState(
   {
@@ -2083,6 +2298,10 @@ window.addEventListener('popstate',event=>{
   if(view==='newsProfile'){
     renderNewsProfile();
   }
+
+  if(view==='viewer'){
+    renderViewerTab();
+  }
 });
 initProfile();
 renderFollowStates();
@@ -2090,10 +2309,12 @@ renderNews();
 unlock(NEWS_POST.id);
 renderNewsProfile();
 renderFeed();
+renderViewerTab();
 renderProgress();
 updateUnread();
 updateActivityBadge();
 renderMessages();
 checkCompletion();
+checkDailyAndGameNotices(true);
 refreshTimeline();
 setInterval(refreshTimeline,30000);

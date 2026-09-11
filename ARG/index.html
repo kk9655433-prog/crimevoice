@@ -55,7 +55,7 @@
           <button id="newsMessageBtn" class="pill">發送訊息</button>
         </div>
       </section>
-      <div class="tabs"><button class="active">串文</button><button>回覆</button><button>影音內容</button><button>轉發</button></div>
+      <div class="tabs"><button class="active" data-news-tab="posts">串文</button><button data-news-tab="replies">回覆</button><button data-news-tab="media">影音內容</button><button data-news-tab="reposts">轉發</button></div>
       <div id="newsProfileFeed"></div>
     </section>
 
@@ -94,6 +94,7 @@
         <p class="stats">31 位粉絲 · 9 人追蹤中</p>
         <div class="profile-actions"><button id="altFollowBtn" class="pill primary">追蹤</button><button class="pill" id="altMessageBtn">發送訊息</button></div>
       </section>
+      <div class="tabs"><button class="active" data-alt-tab="posts">串文</button><button data-alt-tab="replies">回覆</button><button data-alt-tab="media">影音內容</button><button data-alt-tab="reposts">轉發</button></div>
       <div id="altGate" class="locked-card"><div class="lock-mark">↯</div><h2>這是私人帳號</h2><p>你們需要互相追蹤，才能查看這個帳號的串文。</p></div>
       <div id="altFeed" class="hidden"></div>
     </section>
@@ -112,7 +113,7 @@
 
     <section id="activityView" class="view list-view"><div class="section-title"><h1>動態</h1><p>為你推薦</p></div><div id="activityFeed"></div></section>
 
-    <section id="viewerView" class="view viewer-view"><section class="profile"><div class="profile-head"><div><h1>無關緊要的我</h1><p class="handle">irrelevant.me</p></div><div class="avatar viewer-avatar">我</div></div><p class="bio">只是碰巧看到這些串文的人。</p><p class="stats">0 位粉絲 · 83 人追蹤中</p></section><div class="empty">尚未發布任何串文</div></section>
+    <section id="viewerView" class="view viewer-view"><section class="profile"><div class="profile-head"><div><h1>無關緊要的我</h1><p class="handle">irrelevant.me</p></div><div class="avatar viewer-avatar">我</div></div><p class="bio">只是碰巧看到這些串文的人。</p><p class="stats">0 位粉絲 · 83 人追蹤中</p></section><div class="tabs"><button class="active" data-viewer-tab="posts">串文</button><button data-viewer-tab="replies">回覆</button><button data-viewer-tab="media">影音內容</button><button data-viewer-tab="reposts">轉發</button></div><div id="viewerFeed"></div></section>
 
     <section id="searchView" class="view search-view">
       <label class="searchbox"><svg><use href="#i-search"></use></svg><input id="searchInput" type="search" placeholder="搜尋" autocomplete="off"></label>
@@ -155,6 +156,20 @@
 
   <button id="closeCreatorDialog">關閉</button>
 </dialog>
+
+<dialog id="dailyNoClueDialog" class="completion-dialog">
+  <div class="modal-icon">!</div>
+  <h2>今日沒有新線索耶</h2>
+  <p>但你可以探索一下今天有什麼新串文？</p>
+  <button id="closeDailyNoClueDialog">繼續探索</button>
+</dialog>
+
+<dialog id="gameEndDialog" class="completion-dialog">
+  <div class="modal-icon">✓</div>
+  <h2>遊戲已經結束囉！</h2>
+  <p>但你還是可以來看看曾經發生過什麼？</p>
+  <button id="closeGameEndDialog">繼續看看</button>
+</dialog>
   
   <dialog id="completionDialog" class="completion-dialog">
   <div class="modal-icon">✓</div>
@@ -164,7 +179,7 @@
 </dialog>
 
   <div id="toast" role="status" aria-live="polite"></div>
-  <script src="./app.js?v=aaa13"></script>
+  <script src="./app.js?v=aaa15"></script>
 
 
 </body></html>
