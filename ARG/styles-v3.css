@@ -120,3 +120,29 @@ dialog{background:#1b1b1b!important;color:#fff!important;border:1px solid #38383
     padding-inline:16px;
   }
 }
+.feed-reason{
+  color:#8c8c8c;
+  font-size:.85rem;
+  padding:5px 0 8px;
+}
+.nav-activity{position:relative}
+.shared-post{
+  display:flex;
+  flex-direction:column;
+  gap:5px;
+  width:min(82%,360px);
+  margin:8px 0 8px auto;
+  padding:12px;
+  border:1px solid #444;
+  border-radius:14px;
+  background:#181818;
+  color:inherit;
+  text-align:left;
+}
+.shared-post span{color:#bbb}
+.ending-view{min-height:calc(100vh - 128px)}
+.ending-story{padding:34px 24px 90px;line-height:1.9}
+.ending-story h1{margin:0 0 24px;font-size:28px}
+.ending-story p{white-space:pre-wrap;font-size:16px}
+.ending-image{display:block;width:100%;height:auto;margin:0 0 24px;border-radius:12px}
+.ending-image.hidden{display:none}

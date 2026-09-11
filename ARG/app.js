@@ -1,4 +1,43 @@
 /* ===== 主要資料：文字與圖片路徑都可在這裡替換 ===== */
+const APP_TIME_ZONE='Asia/Taipei';
+const MINUTE=60*1000;
+const HOUR=60*MINUTE;
+const DAY=24*HOUR;
+const RELEASE={
+  portrait:'2026-11-12T12:00:00+08:00',
+  altPost:'2026-11-13T12:00:00+08:00',
+  xiaAppointment:'2026-11-13T10:05:00+08:00',
+  xiaReplyDeadline:'2026-11-13T23:00:00+08:00',
+  lilithMessages:'2026-11-14T09:00:00+08:00',
+  xiaEarly:'2026-11-14T10:48:00+08:00',
+  museumExplosion:'2026-11-14T11:00:00+08:00'
+};
+
+function timeMs(value){return new Date(value).getTime()}
+function hasArrived(value,now=Date.now()){return now>=timeMs(value)}
+function dateInTaipei(value){
+  const parts=new Intl.DateTimeFormat('en-CA',{timeZone:APP_TIME_ZONE,year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date(value));
+  const get=type=>parts.find(part=>part.type===type)?.value||'';
+  return `${get('year')}-${get('month')}-${get('day')}`;
+}
+function formatPublishedTime(item,now=Date.now()){
+  if(!item?.publishedAt)return item?.time||'';
+  const published=timeMs(item.publishedAt);
+  const diff=now-published;
+  if(diff>=0){
+    if(diff<MINUTE)return '剛剛';
+    if(diff<HOUR)return `${Math.floor(diff/MINUTE)}分鐘`;
+    if(diff<DAY)return `${Math.floor(diff/HOUR)}小時`;
+    if(diff<7*DAY)return `${Math.floor(diff/DAY)}天`;
+    return dateInTaipei(published);
+  }
+  const ahead=-diff;
+  if(ahead<MINUTE)return '即將發布';
+  if(ahead<HOUR)return `${Math.ceil(ahead/MINUTE)}分鐘後`;
+  if(ahead<DAY)return `${Math.ceil(ahead/HOUR)}小時後`;
+  if(ahead<30*DAY)return `${Math.ceil(ahead/DAY)}天後`;
+  return `${Math.max(1,Math.round(ahead/(30*DAY)))}個月後`;
+}
 const PROFILE={name:'莉莉絲・凱特',handle:'lilith.kate',flag:'🇺🇸',location:'高譚',bio:'高譚人\n這裡的言論僅代表我個人。\n1994/08/21',tags:['#Gotham','#Democrats','#公共政策'],followers:'1,284',following:'156',avatar:'assets/avatar.webp'};
 const ALT={name:'LH',handle:'LH5588812',avatar:'assets/person-alt.webp'};
 const FOLLOWERS=[
@@ -130,6 +169,7 @@ const NEWS_PROFILE={name:'高譚日報',handle:'gotham_daily',avatar:'assets/GOT
 const NEWS_RECENT_POSTS=[
   {
     id:'news-1111-transit',
+    publishedAt:'2026-11-11T11:45:00+08:00',
     handle:NEWS_PROFILE.handle,
     avatar:NEWS_PROFILE.avatar,
     time:'15分鐘',
@@ -140,6 +180,7 @@ const NEWS_RECENT_POSTS=[
   },
 	{
 	  id:'news-1110-veterans',
+	  publishedAt:'2026-11-10T12:00:00+08:00',
 	  handle:NEWS_PROFILE.handle,
 	  avatar:NEWS_PROFILE.avatar,
 	  time:'1天',
@@ -150,6 +191,7 @@ const NEWS_RECENT_POSTS=[
 	},
 	{
 	  id:'news-1109-thanksgiving',
+	  publishedAt:'2026-11-09T12:00:00+08:00',
 	  handle:NEWS_PROFILE.handle,
 	  avatar:NEWS_PROFILE.avatar,
 	  time:'2天',
@@ -160,6 +202,7 @@ const NEWS_RECENT_POSTS=[
 	},
   {
     id:'news-1108-museum',
+    publishedAt:'2026-11-08T12:00:00+08:00',
     handle:NEWS_PROFILE.handle,
     avatar:NEWS_PROFILE.avatar,
     time:'3天',
@@ -170,6 +213,7 @@ const NEWS_RECENT_POSTS=[
   },
   {
     id:'news-1107-wayne',
+    publishedAt:'2026-11-07T12:00:00+08:00',
     handle:NEWS_PROFILE.handle,
     avatar:NEWS_PROFILE.avatar,
     time:'4天',
@@ -180,6 +224,7 @@ const NEWS_RECENT_POSTS=[
   },
   {
     id:'news-1106-market',
+    publishedAt:'2026-11-06T12:00:00+08:00',
     handle:NEWS_PROFILE.handle,
     avatar:NEWS_PROFILE.avatar,
     time:'5天',
@@ -190,6 +235,7 @@ const NEWS_RECENT_POSTS=[
   },
   {
     id:'news-1105-budget',
+    publishedAt:'2026-11-05T12:00:00+08:00',
     handle:NEWS_PROFILE.handle,
     avatar:NEWS_PROFILE.avatar,
     time:'6天',
@@ -200,6 +246,7 @@ const NEWS_RECENT_POSTS=[
   },
   {
     id:'news-1104-power',
+    publishedAt:'2026-11-04T12:00:00+08:00',
     handle:NEWS_PROFILE.handle,
     avatar:NEWS_PROFILE.avatar,
     time:'7天',
@@ -230,8 +277,8 @@ const NEWS_PROFILE_POSTS=[
   {id:'news-0308-wayne',handle:NEWS_PROFILE.handle,avatar:NEWS_PROFILE.avatar,time:'2026-3-8',headline:'韋恩基金會宣布增設三處社區醫療站',text:'韋恩基金會宣布將於南區與舊城區增設三處社區醫療站，提供基礎診療、心理諮詢與夜間急診轉介服務。',likes:3561,reposts:521,shares:202,replies:[]},
   {id:'news-0307-arkham',handle:NEWS_PROFILE.handle,avatar:NEWS_PROFILE.avatar,time:'2026-3-7',headline:'市長選戰白熱化：里夫斯捲入謀殺疑雲，希爾支持度上升',text:'隨著市長大選進入最後倒數階段，民意中心最新公布數據顯示在《重生計畫》推出後，現任市長「漢密爾頓·希爾」的民調在過去一週意外回升，而其最大競爭對手——以年輕、清廉的形象而受到市民青睞的「亞瑟·里夫斯」議員，卻因導演馬丁·坎貝爾遇害而深陷爭議。\n警方至今仍不排除里夫斯涉案的可能性，檢察官辦公室則表示將全力調查，不容任何人置身於法律之外。',likes:638,reposts:102,shares:31,replies:[{handle:NEWS_PROFILE.handle,avatar:NEWS_PROFILE.avatar,isAuthor:true,text:'然而坊間輿論，有不少聲音認為這起案件背後可能另有隱情。是有人刻意栽贓，還是政治操作？\n另一方面，希爾陣營則趁勢強化「穩定延續」的口號，強調他在城市建設與治安維護方面的「政績」。雖然外界長期質疑他與某些財團及黑幫勢力關係曖昧，但希爾本人始終予以否認，並在頻繁公開場合表達「一切都是為了更偉大的利益」。\n隨著最後一輪民調的截止，哥譚市選戰進入最緊繃的關頭。支持率的拉鋸、命案的真相，以及背後交錯的利益網絡，無不牽動著市民的未來。這場選戰將如何結束，尚無定論。',likes:23,reposts:0,shares:0}]},
   {id:'news-0306-weather',handle:NEWS_PROFILE.handle,avatar:NEWS_PROFILE.avatar,time:'2026-3-6',headline:'冷鋒晚間抵達　高譚未來三日持續降雨',text:'氣象中心預估冷鋒將於今日晚間抵達，高譚未來三日降雨機率偏高，沿海地區並可能出現強風。',likes:847,reposts:119,shares:52,replies:[]},
-  {id:'news-0227-arkham',handle:NEWS_PROFILE.handle,avatar:NEWS_PROFILE.avatar,time:'2026-2-27',headline:'韋恩大廈臨時召開了記者會，公開次子傑森·陶德·韋恩復出',text:'日前韋恩企業（Wayne Enterprises）執行長布魯斯·韋恩（Bruce Wayne）在記者會上證實，曾被報導於數年前不幸喪生的次子傑森·陶德·韋恩（Jason Todd Wayne），事實上在當年意外後奇蹟生還，並接受長期海外療養，現已康復回國。\n',likes:1240,reposts:58,shares:12,replies:[{handle:NEWS_PROFILE.handle,avatar:NEWS_PROFILE.avatar,isAuthor:true,text:'這一消息震驚社會各界之餘，也迅速在資本市場引發連鎖反應。韋恩企業自消息公佈當天起股價波動劇烈，盤中一度下挫3.8%，收盤時小幅回升，跌幅收斂至1.2%。\n市場分析師指出，雖然傑森·陶德本身未直接涉入韋恩企業的管理層或財務決策，但作為家族成員的身份，使得部分投資人對「企業治理結構的透明度」產生疑慮。著名投資機構安格羅資本（Anglo Capital）於聲明中指出：\n「管理層多年隱瞞家族成員狀況，或許出於人道理由，但對股東而言，任何資訊不對稱都可能構成潛在風險。我們建議持續觀察韋恩企業後續治理動態。」',likes:43,reposts:5,shares:2},{handle:NEWS_PROFILE.handle,avatar:NEWS_PROFILE.avatar,isAuthor:true,text:'另一方面，私人財富管理界則持不同看法。哥譚市著名的高資產顧問機構普倫金融（Prynn Financial）認為，此舉有望穩固市場對韋恩家族繼承鏈的信心：\n「過去市場對韋恩家族未來的穩定性略有擔憂。傑森·陶德的復出，若能逐步參與慈善或家族基金業務，反而可能強化外界對企業的正面觀感。」\n同時，坊間亦流傳著關於傑森·陶德未來角色的各種猜測：有不具名人士稱布魯斯．韋恩對他的愧疚及溺愛將讓傑森成為最有可能取代德雷克．韋恩之地位的養子。然而，韋恩企業官方目前僅回應稱：「傑森先生將專注於私人康復計畫，目前無意涉入公司事務。」\n在哥譚這座城市，家族、資本與公眾形象從來無法徹底分離。傑森·陶德的重生，不只是家族的私事，也是市場的預警訊號。未來數月內，韋恩企業若無法有效釋疑、穩住敘事權，仍可能面臨外部董事壓力、內部重組呼聲，甚至被對手企業藉機施壓。',likes:43,reposts:5,shares:2}]},
-  {id:'news-0214-arkham',handle:NEWS_PROFILE.handle,avatar:NEWS_PROFILE.avatar,time:'2026-2-14',headline:'韋恩大廈臨時召開了記者會，公開次子傑森·陶德·韋恩復出',text:'在過去數年間，韋恩家族次子的死亡一直被哥譚社會視為「不願提及的傷痛」，如今卻迎來了驚人的戲劇性反轉——曾被官方報導為「不幸車禍喪命」的傑森·陶德·韋恩（Jason Todd Wayne），在本週初意外公開露面，並由其父親、韋恩企業執行長布魯斯·韋恩親自證實其身分，震撼整座城市。\n',likes:638,reposts:102,shares:31,replies:[{handle:NEWS_PROFILE.handle,avatar:NEWS_PROFILE.avatar,isAuthor:true,text:'今日清晨，韋恩大廈臨時召開了記者會，吸引了眾多媒體與公眾的關注。布魯斯·韋恩以異常低沉而堅定的語氣，首度就次子事件發表正式聲明：\n「多年來，我選擇了沉默，因為我相信我的兒子值得一個完整康復的機會，遠離聚光燈。事實上，傑森在那場意外中重傷未亡。我們當時選擇將他送往海外接受長期治療與重建，而非公佈真相。我承認，這是一個艱難的決定，也是出於父親本能的保護。',likes:13,reposts:5,shares:6},
+  {id:'news-0227-arkham',handle:NEWS_PROFILE.handle,avatar:NEWS_PROFILE.avatar,time:'2026-2-27',headline:'韋恩次子傑森·陶德·韋恩復出追蹤報導，股價波動恐影響資本市場',text:'日前韋恩企業（Wayne Enterprises）執行長布魯斯·韋恩（Bruce Wayne）在記者會上證實，曾被報導於數年前不幸喪生的次子傑森·陶德·韋恩（Jason Todd Wayne），事實上在當年意外後奇蹟生還，並接受長期海外療養，現已康復回國。\n',likes:1240,reposts:58,shares:12,replies:[{handle:NEWS_PROFILE.handle,avatar:NEWS_PROFILE.avatar,isAuthor:true,text:'這一消息震驚社會各界之餘，也迅速在資本市場引發連鎖反應。韋恩企業自消息公佈當天起股價波動劇烈，盤中一度下挫3.8%，收盤時小幅回升，跌幅收斂至1.2%。\n市場分析師指出，雖然傑森·陶德本身未直接涉入韋恩企業的管理層或財務決策，但作為家族成員的身份，使得部分投資人對「企業治理結構的透明度」產生疑慮。著名投資機構安格羅資本（Anglo Capital）於聲明中指出：\n「管理層多年隱瞞家族成員狀況，或許出於人道理由，但對股東而言，任何資訊不對稱都可能構成潛在風險。我們建議持續觀察韋恩企業後續治理動態。」',likes:43,reposts:5,shares:2},{handle:NEWS_PROFILE.handle,avatar:NEWS_PROFILE.avatar,isAuthor:true,text:'另一方面，私人財富管理界則持不同看法。哥譚市著名的高資產顧問機構普倫金融（Prynn Financial）認為，此舉有望穩固市場對韋恩家族繼承鏈的信心：\n「過去市場對韋恩家族未來的穩定性略有擔憂。傑森·陶德的復出，若能逐步參與慈善或家族基金業務，反而可能強化外界對企業的正面觀感。」\n同時，坊間亦流傳著關於傑森·陶德未來角色的各種猜測：有不具名人士稱布魯斯．韋恩對他的愧疚及溺愛將讓傑森成為最有可能取代德雷克．韋恩之地位的養子。然而，韋恩企業官方目前僅回應稱：「傑森先生將專注於私人康復計畫，目前無意涉入公司事務。」\n在哥譚這座城市，家族、資本與公眾形象從來無法徹底分離。傑森·陶德的重生，不只是家族的私事，也是市場的預警訊號。未來數月內，韋恩企業若無法有效釋疑、穩住敘事權，仍可能面臨外部董事壓力、內部重組呼聲，甚至被對手企業藉機施壓。',likes:43,reposts:5,shares:2}]},
+  {id:'news-0214-arkham',handle:NEWS_PROFILE.handle,avatar:NEWS_PROFILE.avatar,time:'2026-2-14',headline:'韋恩大廈臨時召開了記者會，首次公開次子傑森·陶德·韋恩復出',text:'在過去數年間，韋恩家族次子的死亡一直被哥譚社會視為「不願提及的傷痛」，如今卻迎來了驚人的戲劇性反轉——曾被官方報導為「不幸車禍喪命」的傑森·陶德·韋恩（Jason Todd Wayne），在本週初意外公開露面，並由其父親、韋恩企業執行長布魯斯·韋恩親自證實其身分，震撼整座城市。\n',likes:638,reposts:102,shares:31,replies:[{handle:NEWS_PROFILE.handle,avatar:NEWS_PROFILE.avatar,isAuthor:true,text:'今日清晨，韋恩大廈臨時召開了記者會，吸引了眾多媒體與公眾的關注。布魯斯·韋恩以異常低沉而堅定的語氣，首度就次子事件發表正式聲明：\n「多年來，我選擇了沉默，因為我相信我的兒子值得一個完整康復的機會，遠離聚光燈。事實上，傑森在那場意外中重傷未亡。我們當時選擇將他送往海外接受長期治療與重建，而非公佈真相。我承認，這是一個艱難的決定，也是出於父親本能的保護。',likes:13,reposts:5,shares:6},
   {handle:NEWS_PROFILE.handle,avatar:NEWS_PROFILE.avatar,isAuthor:true,text:'如今，他已準備好回到哥譚，重新找到自己的位置。」\n這番話一經公開，立刻引發了社交媒體與各大新聞頻道的熱烈討論。哥譚市民的情緒複雜，有人為韋恩家的奇蹟重聚感動落淚，也有人質疑多年的誤導是否應當給出更多解釋。\n根據多方消息來源證實，傑森當年確曾因一起涉及罪犯「小丑」的交通意外而重傷昏迷，該起事件一度引起社會轟動，卻因種種原因始終未能釐清全貌。當年韋恩家僅發布一紙簡短聲明，稱「悲痛失去至親」，自此不再對外說明。多年來，各種揣測與陰謀論甚囂塵上，如今真相的一角終於被揭開，卻也引來更多關於事故背後細節的關注。',likes:73,reposts:4,shares:1},
   {handle:NEWS_PROFILE.handle,avatar:NEWS_PROFILE.avatar,isAuthor:true,text:'目前，傑森·陶德·韋恩本人尚未對外發表任何聲明，亦未恢復參與任何企業、基金會或公共活動。然而，據一位不願具名的韋恩企業內部人士透露，公司高層已經開始策劃一項以傑森名義設立的青少年庇護中心，目標是為經歷過暴力、失家或心理創傷的年輕人提供支持與重建機會，象徵著傑森將以自己的方式回應這段痛苦過往。\n此外，韋恩家族的律師團隊也正在研擬相關聲明，對於過去的資訊處理以及未來的媒體合作方向進行調整，以求在尊重個人隱私與滿足公眾知情權之間取得平衡。\n布魯斯·韋恩最後亦於記者會中動情表示：\n「他是我的兒子，無論過去經歷了什麼，他永遠都是。這座城市給了我們無盡的挑戰，但我相信，哥譚也能給予第二次生命一次真正的機會。」\n本報將持續關注傑森·陶德·韋恩的復出動向，並追蹤哥譚社會對這一新篇章的各方回應與未來發展。',likes:23,reposts:0,shares:0}]}
 ];
@@ -239,6 +286,7 @@ const NEWS_PROFILE_POSTS=[
 const POSTS=[
   {
     id:'p1',
+    publishedAt:'2026-11-11T10:00:00+08:00',
     handle:PROFILE.handle,
     time:'2小時',
     text:'今天下午突然很認真地思考了一件事\n工作究竟代表什麼，是為了錢，還是生活的意義。',
@@ -251,6 +299,7 @@ const POSTS=[
 
   {
     id:'p2',
+    publishedAt:'2026-11-10T12:00:00+08:00',
     handle:PROFILE.handle,
     time:'1天',
     text:'整理衣櫃，把大衣都拿出來了。\n怎麼這麼多衣服。',
@@ -263,6 +312,7 @@ const POSTS=[
 
   {
     id:'p3',
+    publishedAt:'2026-11-08T12:00:00+08:00',
     handle:PROFILE.handle,
     time:'3天',
     text:'晚上經過都奈橋。\n現在都要拆了嗎。',
@@ -276,6 +326,7 @@ const POSTS=[
 
   {
     id:'p6',
+    publishedAt:'2026-10-28T12:00:00+08:00',
     handle:PROFILE.handle,
     time:'2週',
     text:'有人問我為什麼最近幾乎不談現在的工作。\n因為現在這份工作不太算是鎂光燈下的工作。\n沒什麼好一直說的。',
@@ -289,6 +340,7 @@ const POSTS=[
   
   {
     id:'p10',
+    publishedAt:'2026-09-11T12:00:00+08:00',
     handle:PROFILE.handle,
     time:'2個月',
     text:'最近開始正常吃早餐。\n以前早上不是趕會議就是趕車，早餐通常在路上解決。\n今天坐下來慢慢吃完，突然覺得這件事以前好像很奢侈。',
@@ -709,6 +761,15 @@ const POSTS=[
     ]
   }
 ];
+const LILITH_1114_POST={
+  id:'lilith-1114-open-messages',
+  handle:PROFILE.handle,
+  avatar:PROFILE.avatar,
+  publishedAt:RELEASE.lilithMessages,
+  text:'時隔好久，決定重新開放陌生訊息了',
+  likes:286,reposts:17,shares:4,replies:[]
+};
+function profilePosts(){return hasArrived(RELEASE.lilithMessages)?[LILITH_1114_POST,...POSTS]:POSTS}
 const REPLY_POSTS=[
 {
 	id:'reply1',
@@ -769,14 +830,14 @@ const MEDIA_POSTS=POSTS.filter(post=>post.image);
 const REPOST_POSTS=[
   {
     id:'repost1',isRepost:true,
-    handle:'BTA250',avatar:'assets/al520.webp',time:'6小時',
+    handle:'BTA250',avatar:'assets/al520.webp',publishedAt:'2026-11-11T06:00:00+08:00',time:'6小時',
     text:'現代人常陷入一種迷思：認為在愛情中做到絕對的真實與毫无保留，才是通往深層連結的唯一路徑。\n然而從心理學與實務經驗來看，缺乏界線的「過度自我暴露」往往事與願違。當真誠失去了分寸，它不再是建立信任的橋樑，反而可能轉化為對關係的隱形施壓，進而加速親密關係的崩解。究竟這份「毫無保留」背後隱藏著怎樣的心理機制，又是如何一步步侵蝕了彼此的感情？',
     likes:302,reposts:74,shares:22,
     replies:[{handle:'lin_seven',avatar:'assets/person-lin.svg',
 		text:'這篇分析寫得滿準的。',likes:18,reposts:4,shares:2}]},
 	{
     id:'repost2',isRepost:true,
-    handle:'sophie_park',avatar:'assets/sophie_park.webp',time:'1天前',
+    handle:'sophie_park',avatar:'assets/sophie_park.webp',publishedAt:'2026-11-10T12:00:00+08:00',time:'1天前',
     text:'剛搬來高譚三個月，房租便宜是真的\n現在知道為什麼了',
     likes:5524,reposts:1248,shares:4492,
     replies:[{handle:'just_here_for_this',avatar:'assets/person-lin.svg',
@@ -789,10 +850,68 @@ const REPOST_POSTS=[
    {handle:'black_mask_enforcer',avatar:'assets/person-rain.svg',text:'黑面具薪水直接發全額現鈔，週結，從不拖欠，危險津貼給得超大方！\n但這錢真的是拿命換的，你今天領了雙倍薪水，明天可能就躺在東區港口浮上來了。適合急需用錢、不怕死想短期翻身的狠角色',likes:19,reposts:1,shares:0},
    {handle:'joker_goon_survivor',avatar:'assets/avatar-2.svg',text:'看到有人在詢問小丑幫？\n快跑！！！連履歷都不要投！！！',likes:44,reposts:3,shares:1},
    {handle:'arkham_escapee_66',avatar:'assets/person-unknown.svg',text:'不用比了，去哪家都一樣啦',likes:28,reposts:2,shares:0},
-   {handle:'gotham_cynic_bro',avatar:'assets/person-rain.svg',text:'講個笑話，高譚打手在比較薪水跟福利',image:'assets/RUN.webp',likes:8,reposts:0,shares:0}
- ]},
+   {handle:'gotham_cynic_bro',avatar:'assets/person-rain.svg',text:'講個笑話，高譚打手在比較薪水跟福利',image:'assets/RUN.webp',likes:8,reposts:0,shares:0}]},
+	{id:'repost5',handle:'r_after_work',avatar:'assets/mia.webp',time:'2026-11-02',text:'一天一個語法小知識，day21，今天是非限定同位語和限定同位語\n你有想過一個逗號可能會改變整個句子的意思嗎？\nMy dearest Lily＝「我最親愛的莉莉」\n在所有叫 Lily 的人中，我最喜歡你。\nMy dearest, Lily＝「我最親愛的人，莉莉」\n在所有人中，我最喜歡你。',likes:73,reposts:6,shares:2,replies:[{handle:PROFILE.handle,avatar:PROFILE.avatar,
+		text:'=)',likes:2,reposts:0,shares:0,ownerLiked:true}]}
 ];
+[
+  ['repost3','2026-11-08T12:00:00+08:00'],
+  ['repost4','2026-11-06T12:00:00+08:00']
+].forEach(([id,publishedAt])=>Object.assign(REPOST_POSTS.find(post=>post.id===id),{publishedAt}));
+
+const NEWS_1112_POST={
+  id:'news-1112-portrait',handle:NEWS_PROFILE.handle,avatar:NEWS_PROFILE.avatar,
+  publishedAt:RELEASE.portrait,
+  headline:'希爾市長肖像遭撤下　市政廳外仍聚集抗議民眾',
+  text:'市政廳已撤下漢密爾頓．希爾位於主樓大廳的官方肖像。昨晚仍有數百名市民聚集於廣場，有人要求徹查相關案件，也有人高舉「希爾市長無罪」的標語。警方表示目前未發生重大衝突。',
+  likes:5821,reposts:940,shares:377,
+  replies:[
+    {handle:'cityhall_watch',avatar:'assets/avatar-2.svg',text:'撤肖像只是開始，市府應該把所有調查資料公開。',likes:318,reposts:27,shares:8},
+    {handle:'martha_works',avatar:'assets/works.webp',text:'人都還沒有定罪就撤掉，這不是未審先判嗎？',likes:276,reposts:19,shares:5},
+    {handle:'oldtown_resident',avatar:'assets/oldtown_resident.webp',text:'廣場昨晚很吵，但兩邊至少沒有真的打起來。',likes:143,reposts:9,shares:2},
+    {handle:'jack_in_city',avatar:'assets/jack_in_city.webp',text:'都查到器官販賣了還有人舉無罪標語，太荒謬。',likes:491,reposts:54,shares:13},
+    {handle:'paul_cityhall',avatar:'assets/paul_cityhall.webp',text:'報導寫的是疑似，等檢方正式起訴再下結論吧。',likes:354,reposts:24,shares:7},
+    {handle:ALT.handle,avatar:ALT.avatar,altProfileLink:true,text:'你們從來沒有理解過他，現在卻急著決定他是什麼樣的人。',likes:12,reposts:1,shares:0},
+    {handle:'mia_afterfive',avatar:'assets/mia.webp',text:'上面那個帳號講得好像認識希爾本人一樣。',likes:81,reposts:3,shares:0},
+    {handle:'night_shift',avatar:'assets/avatar-2.svg',text:'警方今晚還會封路，經過市政廳的人記得繞道。',likes:119,reposts:16,shares:4}
+  ]
+};
+
+const NEWS_1114_POST={
+  id:'news-1114-museum-explosion',handle:NEWS_PROFILE.handle,avatar:NEWS_PROFILE.avatar,
+  publishedAt:RELEASE.museumExplosion,
+  headline:'美術館於適才遭遇小丑轟炸，現場死傷慘重',
+  text:'高譚市立美術館今日上午發生劇烈爆炸，警方初步研判事件可能與小丑有關。消防與救護人員已進入現場，館內外發現多名傷者，確切死傷人數仍待確認。警方已封鎖周邊道路，呼籲市民遠離現場。',
+  likes:12741,reposts:6823,shares:4951,
+  replies:[
+    {handle:'gotham_emergency',avatar:'assets/avatar-2.svg',text:'請不要前往現場，也不要占用周邊道路。',likes:921,reposts:418,shares:206},
+    {handle:'museum_member',avatar:'assets/person-rain.svg',text:'今天早上不是還有很多學生團體嗎……',likes:538,reposts:72,shares:19},
+    {handle:'no_news_today',avatar:'assets/avatar-3.svg',text:'請大家先確認親友平安，不要轉傳未證實名單。',likes:663,reposts:103,shares:41}
+  ]
+};
+const NEWS_1113_TAIPEI_EVENT={
+  id:'news-1113-taipei-western-fandom',
+  handle:NEWS_PROFILE.handle,
+  avatar:NEWS_PROFILE.avatar,
+  publishedAt:'2026-11-13T13:00:00+08:00',
+  headline:'歐美翁明日於三重登場　歐美作品同好齊聚交流',
+  text:'歐美作品主題同人活動「歐美翁」將於明日（14日）在台北三重舉行，現場預計設置同人創作攤位、角色扮演交流區及作品展示。主辦單位提醒參加者事先確認入場資訊，並配合場館動線與現場工作人員引導。',
+  likes:846,reposts:126,shares:57,
+  replies:[
+    {handle:'cosplay_weekend',avatar:'assets/avatar-2.svg',text:'明天見！已經準備好要逛一整天了。',likes:31,reposts:2,shares:0},
+    {handle:'train_to_taipei',avatar:'assets/person-rain.svg',text:'從外縣市過去的人記得先查交通路線。',likes:18,reposts:1,shares:0}
+  ]
+};
+const PROFILE_ONLY_SCHEDULED_NEWS=[NEWS_1113_TAIPEI_EVENT];
+const SCHEDULED_NEWS_POSTS=[NEWS_1114_POST,NEWS_1112_POST];
+
 const ALT_POSTS=[
+  {
+    id:'alt-1113-fraction',handle:ALT.handle,avatar:ALT.avatar,
+    publishedAt:RELEASE.altPost,
+    text:'我是他的幾分之幾呢？',image:'assets/tulip.webp',
+    likes:3,reposts:0,shares:0,replies:[]
+  },
   {
 	id:'alt1',
     handle:ALT.handle,
@@ -812,15 +931,6 @@ const ALT_POSTS=[
     replies:[]
   },
 
-    {
-    id:'alt14',
-    handle:ALT.handle,
-    avatar:ALT.avatar,
-    time:'2026-9-03',
-    text:'又快到他的生日了，我還記得他去年收到禮物的表情',
-    likes:4,reposts:2,shares:0,
-    replies:[]
-  },
 
     {
     id:'alt3',
@@ -866,6 +976,17 @@ const ALT_POSTS=[
     likes:5,reposts:0,shares:0,
     replies:[]
   },
+
+    {
+    id:'alt14',
+    handle:ALT.handle,
+    avatar:ALT.avatar,
+    time:'2026-8-11',
+    text:'又快到他的生日了，我還記得他去年收到禮物的表情',
+    likes:4,reposts:2,shares:0,
+    replies:[]
+  },
+
   {
     id:'alt13',
     handle:ALT.handle,
@@ -963,8 +1084,17 @@ const ACTIVITY_POSTS=[
  ]},
  {id:'a7',handle:'old_mack_g',avatar:'assets/old_mack_g.webp',time:'1天前',text:'冰山老闆超誇張 剛剛布魯斯韋恩來跳舞被他趕出去欸XDD!',likes:42,reposts:8,shares:3,replies:[]}
 ];
+[
+  ['a8','2026-11-11T11:55:00+08:00'],
+  ['a1','2026-11-11T11:42:00+08:00'],
+  ['a2','2026-11-11T11:00:00+08:00'],
+  ['a3','2026-11-11T10:00:00+08:00'],
+  ['a4','2026-11-11T08:00:00+08:00'],
+  ['a5','2026-11-11T07:00:00+08:00'],
+  ['a7','2026-11-10T12:00:00+08:00']
+].forEach(([id,publishedAt])=>Object.assign(ACTIVITY_POSTS.find(post=>post.id===id),{publishedAt}));
 const CHATS=[
- {id:'friend1',name:'小安',handle:'an_an',avatar:'assets/an_an.webp',time:'下午 6:42',preview:'週末還要去看展嗎？',messages:[['in','週末還要去看展嗎？'],['out','要啊，時間不變。'],['in','好，那我到捷運站再找你。']]},
+ {id:'friend1',name:'小安',handle:'an_an',avatar:'assets/an_an.webp',time:'下午 6:42',preview:'週末還要去看展嗎？',messages:[['in','週末還要去看展嗎？'],['out','要啊，時間不變。'],['in','好，那我到了再叫你。']]},
  {id:'friend2',name:'艾利',handle:'ALY_1204',avatar:'assets/ALY_1204.webp',time:'昨天',preview:'你有看到那個貼文嗎？',messages:[['in','你有看到那個貼文嗎？有狗遺失，飼主懸賞十萬的那個'],['out','剛看到。怎麼了？'],['in','在我家附近，我有點想去找看看，哈。']]},
  {id:'group',name:'週五桌遊團',handle:' ',avatar:'assets/GAMEgroup.webp',time:'星期一',preview:'Mika：這週缺一個人',messages:[['in','Mika：這週缺一個人，有誰能帶朋友？'],['out','我再問問看。'],['in','Joe：記得不要再遲到了。']]}
 ];
@@ -972,6 +1102,9 @@ const ALL_POSTS=[
   ...new Map(
     [
       NEWS_POST,
+	  ...SCHEDULED_NEWS_POSTS,
+	  ...PROFILE_ONLY_SCHEDULED_NEWS,
+      LILITH_1114_POST,
 	  ...NEWS_RECENT_POSTS,
       ...NEWS_PROFILE_POSTS,
       ...POSTS,
@@ -1116,7 +1249,18 @@ const state={
 
   altFollowed:!!saved.altFollowed,
   mutual:!!saved.mutual,
-  unread:!!saved.unread,
+  unreadChats:new Set(saved.unreadChats||(saved.unread?['alt']:[])),
+  seenChatEvents:new Set(saved.seenChatEvents||[]),
+  seenActivityEvents:new Set(saved.seenActivityEvents||[]),
+  museumNewsOpened:!!saved.museumNewsOpened,
+  xiaAnReply:saved.xiaAnReply||'',
+  xiaAnReplyAt:Number(saved.xiaAnReplyAt)||0,
+  xiaAnAppointmentReplied:!!saved.xiaAnAppointmentReplied,
+  xiaAnDeclined:!!saved.xiaAnDeclined,
+  xiaAnEmergencyTriggered:!!saved.xiaAnEmergencyTriggered,
+  xiaAnEmergencyMessagesShown:Number(saved.xiaAnEmergencyMessagesShown)||0,
+  lilithChatStarted:!!saved.lilithChatStarted,
+  endingUnlocked:!!saved.endingUnlocked,
   completionSignature:saved.completionSignature||'',
   view:'news',
   previous:'news'
@@ -1131,7 +1275,18 @@ function save(){
 
       altFollowed:state.altFollowed,
       mutual:state.mutual,
-      unread:state.unread,
+      unreadChats:[...state.unreadChats],
+      seenChatEvents:[...state.seenChatEvents],
+      seenActivityEvents:[...state.seenActivityEvents],
+      museumNewsOpened:state.museumNewsOpened,
+      xiaAnReply:state.xiaAnReply,
+      xiaAnReplyAt:state.xiaAnReplyAt,
+      xiaAnAppointmentReplied:state.xiaAnAppointmentReplied,
+	  xiaAnDeclined:state.xiaAnDeclined,
+      xiaAnEmergencyTriggered:state.xiaAnEmergencyTriggered,
+      xiaAnEmergencyMessagesShown:state.xiaAnEmergencyMessagesShown,
+      lilithChatStarted:state.lilithChatStarted,
+      endingUnlocked:state.endingUnlocked,
       completionSignature:state.completionSignature
     })
   );
@@ -1156,6 +1311,7 @@ function toggleProfileFollow(selector,profileId){
 
   save();
   updateFollowButton(selector,profileId);
+  if(profileId===NEWS_PROFILE.handle&&state.view==='activity')renderActivity(false);
 }
 
 function renderFollowStates(){
@@ -1172,13 +1328,17 @@ function postAvatar(p){
   if(p.handle===ALT.handle)return ALT.avatar;
   return 'assets/avatar-3.svg';
 }
+function publishedTimeHTML(item){
+  const stamp=item.publishedAt?` data-published-at="${esc(item.publishedAt)}"`:'';
+  return `<span class="dynamic-time"${stamp}>${esc(formatPublishedTime(item))}</span>`;
+}
 function actions(p,openable=true){
   const liked=localStorage.getItem('liked-'+p.id)==='1';
   const baseLikes=Number(p.likes)||0;
   const replyCount=p.comments??(p.replies?.length||0);
   return `<div class="actions"><button class="action heart ${liked?'liked':''}" data-like="${p.id}" data-base-likes="${baseLikes}">${icon('i-heart')}<span>${baseLikes+(liked?1:0)}</span></button><button class="action" ${openable?`data-open="${p.id}"`:''}>${icon('i-comment')}<span>${replyCount}</span></button><button class="action">${icon('i-repost')}<span>${p.reposts||0}</span></button><button class="action">${icon('i-send')}<span>${p.shares||0}</span></button></div>`;
 }
-function postHTML(p,clickable=true){const own=p.handle===PROFILE.handle;const account=p.handle;const newsAccount=account===NEWS_PROFILE.handle;const newsLink=newsAccount?'data-news-profile-link="1" tabindex="0" role="link" aria-label="前往高譚日報的個人頁面"':'';return `<article class="post ${p.headline?'news-post':''}" ${clickable?`data-post="${p.id}"`:''}>${avatar(account,postAvatar(p),newsLink)}<div><div class="post-header"><strong ${newsLink}>${esc(account)}</strong><span class="meta">${own?PROFILE.flag+' '+PROFILE.location+' · ':''}${esc(p.time)}</span><span class="dots">•••</span></div>${p.headline?`<h1 class="news-headline">${esc(p.headline)}</h1>`:''}<p class="post-text">${esc(p.text)}</p>${p.image?`<img class="post-image" src="${p.image}" alt="串文圖片">`:''}${actions(p,clickable)}</div></article>`}
+function postHTML(p,clickable=true){const own=p.handle===PROFILE.handle;const account=p.handle;const newsAccount=account===NEWS_PROFILE.handle;const altAccount=account===ALT.handle&&hasArrived(RELEASE.portrait);const accountLink=newsAccount?'data-news-profile-link="1" tabindex="0" role="link" aria-label="前往高譚日報的個人頁面"':altAccount?'data-alt-profile-link="1" tabindex="0" role="link" aria-label="前往 LH5588812 的個人頁面"':'';return `<article class="post ${p.headline?'news-post':''}" ${clickable?`data-post="${p.id}"`:''}>${avatar(account,postAvatar(p),accountLink)}<div><div class="post-header"><strong ${accountLink}>${esc(account)}</strong><span class="meta">${own?PROFILE.flag+' '+PROFILE.location+' · ':''}${publishedTimeHTML(p)}</span><span class="dots">•••</span></div>${p.feedReason?`<div class="feed-reason">${esc(p.feedReason)}</div>`:''}${p.headline?`<h1 class="news-headline">${esc(p.headline)}</h1>`:''}<p class="post-text">${esc(p.text)}</p>${p.image?`<img class="post-image" src="${esc(p.image)}" alt="串文圖片">`:''}${actions(p,clickable)}</div></article>`}
 function getReplyParent(reply){
   if(reply.parentId)return ALL_POSTS.find(post=>post.id===reply.parentId);
   if(reply.parentPost)return ALL_POSTS.find(post=>post.id===reply.parentPost.id)||reply.parentPost;
@@ -1194,7 +1354,7 @@ function replyThreadHTML(reply){
     <article class="reply-thread-response">
       ${avatar(reply.handle,postAvatar(reply))}
       <div>
-        <div class="post-header"><strong>${esc(reply.handle)}</strong><span class="meta">${esc(reply.time)} · ${PROFILE.flag} ${esc(PROFILE.location)}</span><span class="dots">•••</span></div>
+        <div class="post-header"><strong>${esc(reply.handle)}</strong><span class="meta">${publishedTimeHTML(reply)} · ${PROFILE.flag} ${esc(PROFILE.location)}</span><span class="dots">•••</span></div>
         <p class="post-text">${esc(reply.text)}</p>
         ${reply.image?`<img class="post-image" src="${esc(reply.image)}" alt="回覆圖片">`:''}
         <div class="actions"><button class="action heart ${liked?'liked':''}" data-like="${reply.id}" data-base-likes="${baseLikes}">${icon('i-heart')}<span>${baseLikes+(liked?1:0)}</span></button><button class="action">${icon('i-comment')}<span>${reply.replies?.length||0}</span></button><button class="action">${icon('i-repost')}<span>${reply.reposts||0}</span></button><button class="action">${icon('i-send')}<span>${reply.shares||0}</span></button></div>
@@ -1202,7 +1362,7 @@ function replyThreadHTML(reply){
     </article>
   </div>`;
 }
-function renderFeed(list=POSTS,target='#feed'){
+function renderFeed(list=profilePosts(),target='#feed'){
   const el=$(target);
   el.innerHTML=list.length?list.map(p=>(p.parentId||p.parentPost)?replyThreadHTML(p):postHTML(p)).join(''):'<div class="empty">目前沒有內容</div>';
   bindActions();
@@ -1231,6 +1391,7 @@ function bindActions(){
     x.onkeydown=open;
   });
   $$('[data-news-profile-link]').forEach(x=>{const open=e=>{if(e.type==='keydown'&&!['Enter',' '].includes(e.key))return;e.preventDefault();e.stopPropagation();showView('newsProfile',state.view);renderNewsProfile()};x.onclick=open;x.onkeydown=open});
+  $$('[data-alt-profile-link]').forEach(x=>{const open=e=>{if(e.type==='keydown'&&!['Enter',' '].includes(e.key))return;e.preventDefault();e.stopPropagation();openAlt()};x.onclick=open;x.onkeydown=open});
 }
 function showView(v,previous=state.view,addHistory=true){
   if(!$('#'+v+'View'))return;
@@ -1271,18 +1432,19 @@ function showView(v,previous=state.view,addHistory=true){
 
   scrollTo(0,0);
 }
-function repliesHTML(p){const ordered=p.replies.map((r,i)=>({...r,index:i})).sort((a,b)=>Number(b.ownerLiked)-Number(a.ownerLiked));return ordered.length?ordered.map(r=>{
+function repliesHTML(p){const ordered=(p.replies||[]).map((r,i)=>({...r,index:i})).sort((a,b)=>Number(b.ownerLiked)-Number(a.ownerLiked));return ordered.length?ordered.map(r=>{
   const key=r.likeId||(p.id+'r'+r.index);
   const on=localStorage.getItem('liked-'+key)==='1';
   const baseLikes=Number(r.likes)||0;
 
   const isAuthor=r.isAuthor===true;
 
-  return `<article class="reply" ${r.profileLink?'data-profile-entry="1"':''}>${avatar(r.handle,r.avatar,r.profileLink?'data-profile-entry-target="1" tabindex="0" role="link" aria-label="前往此帳號的個人頁面"':'')}<div><div class="post-header">
-  <strong ${r.profileLink?'data-profile-entry-target="1" tabindex="0" role="link" aria-label="前往此帳號的個人頁面"':''}>${esc(r.handle)}</strong>
+  const profileAttrs=r.profileLink?'data-profile-entry-target="1" tabindex="0" role="link" aria-label="前往此帳號的個人頁面"':r.altProfileLink?'data-alt-entry-target="1" tabindex="0" role="link" aria-label="前往此帳號的個人頁面"':'';
+  return `<article class="reply">${avatar(r.handle,r.avatar,profileAttrs)}<div><div class="post-header">
+  <strong ${profileAttrs}>${esc(r.handle)}</strong>
 
 <span class="meta">
-  ${r.time?`${esc(r.time)} · `:''}
+  ${(r.time||r.publishedAt)?`${publishedTimeHTML(r)} · `:''}
   ${esc(r.flag||'🇺🇸')} ${esc(r.location||'高譚')}
   ${isAuthor?' · 作者':''}
 </span>
@@ -1321,10 +1483,29 @@ function bindReplyActions(){
     x.onclick=open;
     x.onkeydown=open;
   });
+  $$('[data-alt-entry-target]').forEach(x=>{
+    const open=e=>{
+      if(e.type==='keydown'&&!['Enter',' '].includes(e.key))return;
+      e.preventDefault();e.stopPropagation();openAlt();
+    };
+    x.onclick=open;x.onkeydown=open;
+  });
 }
 function renderNews(){$('#newsPost').innerHTML=postHTML(NEWS_POST,true);$('#newsReplies').innerHTML=repliesHTML(NEWS_POST);bindActions();bindReplyActions()}
-function renderNewsProfile(){$('#newsProfileAvatar').src=NEWS_PROFILE.avatar;$('#newsProfileName').textContent=NEWS_PROFILE.name;$('#newsProfileHandle').textContent=NEWS_PROFILE.handle;renderFeed([...NEWS_RECENT_POSTS,NEWS_POST,...NEWS_PROFILE_POSTS],'#newsProfileFeed')}
-function openPost(id){const p=ALL_POSTS.find(x=>x.id===id);unlock(id);showView('detail');$('#detailPost').innerHTML=postHTML(p,false);$('#detailReplies').innerHTML=repliesHTML(p);bindActions();bindReplyActions()}
+function releasedScheduledNews(){return SCHEDULED_NEWS_POSTS.filter(post=>hasArrived(post.publishedAt))}
+function releasedProfileOnlyNews(){return PROFILE_ONLY_SCHEDULED_NEWS.filter(post=>hasArrived(post.publishedAt))}
+function renderNewsProfile(){
+  $('#newsProfileAvatar').src=NEWS_PROFILE.avatar;$('#newsProfileName').textContent=NEWS_PROFILE.name;$('#newsProfileHandle').textContent=NEWS_PROFILE.handle;
+  const scheduled=[...releasedScheduledNews(),...releasedProfileOnlyNews()].sort((a,b)=>timeMs(b.publishedAt)-timeMs(a.publishedAt));
+  renderFeed([...scheduled,...NEWS_RECENT_POSTS,NEWS_POST,...NEWS_PROFILE_POSTS],'#newsProfileFeed');
+}
+function openPost(id){
+  const p=ALL_POSTS.find(x=>x.id===id);
+  if(!p)return;
+  if([...SCHEDULED_NEWS_POSTS,...PROFILE_ONLY_SCHEDULED_NEWS].includes(p)&&!hasArrived(p.publishedAt))return;
+  if(id===NEWS_1114_POST.id){state.museumNewsOpened=true;save()}
+  unlock(id);showView('detail');$('#detailPost').innerHTML=postHTML(p,false);$('#detailReplies').innerHTML=repliesHTML(p);bindActions();bindReplyActions()
+}
 function unlock(id){
   const clues=CLUES.filter(c=>c.postId===id);
   const newClues=clues.filter(c=>!state.unlocked.has(c.id));
@@ -1409,15 +1590,141 @@ function checkCompletion(){
     }
   },5000);
 }
-function renderPeople(type='followers'){const list=type==='followers'?FOLLOWERS:FOLLOWING;$('#followersTab').classList.toggle('active',type==='followers');$('#followingTab').classList.toggle('active',type==='following');$('#peopleList').innerHTML=list.map((p,i)=>`<article class="person ${p.isAlt?'clickable-person':''}" ${p.isAlt?'data-alt-profile="1"':''}><img class="avatar person-avatar" src="${p.avatar}" alt="${esc(p.name)}"><div class="person-copy"><strong>${esc(p.name)}</strong><span>@${esc(p.handle)}</span>${p.bio?`<p>${esc(p.bio)}</p>`:''}</div><button class="mini-follow" data-person-follow="${type}-${i}">追蹤</button></article>`).join('');$$('[data-alt-profile]').forEach(x=>x.onclick=e=>{if(!e.target.closest('[data-person-follow]'))openAlt()});$$('[data-person-follow]').forEach(b=>b.onclick=()=>{const on=b.classList.toggle('following');b.textContent=on?'追蹤中':'追蹤'})}
-function openAlt(){showView('alt');renderAlt()}
-function renderAlt(){$('#altProfileAvatar').src=ALT.avatar;const follow=$('#altFollowBtn');follow.textContent=state.altFollowed?'追蹤中':'追蹤';follow.classList.toggle('following',state.altFollowed);$('#followsYou').classList.toggle('hidden',!state.mutual);$('#altGate').classList.toggle('hidden',state.mutual);$('#altFeed').classList.toggle('hidden',!state.mutual);if(state.mutual)renderFeed(ALT_POSTS,'#altFeed')}
-function followAlt(){if(state.altFollowed)return;state.altFollowed=true;state.unread=true;save();renderAlt();updateUnread();toast('追蹤邀請已送出')}
-function renderMessages(){const mystery=state.altFollowed?`<button class="message-row" data-chat="alt"><img class="avatar" src="${ALT.avatar}" alt="${ALT.name}"><span><strong>${ALT.handle}</strong><small>你也喜歡他？那你也記得他的生日嗎？</small></span>${state.unread?'<i class="unread-dot">1</i>':''}</button>`:'';$('#messageList').innerHTML=mystery+CHATS.map(c=>`<button class="message-row" data-chat="${c.id}"><img class="avatar" src="${c.avatar}" alt="${esc(c.name)}"><span><strong>${esc(c.name)}</strong><small>${esc(c.preview)}</small></span><time>${esc(c.time)}</time></button>`).join('');$$('[data-chat]').forEach(b=>b.onclick=()=>b.dataset.chat==='alt'?openChat():openRegularChat(b.dataset.chat))}
-function updateUnread(){$('#navUnread').classList.toggle('hidden',!state.unread);if(state.view==='messages')renderMessages()}
+function renderPeople(type='followers'){
+  const list=type==='followers'?FOLLOWERS:FOLLOWING;
+  $('#followersTab').classList.toggle('active',type==='followers');$('#followingTab').classList.toggle('active',type==='following');
+  $('#peopleList').innerHTML=list.map((p,i)=>{
+    const canOpenAlt=p.isAlt&&hasArrived(RELEASE.portrait);
+    return `<article class="person ${canOpenAlt?'clickable-person':''}" ${canOpenAlt?'data-alt-profile="1" tabindex="0" role="link"':''}><img class="avatar person-avatar" src="${p.avatar}" alt="${esc(p.name)}"><div class="person-copy"><strong>${esc(p.name)}</strong><span>@${esc(p.handle)}</span>${p.bio?`<p>${esc(p.bio)}</p>`:''}</div><button class="mini-follow" data-person-follow="${type}-${i}">追蹤</button></article>`;
+  }).join('');
+  $$('[data-alt-profile]').forEach(row=>{const open=e=>{if(e.type==='keydown'&&!['Enter',' '].includes(e.key))return;if(e.target.closest('[data-person-follow]'))return;e.preventDefault();openAlt()};row.onclick=open;row.onkeydown=open});
+  $$('[data-person-follow]').forEach(b=>b.onclick=()=>{const on=b.classList.toggle('following');b.textContent=on?'追蹤中':'追蹤'});
+}
+function openAlt(){if(!hasArrived(RELEASE.portrait))return;showView('alt');renderAlt()}
+function renderAlt(){
+  $('#altProfileAvatar').src=ALT.avatar;
+  const follow=$('#altFollowBtn');follow.textContent=state.altFollowed?'追蹤中':'追蹤';follow.classList.toggle('following',state.altFollowed);
+  const canViewFeed=state.mutual||hasArrived(RELEASE.altPost);
+  $('#followsYou').classList.toggle('hidden',!state.mutual);
+  $('#altGate').classList.toggle('hidden',canViewFeed);
+  $('#altFeed').classList.toggle('hidden',!canViewFeed);
+  if(canViewFeed)renderFeed(ALT_POSTS.filter(post=>post.id!=='alt-1113-fraction'||hasArrived(post.publishedAt)),'#altFeed');
+}
+function followAlt(){if(state.altFollowed)return;state.altFollowed=true;state.unreadChats.add('alt');save();renderAlt();updateUnread();updateActivityBadge();toast('追蹤邀請已送出')}
+function syncTimedChatUnread(){
+  if(hasArrived(RELEASE.xiaAppointment)&&!state.seenChatEvents.has('xia-appointment'))state.unreadChats.add('friend1');
+  if(hasArrived(RELEASE.xiaReplyDeadline)&&!state.xiaAnAppointmentReplied&&!state.seenChatEvents.has('xia-reminder'))state.unreadChats.add('friend1');
+  if(hasArrived(RELEASE.xiaEarly)&&!state.seenChatEvents.has('xia-early'))state.unreadChats.add('friend1');
+}
+function xiaMessages(){
+  const messages=[['date','2026年11月11日 上午11:23'],...CHATS.find(chat=>chat.id==='friend1').messages];
+  if(hasArrived(RELEASE.xiaAppointment))messages.push(['date','2026年11月13日 上午10:05'],['in','明天11點半在美術館見面？']);
+  if(state.xiaAnAppointmentReplied){
+  messages.push(['out',state.xiaAnReply]);
+
+  if(Date.now()-state.xiaAnReplyAt>=1000){
+    messages.push([
+      'in',
+      state.xiaAnDeclined
+        ? '你怎麼突然反悔了？\n算了 我自己去吧。'
+        : '明天見'
+    ]);
+  }
+}
+  if(hasArrived(RELEASE.xiaReplyDeadline)&&!state.xiaAnAppointmentReplied){
+    messages.push(['in','你怎麼今天都沒回我訊息?記得明天見喔！']);
+  }
+if(hasArrived(RELEASE.xiaEarly)){
+  messages.push(
+    ['date','2026年11月14日 上午10:48'],
+    [
+      'in',
+      state.xiaAnDeclined
+        ? '我提早到了，如果你最後決定有要來再跟我說一下～'
+        : '我估錯時間太早到美術館了XDD\n先進去美術館裡面咖啡廳等你'
+    ]
+  );
+}
+  if(state.xiaAnEmergencyTriggered){
+    messages.push(['share',NEWS_1114_POST.headline]);
+    ['你沒事吧?','你可以回我嗎?','拜託你回我一下'].slice(0,state.xiaAnEmergencyMessagesShown).forEach(text=>messages.push(['out',text]));
+  }
+  return messages;
+}
+function chatMessages(chat){return chat.id==='friend1'?xiaMessages():chat.messages}
+function renderMessages(){
+  syncTimedChatUnread();
+  const mystery=state.altFollowed?`<button class="message-row" data-chat="alt"><img class="avatar" src="${ALT.avatar}" alt="${ALT.name}"><span><strong>${ALT.handle}</strong><small>你也喜歡他？那你也記得他的生日嗎？</small></span>${state.unreadChats.has('alt')?'<i class="unread-dot">1</i>':''}</button>`:'';
+	const lilith=state.lilithChatStarted
+	  ? `
+		<button class="message-row" data-chat="lilith">
+		  <img class="avatar" src="${PROFILE.avatar}" alt="${PROFILE.name}">
+		  <span>
+			<strong>${PROFILE.handle}</strong>
+			<small>
+			  ${state.endingUnlocked
+				? '你怎麼知道這些事情？'
+				: '尚無訊息'
+			  }
+			</small>
+		  </span>
+		</button>
+	  `
+	  : '';
+  $('#messageList').innerHTML=lilith+mystery+CHATS.map(c=>{const messages=chatMessages(c).filter(message=>message[0]!=='date');const preview=messages.at(-1)?.[1]||c.preview;return `<button class="message-row" data-chat="${c.id}"><img class="avatar" src="${c.avatar}" alt="${esc(c.name)}"><span><strong>${esc(c.name)}</strong><small>${esc(preview)}</small></span>${state.unreadChats.has(c.id)?'<i class="unread-dot">1</i>':`<time>${esc(c.time)}</time>`}</button>`}).join('');
+  $$('[data-chat]').forEach(b=>b.onclick=()=>b.dataset.chat==='alt'?openChat():b.dataset.chat==='lilith'?openLilithChat():openRegularChat(b.dataset.chat));save()
+}
+function updateUnread(){syncTimedChatUnread();$('#navUnread').classList.toggle('hidden',state.unreadChats.size===0);if(state.view==='messages')renderMessages()}
+function eligibleActivityEvents(){
+  const events=releasedScheduledNews().map(post=>post.id);
+  if(state.altFollowed&&hasArrived(RELEASE.altPost))events.push('alt-1113-fraction');
+  return events;
+}
+function activityPosts(){
+  const reason=state.followedProfiles.has(NEWS_PROFILE.handle)?'因為你追蹤':'建議串文';
+  const news=releasedScheduledNews().map(post=>({...post,feedReason:reason}));
+  const alt=state.altFollowed&&hasArrived(RELEASE.altPost)?[{...ALT_POSTS.find(post=>post.id==='alt-1113-fraction'),feedReason:'因為你追蹤'}]:[];
+  return [...news,...alt,...ACTIVITY_POSTS].sort((a,b)=>timeMs(b.publishedAt||0)-timeMs(a.publishedAt||0));
+}
+function updateActivityBadge(){
+  const count=eligibleActivityEvents().filter(id=>!state.seenActivityEvents.has(id)).length;
+  const badge=$('#activityUnread');
+  badge.textContent=String(Math.min(9,count));
+  badge.classList.toggle('hidden',count===0);
+}
+function renderActivity(markSeen=false){
+  renderFeed(activityPosts(),'#activityFeed');
+  if(markSeen){eligibleActivityEvents().forEach(id=>state.seenActivityEvents.add(id));save()}
+  updateActivityBadge();
+}
+function refreshRelativeTimeLabels(){
+  $$('[data-published-at]').forEach(node=>{node.textContent=formatPublishedTime({publishedAt:node.dataset.publishedAt})});
+}
+let lastTimelineSignature='';
+function refreshTimeline(){
+  syncTimedChatUnread();
+  const signature=[...eligibleActivityEvents(),...releasedProfileOnlyNews().map(post=>post.id),hasArrived(RELEASE.xiaAppointment),hasArrived(RELEASE.xiaReplyDeadline),hasArrived(RELEASE.lilithMessages),hasArrived(RELEASE.xiaEarly)].join('|');
+  if(signature!==lastTimelineSignature){
+    lastTimelineSignature=signature;
+    if(state.view==='newsProfile')renderNewsProfile();
+    if(state.view==='activity')renderActivity(false);
+    if(state.view==='alt')renderAlt();
+    if(state.view==='profile')renderFeed(profilePosts());
+    if(state.view==='messages')renderMessages();
+    if(state.view==='chat'&&activeChatId==='friend1'){
+      if(hasArrived(RELEASE.xiaReplyDeadline)&&!state.xiaAnAppointmentReplied){
+        state.seenChatEvents.add('xia-reminder');state.unreadChats.delete('friend1');
+      }
+      renderRegularChat(CHATS.find(chat=>chat.id==='friend1'));
+    }
+    updateUnread();updateActivityBadge();save();
+  }
+  refreshRelativeTimeLabels();
+}
 function openChat(){
   showView('chat','messages');
-  state.unread=false;
+  activeChatId='alt';
+  state.unreadChats.delete('alt');
   save();
   updateUnread();
 
@@ -1434,17 +1741,142 @@ function openChat(){
     }
   `;
 
+  const input=$('#codeInput');input.inputMode='numeric';input.maxLength=4;input.placeholder='輸入答案';
   $('#codeForm').classList.toggle('hidden',state.mutual);
 
   if(state.mutual){
     $('#viewAltFromChat').onclick=openAlt;
   }
 }
-function openRegularChat(id){const c=CHATS.find(x=>x.id===id);showView('chat','messages');$('#codeForm').classList.add('hidden');$('#chatBody').innerHTML=`<div class="chat-person"><img class="avatar" src="${c.avatar}" alt="${esc(c.name)}"><strong>${esc(c.name)}</strong><span>@${esc(c.handle)}</span></div><div class="date-divider">較早</div>${c.messages.map(m=>`<div class="bubble ${m[0]==='in'?'incoming':'outgoing'}">${esc(m[1])}</div>`).join('')}`}
+let activeChatId='';
+const ENDING_CONTENT={
+  text:'我最親愛的，漢密爾頓：\n「明天，和明天，和明天，一天接著一天，以蹣跚的步伐向前挪去。」\n相信不必多說，你便知道我引用的是哪一齣悲劇。現在外頭的人都這麼說。他們說你是馬克白，受野心與理想驅使，最終自取滅亡。但我始終相信，我們所做的是正確的事——即使世人不明白，即使你我至親之人也不明白。\n我知道你的理想，甚至可以說，我大概是這世上最盼望它成真的人，請你務必記得這一點：我始終站在你這一邊。\n另外，務必謹言慎行。無論文字或話語，一個不合時宜的停頓，都可能造成不必要的誤會；一兩週前我收到你的來信。你在上頭寫著：「我最親愛的，莉莉絲。」\n我希望那個逗號是你故意放的，但我猜不是。\n我知道你向來不樂意講究那些標點符號。放在以前，我自然會替你一一審查講稿和條文；但如今我不在你身邊，請萬事小心。\n\n莉莉絲。\n\n\n\n\n／\n\n\n\n\n「我說過我討厭菸味。」\n莉莉絲．凱特拉開車門，迎面而來的煙霧濃得幾乎令人窒息。她皺了皺眉，向後退開兩步，等車裡的煙散得差不多了，才抱著那束鬱金香坐進副駕駛座。\n「打扮得真隆重。」索恩偏過頭，打量了一眼她身上的白色風衣，輕聲嗤笑，「一個手下敗將，值得嗎？」\n「他是我的導師。」莉莉絲神色冷淡地望向窗外，顯然沒有繼續交談的興致。\n索恩倒不介意。他一手搭著方向盤，對著身旁這個身形幾乎只有自己一半大的女人喋喋不休，「不只如此吧？你跑來投靠我，親手把他弄到這副境地，現在倒擺起學生的架子了。真搞不懂你到底在想什麼……」\n「不管我在想什麼，都和你無關。」莉莉絲望著窗外飛速掠過的街景。\n導師嗎？確實不只如此。\n漢密爾頓．希爾是她的伯樂，是她的恩人，是她的導師和戰友，希爾可以用一個眼神告訴她該往哪走，也可以通過筆尖的輕輕一撇使她心煩意亂。\n她跟在這個人身邊十年，整整十年。她替他修改講稿，替他斟酌那些他從來懶得在意的字句和標點，替他記得每一場會議、每一個承諾，也比任何人都更清楚，他究竟想把高譚變成什麼模樣。\n她知道他的理想，甚至比希爾本人更清楚那些理想，所以她當然也比任何人更早看見結局——莉莉絲從一開始就知道漢密爾頓．希爾會走向滅亡。\n她提醒過他，一次，兩次，無數次，可希爾不以為意。他沉醉在那個近在咫尺的未來裡，一步一步向前走，從未回過頭來看她一眼。\n於是最後，莉莉絲替他停了下來，她將漢密爾頓．希爾出賣給索恩，親手驗證了自己早已說過無數次的預言。\n看吧，我早就告訴過你。莉莉絲垂下眼，指尖輕輕撫過懷裡鬱金香的花瓣，車窗上映出她模糊的倒影。她看著那張臉，忽然很輕地彎起嘴角。\n十分鐘。\n再十分鐘。\n她幾乎已經等不及了。\n至少現在他終於只能看著我了，我最親愛的，漢密爾頓。',
+  image:'' // 需要結局圖片時填入，例如：assets/ending.webp
+};
+function renderEnding(){
+  $('#endingText').textContent=ENDING_CONTENT.text;
+  const image=$('#endingImage');
+  image.classList.toggle('hidden',!ENDING_CONTENT.image);
+  if(ENDING_CONTENT.image)image.src=ENDING_CONTENT.image;
+}
+function openLilithChat(){
+  if(
+    !state.lilithChatStarted &&
+    !hasArrived(RELEASE.lilithMessages)
+  ){
+    return;
+  }
+
+  state.lilithChatStarted=true;
+  save();
+
+  activeChatId='lilith';
+  showView('chat','messages');
+
+  $('#chatBody').innerHTML=`
+    <div class="chat-person">
+      <img
+        class="avatar"
+        src="${PROFILE.avatar}"
+        alt="${esc(PROFILE.name)}"
+      >
+      <strong>${esc(PROFILE.handle)}</strong>
+      <span>
+        ${PROFILE.flag} ${esc(PROFILE.location)}
+      </span>
+    </div>
+
+    ${
+      state.endingUnlocked
+        ? `
+          <div class="bubble outgoing">
+            你今天要去見他嗎？
+          </div>
+
+          <div class="bubble incoming">
+            你是誰？
+          </div>
+
+          <div class="bubble incoming">
+            你怎麼知道這些事情？
+          </div>
+
+          <button
+            class="view-alt-btn"
+            id="showEndingBtn"
+          >
+            顯示結局
+          </button>
+        `
+        : ''
+    }
+  `;
+
+  const input=$('#codeInput');
+
+  input.inputMode='text';
+  input.removeAttribute('maxlength');
+  input.placeholder='傳送訊息';
+
+  $('#codeForm').classList.toggle(
+    'hidden',
+    state.endingUnlocked
+  );
+
+  if(state.endingUnlocked){
+    $('#showEndingBtn').onclick=()=>{
+      showView('ending','chat');
+      renderEnding();
+    };
+  }
+}
+function chatMessageHTML(message){
+  if(message[0]==='date')return `<div class="date-divider">${esc(message[1])}</div>`;
+  if(message[0]==='share')return `<button class="shared-post" data-open="${NEWS_1114_POST.id}"><strong>高譚日報</strong><span>${esc(message[1])}</span></button>`;
+  return `<div class="bubble ${message[0]==='in'?'incoming':'outgoing'}">${esc(message[1])}</div>`;
+}
+function renderRegularChat(c){
+  $('#chatBody').innerHTML=`<div class="chat-person"><img class="avatar" src="${c.avatar}" alt="${esc(c.name)}"><strong>${esc(c.name)}</strong><span>@${esc(c.handle)}</span></div>${chatMessages(c).map(chatMessageHTML).join('')}`;
+  bindActions();
+  const input=$('#codeInput');
+  const canReply=c.id==='friend1'&&hasArrived(RELEASE.xiaAppointment)&&!hasArrived(RELEASE.xiaReplyDeadline)&&!state.xiaAnAppointmentReplied;
+  input.inputMode='text';input.removeAttribute('maxlength');input.placeholder='輸入訊息';
+  $('#codeForm').classList.toggle('hidden',!canReply);
+}
+function continueXiaEmergency(){
+  if(!state.xiaAnEmergencyTriggered)return;
+  const messages=['你沒事吧?','你可以回我嗎?','拜託你回我一下'];
+  const next=state.xiaAnEmergencyMessagesShown;
+  if(next>=messages.length)return;
+  setTimeout(()=>{
+    state.xiaAnEmergencyMessagesShown++;
+    save();
+    if(activeChatId==='friend1'){
+      $('#chatBody').insertAdjacentHTML('beforeend',chatMessageHTML(['out',messages[next]]));
+      scrollTo(0,document.body.scrollHeight);
+    }
+    continueXiaEmergency();
+  },1000);
+}
+function openRegularChat(id){
+  const c=CHATS.find(x=>x.id===id);if(!c)return;
+  activeChatId=id;showView('chat','messages');
+  if(id==='friend1'){
+    if(hasArrived(RELEASE.xiaAppointment))state.seenChatEvents.add('xia-appointment');
+    if(hasArrived(RELEASE.xiaReplyDeadline))state.seenChatEvents.add('xia-reminder');
+    if(hasArrived(RELEASE.xiaEarly))state.seenChatEvents.add('xia-early');
+    state.unreadChats.delete('friend1');
+    if(state.museumNewsOpened&&hasArrived(RELEASE.museumExplosion)&&!state.xiaAnEmergencyTriggered){
+      state.xiaAnEmergencyTriggered=true;state.xiaAnEmergencyMessagesShown=0;
+    }
+  }
+  save();updateUnread();renderRegularChat(c);
+  if(id==='friend1')continueXiaEmergency();
+}
 function initProfile(){$('#displayName').textContent=PROFILE.name;$('#handle').textContent=PROFILE.handle;$('#location').textContent=PROFILE.location;$('.flag').textContent=PROFILE.flag;$('#bio').innerHTML=esc(PROFILE.bio).replace(/\n/g,'<br>');$('#tags').innerHTML=PROFILE.tags.map(t=>`<span>${esc(t)}</span>`).join('');$('#followers').textContent=PROFILE.followers;$('#following').textContent=PROFILE.following;$('#profileAvatar').src=PROFILE.avatar}
 function toast(t){const x=$('#toast');x.textContent=t;x.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>x.classList.remove('show'),1800)}
 $('#followBtn').onclick=()=>{  toggleProfileFollow('#followBtn',PROFILE.handle);};
-$('#messageBtn').onclick=()=>$('#messageDialog').showModal();
+$('#messageBtn').onclick=()=>(state.lilithChatStarted||hasArrived(RELEASE.lilithMessages))?openLilithChat():$('#messageDialog').showModal();
 $('#closeDialog').onclick=()=>$('#messageDialog').close();
 $('#closeCompletionDialog').onclick=()=>$('#completionDialog').close();
 
@@ -1483,6 +1915,104 @@ $('#codeForm').onsubmit=e=>{
 
   if(!answer)return;
 
+if(activeChatId==='lilith'){
+  const message=input.value.trim();
+
+  input.value='';
+
+  $('#chatBody').insertAdjacentHTML(
+    'beforeend',
+    `<div class="bubble outgoing">${esc(message)}</div>`
+  );
+
+  if(message==='你喜歡希爾對嗎?'){
+    state.endingUnlocked=true;
+    save();
+
+    $('#codeForm').classList.add('hidden');
+
+    setTimeout(()=>{
+  if(activeChatId!=='lilith'||state.view!=='chat')return;
+
+  $('#chatBody').insertAdjacentHTML(
+    'beforeend',
+    `
+      <div class="bubble incoming">
+        你是誰？
+      </div>
+    `
+  );
+
+  scrollTo(0,document.body.scrollHeight);
+},2000);
+
+setTimeout(()=>{
+  if(activeChatId!=='lilith'||state.view!=='chat')return;
+
+  $('#chatBody').insertAdjacentHTML(
+    'beforeend',
+    `
+      <div class="bubble incoming">
+        你怎麼知道這些事情？
+      </div>
+    `
+  );
+
+  scrollTo(0,document.body.scrollHeight);
+},4000);
+
+setTimeout(()=>{
+  if(activeChatId!=='lilith'||state.view!=='chat')return;
+
+  $('#chatBody').insertAdjacentHTML(
+    'beforeend',
+    `
+      <button
+        class="view-alt-btn"
+        id="showEndingBtn"
+      >
+        顯示結局
+      </button>
+    `
+  );
+
+  $('#showEndingBtn').onclick=()=>{
+    showView('ending','chat');
+    renderEnding();
+  };
+
+  scrollTo(0,document.body.scrollHeight);
+},6000);
+  }
+
+  return;
+}
+
+  if(activeChatId==='friend1'){
+    if(hasArrived(RELEASE.xiaReplyDeadline)){
+      input.value='';
+      state.seenChatEvents.add('xia-reminder');state.unreadChats.delete('friend1');save();
+      renderRegularChat(CHATS.find(chat=>chat.id==='friend1'));
+      return;
+    }
+    state.xiaAnReply=input.value.trim();
+	state.xiaAnReplyAt=Date.now();
+	state.xiaAnAppointmentReplied=true;
+
+		const declineKeywords=[
+		  '沒空','不去','不能去','沒辦法去','不想去','不方便','臨時有事',];
+
+state.xiaAnDeclined=declineKeywords.some(keyword=>{
+  return state.xiaAnReply.includes(keyword);
+});
+    input.value='';save();
+    renderRegularChat(CHATS.find(chat=>chat.id==='friend1'));
+    setTimeout(()=>{
+      if(activeChatId==='friend1')renderRegularChat(CHATS.find(chat=>chat.id==='friend1'));
+    },1000);
+    return;
+  }
+
   const accepted=['八三一','831','0831','8/31','０８／３１','8月31日','八月三十一日','8月31號','8月31','８／３１'];
 
   $('#chatBody').insertAdjacentHTML(
@@ -1512,8 +2042,8 @@ $('#codeForm').onsubmit=e=>{
     input.value='';
   }
 };
-$$('[data-nav]').forEach(b=>b.onclick=()=>{const v=b.dataset.nav;showView(v,v);if(v==='messages')renderMessages();if(v==='activity')renderFeed(ACTIVITY_POSTS,'#activityFeed');if(v==='search')renderProgress()});
-const TAB_CONTENT={posts:POSTS,replies:REPLY_POSTS,media:MEDIA_POSTS,reposts:REPOST_POSTS};$$('[data-profile-tab]').forEach(b=>b.onclick=()=>{$$('[data-profile-tab]').forEach(x=>x.classList.remove('active'));b.classList.add('active');renderFeed(TAB_CONTENT[b.dataset.profileTab])});
+$$('[data-nav]').forEach(b=>b.onclick=()=>{const v=b.dataset.nav;showView(v,v);if(v==='messages')renderMessages();if(v==='activity')renderActivity(true);if(v==='search')renderProgress()});
+const TAB_CONTENT={replies:REPLY_POSTS,media:MEDIA_POSTS,reposts:REPOST_POSTS};$$('[data-profile-tab]').forEach(b=>b.onclick=()=>{$$('[data-profile-tab]').forEach(x=>x.classList.remove('active'));b.classList.add('active');renderFeed(b.dataset.profileTab==='posts'?profilePosts():TAB_CONTENT[b.dataset.profileTab])});
 $('#searchInput').oninput=e=>{const q=e.target.value.trim().toLowerCase();if(q==='0826')unlock('p3');const list=POSTS.filter(p=>(p.text+(p.clue||'')+(p.clueTitle||'')).toLowerCase().includes(q));$('#searchResults').innerHTML=q?`<div class="reply-heading">搜尋結果</div>${list.map(p=>postHTML(p)).join('')}`:'';bindActions()};
 history.replaceState(
   {
@@ -1539,10 +2069,7 @@ window.addEventListener('popstate',event=>{
   }
 
   if(view==='activity'){
-    renderFeed(
-      ACTIVITY_POSTS,
-      '#activityFeed'
-    );
+    renderActivity(false);
   }
 
   if(view==='search'){
@@ -1565,5 +2092,8 @@ renderNewsProfile();
 renderFeed();
 renderProgress();
 updateUnread();
+updateActivityBadge();
 renderMessages();
 checkCompletion();
+refreshTimeline();
+setInterval(refreshTimeline,30000);
