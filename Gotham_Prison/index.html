@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>黑門監獄</title>
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="login-lock" id="loginLock">
+  <div class="login-panel">
+    <div class="login-seal" aria-hidden="true">BG</div>
+    <div class="login-heading">
+      <h1>BLACKGATE PENITENTIARY</h1>
+      <p>高譚黑門監獄｜安全存取系統</p>
+    </div>
+
+    <form class="login-form" id="loginForm" autocomplete="off">
+      <label for="loginAccount">帳號</label>
+      <input id="loginAccount" name="account" type="text" maxlength="32" spellcheck="false" autocomplete="off" required>
+
+      <label for="loginPassword">密碼 <span class="case-note">（密碼區分大小寫）</span></label>
+      <input id="loginPassword" name="password" type="text" maxlength="40" autocomplete="off" spellcheck="false" required>
+
+      <p class="login-error" id="loginError" aria-live="polite"></p>
+      <button type="submit" class="login-submit">登入系統</button>
+    </form>
+
+    <div class="login-warning">限授權人員使用　所有登入行為皆會留下紀錄</div>
+  </div>
+</div>
+
+<div class="desktop">
+  <div class="icon" onclick="querySystemGate()">
+    <img src="images/query.png">
+    <span>高譚監獄綜合系統</span>
+  </div>
+
+  <div class="session-box" id="sessionBox">
+    <div id="welcomeText">歡迎你</div>
+    <button type="button" class="logout-btn" id="logoutButton">登出</button>
+  </div>
+</div>
+
+<div class="logout-dialog" id="logoutDialog" aria-hidden="true">
+  <div class="logout-dialog-box" role="dialog" aria-modal="true" aria-labelledby="logoutMessage">
+    <p id="logoutMessage">用完電腦請隨手登出系統，確認登出嗎？</p>
+    <div class="logout-actions">
+      <button type="button" id="confirmLogout">確認</button>
+      <button type="button" id="cancelLogout">取消</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="modal">
+  <div class="modal-content" id="modalBody"></div>
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>

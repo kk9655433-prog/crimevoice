@@ -1,0 +1,373 @@
+
+html,body{
+  margin:0;
+  height:100%;
+  overflow:hidden;
+  background:url('images/XP.jpg') no-repeat center/cover;
+  font-family:system-ui;
+}
+
+/* ===== 黑門監獄登入鎖定畫面 ===== */
+.login-lock{
+  position:fixed;
+  inset:0;
+  z-index:20000;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:24px;
+  box-sizing:border-box;
+  color:#eaf2f7;
+  background:
+    linear-gradient(rgba(3,10,15,.92),rgba(3,10,15,.96)),
+    repeating-linear-gradient(0deg,transparent 0 3px,rgba(255,255,255,.025) 3px 4px);
+}
+
+.login-lock.unlocked{
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+  transition:opacity .45s ease,visibility .45s;
+}
+
+.login-panel{
+  width:min(420px,100%);
+  padding:34px 36px 28px;
+  box-sizing:border-box;
+  background:#101820;
+  border:1px solid #61717c;
+  box-shadow:0 18px 60px rgba(0,0,0,.65),inset 0 0 0 3px #070b0e;
+}
+
+.login-seal{
+  width:76px;
+  height:76px;
+  margin:0 auto 18px;
+  display:grid;
+  place-items:center;
+  border:3px double #c5d0d6;
+  border-radius:50%;
+  color:#c5d0d6;
+  font-family:Georgia,serif;
+  font-size:25px;
+  font-weight:700;
+  letter-spacing:1px;
+}
+
+.login-heading{text-align:center;margin-bottom:28px}
+.login-heading h1{margin:0;font:700 22px/1.25 Georgia,serif;letter-spacing:1.8px}
+.login-heading p{margin:8px 0 0;color:#9eacb5;font-size:13px;letter-spacing:1px}
+.login-form{display:flex;flex-direction:column}
+.login-form label{margin:0 0 6px;color:#c8d1d6;font-size:13px}
+.case-note{color:#ffcf70;font-size:12px}
+.login-form input{
+  box-sizing:border-box;
+  width:100%;
+  height:42px;
+  margin:0 0 17px;
+  padding:0 12px;
+  border:1px solid #687985;
+  border-radius:2px;
+  outline:none;
+  background:#05090c;
+  color:#fff;
+  font:16px Consolas,monospace;
+  user-select:text;
+  -webkit-user-select:text;
+}
+.login-form input:focus{border-color:#d7e0e5;box-shadow:0 0 0 2px rgba(215,224,229,.12)}
+.login-submit{
+  height:43px;
+  border:1px solid #aab7bf;
+  background:#d7dde1;
+  color:#11181d;
+  font-weight:700;
+  cursor:pointer;
+}
+.login-submit:active{transform:translateY(1px)}
+.login-error{min-height:20px;margin:-5px 0 10px;color:#ff6b6b;font-size:13px;text-align:center}
+.login-warning{margin-top:24px;padding-top:17px;border-top:1px solid #34414a;color:#74838d;font-size:11px;text-align:center}
+
+@media (max-width:520px){
+  .login-lock{padding:16px}
+  .login-panel{padding:28px 22px 24px}
+  .login-heading h1{font-size:18px;letter-spacing:1.2px}
+}
+  
+.desktop{
+  height:100%;
+  padding-top:2vh;
+  padding-left:0.5vw;
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+}
+
+/* ===== 目前登入者與登出 ===== */
+.session-box{
+  position:fixed;
+  right:18px;
+  bottom:18px;
+  min-width:210px;
+  padding:12px 14px;
+  box-sizing:border-box;
+  color:#fff;
+  background:rgba(0,34,76,.88);
+  border:1px solid rgba(255,255,255,.78);
+  box-shadow:0 3px 10px rgba(0,0,0,.45);
+  text-align:right;
+  font-size:14px;
+  text-shadow:0 1px 2px #000;
+}
+
+.logout-btn{
+  margin-top:9px;
+  padding:4px 15px;
+  border:1px solid #fff;
+  border-radius:2px;
+  color:#fff;
+  background:#245da7;
+  cursor:pointer;
+}
+
+.logout-dialog{
+  position:fixed;
+  inset:0;
+  z-index:21000;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  box-sizing:border-box;
+  background:rgba(0,0,0,.55);
+}
+.logout-dialog.active{display:flex}
+.logout-dialog-box{
+  width:min(390px,100%);
+  padding:24px;
+  box-sizing:border-box;
+  color:#111;
+  background:#ece9d8;
+  border:3px solid #245edb;
+  border-radius:7px 7px 2px 2px;
+  box-shadow:0 12px 35px rgba(0,0,0,.55);
+  text-align:center;
+}
+.logout-dialog-box p{margin:0 0 22px;line-height:1.6}
+.logout-actions{display:flex;justify-content:center;gap:12px}
+.logout-actions button{
+  min-width:76px;
+  padding:6px 15px;
+  border:1px solid #555;
+  background:#f5f5f1;
+  cursor:pointer;
+}
+
+@media (max-width:520px){
+  .session-box{right:10px;bottom:10px;min-width:190px}
+}
+  
+.icon{
+  width:90px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:flex-start;
+  text-align:center;
+  color:white;
+  cursor:pointer;
+  text-shadow:0 2px 4px black;
+  user-select:none;
+}
+
+.icon img{
+  width:48px;
+  height:auto;
+  display:block;
+  margin-bottom:6px;
+}
+
+.icon span{
+  display:block;
+  width:100%;
+  word-break:break-all;
+}
+
+.close-btn{
+  position:absolute;
+  top:15px;
+  right:20px;
+  font-size:22px;
+  color:#00e5ff;
+  cursor:pointer;
+  text-shadow:0 0 10px rgba(0,255,255,0.8);
+  transition:.2s;
+}
+
+.close-btn:hover{
+  transform:scale(1.2);
+}
+  
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.6);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  opacity:0;
+  pointer-events:none;
+  transition:.3s;
+  z-index:9999;
+}
+.modal.active{opacity:1;pointer-events:auto;}
+
+.modal-content{
+  position:relative;
+  width:90%;
+  max-width:1100px;
+  max-height:90vh;
+  overflow:auto;
+  border-radius:8px;
+  color:white;
+}
+
+.document-bg{
+  background:url('images/XP.jpg') no-repeat center/cover;
+  position:relative;
+  padding:60px;
+}
+.document-bg::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,0.8);
+}
+.document{
+  position:relative;
+  z-index:2;
+  line-height:1.9;
+  font-size:16px;
+}
+.doc-header{
+  text-align:center;
+  padding:25px;
+  margin-bottom:40px;
+  border:1px solid rgba(255,255,255,0.4);
+  box-shadow:0 0 30px rgba(0,255,255,0.2);
+}
+.meta-box{
+  border:1px solid rgba(255,255,255,0.3);
+  padding:15px;
+  margin-top:10px;
+  font-size:14px;
+}
+
+/* ===== Discord-style spoiler chips===== */
+.redacted-group{
+  display:inline;
+  cursor:pointer;
+}
+
+/* 核心：每行背景分段塗抹 */
+.redacted-spoiler{
+  display:inline;
+  background:#000;
+  color:transparent;
+  border-radius:3px;
+  padding:0 4px;
+  user-select:none;
+  text-shadow:none;
+  -webkit-text-fill-color: transparent;
+
+  /* 關鍵：讓換行後每一行背景獨立複製 */
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+.redacted-spoiler::selection{
+  background:#000;
+  color:transparent;
+}
+
+/* 解鎖 */
+.redacted-group.revealed .redacted-spoiler{
+  background:none;
+  color:inherit;
+  -webkit-text-fill-color: currentColor;
+  user-select:text;
+}
+/* 權限提示框 */
+.auth-box{
+  position:fixed;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  background:#111;
+  color:#00e5ff;
+  padding:30px 50px;
+  border:1px solid #00e5ff;
+  z-index:10000;
+  text-align:center;
+  font-size:18px;
+  box-shadow:0 0 25px rgba(0,255,255,.5);
+}
+
+/* 密碼 */
+.pwd{
+  width:50px;height:50px;
+  font-size:24px;text-align:center;
+}
+#pwdConfirm{
+  display:block;margin:20px auto 0;
+  padding:6px 18px;
+}
+
+/* Chrome / Edge / Safari */
+.modal-content::-webkit-scrollbar {
+  width: 10px;
+}
+
+.modal-content::-webkit-scrollbar-track {
+  background: rgba(0,0,0,0.6);
+  border-left: 1px solid rgba(0,255,255,0.2);
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    180deg,
+    rgba(0,255,255,0.6),
+    rgba(0,150,255,0.6)
+  );
+  border-radius: 6px;
+  box-shadow: 0 0 8px rgba(0,255,255,0.6);
+}
+
+.modal-content::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(
+    180deg,
+    rgba(0,255,255,0.9),
+    rgba(0,150,255,0.9)
+  );
+}
+
+/* Firefox */
+.modal-content {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0,255,255,0.7) rgba(0,0,0,0.6);
+}
+/* 禁止文字反白 */
+html,
+body,
+body * {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+
+/* 圖片禁止拖曳 */
+img {
+  -webkit-user-drag: none;
+  user-drag: none;
+}
