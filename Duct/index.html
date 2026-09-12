@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="theme-color" content="#0b141b"><title>逃離通風管</title><link rel="stylesheet" href="style.css?v=2"><script src="app.js?v=2" defer></script></head>
+<body><main class="app"><header class="app-header"><span class="eyebrow">ESCAPE / 通風系統</span><span id="stageCount">01 / 03</span></header><div class="stage-progress" aria-label="關卡進度"><i class="current"></i><i></i><i></i></div>
+<section id="stage1" class="stage" ><div class="wrap">
+  <div class="game-shell">
+    <div class="game-inner">
+      <div class="title">連通所有通風管</div>
+      <canvas id="s1-game"></canvas>
+
+      <div class="modal" id="s1-introModal">
+        <div class="modal-card">
+          <h2>逃離通風管</h2>
+          <p>你面前有一張通風管地圖
+但地圖被打亂了
+你需要找出正確的通風管連接方式
+才能離開這邊</p>
+          <button id="s1-confirmBtn">確定</button>
+        </div>
+      </div>
+
+      <div class="modal hidden" id="s1-successModal">
+        <div class="modal-card">
+          <p>你費盡千辛萬苦，
+終於找出通風管的路線，
+你現在要試圖爬進這個管道……</p>
+          <button id="s1-nextStepBtn">確定</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></section>
+<section id="stage2" class="stage" hidden><div class="wrap">
+  <div class="game-shell">
+    <div class="game-inner">
+      <div class="title">電網斷路</div>
+      <div class="sub">拖曳相同顏色節點，讓所有電路彼此不纏繞</div>
+      <canvas id="s2-game"></canvas>
+
+      <div class="modal" id="s2-introModal">
+        <div class="modal-card">
+          <h2>電網斷路</h2>
+          <p>監獄的通風管內部被設計了高壓電網，
+如果直接爬進去後果不堪設想，
+你需要重新接通不同顏色的電線，
+讓電線彼此繞過，
+所有線路都不能重疊，
+完成後才能進去。</p>
+          <button id="s2-confirmBtn">確定</button>
+        </div>
+      </div>
+
+      <div class="modal hidden" id="s2-successModal">
+        <div class="modal-card">
+          <p>你成功讓通風管的電網失效了，
+你繼續往前爬……</p>
+          <button id="s2-nextStepBtn">確定</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></section><section id="stage3" class="stage" hidden>
+<div class="wrap"><div class="game-shell"><div class="game-inner screw-game">
+<div class="title">螺絲拆解</div><p class="sub">拆下露出的螺絲，讓交疊的板件逐一掉落。</p>
+<div class="screw-top"><div class="tray-grid" id="trays" aria-label="收集盒"></div>
+<div class="buffer-label"><span>暫存區</span><span id="bufferCount">0 / 7</span></div><div id="buffer" class="buffer-row"></div></div>
+<div class="screw-toolbar"><span id="screwProgress" aria-live="polite"></span><button id="retryScrews" class="text-button">重試本關</button></div>
+<div id="plates" class="plates"></div>
+<div id="vent" class="vent" hidden><p>拆下最後四顆螺絲</p><div class="vent-grille"></div><div id="ventScrews"></div></div>
+<p id="screwStatus" class="status" role="status">點選露出的螺絲，放入對應的收集盒。</p>
+<div id="escapeLight" class="escape-light"></div>
+<div class="modal" id="s3-introModal"><div class="modal-card"><h2>最後一道出口</h2><p>距離出口只剩最後一步，
+你面前是被螺絲鎖住的通風出口，
+你需要把螺絲轉開……</p><p class="instructions">上方有 4 個收集盒，同色集滿 4 顆就會收走。其他顏色先放進 7 格暫存區；暫存滿時，仍可拆收集盒需要的顏色。</p><button id="s3-confirmBtn">開始拆解</button></div></div>
+</div></div></div></section>
+<footer class="app-footer"><span id="stageHint">輕觸管件旋轉，連通所有通風管。</span><button id="helpBtn" class="text-button" aria-label="查看玩法">玩法</button></footer></main>
+<dialog id="notice"><div class="modal-card"><h2 id="noticeTitle"></h2><p id="noticeText"></p><div class="dialog-actions"><button id="noticeCancel" class="secondary">取消</button><button id="noticeOK">確定</button></div></div></dialog>
+</body></html>
