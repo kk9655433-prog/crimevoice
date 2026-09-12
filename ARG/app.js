@@ -855,8 +855,25 @@ const REPOST_POSTS=[
    {handle:'joker_goon_survivor',avatar:'assets/avatar-2.svg',text:'看到有人在詢問小丑幫？\n快跑！！！連履歷都不要投！！！',likes:44,reposts:3,shares:1},
    {handle:'arkham_escapee_66',avatar:'assets/person-unknown.svg',text:'不用比了，去哪家都一樣啦',likes:28,reposts:2,shares:0},
    {handle:'gotham_cynic_bro',avatar:'assets/person-rain.svg',text:'講個笑話，高譚打手在比較薪水跟福利',image:'assets/RUN.webp',likes:8,reposts:0,shares:0}]},
-	{id:'repost5',handle:'r_after_work',avatar:'assets/mia.webp',time:'2026-11-02',text:'一天一個語法小知識，day21，今天是非限定同位語和限定同位語\n你有想過一個逗號可能會改變整個句子的意思嗎？\nMy dearest Lily＝「我最親愛的莉莉」\n在所有叫 Lily 的人中，我最喜歡你。\nMy dearest, Lily＝「我最親愛的人，莉莉」\n在所有人中，我最喜歡你。',likes:73,reposts:6,shares:2,replies:[{handle:PROFILE.handle,avatar:PROFILE.avatar,
-		text:'=)',likes:2,reposts:0,shares:0,ownerLiked:true}]}
+	{id:'repost5',handle:'JP_Love_Lili',avatar:'assets/POTER.webp',time:'2026-11-02',text:'一天一個語法小知識，day21，今天是非限定同位語和限定同位語\n你有想過一個逗號可能會改變整個句子的意思嗎？\nMy dearest Lily＝「我最親愛的莉莉」\n在所有叫 Lily 的人中，我最喜歡你。\nMy dearest, Lily＝「我最親愛的人，莉莉」\n在所有人中，我最喜歡你。',likes:73,reposts:6,shares:2,flag:'UK',location:'倫敦',replies:[{handle:PROFILE.handle,avatar:PROFILE.avatar,
+		text:'=)',likes:2,reposts:0,shares:0,ownerLiked:true},
+		{handle:'Unhappy_Teacher',avatar:'assets/BLACK.webp',
+		text:'😧😧😧',likes:4,reposts:0,shares:0},
+		{handle:'JP_Love_Lili',avatar:'assets/POTER.webp',flag:'UK',location:'倫敦',
+		text:'@Unhappy_Teacher 別吵，去上你的課。',likes:5,reposts:0,shares:0},
+		{handle:'Unhappy_Teacher',avatar:'assets/BLACK.webp',flag:'UK',location:'蘇格蘭高地',
+		text:'你才很吵，海膽頭',likes:4,reposts:0,shares:0},
+		{handle:'JP_Love_Lili',avatar:'assets/POTER.webp',flag:'UK',location:'倫敦',
+		text:'@Unhappy_Teacher 你眼睛有問題嗎！？？？海膽是直的！我頭髮是卷的！',likes:5,reposts:0,shares:0},
+		{handle:'JP_Love_Lili',avatar:'assets/POTER.webp',flag:'UK',location:'倫敦',
+		text:'@Unhappy_Teacher 回我啊！！！回我！！！',likes:4,reposts:0,shares:0},
+		{handle:'JP_Love_Lili',avatar:'assets/POTER.webp',flag:'UK',location:'倫敦',
+		text:'@Unhappy_Teacher 別上課了上什麼課給我回來說清楚！！！',likes:1,reposts:0,shares:0},
+		{handle:'Unhappy_Teacher',avatar:'assets/BLACK.webp',flag:'UK',location:'蘇格蘭高地',
+		text:'知道了，你不是直的。',likes:35,reposts:0,shares:0},
+		{handle:'JP_Love_Lili',avatar:'assets/POTER.webp',flag:'UK',location:'倫敦',
+		text:'@Unhappy_Teacher ？我現在訂機票過去跟你打架你等著。',likes:20,reposts:0,shares:0}
+		]}
 ];
 [
   ['repost3','2026-11-08T12:00:00+08:00'],
@@ -899,11 +916,11 @@ const NEWS_1113_TAIPEI_EVENT={
   avatar:NEWS_PROFILE.avatar,
   publishedAt:'2026-11-13T13:00:00+08:00',
   headline:'歐美翁明日於三重登場　歐美作品同好齊聚交流',
-  text:'歐美作品主題同人活動「歐美翁」將於明日（14日）在台北三重舉行，現場預計設置同人創作攤位、角色扮演交流區及作品展示。主辦單位提醒參加者事先確認入場資訊，並配合場館動線與現場工作人員引導。',
+  text:'歐美作品主題同人活動「歐美翁」將於明日（14日）在台灣的台北三重舉行，現場預計設置同人創作攤位、角色扮演交流區及作品展示。主辦單位提醒參加者事先確認入場資訊，並配合場館動線與現場工作人員引導。',
   likes:846,reposts:126,shares:57,
   replies:[
     {handle:'cosplay_weekend',avatar:'assets/avatar-2.svg',text:'明天見！已經準備好要逛一整天了。',likes:31,reposts:2,shares:0},
-    {handle:'train_to_taipei',avatar:'assets/person-rain.svg',text:'從外縣市過去的人記得先查交通路線。',likes:18,reposts:1,shares:0}
+    {handle:'train_to_taipei',avatar:'assets/person-rain.svg',text:'從國外過去的人記得先查交通路線喔。',likes:18,reposts:1,shares:0}
   ]
 };
 const PROFILE_ONLY_SCHEDULED_NEWS=[NEWS_1113_TAIPEI_EVENT];
@@ -1101,7 +1118,7 @@ const ACTIVITY_POSTS=[
   {handle:'r_after_work',avatar:'assets/avatar-2.svg',text:'我要死在月台上了',likes:46,reposts:4,shares:0},
   {handle:'paper_cup_01',avatar:'assets/avatar-3.svg',text:'我手上的咖啡都喝完了，車還沒來。',likes:73,reposts:6,shares:2},
   {handle:'anna_in_gotham',avatar:'assets/person-rain.svg',text:'可以說一下目前卡在哪一站嗎？車廂裡完全沒有廣播。',likes:29,reposts:2,shares:0},
-  {handle:'old_gotham_resident',avatar:'assets/person-chen.svg',text:'每次都是號誌異常，到底什麼時候才要把設備換掉？',likes:94,reposts:13,shares:4},
+  {handle:'old_gotham_resident',avatar:'assets/person-chen.svg',text:'又是號誌異常，到底什麼時候才要把設備換掉？',likes:94,reposts:13,shares:4},
   {handle:'mia_afterfive',avatar:'assets/mia.webp',text:'我只想準時回家吃飯，這個要求在高譚很過分嗎？',likes:108,reposts:11,shares:3},
   {handle:'night_shift',avatar:'assets/avatar-2.svg',text:'夜班還沒開始，我已經想請假了。',likes:41,reposts:3,shares:1},
   {handle:'gotham_citizen_a',avatar:'assets/person-lin.svg',text:'高譚市民每天通勤都像在抽隨機事件卡，交通癱瘓，暫停移動一回合是吧。',likes:135,reposts:19,shares:6},
@@ -1816,7 +1833,13 @@ function chatMessages(chat){
 }
 function renderMessages(){
   syncTimedChatUnread();
-  const mystery=state.altFollowed?`<button class="message-row" data-chat="alt"><img class="avatar" src="${ALT.avatar}" alt="${ALT.name}"><span><strong>${ALT.handle}</strong><small>你也喜歡他？那你也記得他的生日嗎？</small></span>${state.unreadChats.has('alt')?'<i class="unread-dot">1</i>':''}</button>`:'';
+  const altLastHistory=state.altChatHistory.at(-1);
+  const altPreview=altLastHistory
+    ? (altLastHistory.correct?'答對了，我追蹤你了。':'答錯了。')
+    : state.mutual
+      ? '答對了，我追蹤你了。'
+      : '你也喜歡他？那你也記得他的生日嗎？';
+  const mystery=state.altFollowed?`<button class="message-row" data-chat="alt"><img class="avatar" src="${ALT.avatar}" alt="${ALT.name}"><span><strong>${ALT.handle}</strong><small>${esc(altPreview)}</small></span>${state.unreadChats.has('alt')?'<i class="unread-dot">1</i>':''}</button>`:'';
 	const lilith=state.lilithChatStarted
 	  ? `
 		<button class="message-row" data-chat="lilith">
@@ -1903,6 +1926,11 @@ function openChat(){
     : state.mutual?[{text:'0831',correct:true}]:[];
 
   $('#chatBody').innerHTML=`
+    <div class="chat-person">
+      <img class="avatar" src="${ALT.avatar}" alt="${esc(ALT.name)}">
+      <strong>${esc(ALT.name)}</strong>
+      <span>@${esc(ALT.handle)}</span>
+    </div>
     <div class="date-divider">今天</div>
     <div class="bubble incoming">你也喜歡他？那你也記得他的生日嗎？</div>
     ${history.map(item=>`
@@ -1968,10 +1996,8 @@ function openLilithChat(){
         src="${PROFILE.avatar}"
         alt="${esc(PROFILE.name)}"
       >
-      <strong>${esc(PROFILE.handle)}</strong>
-      <span>
-        ${PROFILE.flag} ${esc(PROFILE.location)}
-      </span>
+      <strong>${esc(PROFILE.name)}</strong>
+      <span>@${esc(PROFILE.handle)}</span>
     </div>
 
     ${history.map(item=>`<div class="bubble outgoing">${esc(item.text)}</div>`).join('')}
