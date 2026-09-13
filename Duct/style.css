@@ -115,3 +115,31 @@ body.at-station{background:#e9ece5;color:#27342d;color-scheme:light;min-height:1
     0 2px 5px rgba(0, 0, 0, 0.95),
     0 0 14px rgba(0, 0, 0, 0.75);
 }
+
+/* Keep the photo's proportions; long endings continue onto pure black. */
+body.at-station,
+.station-view {
+  background: #000;
+}
+.station-scene {
+  position: absolute;
+  inset: 0 0 auto 0;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  object-position: top center;
+}
+.station-shade {
+  position: absolute;
+  inset: 0 0 auto 0;
+  width: 100%;
+  height: auto;
+  aspect-ratio: var(--station-photo-ratio, 2 / 3);
+  background: linear-gradient(
+    180deg,
+    rgba(17, 44, 34, 0.44) 0%,
+    rgba(25, 58, 41, 0.07) 40%,
+    rgba(0, 0, 0, 0.12) 60%,
+    #000 100%
+  );
+}

@@ -1359,6 +1359,11 @@ function prepareStation() {
     progress.givenName || '';
   const scene=document.getElementById('stationScene');
   scene.addEventListener('error',()=>{scene.hidden=true;});
+  scene.addEventListener('load',()=>{
+    document.getElementById('stationView').style.setProperty(
+      '--station-photo-ratio',`${scene.naturalWidth} / ${scene.naturalHeight}`
+    );
+  });
   scene.src=CONFIG.stationImage;
   const audio=document.getElementById('stationAudio');audio.src=CONFIG.stationAudio;
   audio.addEventListener('play',updateSoundButton);
@@ -1493,9 +1498,10 @@ async function captureEndingPage() {
   Object.assign(page.style,{width:`${width}px`,minHeight:`${window.innerHeight}px`,overflow:'visible'});
   // Remove controls before measuring so they leave no blank space in the export.
   page.querySelectorAll('button,a,form,[role="status"],#ticketPanel').forEach(node=>node.remove());
-  page.querySelectorAll('.station-scene,.station-shade').forEach(node=>{
-    node.style.position='absolute';node.style.width='100%';node.style.height='100%';
-  });
+  const currentPhoto=document.getElementById('stationScene');
+  if(currentPhoto.naturalWidth&&currentPhoto.naturalHeight){
+    page.style.setProperty('--station-photo-ratio',`${currentPhoto.naturalWidth} / ${currentPhoto.naturalHeight}`);
+  }
   holder.append(page);document.body.append(holder);
   let canvas;
   try {
@@ -1564,15 +1570,16 @@ async function captureEndingPage() {
       ])if(w&&h&&!transparent(style[`border${side}Color`])){ctx.fillStyle=style[`border${side}Color`];ctx.fillRect(x,y,w,h);}
       ctx.restore();
     }
-    ctx.fillStyle='#e9ece5';ctx.fillRect(0,0,width,height);
+    ctx.fillStyle='#000';ctx.fillRect(0,0,width,height);
     background(page,{x:0,y:0,w:width,h:height});
     const photo=document.getElementById('stationScene');
     // Reuse the site's current photo; no ending-XX.jpg is fetched.
     if(!photo.hidden&&photo.complete&&photo.naturalWidth){
-      const ratio=Math.max(width/photo.naturalWidth,height/photo.naturalHeight);
-      ctx.drawImage(photo,(width-photo.naturalWidth*ratio)/2,(height-photo.naturalHeight*ratio)/2,photo.naturalWidth*ratio,photo.naturalHeight*ratio);
+      const photoHeight=width*photo.naturalHeight/photo.naturalWidth;
+      ctx.drawImage(photo,0,0,width,photoHeight);
     }
-    const shade=page.querySelector('.station-shade');if(shade)background(shade,{x:0,y:0,w:width,h:height});
+    const photoHeight=photo.naturalWidth&&photo.naturalHeight?width*photo.naturalHeight/photo.naturalWidth:width*1.5;
+    const shade=page.querySelector('.station-shade');if(shade)background(shade,{x:0,y:0,w:width,h:photoHeight});
     const svgImages=new Map();
     for(const svg of page.querySelectorAll('svg')) {
       const copy=svg.cloneNode(true),style=getComputedStyle(svg);
