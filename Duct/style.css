@@ -81,3 +81,37 @@ body.at-station{background:#e9ece5;color:#27342d;color-scheme:light;min-height:1
 .image-status{font-size:12px;line-height:1.8;color:#707d6e;margin:10px 0}.image-status:empty{display:none}
 .rail-footer{padding:0 20px max(24px,env(safe-area-inset-bottom));color:#f5f7efb3;text-align:center;font-size:9px;letter-spacing:.14em}
 @media(max-width:350px){.rail-header{padding-inline:15px}.rail-brand{font-size:16px}.ticket-layout{padding:30px 14px 24px}.ticket-panel,.ending-panel{padding-inline:19px}.ticket-panel h2{font-size:20px}.ticket-bottom{margin-inline:-19px;padding-inline:19px}.arrival-copy h1{font-size:32px}}
+.player-name-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.player-name-fields > div {
+  min-width: 0;
+}
+
+.player-name-fields input {
+  width: 100%;
+  min-height: 52px;
+  padding: 13px 12px;
+  border: 1px solid #b5c0b0;
+  border-radius: 3px;
+  background: #fff;
+  color: #24332b;
+  font: inherit;
+  font-size: 16px;
+}
+
+.player-name-fields input:focus {
+  outline: 2px solid #6c8970;
+  outline-offset: 3px;
+}/* Keep the station headline legible over bright areas of the photograph. */
+.arrival-copy h1 {
+  -webkit-text-stroke: 0.7px rgba(0, 0, 0, 0.85);
+  paint-order: stroke fill;
+  text-shadow:
+    0 2px 5px rgba(0, 0, 0, 0.95),
+    0 0 14px rgba(0, 0, 0, 0.75);
+}

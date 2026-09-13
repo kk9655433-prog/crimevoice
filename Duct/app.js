@@ -7,7 +7,7 @@ const CONFIG = {
   whiteHoldMs: 1800,
   stationFadeMs: 2600,
   endings: [
-    { id:'ending-01', ticket:'GT-731204', title:'結局一', text:'（結局文字待填入）', image:'img/ending-01.jpg' },
+    { id:'ending-01', ticket:'GT-731204', title:'離開高譚', text:'{{名}}抬頭看了看天空，現在是下午。\n他握緊手中的車票，走向月台。', image:'img/ending-01.jpg' },
     { id:'ending-02', ticket:'GT-286519', title:'結局二', text:'（結局文字待填入）', image:'img/ending-02.jpg' },
     { id:'ending-03', ticket:'GT-940673', title:'結局三', text:'（結局文字待填入）', image:'img/ending-03.jpg' },
     { id:'ending-04', ticket:'GT-158462', title:'結局四', text:'（結局文字待填入）', image:'img/ending-04.jpg' },
@@ -23,14 +23,41 @@ function loadProgress() {
   try {
     const raw = JSON.parse(localStorage.getItem(SAVE_KEY) || 'null');
     if(raw?.version===1 && Number.isInteger(raw.completed) && raw.completed>=0 && raw.completed<=3) {
-      return {version:1,completed:raw.completed,endingId:raw.completed===3&&CONFIG.endings.some(e=>e.id===raw.endingId)?raw.endingId:null};
+            const surname =
+        typeof raw.surname === 'string' ? raw.surname.trim() : '';
+
+      const givenName =
+        typeof raw.givenName === 'string' ? raw.givenName.trim() : '';
+
+      return {
+        version: 1,
+        completed: raw.completed,
+        surname,
+        givenName,
+        endingId:
+          raw.completed === 3 &&
+          surname &&
+          givenName &&
+          CONFIG.endings.some(e => e.id === raw.endingId)
+            ? raw.endingId
+            : null
+      };
     }
   } catch(error) { /* Corrupted or unavailable storage starts safely at stage one. */ }
   return {version:1,completed:0,endingId:null};
 }
 let progress = loadProgress();
 function save(completed = progress.completed, endingId = progress.endingId) {
-  progress = {version:1, completed:Math.max(progress.completed,Math.max(0,Math.min(3,completed))), endingId};
+    progress = {
+    version: 1,
+    completed: Math.max(
+      progress.completed,
+      Math.max(0, Math.min(3, completed))
+    ),
+    endingId,
+    surname: progress.surname || '',
+    givenName: progress.givenName || ''
+  };
   try {
     localStorage.setItem(SAVE_KEY,JSON.stringify(progress));
     document.getElementById('saveStatus').textContent='';
@@ -1325,6 +1352,11 @@ async function playStationSound(volume = 0.65) {
 function prepareStation() {
   if(stationReady)return;
   stationReady = true;
+    document.getElementById('playerSurname').value =
+    progress.surname || '';
+
+  document.getElementById('playerGivenName').value =
+    progress.givenName || '';
   const scene=document.getElementById('stationScene');
   scene.addEventListener('error',()=>{scene.hidden=true;});
   scene.src=CONFIG.stationImage;
@@ -1341,6 +1373,19 @@ function prepareStation() {
   });
   document.getElementById('ticketForm').addEventListener('submit',event=>{
     event.preventDefault();
+	const surnameInput = document.getElementById('playerSurname');
+    const givenNameInput = document.getElementById('playerGivenName');
+
+    const surname = surnameInput.value.trim();
+    const givenName = givenNameInput.value.trim();
+
+    if (!surname || !givenName) {
+      document.getElementById('ticketError').textContent =
+        '請完整填寫你的姓與名。';
+
+      (!surname ? surnameInput : givenNameInput).focus();
+      return;
+    }
     if(progress.completed<3)return;
     const input=document.getElementById('ticketNumber');
     const ending=matchTicket(input.value);
@@ -1351,11 +1396,14 @@ function prepareStation() {
       input.setAttribute('aria-invalid','true');input.focus();return;
     }
     if(wantSound&&audio.paused)playStationSound();
+    progress.surname = surname;
+    progress.givenName = givenName;
+
     showEnding(ending);
   });
   document.getElementById('saveEndingBtn').addEventListener('click',downloadEnding);
   document.getElementById('anotherTicket').addEventListener('click',()=>{
-    downloadToken++;selectedEnding=null;save(3,null);
+    downloadToken++;selectedEnding=null;clearEndingExport();save(3,null);
     document.getElementById('endingPanel').hidden=true;
     document.getElementById('ticketPanel').hidden=false;
     document.getElementById('ticketNumber').value='';
@@ -1414,51 +1462,207 @@ function showEnding(ending,persist=true) {
   document.getElementById('endingPanel').hidden=false;
   document.getElementById('endingTitle').textContent=ending.title;
   // Plain text preserves paragraph breaks, and does not execute HTML supplied as story text.
-  document.getElementById('endingText').textContent=ending.text;
+  const playerCodes = {
+    '姓': progress.surname || '',
+    '名': progress.givenName || ''
+  };
+
+  document.getElementById('endingText').textContent =
+    ending.text.replace(
+      /\{\{(姓|名)\}\}/g,
+      (_, code) => playerCodes[code]
+    );
   document.getElementById('downloadStatus').textContent='';
   document.getElementById('saveEndingBtn').disabled=false;
   const original=document.getElementById('openEndingImage');
-  original.href=ending.image;original.hidden=true;
+  clearEndingExport();
   window.scrollTo(0,0);
+}
+// Capture this station page locally: use the browser's laid-out glyph positions,
+// then paint its backgrounds, borders and text to a PNG. No external CDN is needed.
+async function captureEndingPage() {
+  if(document.fonts?.ready)await document.fonts.ready;
+  const source=document.getElementById('stationView');
+  if(source.hidden)throw new Error('請先開啟結局。');
+  const width=Math.min(580,Math.max(280,document.documentElement.clientWidth));
+  const holder=document.createElement('div');
+  holder.setAttribute('aria-hidden','true');holder.inert=true;
+  Object.assign(holder.style,{position:'fixed',left:'-100000px',top:'0',width:`${width}px`,pointerEvents:'none',zIndex:'-1000'});
+  const page=source.cloneNode(true);
+  page.hidden=false;
+  Object.assign(page.style,{width:`${width}px`,minHeight:`${window.innerHeight}px`,overflow:'visible'});
+  // Remove controls before measuring so they leave no blank space in the export.
+  page.querySelectorAll('button,a,form,[role="status"],#ticketPanel').forEach(node=>node.remove());
+  page.querySelectorAll('.station-scene,.station-shade').forEach(node=>{
+    node.style.position='absolute';node.style.width='100%';node.style.height='100%';
+  });
+  holder.append(page);document.body.append(holder);
+  let canvas;
+  try {
+    const bounds=page.getBoundingClientRect();
+    const height=Math.ceil(Math.max(page.scrollHeight,bounds.height));
+    // Limit the backing-store size on phones without cropping any of the text.
+    const scale=Math.min(2,16380/height,16380/width,Math.sqrt(12000000/(width*height)));
+    if(scale<.35)throw new Error('結局文字過長，無法放入一張清晰圖片。請縮短內文後再試。');
+    canvas=document.createElement('canvas');
+    canvas.width=Math.ceil(width*scale);canvas.height=Math.ceil(height*scale);
+    const ctx=canvas.getContext('2d');if(!ctx)throw new Error('無法建立圖片。');
+    ctx.scale(scale,scale);
+    const box=element=>{
+      const r=element.getBoundingClientRect();return {x:r.left-bounds.left,y:r.top-bounds.top,w:r.width,h:r.height};
+    };
+    const transparent=color=>!color||color==='transparent'||/^rgba\([^)]*,\s*0\s*\)$/.test(color);
+    function splitCSS(value) {
+      let depth=0,start=0,result=[];
+      for(let i=0;i<value.length;i++){
+        if(value[i]==='(')depth++;if(value[i]===')')depth--;
+        if(value[i]===','&&!depth){result.push(value.slice(start,i).trim());start=i+1;}
+      }result.push(value.slice(start).trim());return result;
+    }
+    function gradient(value,b) {
+      if(!value.startsWith('linear-gradient('))return null;
+      const parts=splitCSS(value.slice(16,-1));
+      let angle=180;
+      if(/deg$/.test(parts[0]))angle=parseFloat(parts.shift());
+      const rad=angle*Math.PI/180,dx=Math.sin(rad),dy=-Math.cos(rad);
+      const length=Math.abs(b.w*dx)+Math.abs(b.h*dy),cx=b.x+b.w/2,cy=b.y+b.h/2;
+      const fill=ctx.createLinearGradient(cx-dx*length/2,cy-dy*length/2,cx+dx*length/2,cy+dy*length/2);
+      const stops=parts.map((part,i)=>{
+        const m=part.match(/^(.*?)\s+([\d.]+)%$/);
+        return {color:m?m[1]:part,offset:m?Number(m[2])/100:null};
+      });
+      if(stops[0].offset===null)stops[0].offset=0;
+      if(stops.at(-1).offset===null)stops.at(-1).offset=1;
+      for(let i=1;i<stops.length-1;i++)if(stops[i].offset===null){
+        let end=i;while(stops[end].offset===null)end++;
+        const from=stops[i-1].offset,to=stops[end].offset,count=end-i+1;
+        for(let j=i;j<end;j++)stops[j].offset=from+(to-from)*(j-i+1)/count;
+        i=end-1;
+      }
+      stops.forEach(stop=>fill.addColorStop(Math.max(0,Math.min(1,stop.offset)),stop.color));return fill;
+    }
+    function shape(b,r=0) {
+      r=Math.min(r,b.w/2,b.h/2);ctx.beginPath();
+      ctx.moveTo(b.x+r,b.y);ctx.arcTo(b.x+b.w,b.y,b.x+b.w,b.y+b.h,r);
+      ctx.arcTo(b.x+b.w,b.y+b.h,b.x,b.y+b.h,r);ctx.arcTo(b.x,b.y+b.h,b.x,b.y,r);ctx.arcTo(b.x,b.y,b.x+b.w,b.y,r);ctx.closePath();
+    }
+    function background(element,customBox=null) {
+      const style=getComputedStyle(element),b=customBox||box(element),radius=parseFloat(style.borderTopLeftRadius)||0;
+      if(!b.w||!b.h)return;
+      ctx.save();shape(b,radius);
+      if(element.matches('.ending-panel')){ctx.shadowColor='rgba(16,34,27,.21)';ctx.shadowOffsetY=18;ctx.shadowBlur=36;}
+      if(!transparent(style.backgroundColor)){ctx.fillStyle=style.backgroundColor;ctx.fill();}
+      ctx.shadowColor='transparent';
+      const fill=gradient(style.backgroundImage,b);
+      if(fill){ctx.fillStyle=fill;ctx.fill();}
+      ctx.clip();
+      for(const [side,x,y,w,h] of [
+        ['Top',b.x,b.y,b.w,parseFloat(style.borderTopWidth)||0],
+        ['Bottom',b.x,b.y+b.h-(parseFloat(style.borderBottomWidth)||0),b.w,parseFloat(style.borderBottomWidth)||0],
+        ['Left',b.x,b.y,parseFloat(style.borderLeftWidth)||0,b.h],
+        ['Right',b.x+b.w-(parseFloat(style.borderRightWidth)||0),b.y,parseFloat(style.borderRightWidth)||0,b.h]
+      ])if(w&&h&&!transparent(style[`border${side}Color`])){ctx.fillStyle=style[`border${side}Color`];ctx.fillRect(x,y,w,h);}
+      ctx.restore();
+    }
+    ctx.fillStyle='#e9ece5';ctx.fillRect(0,0,width,height);
+    background(page,{x:0,y:0,w:width,h:height});
+    const photo=document.getElementById('stationScene');
+    // Reuse the site's current photo; no ending-XX.jpg is fetched.
+    if(!photo.hidden&&photo.complete&&photo.naturalWidth){
+      const ratio=Math.max(width/photo.naturalWidth,height/photo.naturalHeight);
+      ctx.drawImage(photo,(width-photo.naturalWidth*ratio)/2,(height-photo.naturalHeight*ratio)/2,photo.naturalWidth*ratio,photo.naturalHeight*ratio);
+    }
+    const shade=page.querySelector('.station-shade');if(shade)background(shade,{x:0,y:0,w:width,h:height});
+    const svgImages=new Map();
+    for(const svg of page.querySelectorAll('svg')) {
+      const copy=svg.cloneNode(true),style=getComputedStyle(svg);
+      copy.setAttribute('xmlns','http://www.w3.org/2000/svg');
+      copy.setAttribute('width',svg.getBoundingClientRect().width);copy.setAttribute('height',svg.getBoundingClientRect().height);
+      copy.setAttribute('fill',style.fill);copy.setAttribute('stroke',style.stroke);copy.setAttribute('stroke-width',style.strokeWidth);
+      const image=new Image();
+      await new Promise(resolve=>{image.onload=resolve;image.onerror=resolve;image.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(new XMLSerializer().serializeToString(copy));});
+      if(image.naturalWidth)svgImages.set(svg,image);
+    }
+    function drawText(node) {
+      const style=getComputedStyle(node.parentElement),size=parseFloat(style.fontSize);
+      if(!size)return;
+      ctx.save();ctx.fillStyle=style.color;
+      ctx.font=`${style.fontStyle} ${style.fontWeight} ${style.fontSize} ${style.fontFamily}`;
+      ctx.textBaseline='alphabetic';ctx.textAlign='left';
+      const metrics=ctx.measureText('國Mg');
+      const ascent=metrics.fontBoundingBoxAscent ?? size*.85,descent=metrics.fontBoundingBoxDescent ?? size*.2;
+      const segments=typeof Intl.Segmenter==='function'?[...new Intl.Segmenter(undefined,{granularity:'grapheme'}).segment(node.textContent)].map(s=>({text:s.segment,index:s.index})):Array.from(node.textContent).reduce((out,text)=>{out.push({text,index:out.length?out.at(-1).index+out.at(-1).text.length:0});return out;},[]);
+      const range=document.createRange();
+      for(const {text,index} of segments){
+        if(!text.trim())continue;
+        range.setStart(node,index);range.setEnd(node,index+text.length);
+        const r=range.getBoundingClientRect();if(!r.width||!r.height)continue;
+        const baseline=r.top-bounds.top+(r.height-ascent-descent)/2+ascent;
+        if(node.parentElement.closest('.arrival-copy h1')) {
+          ctx.save();ctx.strokeStyle='rgba(0,0,0,.85)';ctx.lineWidth=.7;
+          ctx.shadowColor='rgba(0,0,0,.95)';ctx.shadowBlur=5;ctx.shadowOffsetY=2;
+          ctx.strokeText(text,r.left-bounds.left,baseline);
+          ctx.fillText(text,r.left-bounds.left,baseline);ctx.restore();
+        } else ctx.fillText(text,r.left-bounds.left,baseline);
+      }
+      range.detach?.();ctx.restore();
+    }
+    function paint(element) {
+      const style=getComputedStyle(element);
+      if(element.hidden||style.display==='none'||style.visibility==='hidden'||Number(style.opacity)===0)return;
+      if(element.matches('.station-scene,.station-shade'))return;
+      ctx.save();ctx.globalAlpha*=Number(style.opacity)||1;background(element);
+      if(element.tagName.toLowerCase()==='svg'){
+        const image=svgImages.get(element),b=box(element);if(image)ctx.drawImage(image,b.x,b.y,b.w,b.h);
+      }else for(const node of element.childNodes){
+        if(node.nodeType===3)drawText(node);else if(node.nodeType===1)paint(node);
+      }
+      ctx.restore();
+    }
+    for(const child of page.children)paint(child);
+    const blob=await new Promise((resolve,reject)=>{
+      try {canvas.toBlob(result=>result?resolve(result):reject(new Error('圖片產生失敗，請再試一次。')),'image/png');}
+      catch(error){reject(new Error('背景圖片無法匯出，請確認車站圖片放在此網站同層的 img 資料夾。'));}
+    });
+    return blob;
+  } finally {
+    holder.remove();if(canvas){canvas.width=1;canvas.height=1;}
+  }
+}
+let endingExportURL=null;
+function clearEndingExport() {
+  if(endingExportURL){URL.revokeObjectURL(endingExportURL);endingExportURL=null;}
+  const link=document.getElementById('openEndingImage');link.hidden=true;link.removeAttribute('href');
 }
 async function downloadEnding() {
   if(!selectedEnding)return;
   const ending=selectedEnding,token=++downloadToken;
   const button=document.getElementById('saveEndingBtn'),message=document.getElementById('downloadStatus');
   const original=document.getElementById('openEndingImage');
-  button.disabled=true;message.textContent='正在準備圖片…';
-  const name=ending.image.split('/').pop().split('?')[0] || `${ending.id}.webp`;
+  button.disabled=true;message.textContent='正在產生你的結局圖片…';
+  clearEndingExport();
   try {
-    const response=await fetch(ending.image);
-    if(!response.ok)throw new Error('Image unavailable');
-    const blob=await response.blob();
-    if(!blob.size || (blob.type && !blob.type.startsWith('image/') && blob.type!=='application/octet-stream'))throw new Error('Invalid image');
+    const blob=await captureEndingPage();
     if(token!==downloadToken)return;
-    const file=new File([blob],name,{type:blob.type||'image/webp'});
-    // iOS can save to Photos/Files from the native share sheet.
-    if(navigator.canShare?.({files:[file]})&&navigator.share) {
+    const name=`${ending.id}-${progress.givenName||'結局'}`.replace(/[\\/:*?"<>|\u0000-\u001f]/g,'_')+'.png';
+    endingExportURL=URL.createObjectURL(blob);
+    original.href=endingExportURL;original.textContent='開啟生成圖片（可長按儲存）';original.hidden=false;
+    const file=new File([blob],name,{type:'image/png'});
+    if(navigator.canShare?.({files:[file]})&&navigator.share){
       try {
         await navigator.share({files:[file],title:ending.title});
-        message.textContent='圖片已交給系統，請選擇儲存圖片或儲存到檔案。';
-        return;
-      } catch(error) {
-        if(error.name==='AbortError'){message.textContent='已取消儲存。';return;}
-        // Sharing may lose user activation while loading. Fall through to download.
-      }
+        if(token===downloadToken)message.textContent='請在系統選單中選擇儲存圖片或儲存到檔案。';return;
+      }catch(error){if(error.name==='AbortError'){if(token===downloadToken)message.textContent='圖片已產生，可開啟圖片後長按儲存。';return;}}
     }
-    const url=URL.createObjectURL(blob),link=document.createElement('a');
-    link.href=url;link.download=name;document.body.append(link);link.click();link.remove();
-    setTimeout(()=>URL.revokeObjectURL(url),60000);
-    message.textContent='已送出圖片下載；若未出現下載，可開啟原圖後長按儲存。';original.hidden=false;
-  } catch(error) {
     if(token!==downloadToken)return;
-    // A local file:// preview cannot fetch in some browsers; allow native image opening.
-    original.hidden=false;
-    message.textContent=location.protocol==='file:'?'請開啟原圖後長按或另存圖片。':'圖片未能載入，請稍後重試；也可以開啟原圖。';
-  } finally {
-    if(token===downloadToken)button.disabled=false;
-  }
+    const link=document.createElement('a');link.href=endingExportURL;link.download=name;
+    document.body.append(link);link.click();link.remove();
+    message.textContent='圖片已產生。若沒有開始下載，請開啟生成圖片後長按儲存。';
+  }catch(error){
+    if(token===downloadToken)message.textContent=error.message||'圖片產生失敗，請再試一次。';
+  }finally{if(token===downloadToken)button.disabled=false;}
 }
+
 function boot() {
   if(progress.completed===3)showStation();
   else goToStage(progress.completed+1);
