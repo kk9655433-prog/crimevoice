@@ -1,19 +1,22 @@
 <!doctype html>
-<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="theme-color" content="#0b141b"><title>逃離通風管</title><link rel="stylesheet" href="style.css?v=6"><script src="app.js?v=6" defer></script></head>
+<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="theme-color" content="#0b141b"><title>逃離通風管</title><link rel="stylesheet" href="style.css?v=7"><script src="app.js?v=7" defer></script></head>
 <body><main class="app"><header class="app-header"><span class="eyebrow">ESCAPE / 通風系統</span><span id="stageCount">01 / 03</span></header><div class="stage-progress" aria-label="關卡進度"><i class="current"></i><i></i><i></i></div>
 <section id="stage1" class="stage" ><div class="wrap">
   <div class="game-shell">
     <div class="game-inner">
-      <div class="title">連通所有通風管</div>
+      <div class="title">必須連通所有通風管，讓所有管子互相連結。</div>
       <canvas id="s1-game"></canvas>
 
       <div class="modal" id="s1-introModal">
         <div class="modal-card">
           <h2>逃離通風管</h2>
-          <p>你面前有一張通風管地圖
-但地圖被打亂了
-你需要找出正確的通風管連接方式
-才能離開這邊</p>
+          <p>你面前有一張通風管地圖，
+但地圖被打亂了，
+每個管子都需要重新連結起來，
+除了起始和終點的兩個管子外，
+不應該有任何管子通向牆壁或空中，
+你需要找出正確的通風管連接方式，
+才能離開這邊。</p>
           <button id="s1-confirmBtn">確定</button>
         </div>
       </div>
@@ -69,7 +72,7 @@
 <p id="screwStatus" class="status" role="status">點選露出的螺絲，放入對應的收集盒。</p>
 
 <div class="modal" id="s3-introModal"><div class="modal-card"><h2>最後一道出口</h2><p>距離出口只剩最後一步，
-你面前是被螺絲鎖住的通風出口，
+你面前是被層層金屬板和螺絲鎖住的通風出口，
 你需要把螺絲轉開……</p><p class="instructions">上方有 4 個收集盒，同色集滿 4 顆就會收走。其他顏色先放進 7 格暫存區；暫存滿時，仍可拆收集盒需要的顏色。</p><button id="s3-confirmBtn">開始拆解</button></div></div>
 </div></div></div></section>
 <p id="saveStatus" class="save-status" role="status"></p><footer class="app-footer"><span id="stageHint">輕觸管件旋轉，連通所有通風管。</span><button id="helpBtn" class="text-button" aria-label="查看玩法">玩法</button></footer></main>
@@ -105,7 +108,7 @@
   </div>
 </div>
 <label for="ticketNumber">車票號碼</label><input id="ticketNumber" name="ticket" type="text" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="XX-123456" maxlength="64" aria-describedby="ticketError" required/><p id="ticketError" class="ticket-error" role="alert"></p><button type="submit" class="rail-primary">查驗車票 <span aria-hidden="true">→</span></button></form><div class="ticket-bottom"><span>GOTHAM RAIL</span><span>旅客服務</span></div></section>
-  <article id="endingPanel" class="ending-panel" hidden><span class="ticket-kicker">JOURNEY RECORD</span><h2 id="endingTitle"></h2><p id="endingText"></p><button id="saveEndingBtn" class="rail-primary">儲存結局圖片</button><a id="openEndingImage" class="rail-link" target="_blank" rel="noopener" hidden>開啟原圖</a><p id="downloadStatus" class="image-status" role="status"></p><button id="anotherTicket" class="rail-link" type="button">返回車票查驗</button></article>
+  <article id="endingPanel" class="ending-panel" hidden><span class="ticket-kicker">JOURNEY RECORD</span><h2 id="endingTitle"></h2><p id="endingText"></p><div class="ending-actions"><button id="viewEscapeTimeBtn" class="rail-secondary" type="button">查看逃出時間</button><button id="saveEndingBtn" class="rail-primary" type="button">儲存結局圖片</button></div><button id="anotherTicket" class="rail-link" type="button">返回車票查驗</button></article>
   </main><footer class="rail-footer">GOTHAM STATION · 旅客票務服務</footer>
 </section>
 <audio id="stationAudio" loop preload="none"></audio>

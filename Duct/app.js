@@ -7,7 +7,7 @@ const CONFIG = {
   whiteHoldMs: 1800,
   stationFadeMs: 2600,
   endings: [
-    { id:'ending-01', ticket:'GT-731204', title:'離開高譚', text:'{{名}}抬頭看了看天空，現在是下午。\n他握緊手中的車票，走向月台。{{名}}抬頭看了看天空，現在是下午。\n他握緊手中的車票，走向月台。{{名}}抬頭看了看天空，現在是下午。\n他握緊手中的車票，走向月台。{{名}}抬頭看了看天空，現在是下午。\n他握緊手中的車票，走向月台。{{名}}抬頭看了看天空，現在是下午。\n他握緊手中的車票，走向月台。{{名}}抬頭看了看天空，現在是下午。\n他握緊手中的車票，走向月台。{{名}}抬頭看了看天空，現在是下午。\n他握緊手中的車票，走向月台。{{名}}抬頭看了看天空，現在是下午。\n他握緊手中的車票，走向月台。{{名}}抬頭看了看天空，現在是下午。\n他握緊手中的車票，走向月台。{{名}}抬頭看了看天空，現在是下午。\n他握緊手中的車票，走向月台。{{名}}抬頭看了看天空，現在是下午。\n他握緊手中的車票，走向月台。{{名}}抬頭看了看天空，現在是下午。\n他握緊手中的車票，走向月台。{{名}}抬頭看了看天空，現在是下午。\n他握緊手中的車票，走向月台。{{名}}抬頭看了看天空，現在是下午。\n他握緊手中的車票，走向月台。{{名}}抬頭看了看天空，現在是下午。\n他握緊手中的車票，走向月台。{{名}}抬頭看了看天空，現在是下午。\n他握緊手中的車票，走向月台。{{名}}抬頭看了看天空，現在是下午。\n他握緊手中的車票，走向月台。{{名}}抬頭看了看天空，現在是下午。\n他握緊手中的車票，走向月台。{{名}}抬頭看了看天空，現在是下午。\n他握緊手中的車票，走向月台。{{名}}抬頭看了看天空，現在是下午。\n他握緊手中的車票，走向月台。{{名}}抬頭看了看天空，現在是下午。\n他握緊手中的車票，走向月台。{{名}}抬頭看了看天空，現在是下午。\n他握緊手中的車票，走向月台。{{名}}抬頭看了看天空，現在是下午。\n他握緊手中的車票，走向月台。{{名}}抬頭看了看天空，現在是下午。\n他握緊手中的車票，走向月台。{{名}}抬頭看了看天空，現在是下午。\n他握緊手中的車票，走向月台。{{名}}抬頭看了看天空，現在是下午。\n他握緊手中的車票，走向月台。{{名}}抬頭看了看天空，現在是下午。\n他握緊手中的車票，走向月台。{{名}}抬頭看了看天空，現在是下午。\n他握緊手中的車票，走向月台。{{名}}抬頭看了看天空，現在是下午。\n他握緊手中的車票，走向月台。{{名}}抬頭看了看天空，現在是下午。\n他握緊手中的車票，走向月台。{{名}}抬頭看了看天空，現在是下午。\n他握緊手中的車票，走向月台。{{名}}抬頭看了看天空，現在是下午。\n他握緊手中的車票，走向月台。{{名}}抬頭看了看天空，現在是下午。\n他握緊手中的車票，走向月台。{{名}}抬頭看了看天空，現在是下午。\n他握緊手中的車票，走向月台。{{名}}抬頭看了看天空，現在是下午。\n他握緊手中的車票，走向月台。{{名}}抬頭看了看天空，現在是下午。\n他握緊手中的車票，走向月台。{{名}}抬頭看了看天空，現在是下午。\n他握緊手中的車票，走向月台。{{名}}抬頭看了看天空，現在是下午。\n他握緊手中的車票，走向月台。{{名}}抬頭看了看天空，現在是下午。\n他握緊手中的車票，走向月台。{{名}}抬頭看了看天空，現在是下午。\n他握緊手中的車票，走向月台。{{名}}抬頭看了看天空，現在是下午。\n他握緊手中的車票，走向月台。{{名}}抬頭看了看天空，現在是下午。\n他握緊手中的車票，走向月台。{{名}}抬頭看了看天空，現在是下午。\n他握緊手中的車票，走向月台。{{名}}抬頭看了看天空，現在是下午。\n他握緊手中的車票，走向月台。{{名}}抬頭看了看天空，現在是下午。\n他握緊手中的車票，走向月台。{{名}}抬頭看了看天空，現在是下午。\n他握緊手中的車票，走向月台。{{名}}抬頭看了看天空，現在是下午。\n他握緊手中的車票，走向月台。{{名}}抬頭看了看天空，現在是下午。\n他握緊手中的車票，走向月台。{{名}}抬頭看了看天空，現在是下午。\n他握緊手中的車票，走向月台。{{名}}抬頭看了看天空，現在是下午。\n他握緊手中的車票，走向月台。{{名}}抬頭看了看天空，現在是下午。\n他握緊手中的車票，走向月台。{{名}}抬頭看了看天空，現在是下午。\n他握緊手中的車票，走向月台。{{名}}抬頭看了看天空，現在是下午。\n他握緊手中的車票，走向月台。{{名}}抬頭看了看天空，現在是下午。\n他握緊手中的車票，走向月台。{{名}}抬頭看了看天空，現在是下午。\n他握緊手中的車票，走向月台。{{名}}抬頭看了看天空，現在是下午。\n他握緊手中的車票，走向月台。{{名}}抬頭看了看天空，現在是下午。\n他握緊手中的車票，走向月台。{{名}}抬頭看了看天空，現在是下午。\n他握緊手中的車票，走向月台。{{名}}抬頭看了看天空，現在是下午。\n他握緊手中的車票，走向月台。{{名}}抬頭看了看天空，現在是下午。\n他握緊手中的車票，走向月台。{{名}}抬頭看了看天空，現在是下午。\n他握緊手中的車票，走向月台。{{名}}抬頭看了看天空，現在是下午。\n他握緊手中的車票，走向月台。{{名}}抬頭看了看天空，現在是下午。\n他握緊手中的車票，走向月台。{{名}}抬頭看了看天空，現在是下午。\n他握緊手中的車票，走向月台。{{名}}抬頭看了看天空，現在是下午。\n他握緊手中的車票，走向月台。{{名}}抬頭看了看天空，現在是下午。\n他握緊手中的車票，走向月台。{{名}}抬頭看了看天空，現在是下午。\n他握緊手中的車票，走向月台。{{名}}抬頭看了看天空，現在是下午。\n他握緊手中的車票，走向月台。{{名}}抬頭看了看天空，現在是下午。\n他握緊手中的車票，走向月台。{{名}}抬頭看了看天空，現在是下午。\n他握緊手中的車票，走向月台。', image:'img/ending-01.jpg' },
+    { id:'ending-01', ticket:'GT-731204', title:'離開高譚', text:'{{名}}抬頭看了看天空，現在是下午。\n他握緊手中的車票，走向月台。', image:'img/ending-01.jpg' },
     { id:'ending-02', ticket:'GT-286519', title:'結局二', text:'（結局文字待填入）', image:'img/ending-02.jpg' },
     { id:'ending-03', ticket:'GT-940673', title:'結局三', text:'（結局文字待填入）', image:'img/ending-03.jpg' },
     { id:'ending-04', ticket:'GT-158462', title:'結局四', text:'（結局文字待填入）', image:'img/ending-04.jpg' },
@@ -32,6 +32,8 @@ function loadProgress() {
       return {
         version: 1,
         completed: raw.completed,
+        startedAt: Number.isFinite(raw.startedAt) && raw.startedAt > 0 ? raw.startedAt : null,
+        finishedAt: raw.completed === 3 && Number.isFinite(raw.startedAt) && raw.startedAt > 0 && Number.isFinite(raw.finishedAt) && raw.finishedAt >= raw.startedAt ? raw.finishedAt : null,
         surname,
         givenName,
         endingId:
@@ -56,7 +58,9 @@ function save(completed = progress.completed, endingId = progress.endingId) {
     ),
     endingId,
     surname: progress.surname || '',
-    givenName: progress.givenName || ''
+    givenName: progress.givenName || '',
+    startedAt: progress.startedAt || null,
+    finishedAt: progress.finishedAt || null
   };
   try {
     localStorage.setItem(SAVE_KEY,JSON.stringify(progress));
@@ -66,6 +70,30 @@ function save(completed = progress.completed, endingId = progress.endingId) {
     document.getElementById('saveStatus').textContent='瀏覽器未能保存進度，請保持此頁開啟。';
     return false;
   }
+}
+
+// Wall-clock timing survives refreshes and stops before the station transition.
+function startEscapeTimer() {
+  // An older save already past stage one has no recoverable original start time.
+  if(progress.completed===0&&!progress.startedAt){
+    progress.startedAt=Date.now();progress.finishedAt=null;save();
+  }
+}
+function finishEscapeTimer() {
+  if(progress.startedAt&&!progress.finishedAt){
+    progress.finishedAt=Math.max(progress.startedAt,Date.now());
+  }
+}
+function showEscapeTime() {
+  if(!progress.startedAt||!progress.finishedAt){
+    ask(' ','這份存檔沒有完整的逃出時間紀錄。計時功能更新前的遊戲無法補算。',null,false);
+    return;
+  }
+  const seconds=Math.floor((progress.finishedAt-progress.startedAt)/1000);
+  const minutes=Math.floor(seconds/60),remainder=seconds%60;
+  ask(' ',`恭喜你，在這場逃獄行動中！
+您獲得了${minutes}分${remainder}秒的好成績！
+快來跟小夥伴比較看看誰比較快吧！`,null,false);
 }
 
 // Same-page stage controller. No framework or server is required.
@@ -1300,7 +1328,7 @@ function initStage3() {
         if(removed!==TOTAL||button.disabled||complete||!document.getElementById('s3-introModal').classList.contains('hidden'))return;
         button.disabled=true;button.classList.add('removed');ventRemaining--;
         if(!ventRemaining) {
-          complete=true;save(3);vent.classList.add('opened');
+          complete=true;finishEscapeTimer();save(3);vent.classList.add('opened');
           document.getElementById('retryScrews').disabled=true;
           beginEscape();
         }
@@ -1406,6 +1434,7 @@ function prepareStation() {
 
     showEnding(ending);
   });
+  document.getElementById('viewEscapeTimeBtn').addEventListener('click',showEscapeTime);
   document.getElementById('saveEndingBtn').addEventListener('click',downloadEnding);
   document.getElementById('anotherTicket').addEventListener('click',()=>{
     downloadToken++;selectedEnding=null;clearEndingExport();save(3,null);
@@ -1477,9 +1506,7 @@ function showEnding(ending,persist=true) {
       /\{\{(姓|名)\}\}/g,
       (_, code) => playerCodes[code]
     );
-  document.getElementById('downloadStatus').textContent='';
   document.getElementById('saveEndingBtn').disabled=false;
-  const original=document.getElementById('openEndingImage');
   clearEndingExport();
   window.scrollTo(0,0);
 }
@@ -1502,6 +1529,7 @@ async function captureEndingPage() {
   if(currentPhoto.naturalWidth&&currentPhoto.naturalHeight){
     page.style.setProperty('--station-photo-ratio',`${currentPhoto.naturalWidth} / ${currentPhoto.naturalHeight}`);
   }
+  page.querySelector('.ending-actions')?.remove();
   holder.append(page);document.body.append(holder);
   let canvas;
   try {
@@ -1639,38 +1667,35 @@ async function captureEndingPage() {
 let endingExportURL=null;
 function clearEndingExport() {
   if(endingExportURL){URL.revokeObjectURL(endingExportURL);endingExportURL=null;}
-  const link=document.getElementById('openEndingImage');link.hidden=true;link.removeAttribute('href');
 }
 async function downloadEnding() {
   if(!selectedEnding)return;
   const ending=selectedEnding,token=++downloadToken;
-  const button=document.getElementById('saveEndingBtn'),message=document.getElementById('downloadStatus');
-  const original=document.getElementById('openEndingImage');
-  button.disabled=true;message.textContent='正在產生你的結局圖片…';
+  const button=document.getElementById('saveEndingBtn');
+  button.disabled=true;
   clearEndingExport();
   try {
     const blob=await captureEndingPage();
     if(token!==downloadToken)return;
     const name=`${ending.id}-${progress.givenName||'結局'}`.replace(/[\\/:*?"<>|\u0000-\u001f]/g,'_')+'.png';
     endingExportURL=URL.createObjectURL(blob);
-    original.href=endingExportURL;original.textContent='開啟生成圖片（可長按儲存）';original.hidden=false;
     const file=new File([blob],name,{type:'image/png'});
     if(navigator.canShare?.({files:[file]})&&navigator.share){
       try {
         await navigator.share({files:[file],title:ending.title});
-        if(token===downloadToken)message.textContent='請在系統選單中選擇儲存圖片或儲存到檔案。';return;
-      }catch(error){if(error.name==='AbortError'){if(token===downloadToken)message.textContent='圖片已產生，可開啟圖片後長按儲存。';return;}}
+        return;
+      }catch(error){if(error.name==='AbortError')return;}
     }
     if(token!==downloadToken)return;
     const link=document.createElement('a');link.href=endingExportURL;link.download=name;
     document.body.append(link);link.click();link.remove();
-    message.textContent='圖片已產生。若沒有開始下載，請開啟生成圖片後長按儲存。';
   }catch(error){
-    if(token===downloadToken)message.textContent=error.message||'圖片產生失敗，請再試一次。';
+    if(token===downloadToken)ask('無法儲存圖片',error.message||'圖片產生失敗，請再試一次。',null,false);
   }finally{if(token===downloadToken)button.disabled=false;}
 }
 
 function boot() {
+  startEscapeTimer();
   if(progress.completed===3)showStation();
   else goToStage(progress.completed+1);
 }
