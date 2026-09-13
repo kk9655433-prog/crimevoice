@@ -11,6 +11,7 @@ const RELEASE={
   groupArrivedOne:'2026-11-13T13:55:00+08:00',
   groupArrivedTwo:'2026-11-13T13:58:00+08:00',
   groupPing:'2026-11-13T14:03:00+08:00',
+  prisonRumor:'2026-11-13T12:30:00+08:00',
   xiaReplyDeadline:'2026-11-13T23:00:00+08:00',
   lilithMessages:'2026-11-14T09:00:00+08:00',
   xiaEarly:'2026-11-14T10:48:00+08:00',
@@ -887,14 +888,19 @@ const NEWS_1112_POST={
   text:'市政廳已撤下漢密爾頓．希爾位於主樓大廳的官方肖像。昨晚仍有數百名市民聚集於廣場，有人要求徹查相關案件，也有人高舉「希爾市長無罪」的標語。警方表示目前未發生重大衝突。',
   likes:5821,reposts:940,shares:377,
   replies:[
-    {handle:'cityhall_watch',avatar:'assets/avatar-2.svg',text:'撤肖像只是開始，市府應該把所有調查資料公開。',likes:318,reposts:27,shares:8},
-    {handle:'martha_works',avatar:'assets/works.webp',text:'人都還沒有定罪就撤掉，這不是未審先判嗎？',likes:276,reposts:19,shares:5},
-    {handle:'oldtown_resident',avatar:'assets/oldtown_resident.webp',text:'廣場昨晚很吵，但兩邊至少沒有真的打起來。',likes:143,reposts:9,shares:2},
-    {handle:'jack_in_city',avatar:'assets/jack_in_city.webp',text:'都查到器官販賣了還有人舉無罪標語，太荒謬。',likes:491,reposts:54,shares:13},
-    {handle:'paul_cityhall',avatar:'assets/paul_cityhall.webp',text:'報導寫的是疑似，等檢方正式起訴再下結論吧。',likes:354,reposts:24,shares:7},
-    {handle:ALT.handle,avatar:ALT.avatar,altProfileLink:true,text:'你們從來沒有理解過他，現在卻急著決定他是什麼樣的人。',likes:12,reposts:1,shares:0},
-    {handle:'mia_afterfive',avatar:'assets/mia.webp',text:'上面那個帳號講得好像認識希爾本人一樣。',likes:81,reposts:3,shares:0},
-    {handle:'night_shift',avatar:'assets/avatar-2.svg',text:'警方今晚還會封路，經過市政廳的人記得繞道。',likes:119,reposts:16,shares:4}
+    {handle:'cityhall_watch',avatar:'assets/avatar-2.svg',text:'蛤我本來要去潑漆的怎麼就徹走了',likes:318,reposts:27,shares:8},
+    {handle:'martha_works',avatar:'assets/works.webp',text:'希爾市長無罪！',likes:276,reposts:19,shares:5},
+    {handle:'oldtown_resident',avatar:'assets/oldtown_resident.webp',text:'希望現場的大家平安',likes:143,reposts:9,shares:2},
+    {handle:'jack_in_city',avatar:'assets/jack_in_city.webp',text:'到底是用哪隻眼睛看才看不出來= =\n到時候越查越黑你們就不要在那邊哭',likes:491,reposts:54,shares:13},
+    {handle:'paul_cityhall',avatar:'assets/paul_cityhall.webp',text:'任期都還沒結束，照片也拿太急了吧？',likes:354,reposts:24,shares:7},
+    {handle:ALT.handle,avatar:ALT.avatar,altProfileLink:true,text:'你們從來沒有理解過他。',likes:12,reposts:1,shares:0},
+    {handle:'mia_afterfive',avatar:'assets/mia.webp',text:'上面那個帳號講得好像很"理解"希爾本人一樣。',likes:81,reposts:3,shares:0},
+    {handle:'night_shift',avatar:'assets/avatar-2.svg',text:'警方今晚還會封路，經過市政廳的人記得繞道。',likes:119,reposts:16,shares:4},
+	{handle:'martha_works',avatar:'assets/works.webp',text:'這有符合公平正義嗎？希爾市長做的政績沒人看到？還是高譚只在乎誰來做都不會下降的犯罪率啊',likes:227,reposts:31,shares:7},
+    {handle:'jack_in_city',avatar:'assets/jack_in_city.webp',text:'又看到民主黨的在亂。',likes:184,reposts:22,shares:5},
+    {handle:'oldtown_resident',avatar:'assets/oldtown_resident.webp',text:'誰來告訴我，希爾市長發生什麼事了？求懶人包，我們全家都投希爾QQ',likes:96,reposts:4,shares:2},
+    {handle:'martha_works',avatar:'assets/works.webp',text:'樓上，潑漆會破壞環境。還嫌高譚污染不夠嚴重ㄇ',likes:163,reposts:14,shares:3},
+    {handle:'jack_in_city',avatar:'assets/jack_in_city.webp',text:'這種事情的行政效率倒是不錯嘛笑死。是不是查到什麼不得了的東西，現在急著避嫌？',likes:509,reposts:81,shares:26}
   ]
 };
 
@@ -953,15 +959,6 @@ const ALT_POSTS=[
   },
 
 
-    {
-    id:'alt3',
-    handle:ALT.handle,
-    avatar:ALT.avatar,
-    time:'2026-9-03',
-    text:'我想見他，但他不可能願意見我吧',
-    likes:18,reposts:2,shares:0,
-    replies:[]
-  },
   {
     id:'alt4',
     handle:ALT.handle,
@@ -1074,24 +1071,38 @@ const ALT_POSTS=[
 ];
 const ALT_REPLY_POSTS=[
   {
+    id:'alt-reply-portrait',
+    parentId:'news-1112-portrait',
+    publishedAt:RELEASE.portrait,
+    handle:ALT.handle,
+    avatar:ALT.avatar,
+    text:'你們從來沒有理解過他。',
+    likes:12,reposts:1,shares:0,replies:[]
+  },
+  {
     id:'alt-reply-1',
-    parentPost:{id:'alt-reply-parent-1',handle:'gotham_court_watch',avatar:'assets/avatar-2.svg',time:'2026-10-18',text:'希爾案到底什麼時候才會開庭？拖得也太久。',likes:116,reposts:14,shares:3,replies:[]},
-    handle:ALT.handle,avatar:ALT.avatar,time:'2026-10-18',text:'他不該被你們隔著螢幕審判。',likes:9,reposts:0,shares:0,replies:[]
+    parentPost:{id:'alt-reply-parent-1',handle:'gotham_court_watch',avatar:'assets/avatar-2.svg',time:'2026-10-18',text:'笑死，某些人看到對方穿得好看就急著酸。\n自己支持的人土的要命倒是很會批評別人。',likes:116,reposts:14,shares:3,replies:[]},
+    handle:ALT.handle,avatar:ALT.avatar,time:'2026-10-18',text:'雖然你很通人性，還會用脆脆的，但我還是要聯絡屠宰場。',likes:9,reposts:0,shares:0,replies:[]
   },
   {
     id:'alt-reply-2',
-    parentPost:{id:'alt-reply-parent-2',handle:'blackgate_letters',avatar:'assets/person-rain.svg',time:'2026-09-27',text:'聽說最近一直有人往黑門監獄寄花，獄方到底會不會代收？',likes:73,reposts:5,shares:1,replies:[]},
-    handle:ALT.handle,avatar:ALT.avatar,time:'2026-09-27',text:'他不喜歡太甜的花香，鬱金香比較適合。',likes:7,reposts:0,shares:0,replies:[]
+    parentPost:{id:'alt-reply-parent-2',handle:'blackgate_letters',avatar:'assets/person-rain.svg',time:'2026-09-27',text:'今日公開行程中，里夫斯以俐落剪裁的深色西裝亮相，搭配紅色配件，整體造型前衛卻不失個人風格。相較以往較為正式的政治場合穿著，這次的搭配更添幾分時尚感，也意外成為現場媒體與民眾關注的焦點。',likes:73,reposts:5,shares:1,replies:[]},
+    handle:ALT.handle,avatar:ALT.avatar,time:'2026-09-27',text:'太矮了所以很像被幽靈附身的樂高呢。',likes:7,reposts:0,shares:0,replies:[]
+  },
+    {
+    id:'alt-reply-6',
+    parentPost:{id:'alt-reply-parent-6',handle:'late_night_question',avatar:'assets/avatar-3.svg',time:'2026-05-04',text:'親愛的市民大家好，我是亞瑟里夫斯。\n在這裡，我懷著十分感恩與堅定的心情向大家宣佈：我正式決定參選今年的市長選舉。\n\n過去這段日子裡，走在哥譚的巷弄街坊中，聽著大家跟我分享生活的大小事、對地方發展的期待，還有那些「如果可以更好就好了」的心聲。每一個眼神、每一句託付，都深深烙印在我心裡。這裡是我們溫暖的家，這裡有我們的回憶、我們的生活，以及下一代的未來。但面對快速變遷的環境，我們需要更多行動、更貼近民意的聲音，來為這片土地注入新的活力。',likes:2856,reposts:889,shares:4135,replies:[]},
+    handle:ALT.handle,avatar:ALT.avatar,time:'2026-9-05',text:'希望候選人可以更有誠意的接受「眼神託付」，還是候選人可以穿透保鑣的肩膀跟市民們眼神相交？',likes:6,reposts:0,shares:0,replies:[]
   },
   {
     id:'alt-reply-3',
-    parentPost:{id:'alt-reply-parent-3',handle:'cityhall_archive',avatar:'assets/old_newspaper.webp',time:'2026-08-31',text:'整理舊檔案時找到希爾市長就任時的官方肖像。',likes:204,reposts:32,shares:8,replies:[]},
-    handle:ALT.handle,avatar:ALT.avatar,time:'2026-08-31',text:'你們只看得見被掛起來、又被撤下來的那一面。',likes:13,reposts:1,shares:0,replies:[]
+    parentPost:{id:'alt-reply-parent-3',handle:'cityhall_archive',avatar:'assets/old_newspaper.webp',time:'2026-08-31',text:'不覺得里夫斯議員長的很可愛嗎🥰 🥰 是貓系的長相💖 ',likes:204,reposts:32,shares:8,replies:[]},
+    handle:ALT.handle,avatar:ALT.avatar,time:'2026-08-31',text:'因為垃圾桶裡的食物跟老鼠打過架吧',likes:13,reposts:1,shares:0,replies:[]
   },
   {
     id:'alt-reply-4',
-    parentPost:{id:'alt-reply-parent-4',handle:'gotham_old_video',avatar:'assets/history.webp',time:'2026-07-19',text:'翻到希爾市長十年前第一次競選時的演說影片。',likes:331,reposts:61,shares:18,replies:[]},
-    handle:ALT.handle,avatar:ALT.avatar,time:'2026-07-19',text:'他說這段話以前，整晚都沒有睡。',likes:11,reposts:0,shares:0,replies:[]
+    parentPost:{id:'alt-reply-parent-4',handle:'gotham_old_video',avatar:'assets/history.webp',time:'2026-07-19',text:'希爾被採訪時怎麼一直卑躬屈膝，正常人哪會這樣？惺惺作態，要選這種人？',likes:331,reposts:61,shares:18,replies:[]},
+    handle:ALT.handle,avatar:ALT.avatar,time:'2026-07-19',text:'他一直都是這樣溫和有禮的人。',likes:11,reposts:0,shares:0,replies:[]
   },
   {
     id:'alt-reply-5',
@@ -1099,7 +1110,7 @@ const ALT_REPLY_POSTS=[
     handle:ALT.handle,avatar:ALT.avatar,time:'2026-05-04',text:'十年也不一定夠。',likes:6,reposts:0,shares:0,replies:[]
   }
 ];
-const ALT_INLINE_REPLY_PARENT_POSTS=ALT_REPLY_POSTS.map(reply=>({
+const ALT_INLINE_REPLY_PARENT_POSTS=ALT_REPLY_POSTS.filter(reply=>reply.parentPost).map(reply=>({
   ...reply.parentPost,
   replies:[{
     handle:reply.handle,avatar:reply.avatar,likeId:reply.id,time:reply.time,
@@ -1107,6 +1118,23 @@ const ALT_INLINE_REPLY_PARENT_POSTS=ALT_REPLY_POSTS.map(reply=>({
   }]
 }));
 const ACTIVITY_POSTS=[
+ {
+   id:'a9-prison-rumor',
+   handle:'gotham_melon',
+   avatar:'assets/avatar-3.svg',
+   publishedAt:RELEASE.prisonRumor,
+   text:'瓜',
+   likes:87,reposts:12,shares:4,
+   replies:[
+     {handle:'gotham_melon',avatar:'assets/avatar-3.svg',text:'欸你們有聽說有人想要劫獄嗎?',likes:42,reposts:3,shares:1},
+     {handle:'oldtown_resident',avatar:'assets/oldtown_resident.webp',text:'蛤？八年前那個事件過後，整個黑門監獄變得這麼森嚴，怎麼可能劫得了獄？',likes:68,reposts:7,shares:2},
+     {handle:'mia_afterfive',avatar:'assets/mia.webp',text:'他們要劫誰啊?',likes:31,reposts:1,shares:0},
+     {handle:'gotham_melon',avatar:'assets/avatar-3.svg',text:'我不知道欸，我只是聽說有這件事',likes:37,reposts:2,shares:0},
+     {handle:'passing_by',avatar:'assets/passing.webp',text:'吃一口，看看之後有沒有新聞',likes:53,reposts:4,shares:1},
+     {handle:'jack_in_city',avatar:'assets/jack_in_city.webp',text:'這個難度能劫獄的話可以直接出書了吧😂',likes:94,reposts:15,shares:5},
+     {handle:'martha_works',avatar:'assets/works.webp',text:'草wwwww感覺可以出一本60頁的小說＋漫畫',likes:76,reposts:8,shares:3}
+   ]
+ },
  {id:'a8',handle:'old_mack_g',avatar:'assets/old_mack_g.webp',time:'5分鐘',text:'今天是單身節，我今年還是單身，哭了。',likes:42,reposts:8,shares:3,replies:[
 	{handle:'paper_cup_01',avatar:'assets/avatar-3.svg',text:'今天不是軍人節嗎?',likes:73,reposts:6,shares:2},
 	{handle:'old_mack_g',avatar:'assets/old_mack_g.webp',text:'不是，大哥，你不上網嗎？',likes:108,reposts:11,shares:3},
@@ -1127,7 +1155,7 @@ const ACTIVITY_POSTS=[
 ]},
  {id:'a2',handle:'before_rainstops',avatar:'assets/before_rainstops.webp',time:'1小時',text:'今晚的高譚下雨了。',likes:17,reposts:1,shares:0,replies:[]},
  {id:'a3',handle:'gotham_ledger',avatar:'assets/gotham_ledger.webp',time:'2小時',text:'一天一張阿卡漢門鎖照片，直到高譚市政府把防盜系統換掉\nDay 47\n到底是誰給小丑湯匙的？',image:'assets/content.webp',likes:318,reposts:91,shares:36,replies:[{handle:'gotham_watch',avatar:'assets/gotham_watc.webp',text:'等一下，這篇貼文的意思是\n\n小丑又又又又逃出來了？',likes:55,reposts:12,shares:4}]},
- {id:'a4',handle:'coffee_in_gotham',avatar:'assets/coffee_in_gotham.webp',time:'4小時',text:'新品冬季限定草莓奶凍泡泡紅茶預計下周開始供應喔！',likes:73,reposts:6,shares:2,replies:[]},
+ {id:'a4',handle:'coffee_in_gotham',avatar:'assets/coffee_in_gotham.webp',time:'4小時',text:'冬季新品限定草莓奶凍泡泡紅茶預計下周開始供應喔！',likes:73,reposts:6,shares:2,replies:[]},
  {id:'a5',handle:'gotham_history_archive',avatar:'assets/history.webp',time:'5小時',text:'大家還有人記得大概八年前的爆炸案嗎？',clueTitle:'恭喜你發現了一則廣告',clue:'到底誰會在ARG裡打廣告啊？\n但希望你來參加茶會喔！',likes:86,reposts:13,shares:4,replies:[
    {handle:'passing_by',avatar:'assets/passing.webp',text:'哪次？誰做的？',likes:12,reposts:0,shares:0},
    {handle:'southside_local',avatar:'assets/southside_local.webp',text:'小丑炸的。',likes:19,reposts:1,shares:0},
@@ -1771,7 +1799,8 @@ function renderAlt(tab=altProfileTab){
   $$('[data-alt-tab]').forEach(button=>button.classList.toggle('active',button.dataset.altTab===tab));
   if(canViewFeed){
     const posts=ALT_POSTS.filter(post=>post.id!=='alt-1113-fraction'||hasArrived(post.publishedAt));
-    const content={posts,replies:ALT_REPLY_POSTS,media:posts.filter(post=>post.image),reposts:[]}[tab]||[];
+    const availableReplies=ALT_REPLY_POSTS.filter(reply=>!reply.publishedAt||hasArrived(reply.publishedAt));
+    const content={posts,replies:availableReplies,media:posts.filter(post=>post.image),reposts:[]}[tab]||[];
     renderFeed(content,'#altFeed',EMPTY_TAB_TEXT[tab]);
   }
 }
@@ -1863,13 +1892,15 @@ function updateUnread(){syncTimedChatUnread();$('#navUnread').classList.toggle('
 function eligibleActivityEvents(){
   const events=releasedScheduledNews().map(post=>post.id);
   if(state.altFollowed&&hasArrived(RELEASE.altPost))events.push('alt-1113-fraction');
+  if(hasArrived(RELEASE.prisonRumor))events.push('a9-prison-rumor');
   return events;
 }
 function activityPosts(){
   const reason=state.followedProfiles.has(NEWS_PROFILE.handle)?'因為你追蹤':'建議串文';
   const news=releasedScheduledNews().map(post=>({...post,feedReason:reason}));
   const alt=state.altFollowed&&hasArrived(RELEASE.altPost)?[{...ALT_POSTS.find(post=>post.id==='alt-1113-fraction'),feedReason:'因為你追蹤'}]:[];
-  return [...news,...alt,...ACTIVITY_POSTS].sort((a,b)=>timeMs(b.publishedAt||0)-timeMs(a.publishedAt||0));
+  const regular=ACTIVITY_POSTS.filter(post=>post.id!=='a9-prison-rumor'||hasArrived(post.publishedAt));
+  return [...news,...alt,...regular].sort((a,b)=>timeMs(b.publishedAt||0)-timeMs(a.publishedAt||0));
 }
 function updateActivityBadge(){
   const count=eligibleActivityEvents().filter(id=>!state.seenActivityEvents.has(id)).length;
