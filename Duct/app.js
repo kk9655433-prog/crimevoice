@@ -1,4 +1,46 @@
 "use strict";
+
+// ===== 可自行修改：車站素材、八組票號及結局 =====
+const CONFIG = {
+  stationImage: 'img/station.webp',
+  stationAudio: 'img/station.mp3',
+  whiteHoldMs: 1800,
+  stationFadeMs: 2600,
+  endings: [
+    { id:'ending-01', ticket:'GT-731204', title:'結局一', text:'（結局文字待填入）', image:'img/ending-01.jpg' },
+    { id:'ending-02', ticket:'GT-286519', title:'結局二', text:'（結局文字待填入）', image:'img/ending-02.jpg' },
+    { id:'ending-03', ticket:'GT-940673', title:'結局三', text:'（結局文字待填入）', image:'img/ending-03.jpg' },
+    { id:'ending-04', ticket:'GT-158462', title:'結局四', text:'（結局文字待填入）', image:'img/ending-04.jpg' },
+    { id:'ending-05', ticket:'GT-602837', title:'結局五', text:'（結局文字待填入）', image:'img/ending-05.jpg' },
+    { id:'ending-06', ticket:'GT-479125', title:'結局六', text:'（結局文字待填入）', image:'img/ending-06.jpg' },
+    { id:'ending-07', ticket:'GT-823096', title:'結局七', text:'（結局文字待填入）', image:'img/ending-07.jpg' },
+    { id:'ending-08', ticket:'GT-365748', title:'結局八', text:'（結局文字待填入）', image:'img/ending-08.jpg' }
+  ]
+};
+
+const SAVE_KEY = 'gotham-vent-progress-v1';
+function loadProgress() {
+  try {
+    const raw = JSON.parse(localStorage.getItem(SAVE_KEY) || 'null');
+    if(raw?.version===1 && Number.isInteger(raw.completed) && raw.completed>=0 && raw.completed<=3) {
+      return {version:1,completed:raw.completed,endingId:raw.completed===3&&CONFIG.endings.some(e=>e.id===raw.endingId)?raw.endingId:null};
+    }
+  } catch(error) { /* Corrupted or unavailable storage starts safely at stage one. */ }
+  return {version:1,completed:0,endingId:null};
+}
+let progress = loadProgress();
+function save(completed = progress.completed, endingId = progress.endingId) {
+  progress = {version:1, completed:Math.max(progress.completed,Math.max(0,Math.min(3,completed))), endingId};
+  try {
+    localStorage.setItem(SAVE_KEY,JSON.stringify(progress));
+    document.getElementById('saveStatus').textContent='';
+    return true;
+  } catch(error) {
+    document.getElementById('saveStatus').textContent='瀏覽器未能保存進度，請保持此頁開啟。';
+    return false;
+  }
+}
+
 // Same-page stage controller. No framework or server is required.
 let currentStage = 0;
 const initialized = new Set();
@@ -518,6 +560,7 @@ function initStage1() {
 
     if (solvedState) {
       redirecting = true;
+      save(1);
       successModal.classList.remove("hidden");
     }
   }
@@ -553,8 +596,8 @@ function initStage1() {
 
 
 function initStage2() {
-  const COLS = 8;
-  const ROWS = 7;
+  const COLS = 7;
+  const ROWS = 11;
 
   const COLORS = {
     Y: "#efe84a",
@@ -563,18 +606,12 @@ function initStage2() {
     O: "#ff7a1f",
     G: "#7dff14",
     K: "#8fd8ff",
-    M: "#f28ad3"
+    M: "#f28ad3",
+    T: "#43d8bc",
+    C: "#e7edf5"
   };
 
-  const PAIRS = [
-    { id:"Y", a:[0,0], b:[2,4] },
-    { id:"R", a:[3,0], b:[6,5] },
-    { id:"P", a:[6,0], b:[7,3] },
-    { id:"O", a:[7,0], b:[6,1] },
-    { id:"G", a:[0,1], b:[4,6] },
-    { id:"K", a:[5,3], b:[5,6] },
-    { id:"M", a:[0,3], b:[3,6] }
-  ];
+  const PAIRS = [{"id": "Y", "a": [6, 10], "b": [3, 10]}, {"id": "R", "a": [2, 10], "b": [1, 8]}, {"id": "P", "a": [1, 7], "b": [2, 3]}, {"id": "O", "a": [2, 2], "b": [1, 1]}, {"id": "G", "a": [2, 1], "b": [5, 2]}, {"id": "K", "a": [5, 1], "b": [3, 3]}, {"id": "M", "a": [3, 4], "b": [3, 6]}, {"id": "T", "a": [3, 7], "b": [5, 7]}, {"id": "C", "a": [4, 7], "b": [5, 5]}];
 
   const canvas = document.getElementById("s2-game");
   const ctx = canvas.getContext("2d");
@@ -784,6 +821,7 @@ function finishDrag() {
 
   if (solved && !redirecting) {
     redirecting = true;
+    save(2);
     successModal.classList.remove("hidden");
   }
 }
@@ -803,14 +841,14 @@ function finishDrag() {
         if (!areAdjacent(full[i - 1], full[i])) return false;
       }
 
-      for (let i = 1; i < full.length - 1; i++) {
+      for (let i = 0; i < full.length; i++) {
         const k = key(full[i].x, full[i].y);
         if (occupied.has(k)) return false;
         occupied.add(k);
       }
     }
 
-    return true;
+    return occupied.size === COLS * ROWS;
   }
 
   function roundedRect(x, y, w, h, r) {
@@ -836,13 +874,13 @@ function finishDrag() {
     roundedRect(boardX - 8, boardY - 8, boardW + 16, boardH + 16, 10);
     ctx.fill();
 
-    ctx.fillStyle = "#015617";
+    ctx.fillStyle = "#101f22";
     roundedRect(boardX - 2, boardY - 2, boardW + 4, boardH + 4, 6);
     ctx.fill();
   }
 
   function drawGrid(boardX, boardY, boardW, boardH, size) {
-    ctx.fillStyle = "#015617";
+    ctx.fillStyle = "#101f22";
     ctx.fillRect(boardX, boardY, boardW, boardH);
 
     ctx.strokeStyle = "rgba(255,255,255,.1)";
@@ -897,8 +935,8 @@ function finishDrag() {
 
   function drawEndpoint(x, y, color, boardX, boardY, size) {
     const c = cellCenter(x, y, boardX, boardY, size);
-    const outerR = size * 0.24;
-    const innerR = size * 0.16;
+    const outerR = size * 0.32;
+    const innerR = size * 0.23;
 
     ctx.save();
 
@@ -924,6 +962,9 @@ function finishDrag() {
     ctx.arc(c.x, c.y, innerR * 0.92, 0, Math.PI * 2);
     ctx.fill();
 
+    const number=PAIRS.findIndex(p=>COLORS[p.id]===color)+1;
+    ctx.fillStyle='#f4f7fa';ctx.font=`600 ${Math.max(10,size*.28)}px sans-serif`;
+    ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(String(number),c.x,c.y);
     ctx.restore();
   }
 
@@ -959,6 +1000,9 @@ function finishDrag() {
       drawEndpoint(pair.a[0], pair.a[1], COLORS[pair.id], boardX, boardY, size);
       drawEndpoint(pair.b[0], pair.b[1], COLORS[pair.id], boardX, boardY, size);
     }
+    const used=new Set();let connected=0;
+    for(const pair of PAIRS) if(paths[pair.id].length){connected++;[pair.a,pair.b].forEach(([x,y])=>used.add(key(x,y)));paths[pair.id].forEach(p=>used.add(key(p.x,p.y)));}
+    document.getElementById('wireProgress').textContent=`已連接 ${connected} / 9 · 已通電 ${used.size} / ${COLS*ROWS}`;
   }
 
   function eventToCell(clientX, clientY) {
@@ -1038,8 +1082,8 @@ function finishDrag() {
 function initStage3() {
   // Geometry is shared by SVG rendering, occlusion checks and solvable-order generation.
   const COLORS = [
-    ['red','紅','#ed6670'],['orange','橙','#f2a35d'],['blue','藍','#69b1ee'],
-    ['purple','紫','#b397ed'],['pink','粉','#eda3ce'],['yellow','黃','#e8cf6b'],['gray','灰','#b8c5d0']
+    ['red','紅','#ad6264'],['orange','橙','#bf865b'],['blue','藍','#608ba8'],
+    ['purple','紫','#86739c'],['pink','粉','#ba8f9d'],['yellow','黃','#b5a260'],['gray','灰','#a9b6bd']
   ];
   const palette = Object.fromEntries(COLORS.map(([id,name,hex])=>[id,{name,hex}]));
   const TOTAL = 108, CAPACITY = 7;
@@ -1058,7 +1102,7 @@ function initStage3() {
     hexagon: {outline:[[-46,-76],[44,-76],[85,-2],[42,76],[-42,76],[-85,-2]], screws:[[-30,-37],[30,-37],[-30,37],[30,37]]},
     star: {outline:Array.from({length:10},(_,i)=>{const angle=-Math.PI/2+i*Math.PI/5,r=i%2?43:88;return [Math.cos(angle)*r,Math.sin(angle)*r];}), screws:[[0,-50],[-47,-13],[47,-13],[0,36]]}
   };
-  const tints=['#ad93e5','#7dcbe5','#d9c4a3','#a1bbd4','#cf9dd9'];
+  const tints=['#65747c','#7a8487','#716f67','#4d6069','#8c9497'];
   function roundedOutline(points) {
     // Sample quadratic corners once. The exact same polygon is drawn and tested.
     const result=[];
@@ -1111,9 +1155,9 @@ function initStage3() {
     }
     sequence.forEach(s=>s.removed=false);
     trays=[];buffer=[];removed=0;complete=false;ventRemaining=4;
-    vent.hidden=true;vent.classList.remove('opened');plates.hidden=false;
+    vent.hidden=false;vent.classList.remove('opened');plates.hidden=false;
+    setupVent();
     document.getElementById('retryScrews').disabled=false;
-    document.getElementById('escapeLight').classList.remove('expand');
     settle();render();
     status.textContent='拆下露出的螺絲；被板件壓住的螺絲暫時無法轉動。';
   }
@@ -1123,11 +1167,13 @@ function initStage3() {
     return element;
   }
   function drawPieces() {
-    const svg=svgElement('svg',{viewBox:'-24 -20 464 610',class:'screw-scene','aria-label':'交疊的透明板件與螺絲'});
+    const svg=svgElement('svg',{viewBox:'-24 -20 464 610',class:'screw-scene','aria-label':'交疊的金屬板件與螺絲'});
     const defs=svgElement('defs');
+    const grain=svgElement('pattern',{id:'metal-grain',width:6,height:4,patternUnits:'userSpaceOnUse'});
+    grain.append(svgElement('path',{d:'M0 1H6',stroke:'#eff6f5','stroke-opacity':'.07','stroke-width':.6}));defs.append(grain);
     pieces.forEach(piece=>{
       const gradient=svgElement('linearGradient',{id:`glass-${piece.z}`,x1:'0',y1:'0',x2:'1',y2:'1'});
-      [['0','#ffffff',.48],['.25',piece.tint,.73],['.78',piece.tint,.50],['1','#f3ecff',.72]].forEach(([offset,color,opacity])=>gradient.append(svgElement('stop',{offset,'stop-color':color,'stop-opacity':opacity})));
+      [['0','#c8cfd0',1],['.18',piece.tint,1],['.43','#9ba5a7',1],['.48','#58656b',1],['.8',piece.tint,1],['1','#343f46',1]].forEach(([offset,color,opacity])=>gradient.append(svgElement('stop',{offset,'stop-color':color,'stop-opacity':opacity})));
       defs.append(gradient);
     });svg.append(defs);
     for(const piece of pieces) {
@@ -1135,7 +1181,8 @@ function initStage3() {
       const group=svgElement('g',{'data-piece':piece.z,class:'glass-piece'});
       const points=piece.polygon.map(p=>p.join(',')).join(' ');
       group.append(svgElement('polygon',{points,fill:'#020d19','fill-opacity':'.22',transform:'translate(0 5)'}));
-      group.append(svgElement('polygon',{points,fill:`url(#glass-${piece.z})`,stroke:'#e8f0ff','stroke-opacity':'.82','stroke-width':'2.2','stroke-linejoin':'round',class:'glass-face'}));
+      group.append(svgElement('polygon',{points,fill:`url(#glass-${piece.z})`,stroke:'#c2cccc','stroke-opacity':'.7','stroke-width':'2.2','stroke-linejoin':'round',class:'glass-face'}));
+      group.append(svgElement('polygon',{points,fill:'url(#metal-grain)','pointer-events':'none'}));
       for(const screw of piece.screws) {
         if(screw.removed){group.append(svgElement('circle',{cx:screw.x,cy:screw.y,r:11,fill:'#112234','fill-opacity':'.42',stroke:'#f0f7ff','stroke-opacity':'.3','stroke-width':2}));continue;}
         const open=accessible(screw);
@@ -1143,6 +1190,7 @@ function initStage3() {
         button.append(svgElement('circle',{r:25,fill:'transparent',class:'screw-hit'}));
         button.append(svgElement('circle',{cy:3,r:20,fill:'#1c203e','fill-opacity':'.5'}));
         button.append(svgElement('circle',{r:19,fill:palette[screw.color].hex,stroke:'#fff','stroke-opacity':'.6','stroke-width':1.5}));
+        button.append(svgElement('circle',{r:13.5,fill:'#acb8bd',stroke:'#38464e','stroke-width':1}));
         button.append(svgElement('path',{d:'M-13 -7 A15 15 0 0 1 10 -11',fill:'none',stroke:'#fff','stroke-opacity':'.47','stroke-width':2.5,'stroke-linecap':'round'}));
         button.append(svgElement('path',{d:'M-3 -10 H3 V-3 H10 V3 H3 V10 H-3 V3 H-10 V-3 H-3 Z',fill:'#263047','fill-opacity':'.85',transform:`rotate(${piece.z*17%90})`}));
         group.append(button);
@@ -1216,28 +1264,26 @@ function initStage3() {
     status.textContent=buffer.length>=CAPACITY?'暫存已滿，請先完成上方收集盒。':'點選露出的螺絲，放入對應的收集盒。';
     if(removed===TOTAL) openVent();
   }
-  function openVent() {
-    plates.hidden=true;vent.hidden=false;
-    status.textContent='板件已全部拆除，現在可以打開通風口。';
+  function setupVent() {
     const container=document.getElementById('ventScrews');container.replaceChildren();
     for(let i=0;i<4;i++) {
-      const button=document.createElement('button');button.className=`vent-screw v${i}`;button.textContent='＋';button.setAttribute('aria-label',`出口螺絲 ${i+1}`);
+      const button=document.createElement('button');button.className=`vent-screw v${i}`;
+      button.disabled=true;button.setAttribute('aria-label',`出口螺絲 ${i+1}`);
       button.addEventListener('click',()=>{
-        if(button.disabled||complete)return;
+        if(removed!==TOTAL||button.disabled||complete||!document.getElementById('s3-introModal').classList.contains('hidden'))return;
         button.disabled=true;button.classList.add('removed');ventRemaining--;
         if(!ventRemaining) {
-          complete=true;vent.classList.add('opened');
+          complete=true;save(3);vent.classList.add('opened');
           document.getElementById('retryScrews').disabled=true;
-          setTimeout(()=>document.getElementById('escapeLight').classList.add('expand'),450);
-          setTimeout(()=>ask('你逃出來了','隨著拿掉最後一顆螺絲，\n你終於見到了太陽……',()=>{
-            document.getElementById('stageCount').textContent='已完成';
-            document.getElementById('stageHint').textContent='通風出口已開啟。';
-            document.getElementById('helpBtn').hidden=true;
-            status.textContent='你已成功離開通風管。';
-          },false),1500);
+          beginEscape();
         }
       });container.append(button);
     }
+  }
+  function openVent() {
+    plates.hidden=true;
+    status.textContent='';
+    vent.querySelectorAll('.vent-screw').forEach(button=>button.disabled=false);
   }
   plates.addEventListener('keydown',event=>{
     if(event.key==='Enter'||event.key===' '){const target=event.target.closest('[data-order]');if(target){event.preventDefault();removeScrew(sequence[Number(target.dataset.order)]);}}
@@ -1250,4 +1296,171 @@ function initStage3() {
   reset();
 }
 
-goToStage(1);
+
+
+// ===== 車站、文字結局與獨立紀念圖片 =====
+let escaping = false;
+let selectedEnding = null;
+let stationReady = false;
+let wantSound = false;
+let audioFadeToken = 0;
+let downloadToken = 0;
+const pause = ms => new Promise(resolve => setTimeout(resolve,ms));
+function normalizeTicket(value) { return String(value).trim().toUpperCase(); }
+function matchTicket(value) {
+  const ticket = normalizeTicket(value);
+  return CONFIG.endings.find(ending=>normalizeTicket(ending.ticket)===ticket) || null;
+}
+function updateSoundButton() {
+  const audio = document.getElementById('stationAudio');
+  document.getElementById('soundBtn').textContent = audio.paused ? '開啟車站音效' : '關閉車站音效';
+}
+async function playStationSound(volume = 0.65) {
+  const audio = document.getElementById('stationAudio');
+  wantSound = true;
+  audio.volume = volume;
+  try { await audio.play(); } catch(error) { /* Mobile autoplay may require the sound button. */ }
+  updateSoundButton();
+}
+function prepareStation() {
+  if(stationReady)return;
+  stationReady = true;
+  const scene=document.getElementById('stationScene');
+  scene.addEventListener('error',()=>{scene.hidden=true;});
+  scene.src=CONFIG.stationImage;
+  const audio=document.getElementById('stationAudio');audio.src=CONFIG.stationAudio;
+  audio.addEventListener('play',updateSoundButton);
+  audio.addEventListener('pause',updateSoundButton);
+  audio.addEventListener('error',()=>{
+    document.getElementById('soundBtn').textContent='音效無法載入，點此重試';
+  });
+  document.getElementById('soundBtn').addEventListener('click',()=>{
+    audioFadeToken++;
+    if(!audio.paused){wantSound=false;audio.pause();}
+    else {if(audio.error)audio.load();playStationSound();}
+  });
+  document.getElementById('ticketForm').addEventListener('submit',event=>{
+    event.preventDefault();
+    if(progress.completed<3)return;
+    const input=document.getElementById('ticketNumber');
+    const ending=matchTicket(input.value);
+    document.getElementById('ticketError').textContent='';
+    input.removeAttribute('aria-invalid');
+    if(!ending){
+      document.getElementById('ticketError').textContent=input.value.trim()?'查無此車票，請確認號碼後重新輸入。':'請先輸入你的車票號碼。';
+      input.setAttribute('aria-invalid','true');input.focus();return;
+    }
+    if(wantSound&&audio.paused)playStationSound();
+    showEnding(ending);
+  });
+  document.getElementById('saveEndingBtn').addEventListener('click',downloadEnding);
+  document.getElementById('anotherTicket').addEventListener('click',()=>{
+    downloadToken++;selectedEnding=null;save(3,null);
+    document.getElementById('endingPanel').hidden=true;
+    document.getElementById('ticketPanel').hidden=false;
+    document.getElementById('ticketNumber').value='';
+    document.getElementById('ticketNumber').focus();window.scrollTo(0,0);
+  });
+  document.addEventListener('visibilitychange',()=>{
+    if(document.hidden)audio.pause();
+    else if(wantSound&&!document.getElementById('stationView').hidden)playStationSound();
+  });
+}
+function showStation(restoreEnding=true) {
+  prepareStation();
+  document.querySelector('.app').hidden=true;
+  document.getElementById('stationView').hidden=false;
+  document.body.classList.add('at-station');
+  document.title='高譚車站｜車票查驗';
+  document.querySelector('meta[name="theme-color"]').content='#edf0e9';
+  window.scrollTo(0,0);
+  const ending=restoreEnding?CONFIG.endings.find(e=>e.id===progress.endingId):null;
+  if(ending)showEnding(ending,false);
+  else {document.getElementById('ticketPanel').hidden=false;document.getElementById('endingPanel').hidden=true;}
+}
+async function beginEscape() {
+  if(escaping)return;
+  escaping=true;
+  prepareStation();
+  // Start the audio in the final screw's user gesture, silently until the station appears.
+  playStationSound(0);
+  const veil=document.getElementById('whiteout');
+  veil.hidden=false;
+  document.querySelector('meta[name="theme-color"]').content='#ffffff';
+  document.body.classList.add('escaping');
+  document.querySelector('.app').inert=true;
+  // Flush the initial opacity before beginning the all-white fade.
+  void veil.offsetWidth;
+  veil.classList.add('full-white');
+  await pause(900);
+  // A fully opaque #fff viewport is held with no text, dialog, image or controls.
+  await pause(CONFIG.whiteHoldMs);
+  const scene=document.getElementById('stationScene');
+  if(scene.decode)await Promise.race([scene.decode().catch(()=>{}),pause(5000)]);
+  showStation(false);
+  veil.style.transitionDuration=`${CONFIG.stationFadeMs}ms`;
+  veil.classList.remove('full-white');
+  const token=++audioFadeToken,audio=document.getElementById('stationAudio');
+  for(let step=1;step<=20;step++) {
+    await pause(CONFIG.stationFadeMs/20);
+    if(token===audioFadeToken&&!audio.paused)audio.volume=.65*step/20;
+  }
+  veil.hidden=true;document.body.classList.remove('escaping');
+}
+function showEnding(ending,persist=true) {
+  selectedEnding=ending;downloadToken++;
+  if(persist)save(3,ending.id);
+  document.getElementById('ticketPanel').hidden=true;
+  document.getElementById('endingPanel').hidden=false;
+  document.getElementById('endingTitle').textContent=ending.title;
+  // Plain text preserves paragraph breaks, and does not execute HTML supplied as story text.
+  document.getElementById('endingText').textContent=ending.text;
+  document.getElementById('downloadStatus').textContent='';
+  document.getElementById('saveEndingBtn').disabled=false;
+  const original=document.getElementById('openEndingImage');
+  original.href=ending.image;original.hidden=true;
+  window.scrollTo(0,0);
+}
+async function downloadEnding() {
+  if(!selectedEnding)return;
+  const ending=selectedEnding,token=++downloadToken;
+  const button=document.getElementById('saveEndingBtn'),message=document.getElementById('downloadStatus');
+  const original=document.getElementById('openEndingImage');
+  button.disabled=true;message.textContent='正在準備圖片…';
+  const name=ending.image.split('/').pop().split('?')[0] || `${ending.id}.webp`;
+  try {
+    const response=await fetch(ending.image);
+    if(!response.ok)throw new Error('Image unavailable');
+    const blob=await response.blob();
+    if(!blob.size || (blob.type && !blob.type.startsWith('image/') && blob.type!=='application/octet-stream'))throw new Error('Invalid image');
+    if(token!==downloadToken)return;
+    const file=new File([blob],name,{type:blob.type||'image/webp'});
+    // iOS can save to Photos/Files from the native share sheet.
+    if(navigator.canShare?.({files:[file]})&&navigator.share) {
+      try {
+        await navigator.share({files:[file],title:ending.title});
+        message.textContent='圖片已交給系統，請選擇儲存圖片或儲存到檔案。';
+        return;
+      } catch(error) {
+        if(error.name==='AbortError'){message.textContent='已取消儲存。';return;}
+        // Sharing may lose user activation while loading. Fall through to download.
+      }
+    }
+    const url=URL.createObjectURL(blob),link=document.createElement('a');
+    link.href=url;link.download=name;document.body.append(link);link.click();link.remove();
+    setTimeout(()=>URL.revokeObjectURL(url),60000);
+    message.textContent='已送出圖片下載；若未出現下載，可開啟原圖後長按儲存。';original.hidden=false;
+  } catch(error) {
+    if(token!==downloadToken)return;
+    // A local file:// preview cannot fetch in some browsers; allow native image opening.
+    original.hidden=false;
+    message.textContent=location.protocol==='file:'?'請開啟原圖後長按或另存圖片。':'圖片未能載入，請稍後重試；也可以開啟原圖。';
+  } finally {
+    if(token===downloadToken)button.disabled=false;
+  }
+}
+function boot() {
+  if(progress.completed===3)showStation();
+  else goToStage(progress.completed+1);
+}
+boot();

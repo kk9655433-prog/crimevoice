@@ -38,3 +38,46 @@ dialog{padding:0;border:0;background:transparent;max-width:calc(100% - 28px);col
 #stage3 .tray-name{font-size:10px;margin-bottom:9px;color:#dce6ec}#stage3 .tray-slots{gap:3px}#stage3 .tray-slots .slot{background:#0a1725;box-shadow:inset 0 2px 4px #0009,0 1px 0 #ffffff20}#stage3 .slot.filled{background:var(--color);position:relative;box-shadow:inset 0 2px 0 #fff5,0 2px 3px #0005}#stage3 .slot.filled:after{content:'+';position:absolute;inset:0;display:grid;place-items:center;font-weight:900;color:#263047;font-size:16px;line-height:1}
 #stage3 .buffer-row{border:0;border-radius:0;box-shadow:none;background:none;padding:5px 12px;gap:12px}#stage3 .buffer-row .slot{width:25px;background:#101f2b;box-shadow:inset 0 3px 5px #0008,0 1px 0 #adc8d147}#stage3 .buffer-row .slot.filled{background:var(--color)}#stage3 .buffer-label{margin-top:16px}#stage3 .screw-toolbar{padding-top:3px}#stage3 .status{font-size:11px;color:#bbceda;margin-top:3px}
 @media(prefers-reduced-motion:reduce){.falling-piece{animation:none;opacity:0}}
+/* Portrait nine-circuit board: width controls cell size, rather than shrinking to viewport height. */
+#stage2 canvas{height:auto;aspect-ratio:7 / 13.5}
+#stage2 .game-inner{min-height:0}.wire-progress{margin:0;padding:0 16px 14px;text-align:center;font-size:12px;color:#b6c8ce}.save-status{margin:6px 5px 0;color:#eccba3;font-size:12px;line-height:1.6}.save-status:empty{display:none}
+/* The exit grille is present underneath the metal plates for the entire third stage. */
+.screw-board{position:relative;aspect-ratio:464 / 610;isolation:isolate;margin-top:3px}
+#stage3 .screw-board .plates{position:absolute;inset:0;margin:0;padding:0;z-index:2;pointer-events:none;background:none}
+#stage3 .screw-scene{pointer-events:none}.glass-face,.real-screw.exposed{pointer-events:auto}
+#stage3 .screw-board .vent{position:absolute;inset:12px 0;margin:0;height:auto;width:auto;z-index:1;background:linear-gradient(130deg,#8b969a,#536169 24%,#849196 52%,#34434b);border:2px solid #a0adb1;box-shadow:inset 0 1px 0 #fff5,0 8px 24px #0006}
+#stage3 .vent-grille{inset:60px 28px;background:repeating-linear-gradient(0deg,#091217 0 11px,#76878d 11px 17px);border:2px solid #35464f}
+/* Draw the cross geometrically, independent of font metrics or button text baselines. */
+#stage3 .vent-screw{padding:0;appearance:none;-webkit-appearance:none;display:block;font-size:0;line-height:0;background:radial-gradient(circle at 36% 28%,#e0e7e8,#8d9ca2 70%);border:4px solid #435760;box-shadow:inset 0 1px 0 #fff8,0 2px 4px #0006;opacity:1}
+#stage3 .vent-screw::before,#stage3 .vent-screw::after{content:'';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:#34434b;border-radius:1px;box-shadow:0 1px 0 #f1f8f933}
+#stage3 .vent-screw::before{width:19px;height:4px}#stage3 .vent-screw::after{width:4px;height:19px}
+#stage3 .vent-screw:disabled{opacity:1;cursor:default}#stage3 .vent-screw:not(:disabled):active{transform:rotate(25deg)}
+#stage3 .vent.opened{opacity:0;transition:opacity .8s}
+#stage3 .screw-game{background:radial-gradient(ellipse at 50% 70%,#35434b,#1b2a34 65%,#172630)}
+#stage3 .tray-card{background:linear-gradient(145deg,#73808633,#162731);box-shadow:inset 0 1px 0 #e0eaed40,0 3px 0 #0d1b22;border-color:#7d8e9870}
+#stage3 .tray-name{color:var(--color,#c5d1d5)}
+/* Full-viewport white hold, then a slow reveal of the station. */
+.whiteout{position:fixed;inset:0;width:100%;height:100%;z-index:2147483647;background:#fff;opacity:0;pointer-events:auto;transition:opacity .9s linear}
+.whiteout.full-white{opacity:1}.escaping{overflow:hidden}.escaping .station-view{pointer-events:none}
+/* Station pages deliberately use a separate light rail-ticket visual style. */
+body.at-station{background:#e9ece5;color:#27342d;color-scheme:light;min-height:100svh}
+.station-view{position:relative;min-height:100svh;isolation:isolate;overflow:hidden;background:linear-gradient(140deg,#75877c,#b0b6a7 55%,#65796e)}
+.station-scene{position:fixed;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:-2}
+.station-shade{position:fixed;inset:0;background:linear-gradient(180deg,#112c2270,#193a2912 30%,#142c216b);z-index:-1;pointer-events:none}
+.rail-header{padding:max(22px,env(safe-area-inset-top)) 22px 18px;display:flex;align-items:center;justify-content:space-between;gap:14px;color:#fff;border-bottom:1px solid #ffffff36;background:#19342e45}
+.rail-brand{display:flex;align-items:center;gap:10px;font-size:18px;letter-spacing:.08em;font-weight:650}.rail-brand small{display:block;font-size:8px;letter-spacing:.16em;margin-top:4px}.rail-brand svg{width:30px;height:30px;fill:none;stroke:currentColor;stroke-width:1.7;flex-shrink:0}
+.sound-button{background:#173b2e55;border:1px solid #ffffff70;color:#fff;border-radius:999px;font-size:11px;padding:10px 12px;min-height:42px}
+.ticket-layout{width:min(100%,580px);margin:auto;padding:46px 20px 32px}.arrival-copy{color:#fff;margin:0 6px 28px;text-shadow:0 2px 20px #102c2355}.rail-kicker{font-size:10px;letter-spacing:.22em}.arrival-copy h1{font-family:Georgia,"Noto Serif TC","Songti TC",serif;font-size:38px;line-height:1.35;font-weight:400;letter-spacing:.06em;margin:13px 0 0}
+.ticket-panel,.ending-panel{background:#f7f7ef;color:#27382d;border-radius:5px;box-shadow:0 18px 65px #10221b35;padding:27px 24px 0;border-top:5px solid #436b53;position:relative}
+.ticket-kicker{display:block;font-size:9px;letter-spacing:.13em;color:#657664;margin-bottom:16px}.ticket-panel h2,.ending-panel h2{font-size:22px;line-height:1.5;font-weight:550;margin:0 0 24px;letter-spacing:.03em}
+#ticketForm label{font-size:12px;color:#657465;display:block;margin-bottom:8px}
+#ticketNumber{width:100%;min-height:52px;border:1px solid #b5c0b0;border-radius:3px;padding:13px 12px;color:#24332b;background:#fff;font-size:17px;letter-spacing:.06em;outline-offset:3px}
+#ticketNumber:focus{outline:2px solid #6c8970}#ticketNumber[aria-invalid=true]{border-color:#9c5249}
+.ticket-error{font-size:12px;color:#a0453d;line-height:1.6;min-height:20px;margin:8px 0 14px}
+.rail-primary{border:0;display:flex;align-items:center;justify-content:center;gap:16px;min-height:50px;width:100%;background:#355e46;color:#fff;border-radius:3px;font-size:15px;font-weight:500;padding:13px 16px;letter-spacing:.04em}
+.rail-primary:active{background:#244b35}.rail-primary:disabled{opacity:.55}.ticket-bottom{margin:25px -24px 0;padding:17px 24px;border-top:1px dashed #bcc4b5;display:flex;justify-content:space-between;font-size:9px;letter-spacing:.1em;color:#7a8577;background:#e9ede28c}
+.ending-panel{padding-bottom:20px}.ending-panel h2{margin-bottom:22px}#endingText{white-space:pre-wrap;overflow-wrap:anywhere;line-height:2.05;font-size:16px;margin:0 0 32px;font-family:Georgia,"Songti TC","PMingLiU",serif;color:#344239}
+.rail-link{display:block;text-align:center;font-size:12px;color:#4b6f56;background:none;border:none;min-height:44px;width:100%;padding:13px 0;text-decoration:underline;text-underline-offset:4px}
+.image-status{font-size:12px;line-height:1.8;color:#707d6e;margin:10px 0}.image-status:empty{display:none}
+.rail-footer{padding:0 20px max(24px,env(safe-area-inset-bottom));color:#f5f7efb3;text-align:center;font-size:9px;letter-spacing:.14em}
+@media(max-width:350px){.rail-header{padding-inline:15px}.rail-brand{font-size:16px}.ticket-layout{padding:30px 14px 24px}.ticket-panel,.ending-panel{padding-inline:19px}.ticket-panel h2{font-size:20px}.ticket-bottom{margin-inline:-19px;padding-inline:19px}.arrival-copy h1{font-size:32px}}
