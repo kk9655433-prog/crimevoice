@@ -156,6 +156,7 @@ dialog{background:#1b1b1b!important;color:#fff!important;border:1px solid #38383
 .ending-image{display:block;width:100%;height:auto;margin:0 0 24px;border-radius:12px}
 .ending-image.hidden{display:none}
 #creatorDialog .dialog-actions,.completion-dialog .dialog-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+#creatorDialog .restart-actions{flex-direction:column;align-items:stretch}
 .completion-dialog button.secondary{background:#eee;color:#111}
 .next-day-button{position:fixed;right:max(14px,env(safe-area-inset-right));bottom:calc(76px + env(safe-area-inset-bottom));z-index:30;border:0;border-radius:999px;padding:11px 16px;background:#111;color:#fff;font-weight:700;box-shadow:0 6px 22px rgba(0,0,0,.25)}
 .next-day-button.hidden{display:none}

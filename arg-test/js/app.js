@@ -87,6 +87,17 @@ function installPageProtection(){
 installPageProtection();
 
 const STORAGE_KEY='lilith-arg-state-v2';
+const DAY_SNAPSHOT_KEY='lilith-arg-day-start-v1';
+function currentStorageSnapshot(){
+  const snapshot={};
+  for(let i=0;i<localStorage.length;i++){
+    const key=localStorage.key(i);
+    if(key&&key!==DAY_SNAPSHOT_KEY)snapshot[key]=localStorage.getItem(key);
+  }
+  return snapshot;
+}
+function captureDayStart(){localStorage.setItem(DAY_SNAPSHOT_KEY,JSON.stringify(currentStorageSnapshot()))}
+if(!localStorage.getItem(DAY_SNAPSHOT_KEY))captureDayStart();
 const saved=JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}');
 const ARG_START_DAY='2026-11-11';
 const ARG_LAST_DAY='2026-11-14';
@@ -111,7 +122,8 @@ const state={
   xiaAnReply:saved.xiaAnReply||'',
   xiaAnReplyAt:Number(saved.xiaAnReplyAt)||0,
   xiaAnAppointmentReplied:!!saved.xiaAnAppointmentReplied,
-  xiaAnDeclined:!!saved.xiaAnDeclined,
+	  xiaAnDeclined:!!saved.xiaAnDeclined,
+  xiaAnWarnedOff:!!saved.xiaAnWarnedOff,
   xiaAnEmergencyTriggered:!!saved.xiaAnEmergencyTriggered,
   xiaAnEmergencyMessagesShown:Number(saved.xiaAnEmergencyMessagesShown)||0,
   lilithChatStarted:!!saved.lilithChatStarted,
@@ -149,6 +161,7 @@ function save(){
       xiaAnReplyAt:state.xiaAnReplyAt,
       xiaAnAppointmentReplied:state.xiaAnAppointmentReplied,
 	  xiaAnDeclined:state.xiaAnDeclined,
+      xiaAnWarnedOff:state.xiaAnWarnedOff,
       xiaAnEmergencyTriggered:state.xiaAnEmergencyTriggered,
       xiaAnEmergencyMessagesShown:state.xiaAnEmergencyMessagesShown,
       lilithChatStarted:state.lilithChatStarted,
@@ -443,16 +456,23 @@ function xiaMessages(){
   if(Date.now()-state.xiaAnReplyAt>=1000){
     messages.push([
       'in',
-      state.xiaAnDeclined
-        ? '你怎麼突然反悔了？\n算了 我自己去吧。'
-        : '明天見'
+      state.xiaAnWarnedOff
+        ? '怎麼突然這麼說？\n好吧，那我不去了。'
+        : state.xiaAnDeclined
+          ? '你怎麼突然反悔了？\n算了 我自己去吧。'
+          : '明天見'
     ]);
   }
 }
   if(hasArrived(RELEASE.xiaReplyDeadline)&&!state.xiaAnAppointmentReplied){
     messages.push(['in','你怎麼今天都沒回我訊息?記得明天見喔！']);
   }
-if(hasArrived(RELEASE.xiaEarly)){
+if(state.xiaAnWarnedOff&&hasArrived(RELEASE.museumExplosion)){
+  messages.push(
+    ['date','2026年11月14日 上午11:05'],
+    ['in','還好昨天有聽你的沒有去……\n看到新聞嚇死了，你沒事吧？']
+  );
+}else if(hasArrived(RELEASE.xiaEarly)){
   messages.push(
     ['date','2026年11月14日 上午10:48'],
     [
@@ -550,6 +570,7 @@ function updateNextDayButton(){
 }
 function enterNextDay(){
   if(state.argDay>=ARG_LAST_DAY)return;
+  captureDayStart();
   state.argDay=nextArgDay();state.argDayEnteredAt=Date.now();state.declinedNextDay=false;state.completionSignature='';
   save();$('#completionDialog')?.close();updateNextDayButton();
   showView('news','news',false);scrollTo(0,0);
@@ -732,7 +753,7 @@ function openRegularChat(id){
     if(hasArrived(RELEASE.xiaReplyDeadline))state.seenChatEvents.add('xia-reminder');
     if(hasArrived(RELEASE.xiaEarly))state.seenChatEvents.add('xia-early');
     state.unreadChats.delete('friend1');
-    if(state.museumNewsOpened&&hasArrived(RELEASE.museumExplosion)&&!state.xiaAnEmergencyTriggered){
+    if(state.museumNewsOpened&&hasArrived(RELEASE.museumExplosion)&&!state.xiaAnWarnedOff&&!state.xiaAnEmergencyTriggered){
       state.xiaAnEmergencyTriggered=true;state.xiaAnEmergencyMessagesShown=0;
     }
   }
@@ -781,6 +802,22 @@ $('#closeCreatorDialog').onclick=()=>{
 };
 $('#restartArgButton').onclick=()=>{
   localStorage.clear();
+  location.reload();
+};
+$('#restartTodayButton').onclick=()=>{
+  const today=state.argDay;
+  let snapshot={};
+  try{snapshot=JSON.parse(localStorage.getItem(DAY_SNAPSHOT_KEY)||'{}')}catch{}
+  localStorage.clear();
+  Object.entries(snapshot).forEach(([key,value])=>localStorage.setItem(key,value));
+  let restored={};
+  try{restored=JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}')}catch{}
+  restored.argDay=today;
+  restored.argDayEnteredAt=Date.now();
+  restored.declinedNextDay=false;
+  restored.completionSignature='';
+  localStorage.setItem(STORAGE_KEY,JSON.stringify(restored));
+  captureDayStart();
   location.reload();
 };
 $('#newsFollowBtn').onclick=()=>{  toggleProfileFollow('#newsFollowBtn',NEWS_PROFILE.handle);};
@@ -891,11 +928,12 @@ setTimeout(()=>{
     state.xiaAnReply=input.value.trim();
 	state.xiaAnReplyAt=Date.now();
 	state.xiaAnAppointmentReplied=true;
+	state.xiaAnWarnedOff=state.xiaAnReply.replace(/[\s，。！？!?]/g,'').includes('你不要去');
 
 		const declineKeywords=[
 		  '沒空','不去','不能去','沒辦法去','不想去','不方便','臨時有事',];
 
-state.xiaAnDeclined=declineKeywords.some(keyword=>{
+state.xiaAnDeclined=!state.xiaAnWarnedOff&&declineKeywords.some(keyword=>{
   return state.xiaAnReply.includes(keyword);
 });
     input.value='';save();

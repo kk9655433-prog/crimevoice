@@ -597,16 +597,6 @@ const ALT_POSTS=[
     id:'alt-1113-fraction',handle:ALT.handle,avatar:ALT.avatar,
     publishedAt:RELEASE.altPost,
     text:'我是他的幾分之幾呢？',image:'assets/tulip.webp',
-	clues:[
-  {
-    title:'幾分之幾？',
-    text:'LH在11/13發了一篇意義不明的文章。'
-  },
-  {
-    title:'鬱金香照片',
-    text:'LH發布的照片裡，鬱金香上的便條紙寫著1 step forward, 3 steps back (前進一步，後退三步)。'
-  }
-  ],
     likes:3,reposts:0,shares:0,replies:[]
   },
   {
