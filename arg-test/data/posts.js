@@ -316,7 +316,7 @@ const POSTS=[
     text:'準備工作',
 	image:'assets/WORKWORK.webp',
     clueTitle:'便條紙',
-    clue:'莉莉絲桌上有個便條紙寫著ZGMXXX。',
+    clue:'莉莉絲桌上有個便條紙寫著一串亂碼。',
     likes:1115,reposts:26,shares:25,
     replies:[    ]
   },
