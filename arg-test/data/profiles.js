@@ -16,6 +16,7 @@ const RELEASE={
   xiaReplyDeadline:'2026-11-13T23:00:00+08:00',
   lilithMessages:'2026-11-14T09:00:00+08:00',
   xiaEarly:'2026-11-14T10:48:00+08:00',
+  xiaSafe:'2026-11-14T11:05:00+08:00',
   museumExplosion:'2026-11-14T11:00:00+08:00'
 };
 

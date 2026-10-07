@@ -443,7 +443,7 @@ function followAlt(){if(state.altFollowed)return;state.altFollowed=true;state.un
 function syncTimedChatUnread(){
   if(hasArrived(RELEASE.xiaAppointment)&&!state.seenChatEvents.has('xia-appointment'))state.unreadChats.add('friend1');
   if(hasArrived(RELEASE.xiaReplyDeadline)&&!state.xiaAnAppointmentReplied&&!state.seenChatEvents.has('xia-reminder'))state.unreadChats.add('friend1');
-  if(hasArrived(RELEASE.xiaEarly)&&!state.seenChatEvents.has('xia-early'))state.unreadChats.add('friend1');
+  if(hasArrived(state.xiaAnWarnedOff?RELEASE.xiaSafe:RELEASE.xiaEarly)&&!state.seenChatEvents.has('xia-early'))state.unreadChats.add('friend1');
   if(hasArrived(RELEASE.groupFilled)&&!state.seenChatEvents.has('group-filled'))state.unreadChats.add('group');
   if(hasArrived(RELEASE.groupArrivedOne)&&!state.seenChatEvents.has('group-meet'))state.unreadChats.add('group');
 }
@@ -467,12 +467,12 @@ function xiaMessages(){
   if(hasArrived(RELEASE.xiaReplyDeadline)&&!state.xiaAnAppointmentReplied){
     messages.push(['in','你怎麼今天都沒回我訊息?記得明天見喔！']);
   }
-if(state.xiaAnWarnedOff&&hasArrived(RELEASE.museumExplosion)){
+if(state.xiaAnWarnedOff&&hasArrived(RELEASE.xiaSafe)){
   messages.push(
     ['date','2026年11月14日 上午11:05'],
     ['in','還好昨天有聽你的沒有去……\n看到新聞嚇死了，你沒事吧？']
   );
-}else if(hasArrived(RELEASE.xiaEarly)){
+}else if(!state.xiaAnWarnedOff&&hasArrived(RELEASE.xiaEarly)){
   messages.push(
     ['date','2026年11月14日 上午10:48'],
     [
@@ -580,7 +580,7 @@ function enterNextDay(){
 let lastTimelineSignature='';
 function refreshTimeline(){
   syncTimedChatUnread();
-  const signature=[...eligibleActivityEvents(),...releasedProfileOnlyNews().map(post=>post.id),hasArrived(RELEASE.xiaAppointment),hasArrived(RELEASE.xiaReplyDeadline),hasArrived(RELEASE.lilithMessages),hasArrived(RELEASE.xiaEarly),hasArrived(RELEASE.groupFilled),hasArrived(RELEASE.groupArrivedOne),hasArrived(RELEASE.groupArrivedTwo),hasArrived(RELEASE.groupPing)].join('|');
+  const signature=[...eligibleActivityEvents(),...releasedProfileOnlyNews().map(post=>post.id),hasArrived(RELEASE.xiaAppointment),hasArrived(RELEASE.xiaReplyDeadline),hasArrived(RELEASE.lilithMessages),hasArrived(RELEASE.xiaEarly),hasArrived(RELEASE.xiaSafe),hasArrived(RELEASE.groupFilled),hasArrived(RELEASE.groupArrivedOne),hasArrived(RELEASE.groupArrivedTwo),hasArrived(RELEASE.groupPing)].join('|');
   if(signature!==lastTimelineSignature){
     lastTimelineSignature=signature;
     if(state.view==='newsProfile')renderNewsProfile();
@@ -605,6 +605,28 @@ function refreshTimeline(){
   refreshRelativeTimeLabels();
   checkCompletion();
   checkDailyAndGameNotices(false);
+}
+function normalizeChatAnswer(value){
+  return String(value).normalize('NFKC').replace(/[\s\p{P}]/gu,'');
+}
+function isEndingQuestion(value){
+  const answer=normalizeChatAnswer(value);
+  return /^(?:你|妳)今天(?:是)?(?:要|會|打算|準備)?(?:去)?(?:見見|見|看|探望|探視)(?:他|希爾(?:市長)?|漢密爾頓|漢米爾頓)(?:嗎|呢|吧)?$/.test(answer);
+}
+function endingReplyHint(value){
+  const answer=normalizeChatAnswer(value);
+  if(/見|探望|探視/.test(answer)&&/他|希爾|漢密爾頓|漢米爾頓/.test(answer)&&!answer.includes('今天'))return '你問的是哪一天？';
+  if(answer.includes('今天'))return '你想問我今天的什麼事？';
+  return '你想問什麼？';
+}
+function isXiaWarning(value){
+  // Match a request not to go; a first-person refusal alone does not warn Xia An.
+  return String(value).split(/[，。！？!?；;\n]/u).some(part=>{
+    const answer=normalizeChatAnswer(part);
+    return /^(?:小安)?(?:拜託|拜托|請|我覺得|我建議|我希望)?(?:(?:今天|明天))?(?:你們|我們|咱們|你|妳)?(?:今天|明天)?(?:真的|千萬|最好|還是|絕對)?(?:都|先)?(?:不要|別|不准)(?:再)?(?:去|過去)/.test(answer)
+      || /^(?:小安)?(?:你們|我們|咱們|你|妳)(?:今天|明天)?(?:都|還是)?(?:不去|別去了|不要去了)(?:美術館|看展)?(?:了|吧|好嗎)?$/.test(answer)
+      || /^(?:小安)?(?:取消|改天再去)(?:明天的?|今天的?)?(?:看展|美術館|約定|行程)/.test(answer);
+  });
 }
 function openChat(){
   showView('chat','messages');
@@ -632,7 +654,7 @@ function openChat(){
     ${state.mutual?'<button class="view-alt-btn" id="viewAltFromChat">查看帳號</button>':''}
   `;
 
-  const input=$('#codeInput');input.inputMode='numeric';input.maxLength=4;input.placeholder='輸入答案';
+  const input=$('#codeInput');input.inputMode='text';input.removeAttribute('maxlength');input.placeholder='發送訊息……';input.setAttribute('aria-label','發送訊息……');
   $('#codeForm').classList.toggle('hidden',state.mutual);
 
   if(state.mutual){
@@ -644,6 +666,9 @@ let endingTypingTimer=null;
 function renderEnding(){
   clearTimeout(endingTypingTimer);
   const text=$('#endingText');
+  const image=$('#endingImage');
+  image.classList.add('hidden');
+  if(ENDING_CONTENT.image)image.src=ENDING_CONTENT.image;
   const characters=Array.from(ENDING_CONTENT.text);
   let index=0;
   text.textContent='';
@@ -653,12 +678,10 @@ function renderEnding(){
     text.textContent+=characters[index]||'';
     index++;
     if(index<characters.length)endingTypingTimer=setTimeout(typeNextCharacter,28);
+    else image.classList.toggle('hidden',!ENDING_CONTENT.image);
   };
 
   typeNextCharacter();
-  const image=$('#endingImage');
-  image.classList.toggle('hidden',!ENDING_CONTENT.image);
-  if(ENDING_CONTENT.image)image.src=ENDING_CONTENT.image;
 }
 function openLilithChat(){
   if(
@@ -688,7 +711,7 @@ function openLilithChat(){
       <span>@${esc(PROFILE.handle)}</span>
     </div>
 
-    ${history.map(item=>`<div class="bubble outgoing">${esc(item.text)}</div>`).join('')}
+    ${history.map(item=>`<div class="bubble outgoing">${esc(item.text)}</div>${item.reply?`<div class="bubble incoming">${esc(item.reply)}</div>`:''}`).join('')}
     ${state.endingUnlocked?`
       <div class="bubble incoming">你是誰？</div>
       <div class="bubble incoming">你怎麼知道這些事情？</div>
@@ -751,7 +774,7 @@ function openRegularChat(id){
   if(id==='friend1'){
     if(hasArrived(RELEASE.xiaAppointment))state.seenChatEvents.add('xia-appointment');
     if(hasArrived(RELEASE.xiaReplyDeadline))state.seenChatEvents.add('xia-reminder');
-    if(hasArrived(RELEASE.xiaEarly))state.seenChatEvents.add('xia-early');
+    if(hasArrived(state.xiaAnWarnedOff?RELEASE.xiaSafe:RELEASE.xiaEarly))state.seenChatEvents.add('xia-early');
     state.unreadChats.delete('friend1');
     if(state.museumNewsOpened&&hasArrived(RELEASE.museumExplosion)&&!state.xiaAnWarnedOff&&!state.xiaAnEmergencyTriggered){
       state.xiaAnEmergencyTriggered=true;state.xiaAnEmergencyMessagesShown=0;
@@ -841,9 +864,10 @@ $('#codeForm').onsubmit=e=>{
 
 if(activeChatId==='lilith'){
   const message=input.value.trim();
-  const correct=message==='你今天要去見他嗎？';
+  const correct=isEndingQuestion(message);
+  const reply=correct?'':endingReplyHint(message);
 
-  state.lilithChatHistory.push({text:message,correct});
+  state.lilithChatHistory.push({text:message,correct,reply});
   save();
 
   input.value='';
@@ -913,13 +937,16 @@ setTimeout(()=>{
 
   scrollTo(0,document.body.scrollHeight);
 },6000);
+  }else{
+    $('#chatBody').insertAdjacentHTML('beforeend',`<div class="bubble incoming">${esc(reply)}</div>`);
+    scrollTo(0,document.body.scrollHeight);
   }
 
   return;
 }
 
   if(activeChatId==='friend1'){
-    if(hasArrived(RELEASE.xiaReplyDeadline)){
+    if(state.xiaAnAppointmentReplied||!hasArrived(RELEASE.xiaAppointment)||hasArrived(RELEASE.xiaReplyDeadline)){
       input.value='';
       state.seenChatEvents.add('xia-reminder');state.unreadChats.delete('friend1');save();
       renderRegularChat(CHATS.find(chat=>chat.id==='friend1'));
@@ -928,7 +955,7 @@ setTimeout(()=>{
     state.xiaAnReply=input.value.trim();
 	state.xiaAnReplyAt=Date.now();
 	state.xiaAnAppointmentReplied=true;
-	state.xiaAnWarnedOff=state.xiaAnReply.replace(/[\s，。！？!?]/g,'').includes('你不要去');
+	state.xiaAnWarnedOff=isXiaWarning(state.xiaAnReply);
 
 		const declineKeywords=[
 		  '沒空','不去','不能去','沒辦法去','不想去','不方便','臨時有事',];
@@ -944,9 +971,9 @@ state.xiaAnDeclined=!state.xiaAnWarnedOff&&declineKeywords.some(keyword=>{
     return;
   }
 
-  const accepted=['八三一','831','0831','8/31','０８／３１','8月31日','八月三十一日','8月31號','8月31','８／３１'];
+  const accepted=['八三一','831','0831','8/31','08/31','8月31日','八月三十一日','八月三十一號','八月三十一','8月31號','8月31'];
   const altMessage=input.value.trim();
-  const altCorrect=accepted.includes(answer);
+  const altCorrect=accepted.includes(answer.normalize('NFKC'));
 
   state.altChatHistory.push({text:altMessage,correct:altCorrect});
   save();
