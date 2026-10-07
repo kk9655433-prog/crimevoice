@@ -609,14 +609,19 @@ function refreshTimeline(){
 function normalizeChatAnswer(value){
   return String(value).normalize('NFKC').replace(/[\s\p{P}]/gu,'');
 }
-function isEndingQuestion(value){
-  const answer=normalizeChatAnswer(value);
-  return /^(?:你|妳)今天(?:是)?(?:要|會|打算|準備)?(?:去)?(?:見見|見|看|探望|探視)(?:他|希爾(?:市長)?|漢密爾頓|漢米爾頓)(?:嗎|呢|吧)?$/.test(answer);
+function isEndingQuestion(value) {
+  const answer = normalizeChatAnswer(value);
+  return /^(?:你|妳)今天要去見(?:他|希爾)(?:嗎[?？]?|[?？])$/.test(answer);
 }
-function endingReplyHint(value){
-  const answer=normalizeChatAnswer(value);
-  if(/見|探望|探視/.test(answer)&&/他|希爾|漢密爾頓|漢米爾頓/.test(answer)&&!answer.includes('今天'))return '你問的是哪一天？';
-  if(answer.includes('今天'))return '你想問我今天的什麼事？';
+
+function endingReplyHint(value) {
+  const answer = normalizeChatAnswer(value);
+  if (answer.includes('見他') && !answer.includes('今天')) {
+    return '你在說什麼？';
+  }
+  if (answer.includes('今天') && !answer.includes('見他')) {
+    return '今天怎麼了？';
+  }
   return '你想問什麼？';
 }
 function isXiaWarning(value){
