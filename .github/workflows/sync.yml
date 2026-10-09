@@ -34,6 +34,7 @@ jobs:
       # 4. 執行同步腳本
       - name: Run sync script
         run: |
+          cd "活動劇本OK"
           python sync_reader.py
 
       # 5. 檢查是否有檔案變更，並自動 Commit 和 Push 回 GitHub
