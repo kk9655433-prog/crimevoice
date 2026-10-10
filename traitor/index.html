@@ -23,13 +23,19 @@
 
   <section id="chatView" class="view chat-view" aria-label="抓叛徒群組">
     <div class="status"><span class="clock">16:08</span><span class="status-icons">● ▴ ◉ 96</span></div>
-    <header class="chat-top"><button class="back" id="backBtn" aria-label="回到聊天列表">‹</button><div class="chat-title" id="chatTitle">抓叛徒群組 (9)</div><div class="tools" aria-hidden="true"><span><svg viewBox="0 0 24 24"><circle cx="10" cy="10" r="6"/><path d="m15 15 5 5M10 6v4l3 2"/></svg></span><span><svg viewBox="0 0 24 24"><path d="M6.6 3.8 9 8 6.8 10a16 16 0 0 0 7.2 7.2l2-2.2 4.2 2.4c.6.4.9 1 .7 1.7-.4 1.3-1.6 2-3 1.9C9.7 20.2 3.8 14.3 3 6.1c-.1-1.4.6-2.6 1.9-3 .7-.2 1.3.1 1.7.7Z"/></svg></span><span><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg></span></div></header>
+    <header class="chat-top"><button class="back" id="backBtn" aria-label="回到聊天列表">‹</button><div class="chat-title" id="chatTitle">抓叛徒群組 (9)</div><div class="tools"><span><svg viewBox="0 0 24 24"><circle cx="10" cy="10" r="6"/><path d="m15 15 5 5M10 6v4l3 2"/></svg></span><span><svg viewBox="0 0 24 24"><path d="M6.6 3.8 9 8 6.8 10a16 16 0 0 0 7.2 7.2l2-2.2 4.2 2.4c.6.4.9 1 .7 1.7-.4 1.3-1.6 2-3 1.9C9.7 20.2 3.8 14.3 3 6.1c-.1-1.4.6-2.6 1.9-3 .7-.2 1.3.1 1.7.7Z"/></svg></span><button type="button" id="chatMenuBtn" aria-label="聊天選單" aria-haspopup="dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button></div></header>
     <video class="blood" id="blood" muted playsinline preload="auto"><source src="assets/blood-flow.webm" type="video/webm"></video>
     <img class="blood" id="bloodStill" src="assets/blood-final.webp" alt="" aria-hidden="true">
     <audio id="gunshot" preload="auto" src="assets/Bom.mp3"></audio>
     <div class="messages" id="messages"><div class="day"><span>今天</span></div></div>
     <form class="composer" id="answerForm"><button type="button" class="plus" aria-label="新增附件">＋</button><input id="answerInput" class="answer" autocomplete="off" maxlength="50" placeholder="輸入叛徒的名字" aria-label="回答誰是叛徒"><button class="send" id="sendBtn" aria-label="送出答案">➤</button></form>
   </section>
+  <dialog id="chatMenu" class="chat-menu" aria-labelledby="menuTitle">
+    <h2 id="menuTitle"></h2>
+    <button type="button" id="muteChatBtn">關閉提醒</button>
+    <button type="button" id="pinChatBtn">釘選</button>
+    <button type="button" id="deleteFriendBtn">刪除好友</button>
+  </dialog>
 </main>
 <script src="app.js"></script>
 </body>
