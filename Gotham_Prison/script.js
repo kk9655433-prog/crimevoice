@@ -67,9 +67,10 @@ logoutDialog.addEventListener('click', event => {
 
 function openModal(html){
   modalBody.innerHTML = `
-    <div class="close-btn" onclick="closeModal()">✕</div>
+    <button type="button" class="close-btn" aria-label="關閉視窗" onclick="closeModal()">✕</button>
     ${html}
   `;
+  modalBody.scrollTop = 0;
   modal.classList.add('active');
 }
 function closeModal(){
@@ -201,16 +202,18 @@ function startAuth(group){
 function querySystemGate(){
 
   openModal(`
-  <p style="text-align:center">本監獄系統已整合高譚各監獄系統</p>
-  <p style="text-align:center">請輸入檔案編號</p>
-  <div style="display:flex;justify-content:center;gap:4px;">
-  ${'<input class="pwd start" maxlength="1">'.repeat(4)}
-  <span>-</span>
-  ${'<input class="pwd mid" maxlength="1">'.repeat(3)}
-  <span>-</span>
-  ${'<input class="pwd end" maxlength="1">'.repeat(5)}
+  <div class="query-panel">
+  <p>本監獄系統已整合高譚各監獄系統</p>
+  <p id="fileCodeLabel">請輸入檔案編號</p>
+  <div class="file-code" role="group" aria-labelledby="fileCodeLabel">
+  <div class="code-group">${Array.from({length:4}, (_, i) => `<input class="pwd start" maxlength="1" aria-label="第一組第 ${i + 1} 個英文字母" inputmode="text" autocapitalize="characters" autocomplete="off" autocorrect="off" spellcheck="false">`).join('')}</div>
+  <span class="code-separator" aria-hidden="true">-</span>
+  <div class="code-group">${Array.from({length:3}, (_, i) => `<input class="pwd mid" maxlength="1" aria-label="第二組第 ${i + 1} 個數字" inputmode="numeric" autocomplete="off">`).join('')}</div>
+  <span class="code-separator" aria-hidden="true">-</span>
+  <div class="code-group">${Array.from({length:5}, (_, i) => `<input class="pwd end" maxlength="1" aria-label="第三組第 ${i + 1} 個英文字母" inputmode="text" autocapitalize="characters" autocomplete="off" autocorrect="off" spellcheck="false">`).join('')}</div>
   </div>
   <button id="pwdConfirm">確定</button>
+  </div>
   `);
 
   const inputs=[...document.querySelectorAll('.pwd')];
