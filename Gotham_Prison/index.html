@@ -54,6 +54,15 @@
   </div>
 </div>
 
+<div class="logout-dialog" id="idleLogoutDialog" aria-hidden="true">
+  <div class="logout-dialog-box" role="alertdialog" aria-modal="true" aria-labelledby="idleLogoutMessage">
+    <p id="idleLogoutMessage">你已經長達三分鐘沒有使用，<span id="idleLogoutSeconds">五</span>秒後自動登出</p>
+    <div class="logout-actions">
+      <button type="button" id="cancelIdleLogout">取消</button>
+    </div>
+  </div>
+</div>
+
 <div class="modal" id="modal">
   <div class="modal-content" id="modalBody"></div>
 </div>

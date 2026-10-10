@@ -5,13 +5,13 @@ const modalBody=document.getElementById('modalBody');
 /* ===== 系統登入帳號 ===== */
 const systemAccounts = {
   's.essen': 'essen-HT214',
-  'a.hugo': 'hugo-SP779',
+  'a.strange': 'strange-SP779',
   'vip-guest': 'VIP-Blackgate88'
 };
 
 const systemProfiles = {
   's.essen': '獄警 莎拉．艾森',
-  'a.hugo': '醫生 阿黛爾．雨果',
+  'a.strange': '醫生 阿黛爾．史特蘭奇',
   'vip-guest': '訪客 未知'
 };
 
@@ -26,6 +26,84 @@ const logoutDialog = document.getElementById('logoutDialog');
 const confirmLogout = document.getElementById('confirmLogout');
 const cancelLogout = document.getElementById('cancelLogout');
 
+/* 登入後閒置三分鐘，顯示五秒倒數；只有按取消才會延長使用時間。 */
+const IDLE_TIMEOUT = 3 * 60 * 1000;
+const LOGOUT_COUNTDOWN = 10 * 1000;
+const idleLogoutDialog = document.getElementById('idleLogoutDialog');
+const idleLogoutSeconds = document.getElementById('idleLogoutSeconds');
+const cancelIdleLogout = document.getElementById('cancelIdleLogout');
+let sessionActive = false;
+let idleDeadline = 0;
+let idleTimer;
+let idleWarningVisible = false;
+let previousFocus;
+let idleBackground = [];
+
+function resetIdleTimer(){
+  clearTimeout(idleTimer);
+  idleDeadline = Date.now() + IDLE_TIMEOUT;
+  idleTimer = setTimeout(checkIdleSession, IDLE_TIMEOUT);
+}
+
+function checkIdleSession(){
+  if(!sessionActive) return;
+  clearTimeout(idleTimer);
+  const now = Date.now();
+  if(now < idleDeadline){
+    idleTimer = setTimeout(checkIdleSession, idleDeadline - now);
+    return;
+  }
+  const remaining = idleDeadline + LOGOUT_COUNTDOWN - now;
+  // 用實際時間判斷，避免切換分頁或手機休眠讓倒數重新開始。
+  if(remaining <= 0){
+    sessionActive = false;
+    window.location.reload();
+    return;
+  }
+  idleLogoutSeconds.textContent = ['零','一','二','三','四','五','六','七','八','九','十'][Math.ceil(remaining / 1000)];
+  if(!idleWarningVisible){
+    idleWarningVisible = true;
+    previousFocus = document.activeElement;
+    idleBackground = [...document.querySelectorAll('.desktop, #modal, #logoutDialog')]
+      .map(element => ({element, inert:element.inert}));
+    idleBackground.forEach(({element}) => { element.inert = true; });
+    idleLogoutDialog.classList.add('active');
+    idleLogoutDialog.setAttribute('aria-hidden','false');
+    cancelIdleLogout.focus({preventScroll:true});
+  }
+  idleTimer = setTimeout(checkIdleSession, Math.min(1000, remaining));
+}
+
+function recordSessionActivity(){
+  if(!sessionActive) return;
+  if(Date.now() >= idleDeadline) checkIdleSession();
+  if(sessionActive && !idleWarningVisible) resetIdleTimer();
+}
+
+// capture 可收到文件彈窗內的捲動；觸控滑動與鍵盤輸入也算使用中。
+['pointerdown','click','touchmove','wheel','scroll','keydown','input'].forEach(type => {
+  document.addEventListener(type, recordSessionActivity, {capture:true, passive:true});
+});
+document.addEventListener('visibilitychange', checkIdleSession);
+window.addEventListener('pageshow', checkIdleSession);
+
+cancelIdleLogout.addEventListener('click', () => {
+  if(!sessionActive || !idleWarningVisible) return;
+  if(Date.now() >= idleDeadline + LOGOUT_COUNTDOWN){
+    checkIdleSession();
+    return;
+  }
+  idleWarningVisible = false;
+  idleLogoutDialog.classList.remove('active');
+  idleLogoutDialog.setAttribute('aria-hidden','true');
+  idleBackground.forEach(({element, inert}) => { element.inert = inert; });
+  resetIdleTimer();
+  if(previousFocus?.isConnected) previousFocus.focus({preventScroll:true});
+});
+cancelIdleLogout.addEventListener('keydown', event => {
+  if(event.key === 'Tab') event.preventDefault();
+});
+
 loginForm.addEventListener('submit', event => {
   event.preventDefault();
 
@@ -36,6 +114,8 @@ loginForm.addEventListener('submit', event => {
     loginError.textContent = '';
     welcomeText.textContent = `歡迎你，${systemProfiles[account]}`;
     loginLock.classList.add('unlocked');
+    sessionActive = true;
+    resetIdleTimer();
     setTimeout(() => loginLock.remove(), 500);
     return;
   }
