@@ -76,10 +76,11 @@
     if (day === 10) {
       state.pendingReplies = [
         { who: 'James', text: '是我沒錯' },
-        { who: 'James', text: '我記得就是那天將莫羅移至阿卡漢的，這事是艾森長官許可的，不過奇怪的是，莫羅這個名字在那天之前並不存在。' },
+        { who: 'James', text: '我記得就是那天將莫羅移至阿卡漢的，這事是艾森長官許可的。\n不過奇怪的是，莫羅這個名字在那天之前並不存在。' },
         { who: 'James', text: '', image: 'assets/NO.jpg' },
         { who: 'James', text: '這是10號那天那個人出現的監視器畫面，其他的我就不知道了。' },
-        { who: 'captain', text: '詹姆斯，到辦公室向我說明當晚的情況。\n謝謝你幫我查出值班的人。' }
+        { who: 'captain', text: '詹姆斯，到辦公室向我說明當晚的情況。\n謝謝你幫我查出值班的人。' },
+		{ who: 'captain', text: '新人，如果你想知道監視器裡的人到底是誰，\n文件區裡有囚犯名籍冊，\n裡面會有囚犯的入監照和身分資料，\n謝謝你幫我找出值班的人。' }
       ];
     } else {
       state.pendingReplies = [
