@@ -1,6 +1,6 @@
 (() => {
   'use strict';
-  const KEY = 'guard_duty_16_v2';
+  const KEY = 'guard_duty_16_v3';
   const MESSAGE_DELAY = 1450;
   const people = {
     captain: { name: '組長', avatar: 'assets/captain.webp' },
@@ -11,10 +11,13 @@
     David: { name: '大衛', avatar: 'assets/David.webp' },
     me: { name: '你', avatar: 'assets/me.webp' }
   };
-  const intro = [
+  const privateIntro = [
     ['captain', '是艾森獄警請你來的嗎？'],
     ['me', '是的。'],
-    ['captain', '那好，3月13號晚上，黑門監獄出了點狀況，當天的值班位置表不見了。'],
+    ['captain', '那好，我把你加進群組。']
+  ];
+  const intro = [
+    ['captain', '新來的，3月13號晚上，黑門監獄出了點狀況，當天的值班位置表不見了。'],
     ['captain', '我把當天負責值班的五名獄警都找來了，他們接下來會一個一個跟你們說證詞。'],
     ['captain', '我們已經可以確定，當天只有一人負責移交區，而且只有他在說謊，其餘四人說的都是真話。'],
     ['Joseph', '13號既不是安妮負責移交區，也不是大衛負責移交區。'],
@@ -27,11 +30,11 @@
   const $ = id => document.getElementById(id);
   const messages = $('messages'), input = $('answerInput');
   let timer;
-  const fresh = () => ({ version: 2, revealed: 0, extra: [], finished: false, askedDays: [], datePhase: false, replyPending: false, pendingReplies: [], finishAfterReplies: false, choicesAfterReplies: false });
+  const fresh = () => ({ version: 3, privateRevealed: 0, joined: false, revealed: 0, extra: [], finished: false, askedDays: [], datePhase: false, replyPending: false, pendingReplies: [], finishAfterReplies: false, choicesAfterReplies: false });
   function load() {
     try {
       const x = JSON.parse(localStorage.getItem(KEY));
-      if (x && x.version === 2 && Number.isInteger(x.revealed) && x.revealed >= 0 && x.revealed <= intro.length && Array.isArray(x.extra) && x.extra.every(m => people[m.who] && typeof m.text === 'string' && typeof m.time === 'string') && typeof x.finished === 'boolean' && Array.isArray(x.askedDays) && typeof x.datePhase === 'boolean' && typeof x.replyPending === 'boolean' && Array.isArray(x.pendingReplies) && typeof x.finishAfterReplies === 'boolean' && typeof x.choicesAfterReplies === 'boolean') return x;
+      if (x && x.version === 3 && Number.isInteger(x.privateRevealed) && x.privateRevealed >= 0 && x.privateRevealed <= privateIntro.length && typeof x.joined === 'boolean' && Number.isInteger(x.revealed) && x.revealed >= 0 && x.revealed <= intro.length && Array.isArray(x.extra) && x.extra.every(m => people[m.who] && typeof m.text === 'string' && typeof m.time === 'string') && typeof x.finished === 'boolean' && Array.isArray(x.askedDays) && typeof x.datePhase === 'boolean' && typeof x.replyPending === 'boolean' && Array.isArray(x.pendingReplies) && typeof x.finishAfterReplies === 'boolean' && typeof x.choicesAfterReplies === 'boolean') return x;
     } catch (_) {}
     return fresh();
   }
@@ -59,7 +62,7 @@
   }
   function extra(who, text, image = null) { const m = { who, text, time: now(), ...(image ? { image } : {}) }; state.extra.push(m); if (image) addPhoto(image, m.time); else addMessage(who, text, m.time); }
   function showDateChoices() {
-    if (!state.datePhase || state.finished || state.replyPending || state.revealed < intro.length) return;
+    if (!state.joined || !state.datePhase || state.finished || state.replyPending || state.revealed < intro.length) return;
     messages.querySelectorAll('.date-choices').forEach(el => el.remove());
     const wrap = document.createElement('div'); wrap.className = 'date-choices'; wrap.setAttribute('aria-label', '詢問詹姆斯值班日期');
     [9, 10, 11, 12].filter(day => !state.askedDays.includes(day)).forEach(day => {
@@ -111,31 +114,64 @@
     }, MESSAGE_DELAY);
   }
   function sync() {
-    input.disabled = state.finished || state.revealed < intro.length || state.datePhase;
+    input.disabled = !state.joined || state.finished || state.revealed < intro.length || state.datePhase;
     $('sendBtn').disabled = input.disabled || !input.value.trim();
-    input.placeholder = state.finished ? '本次調查已結束' : state.revealed < intro.length ? '請稍候……' : state.datePhase ? '請選擇要詢問的日期' : '輸入值班者的名字';
+    input.placeholder = state.finished ? '本次調查已結束' : !state.joined ? '加入群組後即可作答' : state.revealed < intro.length ? '請稍候……' : state.datePhase ? '請選擇要詢問的日期' : '輸入值班者的名字';
+    $('composer').hidden = !state.joined;
+    $('membersBtn').hidden = !state.joined;
+    $('chatTitle').textContent = state.joined ? '獄警值班群組' : '組長';
+    $('chatCount').textContent = state.joined ? '(7)' : '';
+    $('chatCount').hidden = !state.joined;
+    $('messages').setAttribute('aria-label', state.joined ? '群組訊息' : '與組長的私訊');
+    document.title = state.joined ? '獄警值班群組' : '組長';
   }
   function finishedNote() { const el = document.createElement('div'); el.className = 'finished-note'; el.textContent = '本次調查已結束。'; messages.append(el); }
   function reveal() {
+    if (!state.joined) {
+      if (state.privateRevealed >= privateIntro.length) return;
+      const nearBottom = messages.scrollHeight - messages.scrollTop - messages.clientHeight < 100;
+      const m = privateIntro[state.privateRevealed++]; addMessage(...m); save(); sync();
+      if (nearBottom) bottom();
+      if (state.privateRevealed < privateIntro.length) timer = setTimeout(reveal, MESSAGE_DELAY);
+      else timer = setTimeout(showJoinCard, MESSAGE_DELAY);
+      return;
+    }
     if (state.revealed >= intro.length) return;
     const nearBottom = messages.scrollHeight - messages.scrollTop - messages.clientHeight < 100;
     const m = intro[state.revealed++]; addMessage(...m); save(); sync();
     if (nearBottom) bottom();
     if (state.revealed < intro.length) timer = setTimeout(reveal, MESSAGE_DELAY);
   }
+  function showJoinCard() {
+    if (state.joined || state.privateRevealed < privateIntro.length) return;
+    messages.querySelectorAll('.join-card').forEach(el => el.remove());
+    const card = document.createElement('div'); card.className = 'join-card';
+    const title = document.createElement('strong'); title.textContent = '組長邀請你加入群組';
+    const button = document.createElement('button'); button.type = 'button'; button.textContent = '加入群組';
+    button.addEventListener('click', joinGroup); card.append(title, button); messages.append(card); bottom();
+  }
+  function joinGroup() {
+    if (state.joined || state.privateRevealed < privateIntro.length) return;
+    state.joined = true; save(); sync(); render();
+  }
   function render() {
     clearTimeout(timer); messages.replaceChildren();
     const day = document.createElement('div'); day.className = 'day'; const label = document.createElement('span'); label.textContent = '今天'; day.append(label); messages.append(day);
-    intro.slice(0, state.revealed).forEach(m => addMessage(...m));
+    if (!state.joined) {
+      privateIntro.slice(0, state.privateRevealed).forEach(m => addMessage(...m));
+      if (state.privateRevealed >= privateIntro.length) showJoinCard();
+    } else intro.slice(0, state.revealed).forEach(m => addMessage(...m));
     state.extra.forEach(m => m.image ? addPhoto(m.image, m.time) : addMessage(m.who, m.text, m.time));
-    if (state.datePhase && !state.finished && !state.replyPending) showDateChoices();
+    if (state.joined && state.datePhase && !state.finished && !state.replyPending) showDateChoices();
     if (state.finished) finishedNote();
     sync(); bottom();
-    if (state.revealed < intro.length) timer = setTimeout(reveal, state.revealed ? MESSAGE_DELAY : 100);
+    if (!state.joined && state.privateRevealed < privateIntro.length) timer = setTimeout(reveal, state.privateRevealed ? MESSAGE_DELAY : 100);
+    else if (!state.joined && state.privateRevealed >= privateIntro.length) timer = setTimeout(showJoinCard, MESSAGE_DELAY);
+    else if (state.revealed < intro.length) timer = setTimeout(reveal, state.revealed ? MESSAGE_DELAY : 100);
     else if (state.replyPending) scheduleReply();
   }
   function submit(raw) {
-    if (typeof raw !== 'string' || !raw.trim() || raw.length > 50 || state.finished || state.datePhase || state.revealed < intro.length) return { accepted: false };
+    if (typeof raw !== 'string' || !raw.trim() || raw.length > 50 || !state.joined || state.finished || state.datePhase || state.revealed < intro.length) return { accepted: false };
     raw = raw.trim(); extra('me', raw); input.value = '';
     const cleaned = raw.replace(/[\s，。！？!?,.：:]/g, '');
     const matched = ['Joseph', 'Anne', 'Thor', 'James', 'David'].filter(id => cleaned.includes(people[id].name));
@@ -156,7 +192,7 @@
     }
     save(); sync(); bottom(); return { accepted: true, finished: state.finished };
   }
-  $('answerForm').addEventListener('submit', event => { event.preventDefault(); if (!event.isComposing) submit(input.value); });
+  $('composer').addEventListener('submit', event => { event.preventDefault(); if (!event.isComposing) submit(input.value); });
   input.addEventListener('input', sync);
   input.addEventListener('keydown', event => { if (event.key === 'Enter' && event.isComposing) event.preventDefault(); });
   for (const p of Object.values(people)) {
