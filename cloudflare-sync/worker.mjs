@@ -1,6 +1,6 @@
 import {metadata} from './metadata.mjs';
 const DOC_ID='1-bpUffM-E0xer3zJYCAzfvA_fMUtJp3ps65N8FqDdsM';
-const ORIGIN='https://kk9655433-prog.github.io';
+const ORIGIN='https://monitor0314.github.io';
 const uuid=value=>/^[a-f0-9-]{36}$/.test(value||'');
 async function google(tab){
  const url=new URL('https://docs.google.com/document/d/'+DOC_ID+(tab?'/export':'/edit'));
