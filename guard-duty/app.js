@@ -48,7 +48,7 @@
     const body = document.createElement('div'); body.className = 'msg-body';
     const name = document.createElement('div'); name.className = 'sender'; name.textContent = people[who].name;
     const bubble = document.createElement('div'); bubble.className = 'bubble'; bubble.textContent = text;
-    const stamp = document.createElement('div'); stamp.className = 'stamp'; stamp.textContent = (who === 'me' ? '已讀 6　' : '') + time;
+    const stamp = document.createElement('div'); stamp.className = 'stamp'; stamp.textContent = (who === 'me' ? '已讀　' : '') + time;
     body.append(name, bubble, stamp); row.append(avatar, body); messages.append(row);
   }
   function addPhoto(src, time) {
