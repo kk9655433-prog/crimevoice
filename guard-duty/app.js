@@ -1,9 +1,9 @@
 (() => {
   'use strict';
-  const KEY = 'guard_duty_16_v1';
-  const MESSAGE_DELAY = 850;
+  const KEY = 'guard_duty_16_v2';
+  const MESSAGE_DELAY = 1450;
   const people = {
-    captain: { name: '獄警隊長', avatar: 'assets/captain.webp' },
+    captain: { name: '組長', avatar: 'assets/captain.webp' },
     Joseph: { name: '約瑟夫', avatar: 'assets/Joseph.webp' },
     Anne: { name: '安妮', avatar: 'assets/Anne.webp' },
     Thor: { name: '托爾', avatar: 'assets/Thor.webp' },
@@ -12,23 +12,26 @@
     me: { name: '你', avatar: 'assets/me.webp' }
   };
   const intro = [
-    ['captain', '16號晚上，監獄出了狀況，當天的值班表卻不見了。我把可能值班的五名獄警找來，得到以下證詞。'],
-    ['captain', '已經確定，當天只有一人負責值班，而且只有他在說謊，其餘四人說的都是真話。'],
-    ['Joseph', '16號既不是安妮值班，也不是大衛值班。'],
-    ['Anne', '約瑟夫和托爾的證詞，要嘛都是真的，要嘛都是假的。'],
-    ['Thor', '16號值班的人，是詹姆斯或伊森其中一個。'],
-    ['James', '那天是約瑟夫或托爾值班。'],
+    ['captain', '是艾森獄警請你來的嗎？'],
+    ['me', '是的。'],
+    ['captain', '那好，3月13號晚上，黑門監獄出了點狀況，當天的值班位置表不見了。'],
+    ['captain', '我把當天負責值班的五名獄警都找來了，他們接下來會一個一個跟你們說證詞。'],
+    ['captain', '我們已經可以確定，當天只有一人負責移交區，而且只有他在說謊，其餘四人說的都是真話。'],
+    ['Joseph', '13號既不是安妮負責移交區，也不是大衛負責移交區。'],
+    ['Anne', '約瑟夫和托爾說的話，要嘛都是真的，要嘛都是假的。'],
+    ['Thor', '13號負責移交區的人，是詹姆斯或伊森其中一個。'],
+    ['James', '那天是約瑟夫或托爾負責移交區。'],
     ['David', '安妮和詹姆斯之中，只有一個人說真話。'],
-    ['captain', '請幫我查出，誰負責16號的值班？\n直接回覆他的名字。']
+    ['captain', '請幫我查出，誰負責13號的移交區？']
   ];
   const $ = id => document.getElementById(id);
   const messages = $('messages'), input = $('answerInput');
   let timer;
-  const fresh = () => ({ version: 1, revealed: 0, extra: [], finished: false });
+  const fresh = () => ({ version: 2, revealed: 0, extra: [], finished: false, askedDays: [], datePhase: false, replyPending: false, pendingReplies: [], finishAfterReplies: false, choicesAfterReplies: false });
   function load() {
     try {
       const x = JSON.parse(localStorage.getItem(KEY));
-      if (x && x.version === 1 && Number.isInteger(x.revealed) && x.revealed >= 0 && x.revealed <= intro.length && Array.isArray(x.extra) && x.extra.every(m => people[m.who] && typeof m.text === 'string' && typeof m.time === 'string') && typeof x.finished === 'boolean') return x;
+      if (x && x.version === 2 && Number.isInteger(x.revealed) && x.revealed >= 0 && x.revealed <= intro.length && Array.isArray(x.extra) && x.extra.every(m => people[m.who] && typeof m.text === 'string' && typeof m.time === 'string') && typeof x.finished === 'boolean' && Array.isArray(x.askedDays) && typeof x.datePhase === 'boolean' && typeof x.replyPending === 'boolean' && Array.isArray(x.pendingReplies) && typeof x.finishAfterReplies === 'boolean' && typeof x.choicesAfterReplies === 'boolean') return x;
     } catch (_) {}
     return fresh();
   }
@@ -45,11 +48,71 @@
     const stamp = document.createElement('div'); stamp.className = 'stamp'; stamp.textContent = (who === 'me' ? '已讀 6　' : '') + time;
     body.append(name, bubble, stamp); row.append(avatar, body); messages.append(row);
   }
-  function extra(who, text) { const m = { who, text, time: now() }; state.extra.push(m); addMessage(who, text, m.time); }
+  function addPhoto(src, time) {
+    const row = document.createElement('div'); row.className = 'message';
+    const avatar = document.createElement('img'); avatar.className = 'avatar'; avatar.src = people.James.avatar; avatar.alt = '詹姆斯的頭貼';
+    const body = document.createElement('div'); body.className = 'msg-body';
+    const name = document.createElement('div'); name.className = 'sender'; name.textContent = people.James.name;
+    const photo = document.createElement('img'); photo.className = 'chat-photo'; photo.src = src; photo.alt = '10號當天監視器畫面';
+    const stamp = document.createElement('div'); stamp.className = 'stamp'; stamp.textContent = time;
+    body.append(name, photo, stamp); row.append(avatar, body); messages.append(row);
+  }
+  function extra(who, text, image = null) { const m = { who, text, time: now(), ...(image ? { image } : {}) }; state.extra.push(m); if (image) addPhoto(image, m.time); else addMessage(who, text, m.time); }
+  function showDateChoices() {
+    if (!state.datePhase || state.finished || state.replyPending || state.revealed < intro.length) return;
+    messages.querySelectorAll('.date-choices').forEach(el => el.remove());
+    const wrap = document.createElement('div'); wrap.className = 'date-choices'; wrap.setAttribute('aria-label', '詢問詹姆斯值班日期');
+    [9, 10, 11, 12].filter(day => !state.askedDays.includes(day)).forEach(day => {
+      const button = document.createElement('button'); button.type = 'button'; button.textContent = `2/${day}那天也是你負責這個位置嗎？`;
+      button.addEventListener('click', () => askDate(day)); wrap.append(button);
+    });
+    if (wrap.childElementCount) messages.append(wrap);
+  }
+  function askDate(day) {
+    if (state.finished || state.replyPending || state.askedDays.includes(day)) return;
+    state.askedDays.push(day);
+    messages.querySelectorAll('.date-choices').forEach(el => el.remove());
+    extra('me', `2/${day}那天也是你負責這個位置嗎？`);
+    if (day === 10) {
+      state.pendingReplies = [
+        { who: 'James', text: '是我沒錯' },
+        { who: 'James', text: '我記得就是那天將莫羅移至阿卡漢的，這事是艾森長官許可的，不過奇怪的是，莫羅這個名字在那天之前並不存在。' },
+        { who: 'James', text: '', image: 'assets/NO.jpg' },
+        { who: 'James', text: '這是10號那天那個人出現的監視器畫面，其他的我就不知道了。' },
+        { who: 'captain', text: '詹姆斯，到辦公室向我說明當晚的情況。\n謝謝你幫我查出值班的人。' }
+      ];
+    } else {
+      state.pendingReplies = [
+        { who: 'James', text: '不是' },
+        { who: 'captain', text: '詹姆斯，到辦公室向我說明當晚的情況。\n謝謝你幫我查出值班的人。' }
+      ];
+    }
+    state.replyPending = true;
+    state.finishAfterReplies = true;
+    state.choicesAfterReplies = false;
+    save(); sync(); bottom();
+    scheduleReply();
+  }
+  function scheduleReply() {
+    if (!state.replyPending || !state.pendingReplies.length) return;
+    timer = setTimeout(() => {
+      const next = state.pendingReplies.shift();
+      extra(next.who, next.text, next.image || null);
+      if (state.pendingReplies.length) scheduleReply();
+      else if (state.finishAfterReplies) {
+        state.replyPending = false; state.finished = true;
+        save(); sync(); finishedNote();
+      } else {
+        state.replyPending = false;
+        if (state.choicesAfterReplies) { state.choicesAfterReplies = false; showDateChoices(); }
+      }
+      save(); sync(); bottom();
+    }, MESSAGE_DELAY);
+  }
   function sync() {
-    input.disabled = state.finished || state.revealed < intro.length;
+    input.disabled = state.finished || state.revealed < intro.length || state.datePhase;
     $('sendBtn').disabled = input.disabled || !input.value.trim();
-    input.placeholder = state.finished ? '本次調查已結束' : state.revealed < intro.length ? '請稍候……' : '輸入值班者的名字';
+    input.placeholder = state.finished ? '本次調查已結束' : state.revealed < intro.length ? '請稍候……' : state.datePhase ? '請選擇要詢問的日期' : '輸入值班者的名字';
   }
   function finishedNote() { const el = document.createElement('div'); el.className = 'finished-note'; el.textContent = '本次調查已結束。'; messages.append(el); }
   function reveal() {
@@ -63,13 +126,15 @@
     clearTimeout(timer); messages.replaceChildren();
     const day = document.createElement('div'); day.className = 'day'; const label = document.createElement('span'); label.textContent = '今天'; day.append(label); messages.append(day);
     intro.slice(0, state.revealed).forEach(m => addMessage(...m));
-    state.extra.forEach(m => addMessage(m.who, m.text, m.time));
+    state.extra.forEach(m => m.image ? addPhoto(m.image, m.time) : addMessage(m.who, m.text, m.time));
+    if (state.datePhase && !state.finished && !state.replyPending) showDateChoices();
     if (state.finished) finishedNote();
     sync(); bottom();
     if (state.revealed < intro.length) timer = setTimeout(reveal, state.revealed ? MESSAGE_DELAY : 100);
+    else if (state.replyPending) scheduleReply();
   }
   function submit(raw) {
-    if (typeof raw !== 'string' || !raw.trim() || raw.length > 50 || state.finished || state.revealed < intro.length) return { accepted: false };
+    if (typeof raw !== 'string' || !raw.trim() || raw.length > 50 || state.finished || state.datePhase || state.revealed < intro.length) return { accepted: false };
     raw = raw.trim(); extra('me', raw); input.value = '';
     const cleaned = raw.replace(/[\s，。！？!?,.：:]/g, '');
     const matched = ['Joseph', 'Anne', 'Thor', 'James', 'David'].filter(id => cleaned.includes(people[id].name));
@@ -80,23 +145,24 @@
     else if (!suspect) extra('captain', '你在說什麼?請重新回答一次好嗎?');
     else if (suspect !== 'James') extra('captain', '這個答案不符合證詞。只有值班的人說謊，其餘四人都說真話，再核對一次。');
     else {
-      extra('captain', '確認了，16號是詹姆斯負責值班。他說那天是約瑟夫或托爾值班，這句是謊話；其他四人的證詞都成立。');
-      extra('captain', '詹姆斯，到辦公室向我說明當晚的情況。\n謝謝你幫我查出值班的人。');
-      state.finished = true; finishedNote();
+      extra('captain', '確認了，13號是詹姆斯負責移交區。');
+      state.datePhase = true;
+      state.replyPending = true;
+      state.pendingReplies = [{ who: 'captain', text: '你是不是還有問題想問詹姆斯？' }];
+      state.finishAfterReplies = false;
+      state.choicesAfterReplies = true;
+      scheduleReply();
     }
     save(); sync(); bottom(); return { accepted: true, finished: state.finished };
   }
   $('answerForm').addEventListener('submit', event => { event.preventDefault(); if (!event.isComposing) submit(input.value); });
-  input.addEventListener('keydown', event => { if (event.key === 'Enter' && event.isComposing) event.preventDefault(); });
   input.addEventListener('input', sync);
+  input.addEventListener('keydown', event => { if (event.key === 'Enter' && event.isComposing) event.preventDefault(); });
   for (const p of Object.values(people)) {
     const row = document.createElement('div'); row.className = 'member'; const img = document.createElement('img'); img.className = 'avatar'; img.src = p.avatar; img.alt = ''; const name = document.createElement('span'); name.textContent = p.name; row.append(img, name); $('memberList').append(row);
   }
-  $('membersBtn').onclick = () => { $('resetPrompt').hidden = true; $('membersDialog').showModal(); };
+  $('membersBtn').onclick = () => $('membersDialog').showModal();
   $('closeMembers').onclick = () => $('membersDialog').close();
-  $('restartBtn').onclick = () => { $('resetPrompt').hidden = false; };
-  $('cancelReset').onclick = () => { $('resetPrompt').hidden = true; };
-  $('confirmReset').onclick = () => { state = fresh(); input.value = ''; save(); $('membersDialog').close(); render(); };
   function clock() { $('clock').textContent = now(); } clock(); setInterval(clock, 30000);
   // 手機鍵盤開啟時保持輸入框位於可見區域。
   function viewport() { document.documentElement.style.setProperty('--app-height', (window.visualViewport?.height || window.innerHeight) + 'px'); }
