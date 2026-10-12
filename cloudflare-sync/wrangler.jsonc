@@ -1,0 +1,21 @@
+{
+  "name": "crimevoice",
+  "main": "worker.mjs",
+  "compatibility_date": "2026-01-01",
+  "workers_dev": true,
+  "observability": {
+    "enabled": false
+  },
+  "kv_namespaces": [
+    {
+      "binding": "SCRIPTS"
+    }
+  ],
+  "previews": {
+    "kv_namespaces": [
+      {
+        "binding": "SCRIPTS"
+      }
+    ]
+  }
+}
